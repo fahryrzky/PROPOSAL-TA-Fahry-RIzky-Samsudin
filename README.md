@@ -138,8 +138,10 @@ Hasil PDF resmi otomatis diperbarui pada berkas `Proposal Fahry Rizky Samsudin.p
 
 ---
 
-## 🤖 Portabilitas Asisten AI (Agent Skills)
+## 🤖 Portabilitas Asisten AI (Agent Skills & Anti-Slop)
 
-Repositori ini telah dibekali dengan **43 Keterampilan Asisten AI (*Installed Agent Skills*)** di dalam folder `.agents/skills/`. Saat repositori ini di-*clone* ke komputer atau laptop lain:
+Repositori ini telah dibekali dengan **49 Keterampilan Asisten AI (*Installed Agent Skills*)** di dalam folder `.agents/skills/`, termasuk modul **Anti-Slop AI** (`antislop`, `antislop-ui`, `antislop-copywriting`, `antislop-human`, `antislop-layoutmobile`, `antislop-code`). Saat repositori ini di-*clone* ke komputer atau laptop lain:
 - Lingkungan AI / Antigravity akan otomatis mendeteksi kustomisasi ruang kerja dari folder `.agents/`.
+- Aturan anti-slop (`.agents/rules/antislop.md`) memastikan kode, UI, dan naskah yang dihasilkan terbebas dari pola generik AI (*slop*).
 - Seluruh pedoman arsitektur pada `AGENTS.md` dan `GEMINI.md` otomatis menjadi acuan kerja tanpa perlu konfigurasi ulang.
+

@@ -93,12 +93,13 @@ Untuk mengompilasi naskah proposal menjadi PDF:
 
 ## 5. Keterampilan Asisten AI (*Installed Agent Skills*)
 
-Folder [.agents/skills](file:///c:/Users/Fahry%20Rizky%20S/Documents/Tugas%20Akhir%20Fahry/Proposal/.agents/skills) memuat 43 keterampilan yang otomatis aktif ketika repositori ini diakses oleh Antigravity di perangkat mana pun:
+Folder [.agents/skills](file:///c:/Users/Fahry%20Rizky%20S/Documents/Tugas%20Akhir%20Fahry/Proposal/.agents/skills) memuat 49 keterampilan (termasuk modul Anti-Slop AI) yang otomatis aktif ketika repositori ini diakses oleh Antigravity di perangkat mana pun:
 
 | Kategori | Nama Skill |
 |---|---|
 | **Alur Pikir & Desain** | `brainstorming`, `idea-refine`, `interview-me`, `spec-driven-development`, `writing-plans` |
 | **Kualitas & Review** | `code-review-and-quality`, `receiving-code-review`, `requesting-code-review`, `code-simplification`, `verification-before-completion`, `doubt-driven-development` |
+| **Anti-Slop AI & Estetika Desain** | `antislop`, `antislop-ui`, `antislop-copywriting`, `antislop-human`, `antislop-layoutmobile`, `antislop-code` |
 | **Pengujian & Debugging** | `systematic-debugging`, `debugging-and-error-recovery`, `test-driven-development`, `superpowers-test-driven-development`, `browser-testing-with-devtools` |
 | **Arsitektur & Rekayasa** | `api-and-interface-design`, `frontend-ui-engineering`, `awesome-llm-apps`, `performance-optimization`, `observability-and-instrumentation`, `security-and-hardening` |
 | **Eksekusi & Otomasi** | `executing-plans`, `subagent-driven-development`, `incremental-implementation`, `dispatching-parallel-agents`, `latex-compile-clean`, `ci-cd-and-automation` |
@@ -107,6 +108,8 @@ Folder [.agents/skills](file:///c:/Users/Fahry%20Rizky%20S/Documents/Tugas%20Akh
 
 ### Sinkronisasi ke Perangkat Baru (GitHub)
 Saat repositori ini di-*clone* ke komputer atau laptop lain:
-1. Folder `.agents/skills` akan otomatis menyertakan seluruh 43 keterampilan.
+1. Folder `.agents/skills` akan otomatis menyertakan seluruh 49 keterampilan.
 2. Lingkungan Antigravity pada komputer baru akan langsung mendeteksi kustomisasi ruang kerja (*workspace customizations*) dari folder `.agents/`.
-3. Seluruh instruksi, gaya penulisan, dan batas arsitektur pada berkas ini (`AGENTS.md` & `GEMINI.md`) otomatis terbaca sebagai pedoman baku.
+3. Aturan anti-slop otomatis ditegakkan dari `.agents/rules/antislop.md` guna mencegah output AI yang generik (*slop*).
+4. Seluruh instruksi, gaya penulisan, dan batas arsitektur pada berkas ini (`AGENTS.md` & `GEMINI.md`) otomatis terbaca sebagai pedoman baku.
+
