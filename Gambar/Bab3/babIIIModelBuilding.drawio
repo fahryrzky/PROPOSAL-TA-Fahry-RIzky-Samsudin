@@ -1,0 +1,46 @@
+<mxfile host="app.diagrams.net" version="28.2.5" scale="1" border="0">
+  <diagram name="Page-1" id="model_building_qml">
+    <mxGraphModel dx="1000" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n1" value="Mulai" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="105" y="20" width="120" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="n2" value="Memuat Dataset Sinyal Sensor TMR&#xa;Variasi Konsentrasi Formalin pada Bakso" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="30" y="95" width="270" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="n3" value="Ekstraksi Fitur Respons Sinyal:&#xa;Vmean, Pergeseran Sinyal ΔV, Stdev Derau σV&#xa;serta Standarisasi dengan StandardScaler" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="30" y="180" width="270" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="n4" value="Pembagian Dataset:&#xa;Data Latih (80%) dan Data Uji (20%)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="30" y="265" width="270" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="n5a" value="&lt;b&gt;Model Klasik: SVM&lt;/b&gt;&#xa;Kernel RBF &amp; Linear&#xa;Optimasi GridSearch (C, γ)&#xa;Pelatihan Model" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="25" y="355" width="130" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="n5b" value="&lt;b&gt;Model Kuantum: QSVC&lt;/b&gt;&#xa;ZZFeatureMap (Ruang Hilbert)&#xa;Quantum Kernel Matrix (KQ)&#xa;Pelatihan Dual SVM" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="175" y="355" width="130" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="n6" value="Evaluasi Komparatif pada Data Uji:&#xa;Akurasi, Presisi, Recall, F1-Score,&#xa;Confusion Matrix, serta ROC-AUC" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="340" y="645" width="270" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="n7" value="Pengujian Ketahanan Derau (Noise Robustness):&#xa;Simulasi Injeksi Derau Gaussian Klasik&#xa;&amp; Model Derau Depolarizing Kuantum" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="340" y="550" width="270" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="n8" value="Validasi Silang K-Fold (5-Fold CV)&#xa;untuk Stabilitas &amp; Generalisasi Model" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="340" y="465" width="270" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="n9" value="Pemilihan Model Terbaik Berdasarkan ROC-AUC&#xa;&amp; Penyimpanan Model Terlatih (.pkl / .joblib)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="340" y="380" width="270" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="n10" value="Penyimpanan Data Metrik Komparasi&#xa;&amp; Laporan Hasil Evaluasi dalam Format .csv" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="340" y="275" width="270" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="n11" value="Selesai" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="415" y="165" width="120" height="45" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,217 @@
+\chapter{TINJAUAN PUSTAKA}
+
+\section{Dasar Teori}
+\subsection{Formaldehida}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=8cm]{babII_ikatan_formalin.png}
+    \caption{Struktur Molekul dan Hibridisasi Ikatan Kimia Formaldehida}
+    \label{fig:molekul_formaldehida}
+\end{figure}
+
+Formaldehida merupakan senyawa aldehida paling sederhana dengan rumus molekul $\mathrm{CH_2O}$, berwujud gas tidak berwarna dengan bau menyengat khas pada suhu ruang, sangat reaktif, dan mudah larut dalam air \cite{halodoc_formalin}. Struktur molekul formaldehida memiliki geometri planar segitiga dengan sudut ikatan mendekati $120^\circ$, di mana atom karbon mengalami hibridisasi $sp^2$ membentuk ikatan $\sigma$ terhadap dua atom hidrogen dan satu atom oksigen, serta satu ikatan $\pi$ pada gugus karbonil ($\mathrm{C=O}$) sebagaimana ditunjukkan pada Gambar~\ref{fig:molekul_formaldehida}. Secara komersial, larutan formaldehida dalam air dengan konsentrasi berkisar 37--40\% berat yang ditambah metanol 10--15\% sebagai stabilisator untuk mencegah polimerisasi formaldehida menjadi paraformaldehida yang mengendap dikenal luas dengan nama dagang formalin \cite{menlhk_formalin}. Secara kimiawi, formaldehida bersifat elektrofilik kuat pada atom karbon karbonilnya, sehingga mudah bereaksi dengan berbagai nukleofil, termasuk gugus amina pada protein, membentuk ikatan silang (\textit{cross-link}) antar-rantai protein. Reaksi inilah yang mendasari kemampuan formalin sebagai bahan pengawet jaringan biologis: ikatan silang protein yang terbentuk membuat jaringan menjadi kaku dan lebih tahan terhadap aktivitas enzim serta mikroorganisme pembusuk \cite{menlhk_formalin}.
+
+Sifat itulah yang disalahgunakan sebagai pengawet pada produk pangan berprotein tinggi seperti bakso, tahu, dan ikan, meskipun formaldehida bersifat toksik dan karsinogenik bagi manusia sehingga penggunaannya pada pangan dilarang secara tegas oleh regulasi kesehatan \cite{halodoc_formalin}. Paparan formaldehida dalam pangan, meskipun dalam kadar kecil namun berulang, berpotensi terakumulasi dan menimbulkan efek toksik kronis. Karakteristik formalin sebagai gugus aldehida reaktif inilah yang menjadi dasar pendekatan deteksi pada penelitian ini, yaitu memanfaatkan reaksi spesifik antara gugus aldehida formaldehida dengan gugus hidrazida pada material reseptor nanofiber (lihat Subbab~\ref{subsec:fe3o4pvaadh}).
+
+\subsection{\textit{Tunneling Magnetoresistance} (TMR)}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=8.5cm]{babII_TMR_Layer.png}
+    \caption{Struktur Lapisan \textit{Magnetic Tunnel Junction} (MTJ) pada Sensor \textit{Tunneling Magnetoresistance} (TMR) \cite{nanomedicine_mtj}}
+    \label{fig:tmr_layer}
+\end{figure}
+
+\textit{Tunneling Magnetoresistance} (TMR) adalah fenomena magnetoresistif yang muncul pada struktur \textit{magnetic tunnel junction} (MTJ), yaitu dua lapisan feromagnetik yang dipisahkan oleh lapisan penghalang (\textit{barrier}) insulator setebal beberapa nanometer, umumnya magnesium oksida (MgO) atau aluminium oksida (Al$_2$O$_3$) \cite{nve_alt023}. Ilustrasi struktur lapisan MTJ pada sensor TMR ditunjukkan pada Gambar~\ref{fig:tmr_layer}. Berbeda dengan GMR yang mengandalkan hamburan elektron terpolarisasi spin pada lapisan logam nonmagnetik konduktif, TMR memanfaatkan efek terowongan kuantum (\textit{quantum tunneling effect}): elektron menembus lapisan penghalang insulator melalui mekanisme tunneling yang probabilitasnya bergantung pada kesejajaran arah momen magnetik kedua lapisan feromagnetik di sekitarnya.
+
+Ketika magnetisasi kedua lapisan feromagnetik paralel, kerapatan keadaan (\textit{density of states}) elektron dengan spin mayoritas pada kedua elektroda saling bersesuaian, sehingga probabilitas tunneling tinggi dan resistansi junction rendah. Sebaliknya, pada kondisi antiparalel, kerapatan keadaan spin mayoritas dan minoritas antar elektroda saling bertukar, sehingga probabilitas tunneling menurun dan resistansi meningkat signifikan. Secara kuantitatif, rasio TMR dirumuskan melalui model Julliere sebagai
+\begin{equation}
+\mathrm{TMR} = \frac{R_{AP} - R_{P}}{R_{P}} = \frac{2 P_1 P_2}{1 - P_1 P_2},
+\label{eq:tmr_julliere}
+\end{equation}
+dengan $R_{P}$ dan $R_{AP}$ berturut-turut adalah resistansi junction pada kondisi paralel dan antiparalel, sedangkan $P_1$ dan $P_2$ adalah derajat polarisasi spin masing-masing elektroda feromagnetik \cite{nanomedicine_mtj}. Karena efek tunneling jauh lebih sensitif terhadap kesejajaran spin dibandingkan hamburan pada GMR, rasio TMR yang dapat dicapai jauh lebih besar. Sensor berbasis MTJ dengan penghalang MgO dilaporkan mencapai rasio TMR di atas 200\% pada suhu ruang, dibandingkan rasio GMR pada sensor \textit{spin-valve} yang umumnya kurang dari 20\% \cite{nanomedicine_mtj}, dan keluaran sensor TMR komersial dilaporkan dapat mencapai sekitar enam kali lebih tinggi dibandingkan sensor GMR pada aplikasi sejenis \cite{electronicdesign_tmrgmr}.
+
+Sensor TMR analog komersial, seperti seri ALT yang digunakan pada penelitian ini, dikemas dalam konfigurasi jembatan Wheatstone yang tersusun dari elemen-elemen MTJ, menghasilkan keluaran diferensial yang bersifat \textit{bipolar}: bernilai positif untuk medan magnet pada satu arah, dan negatif untuk arah sebaliknya \cite{nve_alt023_evb}. Untuk sensor semacam ini, produsen umumnya menyatakan performa langsung dalam bentuk sensitivitas rasiometrik terhadap tegangan suplai, $\mathrm{Sen}$, dengan satuan mV/V/mT, sehingga tegangan keluaran diferensial dapat dituliskan sebagai
+\begin{equation}
+V_{out} \approx \mathrm{Sen} \times V_{S} \times B,
+\label{eq:tmr_vout}
+\end{equation}
+dengan $V_S$ tegangan suplai jembatan dan $B$ medan magnet yang terukur pada rentang linear sensor \cite{nve_alt023}. Persamaan \eqref{eq:tmr_vout} berlaku pada rentang medan linear sensor; di luar rentang tersebut sensor mengalami saturasi dan hubungan menjadi tidak linear. Sensitivitas tinggi serta linearitas yang baik pada rentang kerjanya menjadikan sensor TMR unggul untuk aplikasi yang membutuhkan resolusi medan magnet sangat kecil, termasuk deteksi perubahan momen magnetik lokal akibat interaksi analit dengan label/reseptor magnetik pada biosensor maupun sensor kimia \cite{micronas_tmr}.
+
+\subsection{Kumparan Helmholtz}
+Kumparan Helmholtz adalah sepasang kumparan melingkar identik dengan radius $R$ dan jumlah lilitan $N$ yang sama, ditempatkan sejajar pada sumbu bersama dan dipisahkan oleh jarak yang sama dengan radiusnya ($\alpha = R$), serta dialiri arus $I$ pada arah yang sama. Konfigurasi ini menghasilkan medan magnet yang relatif homogen pada daerah di sekitar titik tengah antara kedua kumparan, sehingga banyak digunakan untuk kalibrasi sensor magnetik maupun eksperimen fisika yang membutuhkan medan magnet acuan dengan nilai yang diketahui secara akurat \cite{zhu2023,ginisa2015,yudhistira2019}.
+
+Berdasarkan hukum Biot--Savart, medan magnet pada sumbu sebuah kumparan melingkar tunggal berjari-jari $R$ pada jarak $z$ dari pusatnya adalah
+\begin{equation}
+B_{\text{loop}}(z) = \frac{\mu_0 I R^2}{2 (R^2+z^2)^{3/2}},
+\label{eq:helmholtz_loop}
+\end{equation}
+dengan $\mu_0$ permeabilitas vakum. Untuk kumparan dengan $N$ lilitan, nilai pada Persamaan \eqref{eq:helmholtz_loop} dikalikan $N$. Pada konfigurasi sepasang kumparan Helmholtz yang berjarak $\alpha=R$, medan pada titik tengah ($z=0$) menjadi
+\begin{equation}
+B(0) = \frac{8}{5\sqrt{5}} \cdot \frac{\mu_0 N I}{R},
+\label{eq:helmholtz_center}
+\end{equation}
+yang merupakan bentuk baku medan Helmholtz di pusat kumparan \cite{zhu2023}. Keunggulan konfigurasi ini terletak pada turunan orde rendah medan terhadap posisi $z$ di sekitar $z=0$ yang bernilai mendekati nol, sehingga daerah dengan medan seragam (\textit{uniform field region}) menjadi relatif luas dibandingkan kumparan tunggal, dan nilai arus $I$ yang diberikan dapat dikonversi langsung menjadi medan magnet $B$ yang diketahui melalui Persamaan \eqref{eq:helmholtz_center}. Sifat inilah yang dimanfaatkan pada tahap karakterisasi sensor TMR dalam penelitian ini, sebagai sumber medan magnet terkendali sebelum dibandingkan dengan pembacaan teslameter sebagai acuan riil.
+
+\subsection{\textit{Instrumentation Amplifier}}
+\textit{Instrumentation amplifier} (in-amp) adalah konfigurasi penguat diferensial presisi yang dirancang untuk menguatkan selisih dua sinyal masukan sekaligus menolak sinyal yang muncul bersama pada kedua masukan (\textit{common-mode signal}), seperti derau atau interferensi yang terinduksi pada kedua jalur kabel secara bersamaan \cite{TI2019,Jung2002}. Berbeda dari penguat diferensial op-amp tunggal, in-amp umumnya tersusun dari beberapa tahap op-amp dengan impedansi masukan tinggi, sehingga tidak membebani sumber sinyal, serta memiliki \textit{common-mode rejection ratio} (CMRR) yang jauh lebih tinggi.
+
+Secara umum, keluaran in-amp dapat dituliskan sebagai
+\begin{equation}
+V_{out} = G \,(V_{+} - V_{-}) + V_{REF},
+\label{eq:inamp_out}
+\end{equation}
+dengan $G$ adalah penguatan (\textit{gain}) yang diatur oleh sebuah resistor eksternal tunggal ($R_G$), dan $V_{REF}$ adalah tegangan referensi keluaran yang dapat digeser untuk mengakomodasi sinyal bipolar pada sistem catu daya tunggal \cite{TI2019}. Untuk in-amp yang mengatur gain melalui satu resistor eksternal (misalnya seri AD62x), hubungan gain terhadap resistor tersebut umumnya berbentuk
+\begin{equation}
+G = 1 + \frac{R_{gain}}{R_G},
+\label{eq:inamp_gain}
+\end{equation}
+dengan $R_{gain}$ konstanta internal yang nilainya bergantung pada rancangan IC \cite{adi_ad623}. Pemilihan $V_{REF}$ pada nilai tengah rentang catu daya (misalnya setengah dari tegangan suplai) memungkinkan in-amp mengangkat sinyal bipolar kecil ke rentang tegangan positif yang dapat dibaca oleh ADC catu daya tunggal, tanpa memerlukan catu daya negatif \cite{Jung2002}.
+
+\subsection{\textit{Passive Low Pass Filter}}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=5.5cm]{babII_LPF.PNG}
+    \caption{Rangkaian \textit{Passive Low Pass Filter} RC Orde Pertama \cite{Supriyanto2023}}
+    \label{fig:lpf_rangkaian}
+\end{figure}
+
+\textit{Low pass filter} (LPF) adalah rangkaian elektronik yang melewatkan sinyal berfrekuensi rendah dan melemahkan sinyal berfrekuensi tinggi. Parameter kunci LPF adalah frekuensi cut-off ($f_c$), yaitu frekuensi ketika amplitudo sinyal keluaran turun sebesar 3 dB (sekitar 70,7\%) dari amplitudo maksimum \cite{Firmansyah2017}. Rangkaian dasar \textit{passive low pass filter} RC orde pertama ditunjukkan pada Gambar~\ref{fig:lpf_rangkaian}. LPF pasif orde pertama yang paling sederhana tersusun dari resistor $R$ seri dengan sumber sinyal dan kapasitor $C$ paralel terhadap keluaran. Karena impedansi kapasitor menurun seiring naiknya frekuensi, sinyal frekuensi tinggi cenderung "terhubung singkat" ke ground melalui kapasitor, sementara sinyal frekuensi rendah tetap diteruskan menuju keluaran \cite{Supriyanto2023}. Fungsi transfer rangkaian ini adalah
+\begin{equation}
+\frac{V_{out}}{V_{in}} = \frac{1}{1+j\omega RC}, \qquad \omega = 2\pi f,
+\end{equation}
+dengan frekuensi cut-off
+\begin{equation}
+f_c = \frac{1}{2\pi RC}.
+\label{eq:lpf_fc}
+\end{equation}
+Dalam rangkaian instrumentasi sensor, LPF pasif umumnya ditempatkan pada tahap akhir sebelum ADC sebagai filter \textit{anti-aliasing}, yang berfungsi membatasi bandwidth sinyal analog agar berada di bawah setengah frekuensi \textit{sampling} ADC (kriteria Nyquist), sehingga mencegah distorsi \textit{aliasing} pada hasil konversi digital \cite{Firmansyah2017,Supriyanto2023}.
+
+\subsection{\textit{Analog to Digital Converter} (ADC)}
+\textit{Analog to Digital Converter} (ADC) adalah rangkaian yang mengonversi sinyal tegangan analog kontinu menjadi representasi digital diskret. Proses ini melibatkan dua tahap utama: \textit{sampling} (pencuplikan sinyal pada interval waktu tertentu) dan kuantisasi (pemetaan nilai tegangan tercuplik ke tingkat diskret terdekat sesuai resolusi ADC). Kinerja ADC ditentukan oleh resolusi (jumlah bit), laju \textit{sampling}, linearitas, \textit{signal-to-noise ratio} (SNR), dan konsumsi daya \cite{shylu2020power}.
+
+Salah satu arsitektur ADC dengan resolusi tinggi adalah \textit{Delta-Sigma} ($\Delta\Sigma$) ADC, yang bekerja dengan melakukan \textit{oversampling} terhadap sinyal masukan lalu menerapkan \textit{noise shaping} untuk mendorong derau kuantisasi keluar dari pita frekuensi sinyal yang diinginkan, sehingga resolusi efektif tinggi dapat dicapai tanpa memerlukan komponen analog presisi ekstrem \cite{shylu2020power}. Semakin tinggi resolusi ADC (jumlah bit $n$), semakin kecil tegangan minimum yang dapat dibedakan (\textit{least significant bit}, LSB), yang untuk ADC unipolar dengan tegangan rentang penuh $V_{FSR}$ dinyatakan sebagai
+\begin{equation}
+\mathrm{LSB} = \frac{V_{FSR}}{2^{n}}.
+\label{eq:adc_lsb}
+\end{equation}
+Resolusi tinggi ini menjadi penting pada sistem akuisisi data yang perlu membaca perubahan sinyal sensor berorde milivolt hingga mikrovolt, seperti pada instrumentasi sensor magnetoresistif.
+
+\subsection{\textit{Electrospinning}}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=9cm]{babII_elspinPVA.PNG}
+    \caption{Ilustrasi Sistem \textit{Electrospinning} untuk Fabrikasi Nanofiber PVA \cite{Turkoglu2024}}
+    \label{fig:electrospinning_pva}
+\end{figure}
+
+\textit{Electrospinning} merupakan teknik yang memanfaatkan fenomena elektrohidrodinamika untuk menghasilkan serat berukuran nano dari larutan atau lelehan polimer \cite{xue2019electrospinning}. Ilustrasi sistem \textit{electrospinning} untuk pembuatan nanofiber PVA ditunjukkan pada Gambar~\ref{fig:electrospinning_pva}. Sistem \textit{electrospinning} terdiri atas catu daya bertegangan tinggi (DC/AC), pompa \textit{syringe}, \textit{spinneret} (jarum hipodermik berujung tumpul), dan kolektor konduktif. Proses ini berlangsung dalam empat tahap: (i) pembentukan \textit{Taylor cone} akibat gaya tolak elektrostatik yang melampaui tegangan permukaan tetesan larutan; (ii) pemanjangan jet bermuatan searah medan listrik; (iii) penipisan jet yang disertai instabilitas \textit{bending}/\textit{whipping} yang mendominasi pembentukan serat berskala nano; dan (iv) solidifikasi jet akibat penguapan pelarut, menghasilkan serat padat yang terdeposisi pada kolektor \cite{xue2019electrospinning}. Morfologi dan diameter serat yang dihasilkan bergantung pada parameter operasi seperti tegangan yang diberikan, laju alir larutan, serta jarak ujung jarum ke kolektor (\textit{tip-to-collector distance}); peningkatan tegangan cenderung menghasilkan serat lebih tipis, sedangkan laju alir yang lebih tinggi cenderung memperbesar diameter serat \cite{xue2019electrospinning}.
+
+\subsection{\textit{Polyvinyl Alcohol} (PVA)}
+\textit{Polyvinyl alcohol} (PVA) adalah polimer sintetis semi-kristalin larut air yang tersusun atas rantai hidrokarbon dengan gugus hidroksil berulang ($-\text{CH}_2-\text{CH(OH)}-)_n$ \cite{gaaz2015properties}. PVA diproduksi melalui hidrolisis parsial atau penuh dari polivinil asetat (\textit{polyvinyl acetate}), menghasilkan material yang bersifat tidak beracun (\textit{non-toxic}), biokompatibel, memiliki stabilitas termal yang baik, serta kekuatan tarik mekanik yang tinggi \cite{Turkoglu2024,gaaz2015properties}. Gugus hidroksil yang melimpah pada rantai polimer PVA memungkinkan terbentuknya jaringan ikatan hidrogen inter- dan intra-molekul yang kuat. Karakteristik ini memberikan PVA kapasitas pembentukan lapisan (\textit{film-forming}) dan pembentukan serat (\textit{fiber-forming}) yang sangat unggul ketika diproses melalui teknik \textit{electrospinning} \cite{xue2019electrospinning}.
+
+Dalam konteks fabrikasi nanofiber, larutan akuatik PVA memiliki viskoelastisitas yang dapat dikontrol melalui konsentrasi polimer dan berat molekulnya, sehingga mampu membentuk jet polimer stabil yang memanjang menjadi filamen serat berskala nanometer tanpa terputus \cite{Turkoglu2024}. Namun demikian, karena sifat hidrofiliknya yang tinggi, nanofiber PVA murni sangat mudah melarut atau terdegradasi apabila berkontak langsung dengan medium berair atau kelembapan tinggi. Oleh karena itu, aplikasi nanofiber PVA sebagai matriks reseptor sensor pada lingkungan pengujian cair (seperti pengujian formalin dan ekstrak makanan) mutlak memerlukan proses penautan silang (\textit{crosslinking}) guna mengubah sifat rantai polimer menjadi tidak larut air (\textit{water-insoluble}) serta mempertahankan integritas strukturalnya selama pengukuran berlangsung \cite{gaaz2015properties,shi2008citric}.
+
+\subsection{Asam Sitrat (\textit{Citric Acid})}
+Asam sitrat (\textit{citric acid}, $\ch{C6H8O7}$) adalah asam polikarboksilat organik trivalen yang secara alami ditemukan pada buah-buahan genus \textit{Citrus}. Molekul asam sitrat memiliki tiga gugus karboksil ($- \text{COOH}$) dan satu gugus hidroksil ($- \text{OH}$) yang terikat pada rantai karbon alifatik. Dalam penelitian ini, asam sitrat memegang dua peran fungsional yang sangat krusial, yaitu:
+\begin{enumerate}
+    \item \textbf{Agen Penstabil Dispersi (\textit{Capping Agent}) Nanopartikel $\ch{Fe3O4}$}: Partikel magnetik $\ch{Fe3O4}$ murni memiliki kecenderungan alami untuk mengalami aglomerasi cepat akibat interaksi dipol-dipol magnetik dan gaya Van der Waals, yang diperparah oleh densitas partikel yang tinggi ($\sim 5{,}2\,\text{g/cm}^3$) sehingga rentan mengalami sedimentasi gravitasi di dalam tabung jarum suntik selama proses \textit{electrospinning} \cite{dheyab2020citric}. Penambahan asam sitrat berfungsi sebagai ligan penstabil permukaan: gugus karboksilat ($- \text{COO}^-$) asam sitrat berkoordinasi secara kovalen koordinasi dengan kation besi ($\text{Fe}^{2+}/\text{Fe}^{3+}$) pada permukaan partikel magnetit, membentuk lapisan monolayer penudung (\textit{capping layer}) bermuatan negatif tinggi (potensial zeta negatif kuat). Lapisan ini membangkitkan gaya tolak-menolak elektrostatik yang dominan, sehingga partikel $\ch{Fe3O4}$ terdispersi stabil dan homogen di dalam larutan PVA tanpa mengendap di dasar tabung atau menyumbat ujung jarum \textit{spinneret} \cite{dheyab2020citric}.
+    \item \textbf{Agen Penautan Silang Hijau (\textit{Green Crosslinker}) Matriks PVA}: Berbeda dengan reagen \textit{crosslinker} konvensional seperti glutaraldehida (GA) yang bersifat toksik dan karsinogenik, asam sitrat merupakan senyawa penaut silang ramah lingkungan (\textit{green crosslinker}) yang aman bagi pangan dan kesehatan \cite{shi2008citric}. Mekanisme penautan silang antara asam sitrat dan PVA berlangsung melalui reaksi esterifikasi Fisher yang diaktivasi secara termal (\textit{thermal curing}) pada suhu $130\,^{\circ}\text{C}$ selama 1,5 jam \cite{birck2014citric}. Pada kondisi pemanasan ini, gugus karboksil dari asam sitrat mengalami reaksi dehidrasi kondensasi dengan gugus hidroksil rantai PVA, menghasilkan ikatan ester kovalen antar-rantai polimer. Pembentukan jejaring ikatan silang tiga dimensi ini secara dramatis meningkatkan resistansi air (\textit{water resistance}), mencegah degradasi morfologi nanofiber saat dibasahi oleh analit, serta menjaga stabilitas mekanik sensor \cite{shi2008citric,birck2014citric}.
+\end{enumerate}
+
+\subsection{\textit{Adipic Acid Dihydrazide} (ADH)}
+\textit{Adipic acid dihydrazide} (ADH, $\ch{C6H14N4O2}$) adalah senyawa organik homobifungsional alifatik simetris yang mengandung dua gugus fungsional hidrazida terminal ($- \text{CO}-\text{NH}-\text{NH}_2$) di kedua ujung rantai alkilnya \cite{sigma_adh}. ADH dikenal luas dalam rekayasa kimia dan biokonjugasi sebagai reagen penaut silang yang memiliki reaktivitas dan selektivitas sangat tinggi terhadap gugus karbonil, khususnya gugus aldehida ($- \text{CHO}$) dan keton ($- \text{C=O}$) \cite{sigma_adh}.
+
+Reaksi antara gugus hidrazida ADH dengan gugus aldehida berlangsung cepat pada suhu ruang membentuk ikatan hidrazon ($- \text{C=N}-\text{NH}-\text{CO}-$) yang stabil secara kovalen \cite{sigma_adh}. Keunggulan unik inilah yang mendasari pemanfaatan ADH dalam industri kimia dan pengolahan kayu sebagai agen penangkap formaldehida bebas (\textit{formaldehyde scavenger}) \cite{gantrade_adh}. Dalam arsitektur sensor TMR pada penelitian ini, gugus hidrazida bebas dari ADH yang terfungsionalisasi pada permukaan nanofiber difungsikan sebagai situs pengenal molekuler (\textit{molecular recognition site}) spesifik terhadap molekul formaldehida bebas ($\ch{CH2O}$). Ketika sampel formalin diaplikasikan pada permukaan nanofiber, gugus aldehida dari formaldehida akan bereaksi secara selektif dengan situs hidrazida ADH, mengikat analit pada kisi nanofiber tanpa menimbulkan interferensi silang dari gugus matriks lainnya \cite{gantrade_adh}.
+
+\subsection{Nanofiber Komposit \ch{Fe3O4}/PVA-Sitrat-ADH sebagai Elemen Reseptor}
+\label{subsec:fe3o4pvaadh}
+Integrasi antara nanopartikel magnetik $\ch{Fe3O4}$, polimer PVA, asam sitrat, dan ADH menghasilkan material komposit multifungsional yang bertindak sebagai elemen reseptor selektif formaldehida pada sensor TMR. Matriks PVA menyediakan kerangka berserat nano kontinu dengan luas permukaan spesifik tinggi, asam sitrat menjamin kestabilan dispersi partikel $\ch{Fe3O4}$ serta ketahanan hidrolitik serat terhadap air, sedangkan ADH menyediakan situs afinitas kimiawi terhadap formaldehida.
+
+Mekanisme transduksi pada sensor TMR ALT023-10E bekerja berdasarkan prinsip perturbasi medan magnet lokal: keberadaan nanopartikel $\ch{Fe3O4}$ superparamagnetik di dalam serat merespons medan magnet bias dari kumparan Helmholtz. Ketika molekul formaldehida terikat pada situs ADH melalui ikatan hidrazon, interaksi pengikatan ini memicu perubahan kerapatan konformasi mikro, transfer muatan lokal, atau pergeseran posisi partikel magnetik $\ch{Fe3O4}$ di dalam matriks serat. Perubahan mikroskopis tersebut memodifikasi momen magnetik efektif yang dirasakan oleh elemen \textit{Magnetic Tunnel Junction} (MTJ) dari sensor TMR di bawahnya, menghasilkan perubahan tegangan keluaran diferensial ($\Delta V$) yang proporsional terhadap konsentrasi formalin. Pengujian empiris terhadap linearitas dan sensitivitas respons inilah yang menjadi fokus metodologis penelitian ini.
+
+\subsection{\textit{Support Vector Machine} (SVM)}
+\textit{Support Vector Machine} (SVM) adalah algoritma pembelajaran mesin terawasi (\textit{supervised machine learning}) yang bekerja dengan mencari bidang pemisah optimal (\textit{hyperplane}) yang memaksimalkan batas jarak (\textit{margin}) antar kelas data pada ruang fitur \cite{cortes1995support}. Diberikan pasangan data latih $(\mathbf{x}_i, y_i)$ dengan $\mathbf{x}_i \in \mathbb{R}^d$ dan label kelas $y_i \in \{-1, +1\}$, SVM menyelesaikan masalah optimasi konveks:
+\begin{equation}
+\min_{\mathbf{w}, b, \boldsymbol{\xi}} \frac{1}{2} \|\mathbf{w}\|^2 + C \sum_{i=1}^{N} \xi_i, \quad \text{dengan kendala } y_i (\mathbf{w} \cdot \phi(\mathbf{x}_i) + b) \ge 1 - \xi_i, \quad \xi_i \ge 0,
+\end{equation}
+di mana $\mathbf{w}$ adalah vektor bobot normal bidang batas, $b$ adalah bias, $\xi_i$ adalah variabel kendur (\textit{slack variables}) untuk menangani data yang tidak dapat dipisahkan secara linier, dan $C > 0$ adalah parameter penalti regularisasi \cite{cortes1995support}. Fungsi pemetaan $\phi(\mathbf{x})$ memproyeksikan data masukan berdimensi rendah ke ruang berdimensi lebih tinggi melalui fungsi kernel $K(\mathbf{x}_i, \mathbf{x}_j) = \phi(\mathbf{x}_i) \cdot \phi(\mathbf{x}_j)$, seperti kernel \textit{Radial Basis Function} (RBF) $K(\mathbf{x}_i, \mathbf{x}_j) = \exp(-\gamma \|\mathbf{x}_i - \mathbf{x}_j\|^2)$. SVM dikenal tangguh terhadap bahaya \textit{overfitting} pada dataset berukuran kecil hingga menengah dengan dimensi fitur terbatas, sehingga sangat ideal dijadikan sebagai model acuan (\textit{baseline}) klasik dalam klasifikasi sinyal sensor TMR \cite{cortes1995support}.
+
+\subsection{\textit{Quantum Support Vector Classifier} (QSVC)}
+\textit{Quantum Support Vector Classifier} (QSVC) adalah algoritma pembelajaran mesin kuantum yang memperluas konsep SVM klasik dengan memanfaatkan ruang Hilbert kuantum sebagai ruang fitur berdimensi sangat tinggi \cite{havlicek2019supervised,schuld2019quantum}. Pada QSVC, data klasik $\mathbf{x} \in \mathbb{R}^d$ dipetakan ke dalam keadaan kuantum $|\Phi(\mathbf{x})\rangle$ pada ruang Hilbert $2^n$-dimensi (dengan $n$ adalah jumlah qubit) melalui gerbang uniter parametrik $U_{\Phi}(\mathbf{x})$:
+\begin{equation}
+|\Phi(\mathbf{x})\rangle = U_{\Phi}(\mathbf{x}) |0\rangle^{\otimes n}.
+\end{equation}
+Sirkuit kuantum yang umum digunakan adalah \textit{ZZFeatureMap}, yang memperkenalkan interaksi keterikatan (\textit{entanglement}) antar-qubit melalui gerbang rotasi fase dua-qubit $R_{ZZ}$ untuk memetakan korelasi non-linier data sensor \cite{havlicek2019supervised}. Nilai kemiripan antar dua data $\mathbf{x}_i$ dan $\mathbf{x}_j$ dihitung secara langsung sebagai produk dalam keadaan kuantum (\textit{Quantum Kernel Estimator}):
+\begin{equation}
+K_Q(\mathbf{x}_i, \mathbf{x}_j) = |\langle \Phi(\mathbf{x}_i) | \Phi(\mathbf{x}_j) \rangle|^2 = |\langle 0|^{\otimes n} U_{\Phi}^\dagger(\mathbf{x}_j) U_{\Phi}(\mathbf{x}_i) |0\rangle^{\otimes n}|^2.
+\end{equation}
+Matriks kernel kuantum $K_Q$ ini selanjutnya dievaluasi menggunakan algoritma optimasi konveks SVM klasik untuk menentukan bidang batas pemisah \cite{schuld2019quantum}. Keunggulan potensial QSVC terletak pada kemampuannya mengeksploitasi ruang Hilbert berdimensi tinggi secara efisien melalui fenomena superposisi dan keterikatan kuantum, yang berpotensi menghasilkan pemisahan kelas yang lebih tegas dan ketahanan terhadap derau sinyal sensor yang lebih baik dibandingkan fungsi kernel klasik \cite{havlicek2019supervised}. Komparasi langsung performa QSVC terhadap SVM klasik menjadi inti pembuktian kebaruan pada penelitian ini.
+
+\subsection{Arduino IDE}
+\textit{Arduino Integrated Development Environment} (IDE) adalah perangkat lunak utama untuk menulis, mengompilasi, dan mengunggah program ke papan mikrokontroler Arduino. Versi stabil Arduino IDE 2.0.0 yang dirilis pada tahun 2022 dibangun ulang sepenuhnya dari nol untuk meningkatkan pengalaman pengguna, dengan fitur baru seperti \textit{autocompletion}, navigasi kode, \textit{debugging}, dan \textit{serial plotter} yang lebih baik dibanding versi berbasis Java sebelumnya \cite{arduino2022}. Dalam penelitian ini, Arduino IDE digunakan untuk memprogram akuisisi data mentah dari ADC ADS1115 serta memantau keluaran sensor secara langsung melalui \textit{serial monitor} sebelum data diteruskan untuk diolah lebih lanjut.
+
+\subsection{Python}
+Python adalah bahasa pemrograman tingkat tinggi yang dirancang dengan filosofi keterbacaan, kesederhanaan, dan kemudahan penggunaan, mendukung berbagai paradigma pemrograman (berorientasi objek, prosedural, maupun fungsional) \cite{sanjayab2025}. Sifatnya yang berbasis interpreter memudahkan proses \textit{debugging} dan pengembangan iteratif, sementara ekosistem pustaka pihak ketiga yang luas (misalnya untuk pengolahan data numerik dan visualisasi) menjadikan Python banyak dipakai dalam lingkungan ilmiah untuk menyederhanakan analisis data dan komputasi \cite{sanjayab2025,pythonorg,millman2007}. Pada penelitian ini, Python digunakan pada sisi Raspberry Pi untuk menerima data mentah dari Arduino melalui komunikasi serial, melakukan pengolahan statistik (rata-rata dan simpangan baku), serta membangun kurva kalibrasi sensor.
+
+\section{Komponen yang Digunakan dalam Pembuatan Instrumentasi Sensor \textit{Tunneling Magnetoresistance} (TMR)}
+
+\subsection{Arduino Uno}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=5.5cm]{babII_ArduinoUno.jpg}
+    \caption{Papan Mikrokontroler Arduino Uno R3 \cite{sunar2021}}
+    \label{fig:arduino_uno}
+\end{figure}
+
+Arduino Uno merupakan papan mikrokontroler berbasis ATmega328P yang banyak digunakan dalam pengembangan proyek elektronika maupun instrumentasi. Tampilan fisik papan mikrokontroler Arduino Uno R3 ditunjukkan pada Gambar~\ref{fig:arduino_uno}. Papan ini memiliki 14 pin \textit{input/output} digital (6 di antaranya mendukung keluaran PWM) serta 6 pin masukan analog, dilengkapi osilator kristal 16 MHz, port USB, dan header ICSP \cite{sunar2021}. Bahasa pemrograman utamanya adalah C/C++ melalui Arduino IDE, dan papan ini dapat diintegrasikan dengan komputer host menggunakan Python melalui pustaka seperti \texttt{pySerial} \cite{sanjaya2025,dinata2016}. Pada penelitian ini, Arduino Uno berperan sebagai unit akuisisi yang membaca data digital dari ADC ADS1115 melalui antarmuka I2C dan meneruskannya melalui komunikasi serial ke Raspberry Pi.
+
+\subsection{Raspberry Pi 5}
+Raspberry Pi 5 adalah komputer papan tunggal generasi terbaru dari Raspberry Pi Ltd., menggunakan prosesor Broadcom BCM2712 \textit{quad-core} Arm Cortex-A76 64-bit berkecepatan 2,4 GHz, dengan peningkatan kinerja CPU 2--3 kali dibandingkan Raspberry Pi 4 \cite{raspberrypi2025}. Perangkat ini mendukung antarmuka USB, GPIO 40-pin, konektivitas Gigabit Ethernet dan Wi-Fi, serta mampu menjalankan sistem operasi berbasis Linux penuh, sehingga sesuai digunakan sebagai unit pengolah data tingkat tinggi (\textit{host}) yang menerima data mentah dari mikrokontroler dan menjalankan skrip Python untuk analisis serta penyimpanan data \cite{raspberrypi2025}.
+
+\subsection{Sensor TMR ALT023-10E}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=4cm]{babII_ALT023.png}
+    \caption{Modul Evaluasi Sensor TMR ALT023-10E (EVB01) \cite{nve_alt023_evb}}
+    \label{fig:alt023}
+\end{figure}
+
+Sensor ALT023-10E adalah sensor magnetometer analog berbasis \textit{Tunneling Magnetoresistance} produksi NVE Corporation, dikemas dalam paket DFN6 berukuran 2,5$\times$2,5$\times$0,8 mm dengan resistansi divais 20 k$\Omega$ \cite{nve_alt023_evb}. Bentuk fisik modul evaluasi sensor TMR ALT023-10E (EVB01) ditunjukkan pada Gambar~\ref{fig:alt023}. Sensor ini memiliki keluaran jembatan diferensial bersifat \textit{bipolar} (positif untuk medan magnet satu arah, negatif untuk arah sebaliknya), dengan rentang medan linear $\pm$1 mT, medan saturasi sekitar 1,5 mT, sensitivitas tipikal 200 mV/V/mT (rentang 150--250 mV/V/mT), linearitas tipikal 0,1--0,2\% dari skala penuh, serta bandwidth hingga 300 kHz \cite{nve_alt023}. Sensor ini dapat dicatu pada rentang tegangan fleksibel 0--5,5 V tanpa batas minimum, menjadikannya kompatibel dengan catu daya tunggal 5 V yang digunakan pada instrumentasi penelitian ini \cite{magneticsmag_alt023}. Dibandingkan sensor GMR yang digunakan pada penelitian sebelumnya, ALT023-10E menawarkan sensitivitas per-volt-suplai yang jauh lebih tinggi, sebagaimana telah dibahas pada Subbab 2.1.2, sehingga berpotensi meningkatkan kemampuan sistem dalam mendeteksi perubahan medan magnet berskala kecil akibat interaksi formalin dengan nanofiber Fe$_3$O$_4$/PVA-ADH.
+
+\subsection{IC AD623}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=6.5cm]{babII_AD623_Pinout.png}
+    \caption{Konfigurasi Pin (\textit{Pinout}) IC \textit{Instrumentation Amplifier} AD623}
+    \label{fig:ad623_pinout}
+\end{figure}
+
+AD623 adalah IC \textit{instrumentation amplifier} produksi Analog Devices yang dirancang untuk operasi catu daya tunggal maupun ganda, dengan rentang tegangan suplai 2,7--12 V dan keluaran \textit{rail-to-rail} \cite{adi_ad623}. Konfigurasi pin (\textit{pinout}) dari IC AD623 ditunjukkan pada Gambar~\ref{fig:ad623_pinout}. Penguatan (\textit{gain}) diatur melalui satu resistor eksternal $R_G$ yang dipasang antar-pin $-R_G$ dan $+R_G$, mengikuti persamaan
+\begin{equation}
+G = 1 + \frac{100\,\mathrm{k}\Omega}{R_G},
+\label{eq:ad623_gain}
+\end{equation}
+dengan rentang gain dapat diatur dari 1 (tanpa resistor eksternal) hingga 1000 \cite{adi_ad623}. IC ini dilengkapi pin \texttt{REF} yang memungkinkan tegangan keluaran digeser ke titik referensi tertentu, sehingga sinyal bipolar kecil dari sensor TMR dapat diangkat ke rentang tegangan positif yang sesuai dengan input ADC catu daya tunggal. AD623 dipilih pada penelitian ini menggantikan IC LM358 yang digunakan pada instrumentasi GMR sebelumnya, karena AD623 secara khusus dirancang sebagai \textit{instrumentation amplifier} tiga op-amp dengan CMRR tinggi dan pengaturan gain satu-resistor, yang lebih sesuai untuk menguatkan sinyal diferensial kecil dari jembatan sensor magnetoresistif dibandingkan konfigurasi op-amp subtraktor diskret \cite{adi_ad623}.
+
+\subsection{Resistor}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=7.5cm]{babII_Types-of-resistors.png}
+    \caption{Klasifikasi dan Ragam Jenis Resistor \cite{electrical4u_resistor}}
+    \label{fig:types_of_resistors}
+\end{figure}
+
+Resistor adalah komponen pasif dua terminal yang memberikan hambatan terhadap aliran arus listrik, berfungsi membatasi, mengatur, dan membagi arus dalam suatu rangkaian \cite{geeksforgeeks_resistor,electrical4u_resistor}. Klasifikasi dan jenis-jenis resistor ditampilkan pada Gambar~\ref{fig:types_of_resistors}. Resistor dikategorikan menjadi resistor tetap, dengan nilai resistansi tidak berubah (komposisi karbon, film, atau \textit{wire-wound}), dan resistor variabel yang nilainya dapat diubah, misalnya potensiometer \cite{circuitbasics_resistor}. Pada penelitian ini, resistor digunakan pada rangkaian filter RFI dan \textit{anti-aliasing}, pembagi tegangan referensi (\texttt{REF}) AD623, serta penentu gain ($R_G$).
+
+\subsection{Kapasitor}
+Kapasitor adalah komponen pasif yang menyimpan dan melepaskan energi listrik, tersusun dari dua elektroda konduktif yang dipisahkan medium isolator atau elektrolit \cite{liu2024review,sun2022review}. Kapasitor dielektrik (film, keramik, elektrolit) merupakan jenis yang umum digunakan pada rangkaian penyaringan sinyal dan stabilisasi daya \cite{liu2024review}. Pada penelitian ini, kapasitor digunakan pada rangkaian filter RFI di masukan AD623, filter \textit{anti-aliasing} sebelum ADC, serta \textit{decoupling} pada setiap jalur catu daya IC.
+
+\subsection{ADC 16-bit ADS1115}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=5cm]{babII_ADS-1115-c.jpg}
+    \caption{Modul ADC 16-bit ADS1115 \cite{adafruit_ads1115}}
+    \label{fig:ads1115_modul}
+\end{figure}
+
+ADS1115 adalah ADC 16-bit berbasis arsitektur \textit{delta-sigma} produksi Texas Instruments, dengan konsumsi daya rendah dan referensi tegangan internal, sehingga sesuai untuk sistem instrumentasi presisi \cite{ti_ads1115}. Modul ADS1115 yang digunakan ditunjukkan pada Gambar~\ref{fig:ads1115_modul}. Perangkat ini mendukung empat kanal masukan \textit{single-ended} atau dua kanal diferensial, dilengkapi \textit{programmable gain amplifier} (PGA) dengan pilihan penguatan $\times$2/3, 1, 2, 4, 8, hingga 16, serta laju konversi yang dapat diprogram dari 8 hingga 860 sampel per detik (SPS) \cite{adafruit_ads1115}. Komunikasi dilakukan melalui antarmuka I2C dengan hingga empat alamat berbeda (0x48--0x4B) yang dipilih melalui pin \texttt{ADDR}, serta pin \texttt{ALERT/RDY} yang dapat difungsikan sebagai indikator kesiapan data \cite{ti_ads1115}. Pada penelitian ini, ADS1115 membaca keluaran AD623 pada kanal AIN0 secara \textit{single-ended}, dengan PGA diatur pada rentang skala penuh $\pm$6,144 V agar seluruh rentang keluaran AD623 (0--5 V) dapat terbaca tanpa \textit{clipping}.

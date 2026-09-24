@@ -1,0 +1,84 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0" version="28.2.5" scale="1" border="0">
+  <diagram name="Page-1" id="4CqrNohvu9uuhbe_SsnI">
+    <mxGraphModel dx="1234" dy="689" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="MJN94T1lg2GBUVGA7B6C-1" target="MJN94T1lg2GBUVGA7B6C-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-1" value="Mulai" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="160" y="10" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="MJN94T1lg2GBUVGA7B6C-2" target="MJN94T1lg2GBUVGA7B6C-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-2" value="Inisialisasi Pustaka, Input, ADC" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="150" y="110" width="140" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="MJN94T1lg2GBUVGA7B6C-4" target="MJN94T1lg2GBUVGA7B6C-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="MJN94T1lg2GBUVGA7B6C-4" target="MJN94T1lg2GBUVGA7B6C-10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-4" value="Apakah&amp;nbsp;&lt;div&gt;ADC ADS1115&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;dan Pembacaan Serial&lt;/span&gt;&lt;/div&gt;&lt;div&gt;Terbaca?&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="150" y="210" width="140" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="MJN94T1lg2GBUVGA7B6C-10" target="MJN94T1lg2GBUVGA7B6C-14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-10" value="Pengaturan Gain ADC" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="135" y="370" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-11" value="Tidak" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="280" y="290" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-13" value="Ya" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="220" y="340" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="MJN94T1lg2GBUVGA7B6C-14" target="MJN94T1lg2GBUVGA7B6C-16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-14" value="Membaca Nilai&lt;div&gt;Masukan Sensor Melalui Input Analog ADC&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="125" y="450" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="MJN94T1lg2GBUVGA7B6C-16" target="MJN94T1lg2GBUVGA7B6C-19" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-16" value="Menghitung Nilai Sinyal Tegangan Keluaran Sensor dengan ADC 16-bit" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="135" y="530" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="MJN94T1lg2GBUVGA7B6C-18" target="MJN94T1lg2GBUVGA7B6C-26" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-18" value="Mencetak Nilai&lt;div&gt;Tegangan Keluaran Sensor&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="125" y="770" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="MJN94T1lg2GBUVGA7B6C-19" target="MJN94T1lg2GBUVGA7B6C-18" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="MJN94T1lg2GBUVGA7B6C-19" target="MJN94T1lg2GBUVGA7B6C-14" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="320" y="680" />
+              <mxPoint x="320" y="480" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-19" value="Apakah Nilai&lt;div&gt;Tegangan dapat Terbaca?&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="150" y="610" width="140" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-24" value="Tidak" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="280" y="680" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-25" value="Ya" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="210" y="740" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="MJN94T1lg2GBUVGA7B6C-26" value="Selesai" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="160" y="850" width="120" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

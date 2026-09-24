@@ -1,0 +1,41 @@
+# LaTeX Build Logs & Auxiliary Files
+build_logs/
+*.aux
+*.log
+*.bbl
+*.blg
+*.toc
+*.lof
+*.lot
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.nav
+*.snm
+*.vrb
+
+# Python Caches & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+venv/
+env/
+.venv/
+
+# Scratch & Temporary Archives
+scratch/
+*.zip
+*.tar.gz
+*.rar
+
+# OS Generated Files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# IDE Local States
+.vscode/.ropeproject
+.idea/

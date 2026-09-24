@@ -1,0 +1,55 @@
+<mxfile host="app.diagrams.net" version="28.2.5" scale="1" border="0">
+  <diagram name="Page-1" id="synthesis_diagram">
+    <mxGraphModel dx="1000" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="m1" value="Mulai" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="100" y="25" width="120" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="m2" value="Preparasi Prekursor FeSO4 &amp; FeCl3&#xa;serta Ekstrak Daun Kelor (MO)" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="m3" value="Pencampuran Prekursor &amp; Ekstrak MO&#xa;serta Pemanasan Awal 60°C (600 rpm)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="185" width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="m4" value="Presipitasi Kopresipitasi:&#xa;Penambahan NH4OH Tetes demi Tetes&#xa;(Periode 90 Menit hingga Terbentuk Fe3O4)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="265" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="m5" value="Pemisahan Magnetik Menggunakan Magnet&#xa;&amp; Pencucian Endapan Fe3O4 dengan&#xa;Aquades (7 Siklus Pemurnian)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="350" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="m6" value="Pengeringan Partikel Magnetit Fe3O4&#xa;di Furnace (2 Jam)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="440" width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="m7" value="Stabilisasi Penudung (Citrate Capping):&#xa;Dispersi 0,2 g Fe3O4 + Asam Sitrat&#xa;dalam 1 mL Aquades (Sonikasi 30 Menit)&#xa;[Mencegah Pengendapan di Jarum Syringe]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="520" width="240" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="m8" value="Pelarutan Matriks Polimer PVA 11% b/v&#xa;(0,55 g dalam 5 mL, 85-90°C, 60 Menit)&#xa;&amp; Pencampuran Dispersi Fe3O4-Sitrat" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="360" y="780" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="m9" value="Homogenisasi Larutan Komposit:&#xa;Pengadukan Magnetik 30 Menit &amp;&#xa;Sonikasi Ultrasonic Bath 15 Menit" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="360" y="695" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="m10" value="Pemintalan Elektrospinning Optimal:&#xa;Tegangan: 17 kV | Laju Alir: 0,6 mL/jam&#xa;Jarak TCD: 14 cm | Jarum: 22G&#xa;Kecepatan Drum Kolektor: 1000 rpm" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="360" y="580" width="240" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="m11" value="Apakah Nanofiber&#xa;Terbentuk Rata?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="400" y="470" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="m12" value="Perlakuan Thermal Curing Asam Sitrat:&#xa;Pemanasan dalam Oven 130°C (1 Jam)&#xa;untuk Membentuk Ikatan Esterifikasi" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="360" y="365" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="m13" value="Fungsionalisasi Cross-linking ADH:&#xa;Perendaman dalam ADH 2% b/v (4 Jam)&#xa;Menghasilkan Gugus Bebas -NH2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="360" y="275" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="m14" value="Membran Nanofiber Komposit&#xa;Fe3O4/PVA-Sitrat-ADH Siap Pasang&#xa;pada Permukaan Sensor TMR" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="360" y="175" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="m15" value="Selesai" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="420" y="65" width="120" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

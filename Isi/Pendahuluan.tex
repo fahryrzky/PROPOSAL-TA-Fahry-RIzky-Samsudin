@@ -1,0 +1,87 @@
+\chapter{PENDAHULUAN}
+\pagenumbering{arabic}
+
+\section{Latar Belakang}
+
+Formalin (larutan formaldehida) merupakan bahan kimia yang dilarang penggunaannya sebagai bahan tambahan pangan di Indonesia, namun penyalahgunaannya sebagai pengawet masih kerap ditemukan pada produk pangan siap saji, salah satunya bakso. Sejumlah studi identifikasi di berbagai kota melaporkan temuan positif formalin pada sampel bakso yang beredar di pasaran, misalnya di Kota Padang \cite{padang_bakso}, sepanjang Jalan Soebrantas Kota Pekanbaru \cite{pekanbaru_bakso}, hingga di kawasan wisata dan area sekolah di Yogyakarta \cite{yogyakarta_bakso}. Salah satu penelitian bahkan melaporkan kadar formalin pada bakso mencapai 4,506 ppm \cite{pekanbaru_bakso}, sementara Otoritas Keamanan Pangan Eropa (EFSA) menetapkan ambang batas maksimum formalin yang dapat ditoleransi dalam pangan sebesar 100 ppm \cite{sosis_efsa}. Konsumsi formalin secara berulang, sekalipun dalam kadar kecil, berpotensi terakumulasi dalam tubuh dan menimbulkan risiko kesehatan jangka panjang. Kondisi ini menegaskan perlunya metode deteksi formalin yang cepat, murah, dan dapat diterapkan secara luas oleh masyarakat maupun pengawas pangan.
+
+Metode deteksi formalin yang umum digunakan saat ini masih didominasi oleh uji kualitatif berbasis reagen warna, seperti pereaksi kalium permanganat (KMnO$_4$) dan asam kromotropat, maupun uji kuantitatif menggunakan spektrofotometri UV-Vis. Meskipun cukup efektif, metode-metode tersebut umumnya bersifat destruktif terhadap sampel, memerlukan bahan kimia dan peralatan laboratorium, serta membutuhkan waktu analisis yang relatif lama sehingga kurang praktis untuk pengujian cepat di lapangan. Kebutuhan akan instrumen deteksi formalin yang portabel, terjangkau, dan mampu memberikan pembacaan kuantitatif secara langsung menjadi salah satu pendorong utama pengembangan sensor berbasis elektronik sebagai alternatif.
+
+Salah satu pendekatan yang menjanjikan adalah pemanfaatan material nanokomposit magnetik sebagai elemen pengenal (receptor) pada sensor. Nanopartikel Fe$_3$O$_4$ banyak digunakan dalam pengembangan sensor karena sifat superparamagnetiknya, biokompatibilitas, serta kemudahan difungsionalisasi. Dalam penelitian ini, nanofiber Fe$_3$O$_4$/PVA difungsionalisasi menggunakan \textit{adipic acid dihydrazide} (ADH) sebagai agen taut-silang (\textit{crosslinker}), alih-alih glutaraldehida (GA) yang umum digunakan pada penelitian sejenis sebelumnya. Pemilihan ini didasarkan pada sifat kimiawi ADH sebagai senyawa homobifungsional dengan dua gugus hidrazida pada masing-masing ujungnya, yang bereaksi secara spesifik dengan gugus aldehida membentuk ikatan hidrazon yang relatif stabil \cite{sigma_adh}. ADH bahkan telah dilaporkan pemanfaatannya sebagai \textit{formaldehyde scavenger} yang menangkap formaldehida bebas \cite{gantrade_adh}. Sifat inilah yang menjadi dasar hipotesis penelitian ini: gugus hidrazida pada permukaan nanofiber Fe$_3$O$_4$/PVA-ADH diharapkan dapat berikatan secara selektif dengan molekul formaldehida dalam formalin, sehingga menimbulkan perubahan sifat magnetik lokal yang dapat terbaca oleh sensor magnetoresistif. Berbeda dengan GA yang merupakan senyawa aldehida itu sendiri sehingga berpotensi menimbulkan ambiguitas pengenalan terhadap analit target, ADH dipilih justru karena gugus fungsinya bereaksi dengan aldehida, bukan sebagai aldehida.
+
+Untuk membaca perubahan sinyal magnetik tersebut, penelitian ini menggunakan sensor \textit{Tunneling Magnetoresistance} (TMR), sebagai kelanjutan dari lini penelitian sensor magnetoresistif yang sebelumnya memanfaatkan platform \textit{Giant Magnetoresistance} (GMR). TMR memanfaatkan efek terowongan kuantum (\textit{quantum tunneling effect}) pada lapisan penghalang isolator tipis di antara dua lapisan ferromagnetik, yang menghasilkan perubahan resistansi jauh lebih besar dibandingkan efek GMR konvensional \cite{micronas_tmr}. Rasio TMR pada sensor berbasis \textit{magnetic tunnel junction} (MTJ) dengan penghalang MgO dilaporkan dapat melampaui 200\% pada suhu ruang, jauh di atas rasio GMR pada sensor \textit{spin-valve} yang umumnya kurang dari 20\% \cite{nanomedicine_mtj}. Sumber lain turut melaporkan bahwa keluaran sensor TMR secara umum dapat mencapai sekitar enam kali lebih tinggi dibandingkan sensor GMR pada aplikasi sejenis \cite{electronicdesign_tmrgmr}. Keunggulan sensitivitas inilah yang mendasari pemilihan TMR sebagai platform sensor pada penelitian ini, dengan harapan mampu mendeteksi perubahan medan magnet berskala kecil akibat interaksi formalin dengan nanofiber secara lebih baik dibandingkan platform GMR yang digunakan pada penelitian sebelumnya.
+
+Pembacaan sinyal sensor TMR yang berorde milivolt hingga puluhan milivolt memerlukan rangkaian instrumentasi yang mampu menguatkan sekaligus meredam derau secara memadai sebelum dikonversi menjadi data digital. Pada penelitian ini, keluaran sensor TMR dikuatkan menggunakan penguat instrumentasi AD623, difilter melalui rangkaian \textit{anti-aliasing}, kemudian dikonversi menjadi data digital 16-bit menggunakan ADC ADS1115 yang diakuisisi oleh mikrokontroler Arduino dan diteruskan ke Raspberry Pi untuk pengolahan lebih lanjut. Sebelum sistem digunakan untuk pengujian formalin, dilakukan tahap karakterisasi awal untuk memperoleh hubungan kuantitatif antara tegangan keluaran sensor dan medan magnet riil (B) menggunakan kumparan Helmholtz sebagai sumber medan terkontrol dan teslameter sebagai acuan pengukuran, sebelum dilanjutkan dengan pembuatan kurva kalibrasi terhadap variasi konsentrasi formalin. Pendekatan instrumentasi berbasis regresi ini dipilih agar performa sensor dapat dievaluasi secara terukur dan dapat direproduksi.
+
+Berdasarkan uraian di atas, hingga saat ini belum ditemukan penelitian yang secara khusus mengintegrasikan sensor \textit{Tunneling Magnetoresistance} berbasis nanofiber \ch{Fe3O4}/PVA-Sitrat-ADH untuk deteksi formalin pada bakso menggunakan komparasi model \textit{machine learning} klasik (SVM) dan \textit{quantum machine learning} (QSVC), khususnya di Indonesia. Penelitian ini karenanya berfokus pada rancang bangun instrumentasi sensor TMR berbasis nanofiber \ch{Fe3O4}/PVA-Sitrat-ADH untuk uji sensitivitas terhadap variasi konsentrasi formalin, dengan mekanisme pengenalan formalin oleh gugus ADH diperlakukan sebagai hipotesis yang akan diuji secara empiris, serta membandingkan performa model SVM dan QSVC dalam mengklasifikasikan konsentrasi formalin. Hasil penelitian ini diharapkan dapat menjadi langkah awal pengembangan instrumen deteksi formalin yang cerdas, portabel, kuantitatif, dan terjangkau untuk mendukung pengawasan keamanan pangan di Indonesia.
+
+
+\section{Rumusan Masalah}
+Berdasarkan latar belakang di atas maka permasalahan yang dapat dirumuskan adalah sebagai berikut:
+\begin{enumerate}
+    \item Bagaimana sensitivitas sensor \textit{Tunneling Magnetoresistance} (TMR) yang berbasis nanofiber \ch{Fe3O4}/PVA-Sitrat-ADH dalam mendeteksi variasi konsentrasi formalin?
+    \item Bagaimana batas deteksi (\textit{limit of detection}) yang diperoleh dari sensor TMR berbasis nanofiber \ch{Fe3O4}/PVA-Sitrat-ADH dalam mendeteksi variasi konsentrasi formalin?
+    \item Bagaimana gugus hidrazida pada nanofiber \ch{Fe3O4}/PVA-Sitrat-ADH memengaruhi respons magnetoresistif sensor TMR terhadap keberadaan formalin?
+    \item Bagaimana rancangan sistem instrumentasi (AD623-ADS1115-Arduino-Raspberry Pi) menghasilkan kurva kalibrasi yang valid antara tegangan keluaran sensor dan konsentrasi formalin pada bakso?
+    \item Bagaimana komparasi performa klasifikasi antara model \textit{Support Vector Machine} (SVM) klasik dan \textit{Quantum Support Vector Classifier} (QSVC) dalam mendeteksi dan mengklasifikasikan kandungan formalin pada sampel bakso?
+\end{enumerate}
+
+
+\section{Batasan Masalah}
+Penelitian ini memiliki batasan masalah agar penelitian memiliki batasan demi tercapainya suatu tujuan penelitian, di antaranya yaitu:
+\begin{enumerate}
+    \item Penelitian ini hanya berfokus pada deteksi formalin, sehingga bahan tambahan pangan berbahaya lain (misalnya boraks atau pewarna tekstil) tidak dianalisis secara mendalam.
+    \item Pengujian sensor pada tahap ini dilakukan menggunakan larutan formalin standar hasil pengenceran bertingkat dengan konsentrasi yang terkontrol (mg/L), sebagai dasar kurva kalibrasi sebelum diterapkan pada ekstrak sampel bakso riil.
+    \item Material sensor yang digunakan adalah nanofiber \ch{Fe3O4}/PVA-Sitrat-ADH hasil elektrospinning dengan penautan silang asam sitrat dan fungsionalisasi ADH.
+    \item Mekanisme pengenalan formalin oleh gugus hidrazida ADH pada penelitian ini diperlakukan sebagai hipotesis yang diuji, bukan mekanisme yang telah dibuktikan secara pasti.
+    \item Evaluasi sensor TMR dibatasi pada parameter sensitivitas, linearitas, batas deteksi (LOD), dan kestabilan sinyal; aspek lain seperti ketahanan mekanik jangka panjang tidak menjadi fokus utama.
+    \item Pendekatan komputasi cerdas dibatasi pada perbandingan model klasik \textit{Support Vector Machine} (SVM) dan model kuantum \textit{Quantum Support Vector Classifier} (QSVC) yang disimulasikan menggunakan representasi pemetaan fitur kuantum (\textit{quantum feature map}).
+\end{enumerate}
+
+
+\section{Tujuan Penelitian}
+Berdasarkan rumusan masalah di atas, penelitian ini bertujuan untuk:
+\begin{enumerate}
+    \item Mengevaluasi sensitivitas sensor \textit{Tunneling Magnetoresistance} (TMR) berbasis nanofiber \ch{Fe3O4}/PVA-Sitrat-ADH dalam mendeteksi variasi konsentrasi formalin.
+    \item Menentukan batas deteksi (LOD) formalin menggunakan sensor TMR berbasis nanofiber \ch{Fe3O4}/PVA-Sitrat-ADH.
+    \item Mengevaluasi peran gugus hidrazida pada nanofiber \ch{Fe3O4}/PVA-Sitrat-ADH dalam memengaruhi respons magnetoresistif sensor TMR.
+    \item Merancang dan memvalidasi sistem instrumentasi akuisisi data (AD623-ADS1115-Arduino-Raspberry Pi) yang menghasilkan kurva kalibrasi antara tegangan keluaran sensor dan konsentrasi formalin.
+    \item Menganalisis dan membandingkan akurasi, presisi, recall, F1-score, serta ketahanan derau antara model SVM klasik dan QSVC dalam mengklasifikasikan kandungan formalin pada sampel bakso.
+\end{enumerate}
+
+\section{Manfaat Penelitian}
+Penelitian ini akan memberikan beberapa manfaat, di antaranya:
+\begin{enumerate}
+    \item Memberikan kontribusi teoretis dalam pengembangan ilmu instrumentasi sensor dengan menghadirkan kajian mengenai performa sensor \textit{Tunneling Magnetoresistance} (TMR) berbasis nanofiber \ch{Fe3O4}/PVA-Sitrat-ADH untuk deteksi formalin.
+    \item Menawarkan pendekatan alternatif agen taut-silang berbasis asam sitrat dan hidrazida (ADH) yang ramah lingkungan dan lebih selektif terhadap gugus aldehida dibandingkan glutaraldehida.
+    \item Memberikan kontribusi kebaruan ilmiah dalam penerapan komputasi kuantum (\textit{Quantum Machine Learning}) untuk klasifikasi data sinyal sensor pada pengujian keamanan pangan.
+    \item Menjadi dasar bagi pengembangan instrumen deteksi formalin yang cerdas, portabel, kuantitatif, dan terjangkau untuk mendukung pengawasan keamanan pangan nasional.
+\end{enumerate}
+
+\section{Metode Pengumpulan Data}
+Untuk mencapai tujuan dari penelitian, dilaksanakan serangkaian metode pengumpulan data sebagai berikut:
+\begin{enumerate}
+    \item Studi Literatur: Mengumpulkan dan menganalisis informasi dari penelitian terdahulu mengenai deteksi formalin pada pangan, teknologi \textit{Tunneling Magnetoresistance} (TMR), material nanofiber \ch{Fe3O4}/PVA-Sitrat-ADH, serta algoritma pemodelan \textit{machine learning} klasik (SVM) dan \textit{Quantum Machine Learning} (QSVC).
+    \item Observasi dan Studi Pendahuluan: Melakukan observasi terhadap prototipe instrumentasi sensor magnetoresistif yang telah dikembangkan sebelumnya, sebagai titik tolak perancangan rangkaian instrumentasi sensor TMR pada penelitian ini, termasuk teknik fabrikasi nanofiber melalui elektrospinning dengan stabilisasi asam sitrat dan fungsionalisasi ADH.
+    \item Eksperimen Laboratorium: Merancang dan menguji instrumen sensor TMR berbasis nanofiber \ch{Fe3O4}/PVA-Sitrat-ADH untuk mendeteksi variasi konsentrasi formalin, diawali karakterisasi medan magnet kumparan Helmholtz hingga pengujian sampel bakso riil.
+    \item Analisis Data dan Pemodelan Cerdas: Data hasil eksperimen diolah melalui analisis regresi kalibrasi, ekstraksi fitur sinyal, serta pelatihan dan evaluasi komparatif model SVM klasik versus QSVC.
+\end{enumerate}
+
+\newpage
+\section{Sistematika Penulisan}
+Dalam penulisan penelitian ini, diatur sistematika penulisan dalam tiga bab dengan urutan sebagai berikut:
+\\
+\\
+BAB I: PENDAHULUAN
+
+Bab ini berisi uraian mengenai latar belakang penelitian, perumusan masalah, batasan masalah, tujuan penelitian, manfaat penelitian, serta metode pengumpulan data yang digunakan. Bagian ini menjadi landasan awal untuk menjelaskan pentingnya rancang bangun instrumentasi sensor \textit{Tunneling Magnetoresistance} (TMR) berbasis nanofiber \ch{Fe3O4}/PVA-Sitrat-ADH dengan komparasi model SVM dan QSVC dalam deteksi formalin pada bakso.
+\\
+\\
+BAB II: TINJAUAN PUSTAKA
+
+Bab ini membahas kajian pustaka dan teori-teori yang relevan dengan penelitian, meliputi permasalahan formalin pada pangan, prinsip kerja sensor \textit{Tunneling Magnetoresistance} (TMR), dasar material pembentuk nanofiber (PVA, Asam Sitrat, ADH, dan nanofiber komposit), komponen instrumentasi perangkat keras, hingga dasar teori pemodelan komparasi SVM dan QSVC.
+\\
+\\
+BAB III: METODE PENELITIAN DAN PERANCANGAN SISTEM
+
+Bab ini memuat daftar alat dan bahan yang digunakan, tahapan sintesis terstruktur nanofiber komposit melalui elektrospinning dengan parameter optimal, perancangan sistem akuisisi data perangkat keras dan perangkat lunak, serta metodologi ekstraksi fitur dan evaluasi komparatif model SVM dan QSVC.
