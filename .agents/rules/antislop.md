@@ -10,3 +10,10 @@ For UI, copy, people, mobile layout, or code comments work, load the matching an
 - Code comments: skills/antislop-code/SKILL.md
 Before starting, ask the user when antislop applies: during the work, or after it is done.
 </EXTREMELY_IMPORTANT>
+
+## Aturan Khusus Presentasi Akademik (Anti-Slop Slide & Academic Deck)
+1. **Dilarang Repetisi Kategori Bab di Header (R-05)**: Jangan pernah mencantumkan label generik seperti "BAB II: TINJAUAN PUSTAKA" atau "LANDASAN TEORI X" secara berulang di setiap judul slide teori. Judul slide harus langsung merujuk pada topik fisis/teknis (misal: "Karakteristik Formaldehida & Reaksi Hidrazon", "Fisika TMR & Model Julliere").
+2. **Formula Matematika Wajib Dirender Resmi**: Dilarang menulis persamaan matematika kompleks menggunakan representasi teks ASCII biasa (`R-NH-NH2 --> ...`, `(4/5)^(3/2)`). Wajib dirender melalui engine LaTeX Computer Modern 300 DPI dengan latar belakang transparan.
+3. **Format Cover Tradisi Akademik UIN**: Judul di atas, Identitas Peneliti (Nama & NIM) di tengah, dan Dosen Pembimbing I di kiri serta Dosen Pembimbing II di kanan (sesuai format rujukan Gilang Pratama).
+4. **Efisiensi Slide**: Gabungkan Rumusan Masalah dan Batasan Masalah dalam 1 slide (kiri dan kanan); gabungkan Tujuan Penelitian dan Manfaat Penelitian dalam 1 slide (kiri dan kanan). Dilarang membuat slide pengisi (filler) seperti profil mitra perusahaan atau daftar sistematika sidang.
+5. **Latar Belakang Berbasis Visual Flowchart**: Hindari paragraf teks panjang pada latar belakang; sajikan dalam bentuk diagram alir konseptual grafis yang menggambarkan alur masalah pangan, limitasi analisis, reseptor nanofiber, transduser TMR, rantai sinyal, komparasi ML, hingga target solusi.
