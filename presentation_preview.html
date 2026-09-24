@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preview Presentasi Proposal Skripsi - Fahry Rizky Samsudin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-page: #0f172a;
+      --slide-bg: #f8fafc;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-body: #334155;
+      --text-muted: #64748b;
+      --navy-dark: #0f1e4a;
+      --navy-mid: #1e3a8a;
+      --blue-accent: #2563eb;
+      --emerald: #059669;
+      --amber: #d97706;
+      --light-blue: #eff6ff;
+      --light-emr: #ecfdf5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg-page);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+      min-height: 100vh;
+    }
+
+    .top-bar {
+      width: 1280px;
+      max-width: 95vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      color: #94a3b8;
+      font-size: 14px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      background: #1e293b;
+      color: #f1f5f9;
+      border: 1px solid #334155;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+      transition: all 0.15s ease;
+    }
+
+    .btn:hover {
+      background: #334155;
+      color: #fff;
+    }
+
+    .slide-viewport {
+      width: 1280px;
+      height: 720px;
+      max-width: 95vw;
+      aspect-ratio: 16 / 9;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--slide-bg);
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      padding: 40px 60px 30px;
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: var(--slide-bg);
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    /* Header */
+    .slide-header {
+      margin-bottom: 20px;
+      border-bottom: 1.5px solid var(--card-border);
+      padding-bottom: 14px;
+    }
+    .slide-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--blue-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+    .slide-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--navy-dark);
+      line-height: 1.25;
+    }
+    .slide-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Content Area */
+    .slide-content {
+      flex: 1;
+      display: flex;
+      gap: 24px;
+      overflow: hidden;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 22px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-badge {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--blue-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy-dark);
+      margin-bottom: 12px;
+    }
+
+    ul.bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    ul.bullet-list li {
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--text-body);
+      position: relative;
+      padding-left: 18px;
+    }
+    ul.bullet-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--blue-accent);
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 1;
+      top: 0;
+    }
+    ul.bullet-list li strong {
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    /* Media Containers */
+    .media-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+    }
+    .media-card img {
+      max-width: 100%;
+      max-height: 180px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+    .media-caption {
+      font-size: 11px;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    /* Footer */
+    .slide-footer {
+      height: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--card-border);
+      margin-top: 14px;
+      padding-top: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .slide-page-num {
+      font-weight: 700;
+      color: var(--navy-mid);
+    }
+
+    /* Grid 2x2 */
+    .grid-2x2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 16px;
+      flex: 1;
+    }
+    .grid-3x2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 14px;
+      flex: 1;
+    }
+
+    /* Cover Styling */
+    .cover-card {
+      flex: 1;
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 36px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .cover-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: var(--navy-mid);
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+    }
+    .cover-header {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+    .cover-logo {
+      width: 110px;
+      height: 110px;
+      object-fit: contain;
+    }
+    .cover-title-box {
+      flex: 1;
+    }
+    .cover-badge {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--blue-accent);
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .cover-title {
+      font-size: 25px;
+      font-weight: 800;
+      color: var(--navy-dark);
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+    .cover-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .cover-meta {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid var(--card-border);
+      padding-top: 24px;
+    }
+    .cover-meta-col h4 {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--blue-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+    .cover-meta-col h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+    .cover-meta-col p {
+      font-size: 13px;
+      color: var(--text-body);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div style="font-weight: 700; color: #fff;">
+      Rancang Bangun Instrumentasi Sensor TMR — Fahry Rizky Samsudin (1237030018)
+    </div>
+    <div class="controls">
+      <button class="btn" onclick="prevSlide()">◀ Sebelumnya</button>
+      <span id="counter" style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: #38bdf8;">1 / 24</span>
+      <button class="btn" onclick="nextSlide()">Berikutnya ▶</button>
+    </div>
+  </div>
+
+  <div class="slide-viewport">
+
+    <!-- SLIDE 1: COVER -->
+    <div class="slide active" id="slide-1">
+      <div class="cover-card">
+        <div class="cover-header">
+          <img src="Gambar/Logo/Logo UIN.png" alt="Logo UIN" class="cover-logo">
+          <div class="cover-title-box">
+            <div class="cover-badge">SEMINAR PROPOSAL TUGAS AKHIR</div>
+            <h1 class="cover-title">Rancang Bangun Instrumentasi Sensor Tunneling Magnetoresistance Berbasis Nanofiber Fe3O4/PVA-Sitrat-ADH untuk Deteksi Formalin pada Bakso Menggunakan Komparasi Model SVM dan QSVC</h1>
+            <p class="cover-sub">Kajian Eksperimental Sensor TMR ALT023-10E, Fungsionalisasi Nanomaterial Magnetik, dan Pembelajaran Mesin Kuantum</p>
+          </div>
+        </div>
+        <div class="cover-meta">
+          <div class="cover-meta-col">
+            <h4>Peneliti / Mahasiswa</h4>
+            <h3>Fahry Rizky Samsudin</h3>
+            <p>NIM: 1237030018 | Jurusan Fisika</p>
+          </div>
+          <div class="cover-meta-col" style="text-align: right;">
+            <h4>Institusi & Tahun</h4>
+            <h3>Fakultas Sains dan Teknologi</h3>
+            <p>UIN Sunan Gunung Djati Bandung — 2026</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Seminar Proposal Skripsi Program Studi Fisika UIN Sunan Gunung Djati Bandung</span>
+        <span class="slide-page-num">1 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: AGENDA -->
+    <div class="slide" id="slide-2">
+      <div class="slide-header">
+        <div class="slide-badge">Sistematika Presentasi</div>
+        <h2 class="slide-title">Agenda Paparan Proposal Penelitian</h2>
+        <p class="slide-sub">Empat pilar bahasan utama penyusunan tugas akhir instrumentasi dan komputasi</p>
+      </div>
+      <div class="slide-content">
+        <div class="grid-2x2">
+          <div class="card">
+            <div class="card-badge">Bagian 01</div>
+            <div class="card-title">01. Pendahuluan</div>
+            <ul class="bullet-list">
+              <li><strong>Urgensi Pangan:</strong> Bahaya formalin pada bakso & keterbatasan metode konvensional.</li>
+              <li><strong>Sensor TMR:</strong> Peluang sensor magnetoresistansi ultra-sensitif non-destruktif.</li>
+              <li><strong>Rumusan & Batasan:</strong> Fokus penelitian terukur dan ruang lingkup kerja.</li>
+              <li><strong>Tujuan & Manfaat:</strong> Kontribusi teoretis akademis dan aplikasi praktis di masyarakat.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-badge">Bagian 02</div>
+            <div class="card-title">02. Landasan Teori</div>
+            <ul class="bullet-list">
+              <li><strong>Sensor TMR ALT023:</strong> Mekanisme MTJ dan formula model Julliere.</li>
+              <li><strong>Rantai Sinyal:</strong> In-amp AD623 (Vref=2.50V) & ADC ADS1115 16-Bit.</li>
+              <li><strong>Nanofiber Fungsional:</strong> Fe3O4/PVA-Sitrat dan reseptor spesifik ADH.</li>
+              <li><strong>Komparasi Model:</strong> Kernel RBF klasik vs ruang Hilbert kuantum (QSVC).</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-badge">Bagian 03</div>
+            <div class="card-title">03. Metode Penelitian</div>
+            <ul class="bullet-list">
+              <li><strong>Waktu & Tempat:</strong> Lab Fisika Instrumentasi & Lab Sains Terpadu UIN SGD.</li>
+              <li><strong>Desain Hardware:</strong> Skematik PCB rantai sinyal & statif 3D kumparan Helmholtz.</li>
+              <li><strong>Perangkat Lunak:</strong> Firmware Arduino & GUI Python OriginLab 3D Scatter.</li>
+              <li><strong>Sintesis & Karakterisasi:</strong> Electrospinning 15 kV & kalibrasi medan magnet.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-badge">Bagian 04</div>
+            <div class="card-title">04. Pemodelan & Roadmap</div>
+            <ul class="bullet-list">
+              <li><strong>Protokol Sampel:</strong> Spiking formalin bakso (0–1000 ppm) & ekstraksi 5 fitur.</li>
+              <li><strong>Pipeline Evaluasi:</strong> 5-Fold Stratified CV, metrik ROC-AUC, dan waktu inferensi.</li>
+              <li><strong>Deploy Instrumentasi:</strong> Integrasi model klasifikasi ke GUI desktop real-time.</li>
+              <li><strong>Roadmap 6 Bulan:</strong> Jadwal kerja sistematis Semester Genap 2026.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Fahry Rizky Samsudin (1237030018) | Proposal Tugas Akhir Fisika UIN SGD Bandung</span>
+        <span class="slide-page-num">2 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: LATAR BELAKANG I -->
+    <div class="slide" id="slide-3">
+      <div class="slide-header">
+        <div class="slide-badge">Bab I: Pendahuluan</div>
+        <h2 class="slide-title">Latar Belakang I: Bahaya Formalin & Limitasi Pengujian Eksisting</h2>
+        <p class="slide-sub">Krisis keamanan pangan dan urgensi pengembangan metode deteksi cepat dan kuantitatif</p>
+      </div>
+      <div class="slide-content">
+        <div class="card">
+          <div class="card-badge" style="color: var(--amber);">Urgensi Kesehatan Masyarakat</div>
+          <div class="card-title">Penyalahgunaan Formalin pada Produk Bakso</div>
+          <ul class="bullet-list">
+            <li><strong>Karsinogen Golongan 1:</strong> IARC menetapkan formaldehida sebagai bahan karsinogenik terbukti pada manusia.</li>
+            <li><strong>Motif Penyalahgunaan:</strong> Menghambat pembusukan mikroba dan memanipulasi kekenyalan tekstur daging secara ilegal.</li>
+            <li><strong>Bahaya Toksikologi:</strong> Paparan jangka panjang memicu iritasi lambung, nekrosis ginjal, hepatotoksisitas, dan kanker.</li>
+            <li><strong>Temuan Lapangan:</strong> BPOM RI masih menemukan residu formalin pada sampel pangan olahan daging di pasar tradisional.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-badge">Limitasi Analitik Konvensional</div>
+          <div class="card-title">Keterbatasan Metode Pengujian Eksisting</div>
+          <ul class="bullet-list">
+            <li><strong>Uji Laboratorium (HPLC / GC-MS):</strong> Sangat akurat, tetapi destruktif, biaya operasional tinggi, preparasi rumit, dan tidak portabel untuk inspeksi lapangan.</li>
+            <li><strong>Test Kit Kolorimetri:</strong> Cepat dan portabel, tetapi bersifat semi-kuantitatif, sensitivitas terbatas, dan rawan salah interpretasi visual.</li>
+            <li><strong>Kebutuhan Nyata:</strong> Dibutuhkan instrumen sensor baru yang portabel, cepat, non-destruktif, memiliki sensitivitas tinggi, serta mampu mengukur konsentrasi analit secara kuantitatif.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Referensi: IARC Formaldehyde Monograph (2012); BPOM RI Laporan Tahunan (2024); Widyasari et al. (2022).</span>
+        <span class="slide-page-num">3 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: LATAR BELAKANG II -->
+    <div class="slide" id="slide-4">
+      <div class="slide-header">
+        <div class="slide-badge">Bab I: Pendahuluan</div>
+        <h2 class="slide-title">Latar Belakang II: Prinsip Sensor TMR & Nanofiber Magnetik</h2>
+        <p class="slide-sub">Sinergi efek spintronika magnetoresistif dengan nanomaterial fungsional cerdas</p>
+      </div>
+      <div class="slide-content">
+        <div class="card">
+          <div class="card-badge">Teknologi Sensor Transduser</div>
+          <div class="card-title">Keunggulan Sensor TMR ALT023-10E</div>
+          <ul class="bullet-list">
+            <li><strong>Efek Tunneling Magnetoresistance:</strong> Transpor elektron terpolarisasi spin menembus penghalang isolator nanometer (MTJ).</li>
+            <li><strong>Rasio MR & Sensitivitas Tinggi:</strong> TMR > 100%, menghasilkan sensitivitas medan hingga 11–18 mV/V/mT, melampaui sensor Hall dan GMR konvensional.</li>
+            <li><strong>Rentang Linier Medan Rendah:</strong> Linearitas saturasi ±1.0 mT, sangat ideal mendeteksi perturbasi medan mikro analit.</li>
+            <li><strong>Kompak & Hemat Daya:</strong> Jembatan Wheatstone penuh ~20 kΩ dengan kompensasi termal otomatis.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-badge">Membran Penangkap Analit</div>
+          <div class="card-title">Fungsionalisasi Nanofiber Komposit</div>
+          <ul class="bullet-list">
+            <li><strong>Matriks Nanofiber Elektrospinning:</strong> Jaringan pori PVA/Sitrat memiliki luas permukaan spesifik besar (> 50 m²/g).</li>
+            <li><strong>Nanopartikel Fe3O4 Superparamagnetik:</strong> Momen magnetik tinggi tanpa histeresis permanen pada B=0.</li>
+            <li><strong>Reseptor Adipic Dihydrazide (ADH):</strong> Gugus hidrazida (-NH-NH2) berikatan kovalen spesifik dengan gugus aldehida (-CHO) formalin membentuk ikatan hidrazon.</li>
+            <li><strong>Mekanisme Transduksi:</strong> Reaksi pengikatan mengubah permeabilitas lokal dan momen magnetik, terbaca sebagai pergeseran tegangan TMR.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Fahry Rizky Samsudin (1237030018) | Proposal Tugas Akhir Fisika UIN SGD Bandung</span>
+        <span class="slide-page-num">4 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: LATAR BELAKANG III -->
+    <div class="slide" id="slide-5">
+      <div class="slide-header">
+        <div class="slide-badge">Bab I: Pendahuluan</div>
+        <h2 class="slide-title">Latar Belakang III: Peluang Machine Learning (SVM vs QSVC)</h2>
+        <p class="slide-sub">Pengenalan pola sinyal sensorik dari model klasik hingga keunggulan komputasi kuantum</p>
+      </div>
+      <div class="slide-content">
+        <div class="card">
+          <div class="card-badge">Benchmark Pembelajaran Mesin Klasik</div>
+          <div class="card-title">Support Vector Machine (SVM)</div>
+          <ul class="bullet-list">
+            <li><strong>Prinsip Dasar:</strong> Menemukan hyperplane pemisah optimal yang memaksimalkan jarak margin antar-kelas.</li>
+            <li><strong>Kernel RBF:</strong> Mampu memetakan pola non-linear fitur sinyal sensor ke ruang dimensi kontinu secara matematis terbukti.</li>
+            <li><strong>Keunggulan:</strong> Cepat dalam pelatihan, stabil pada dataset ukuran terbatas, dan beban komputasi rendah.</li>
+            <li><strong>Tantangan:</strong> Berpotensi mengalami degradasi separabilitas saat fitur sinyal pada konsentrasi mikro saling bertumpuk (overlapping noise).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-badge" style="color: var(--emerald);">Paradigma Komputasi Kuantum</div>
+          <div class="card-title">Quantum Support Vector Classifier (QSVC)</div>
+          <ul class="bullet-list">
+            <li><strong>Pemetaan Ruang Hilbert:</strong> Memetakan fitur ke ruang keadaan kuantum 2^n menggunakan sirkuit ZZFeatureMap.</li>
+            <li><strong>Entanglement Kuantum:</strong> Menghitung inner product K(xi, xj) = |&lt;Φ(xi)|Φ(xj)&gt;|² untuk mengekstraksi korelasi fitur yang tak terjangkau kernel klasik.</li>
+            <li><strong>Separabilitas Tinggi:</strong> Mampu memisahkan klaster konsentrasi rendah dengan batas keputusan yang lebih tegas.</li>
+            <li><strong>Urgensi Komparasi:</strong> Memberikan tolok ukur empiris keunggulan komputasi kuantum pada sensorika fisik riil.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Fahry Rizky Samsudin (1237030018) | Proposal Tugas Akhir Fisika UIN SGD Bandung</span>
+        <span class="slide-page-num">5 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: RUMUSAN MASALAH -->
+    <div class="slide" id="slide-6">
+      <div class="slide-header">
+        <div class="slide-badge">Bab I: Pendahuluan</div>
+        <h2 class="slide-title">Identifikasi & Rumusan Masalah</h2>
+        <p class="slide-sub">Empat fokus pertanyaan ilmiah terukur yang mendasari pelaksanaan tugas akhir</p>
+      </div>
+      <div class="slide-content">
+        <div class="grid-2x2">
+          <div class="card">
+            <div class="card-badge">Rumusan 01</div>
+            <div class="card-title">Rancang Bangun Instrumentasi Hardware</div>
+            <ul class="bullet-list">
+              <li><strong>Fokus Masalah:</strong> Bagaimana merancang dan merealisasikan rantai instrumentasi sensor TMR ALT023-10E dengan in-amp AD623 (Vref=2.50V) dan ADC ADS1115 16-bit yang stabil dan minim noise?</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-badge">Rumusan 02</div>
+            <div class="card-title">Sintesis & Fungsionalisasi Nanofiber</div>
+            <ul class="bullet-list">
+              <li><strong>Fokus Masalah:</strong> Bagaimana pengaruh variasi konsentrasi dan imobilisasi reseptor ADH pada nanofiber Fe3O4/PVA-Sitrat terhadap modulasi medan magnetik yang terbaca sensor?</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-badge">Rumusan 03</div>
+            <div class="card-title">Karakteristik Respons terhadap Formalin</div>
+            <ul class="bullet-list">
+              <li><strong>Fokus Masalah:</strong> Bagaimana sensitivitas, batas deteksi (LOD), waktu respons, dan kurva tegangan sensor TMR terhadap konsentrasi formalin bakso (0–1000 ppm)?</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-badge">Rumusan 04</div>
+            <div class="card-title">Komparasi Model SVM vs QSVC</div>
+            <ul class="bullet-list">
+              <li><strong>Fokus Masalah:</strong> Bagaimana performa akurasi, presisi, recall, F1-score, dan efisiensi waktu komputasi antara model SVM klasik dan QSVC kuantum dalam klasifikasi analit?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Fahry Rizky Samsudin (1237030018) | Proposal Tugas Akhir Fisika UIN SGD Bandung</span>
+        <span class="slide-page-num">6 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: BATASAN MASALAH -->
+    <div class="slide" id="slide-7">
+      <div class="slide-header">
+        <div class="slide-badge">Bab I: Pendahuluan</div>
+        <h2 class="slide-title">Batasan Masalah & Asumsi Kerja</h2>
+        <p class="slide-sub">Ruang lingkup operasional, parameter perangkat keras, dan batasan komputasi sistem</p>
+      </div>
+      <div class="slide-content">
+        <div class="card">
+          <div class="card-badge">Spesifikasi Elektrik & Mekanik</div>
+          <div class="card-title">Batasan Perangkat Keras & Rantai Sinyal</div>
+          <ul class="bullet-list">
+            <li><strong>Sensor Magnetik:</strong> Menggunakan sensor TMR ALT023-10E pada rentang linier saturasi ±1.0 mT.</li>
+            <li><strong>Pengkondisi Sinyal AD623:</strong> Catu daya tunggal +5.0 V dengan tegangan referensi terkunci pada VREF = 2.50 V menggunakan pembagi presisi R3=R4=1.0 kΩ.</li>
+            <li><strong>ADC ADS1115 16-Bit:</strong> Beroperasi pada penguatan internal GAIN_TWOTHIRDS (FSR ±6.144 V) dengan resolusi 0.1875 mV/count.</li>
+            <li><strong>Kumparan Helmholtz:</strong> Catu daya DC variabel 0–16 V (arus maks ~1.6 A, medan statis 0–11.5 mT, sapuan ±4.0 mT) diatur secara manual eksternal.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-badge">Analit Pangan & Simulator ML</div>
+          <div class="card-title">Batasan Sampel Kimia & Komputasi</div>
+          <ul class="bullet-list">
+            <li><strong>Komposisi Nanofiber:</strong> PVA 10% wt, asam sitrat 5% wt, nanopartikel Fe3O4 3% wt, dan fungsionalisasi Adipic Dihydrazide (ADH).</li>
+            <li><strong>Sampel Analit Bakso:</strong> Bakso daging sapi segar pasar tradisional yang di-spiking larutan formalin pada 6 variasi konsentrasi: 0, 10, 50, 100, 500, dan 1000 ppm.</li>
+            <li><strong>Metode Akuisisi:</strong> Berbasis Durasi Waktu ("Lama Detik", default 5.0 detik) dengan pembuangan waktu stabilisasi awal 1.0 detik.</li>
+            <li><strong>Komputasi Kuantum:</strong> Model QSVC disimulasikan menggunakan sirkuit kuantum statevector pada framework IBM Qiskit (4-qubit feature map).</li>
+          </ul>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Fahry Rizky Samsudin (1237030018) | Proposal Tugas Akhir Fisika UIN SGD Bandung</span>
+        <span class="slide-page-num">7 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 8: TUJUAN PENELITIAN -->
+    <div class="slide" id="slide-8">
+      <div class="slide-header">
+        <div class="slide-badge">Bab I: Pendahuluan</div>
+        <h2 class="slide-title">Tujuan Penelitian</h2>
+        <p class="slide-sub">Target capaian terukur yang berkorespondensi 1:1 dengan rumusan masalah</p>
+      </div>
+      <div class="slide-content">
+        <div class="grid-2x2">
+          <div class="card">
+            <div class="card-badge" style="color: var(--emerald);">Korespondensi 1:1</div>
+            <div class="card-title">Tujuan 1 (Hardware & Instrumentasi)</div>
+            <ul class="bullet-list">
+              <li><strong>Target Capaian:</strong> Merancang, memfabrikasi, dan menguji rantai instrumentasi sensor TMR ALT023-10E dengan penguat in-amp AD623 (Vref=2.50V) dan ADC ADS1115 16-bit berbasis mikrokontroler.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-badge" style="color: var(--emerald);">Korespondensi 1:1</div>
+            <div class="card-title">Tujuan 2 (Sintesis & Fungsionalisasi)</div>
+            <ul class="bullet-list">
+              <li><strong>Target Capaian:</strong> Mensintesis membran nanofiber komposit Fe3O4/PVA-Sitrat-ADH melalui teknik electrospinning dan menganalisis pengaruh fungsionalisasinya terhadap respons medan magnetik.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-badge" style="color: var(--emerald);">Korespondensi 1:1</div>
+            <div class="card-title">Tujuan 3 (Karakterisasi & Analit Bakso)</div>
+            <ul class="bullet-list">
+              <li><strong>Target Capaian:</strong> Mengkarakterisasi sensitivitas (S = dV/dB), limit deteksi, kurva respons transien, dan stabilitas elektrik sensor TMR terhadap sampel bakso berformalin (0–1000 ppm).</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-badge" style="color: var(--emerald);">Korespondensi 1:1</div>
+            <div class="card-title">Tujuan 4 (Pemodelan ML Klasik vs Kuantum)</div>
+            <ul class="bullet-list">
+              <li><strong>Target Capaian:</strong> Mengembangkan dan membandingkan performa akurasi, presisi, recall, F1-score, serta efisiensi waktu komputasi antara model SVM klasik dan QSVC kuantum.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Fahry Rizky Samsudin (1237030018) | Proposal Tugas Akhir Fisika UIN SGD Bandung</span>
+        <span class="slide-page-num">8 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 9: MANFAAT PENELITIAN -->
+    <div class="slide" id="slide-9">
+      <div class="slide-header">
+        <div class="slide-badge">Bab I: Pendahuluan</div>
+        <h2 class="slide-title">Manfaat Penelitian</h2>
+        <p class="slide-sub">Kontribusi terhadap perkembangan ilmu fisika instrumentasi dan aplikasi perlindungan pangan</p>
+      </div>
+      <div class="slide-content">
+        <div class="card">
+          <div class="card-badge">Kontribusi Ilmiah Fisika</div>
+          <div class="card-title">Manfaat Teoretis & Akademis</div>
+          <ul class="bullet-list">
+            <li><strong>Pengembangan Fisika Instrumentasi:</strong> Memperkaya kajian integrasi transduser spintronika magnetoresistif dengan nanomaterial fungsional cerdas.</li>
+            <li><strong>Penerapan Quantum Machine Learning:</strong> Menyajikan data empiris performa model kuantum (QSVC) dalam mengklasifikasikan sinyal sensor fisik riil.</li>
+            <li><strong>Penguatan Literatur Nanomaterial:</strong> Menjadi rujukan ilmiah mengenai rekayasa electrospinning membran PVA-Sitrat-ADH sebagai matriks biosensor.</li>
+            <li><strong>Target Publikasi Ilmiah:</strong> Menghasilkan artikel ilmiah pada jurnal nasional terakreditasi SINTA atau prosiding internasional bereputasi.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-badge" style="color: var(--emerald);">Dampak Sosial & Industri</div>
+          <div class="card-title">Manfaat Praktis & Aplikatif</div>
+          <ul class="bullet-list">
+            <li><strong>Inspeksi Cepat di Lapangan:</strong> Menghadirkan alternatif instrumen portabel berbiaya terjangkau untuk deteksi formalin pada pasar tradisional.</li>
+            <li><strong>Dukungan bagi Instansi Pengawas:</strong> Membantu instansi terkait (BPOM & Dinas Kesehatan) dalam pengawasan mutu pangan secara cepat sebelum uji lab mahal.</li>
+            <li><strong>Keamanan Konsumen:</strong> Memberikan kontribusi nyata dalam menekan peredaran makanan berbahaya dan melindungi kesehatan masyarakat.</li>
+            <li><strong>Potensi Hilirisasi Teknologi:</strong> Membuka peluang pengembangan prototipe biosensor pangan komersial karya mahasiswa fisika Indonesia.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Fahry Rizky Samsudin (1237030018) | Proposal Tugas Akhir Fisika UIN SGD Bandung</span>
+        <span class="slide-page-num">9 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 10: TEORI TMR -->
+    <div class="slide" id="slide-10">
+      <div class="slide-header">
+        <div class="slide-badge">Bab II: Tinjauan Pustaka</div>
+        <h2 class="slide-title">Landasan Teori I: Sensor TMR ALT023-10E & Tunneling Magnetoresistance</h2>
+        <p class="slide-sub">Mekanisme fisika Magnetic Tunnel Junction (MTJ) dan model matematis Julliere</p>
+      </div>
+      <div class="slide-content">
+        <div class="card" style="flex: 1.2;">
+          <div class="card-badge">Spintronika Kuantum</div>
+          <div class="card-title">Prinsip Fisika Magnetic Tunnel Junction</div>
+          <ul class="bullet-list">
+            <li><strong>Fenomena TMR:</strong> Terjadi pada persambungan MTJ di mana arus elektron tunneling menembus isolator tipis dipengaruhi orientasi magnetisasi dua lapisan feromagnetik.</li>
+            <li><strong>Model Julliere (1975):</strong> TMR = (RAP - RP) / RP = 2·P1·P2 / (1 - P1·P2), di mana P1 dan P2 adalah polarisasi spin kedua elektroda.</li>
+            <li><strong>Karakteristik ALT023-10E:</strong> Memiliki 4 elemen MTJ konfigurasi jembatan Wheatstone penuh, resistansi ~20 kΩ, linier pada rentang ±1.0 mT dengan sensitivitas 11–18 mV/V/mT.</li>
+            <li><strong>Kompensasi Termal:</strong> Arsitektur jembatan penuh meminimalkan hanyutan suhu (thermal drift) saat pengukuran.</li>
+          </ul>
+        </div>
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 14px;">
+          <div class="media-card">
+            <img src="Gambar/Bab2/babII_TMR_Layer.png" alt="Struktur TMR">
+            <div class="media-caption">Gambar 2.1: Struktur Lapisan MTJ dan Orientasi Spin Feromagnetik</div>
+          </div>
+          <div class="media-card">
+            <img src="Gambar/Bab2/babII_ALT023.png" alt="Sensor ALT023">
+            <div class="media-caption">Gambar 2.2: Sensor TMR ALT023-10E (Kemasan SOIC-8 NVE Corp.)</div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Referensi: Julliere (1975); NVE Corporation ALT023-10E Datasheet (2022).</span>
+        <span class="slide-page-num">10 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 11: TEORI AD623 & ADS1115 -->
+    <div class="slide" id="slide-11">
+      <div class="slide-header">
+        <div class="slide-badge">Bab II: Tinjauan Pustaka</div>
+        <h2 class="slide-title">Landasan Teori II: Rantai Pengondisi Sinyal AD623 & ADS1115</h2>
+        <p class="slide-sub">Arsitektur penguat instrumentasi single-supply presisi dan konverter analog-ke-digital 16-bit</p>
+      </div>
+      <div class="slide-content">
+        <div class="card" style="flex: 1.2;">
+          <div class="card-badge">Penguat & Konverter Analog</div>
+          <div class="card-title">Spesifikasi Rantai Sinyal Elektrik</div>
+          <ul class="bullet-list">
+            <li><strong>In-Amp AD623:</strong> Penguat instrumentasi rail-to-rail beroperasi pada single supply +5.0 V dengan CMRR tinggi (> 90 dB).</li>
+            <li><strong>Penguatan (Gain):</strong> G = 1 + (100 kΩ / RG). Nilai RG disesuaikan untuk menghasilkan penguatan optimal 50x–100x.</li>
+            <li><strong>Tegangan Referensi VREF = 2.50 V:</strong> Pin 5 (REF) dihubungkan ke pembagi tegangan resistor presisi R3=R4=1.0 kΩ sehingga Vout(B=0) ≈ 2.50 V.</li>
+            <li><strong>ADC ADS1115 16-Bit:</strong> Komunikasi I2C 100 kHz, GAIN_TWOTHIRDS (FSR ±6.144 V), resolusi 0.1875 mV/count pada mode diferensial A0-A1.</li>
+          </ul>
+        </div>
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 14px;">
+          <div class="media-card">
+            <img src="Gambar/Bab2/babII_AD623_Pinout.png" alt="Pinout AD623">
+            <div class="media-caption">Gambar 2.3: Diagram Pinout IC Penguat Instrumentasi AD623</div>
+          </div>
+          <div class="media-card">
+            <img src="Gambar/Bab2/babII_ADS-1115-c.jpg" alt="Modul ADS1115">
+            <div class="media-caption">Gambar 2.4: Modul Konverter Analog-ke-Digital ADS1115 16-Bit</div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Referensi: Analog Devices AD623 Datasheet; Texas Instruments ADS1115 Datasheet.</span>
+        <span class="slide-page-num">11 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 12: TEORI NANOFIBER -->
+    <div class="slide" id="slide-12">
+      <div class="slide-header">
+        <div class="slide-badge">Bab II: Tinjauan Pustaka</div>
+        <h2 class="slide-title">Landasan Teori III: Nanofiber Fe3O4/PVA-Sitrat-ADH & Interaksi Formalin</h2>
+        <p class="slide-sub">Rekayasa fungsionalisasi gugus hidrazon untuk pengikatan spesifik formaldehida</p>
+      </div>
+      <div class="slide-content">
+        <div class="card">
+          <div class="card-badge">Mekanisme Pengikatan Analit</div>
+          <div class="card-title">Interaksi Kimia Pembentukan Hidrazon</div>
+          <ul class="bullet-list">
+            <li><strong>PVA & Asam Sitrat:</strong> Asam sitrat berperan ganda sebagai agen crosslinking esterifikasi gugus -OH PVA (ketahanan air) dan penambat molekul ADH.</li>
+            <li><strong>Adipic Dihydrazide (ADH):</strong> Mengandung gugus terminal hidrazida (-NH-NH2) yang sangat reaktif dan selektif terhadap gugus karbonil aldehida.</li>
+            <li><strong>Persamaan Reaksi Hidrazon:</strong> R-CHO + H2N-NH-R' ---> R-CH=N-NH-R' + H2O. Terbentuk ikatan kovalen hidrazon stabil yang menempel pada permukaan nanofiber.</li>
+            <li><strong>Perturbasi Medan Magnetik:</strong> Pengikatan formalin mengubah momen dipol dielektrik lokal dan memodulasi fluks magnetik Fe3O4 yang ditangkap sensor TMR.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-badge" style="color: var(--emerald);">Komposisi Material Biosensor</div>
+          <div class="card-title">Peran Fungsional Komponen Membran</div>
+          <ul class="bullet-list">
+            <li><strong>PVA 10% wt:</strong> Matriks polimer utama pembentuk jalinan nanofiber electrospinning yang fleksibel dan seragam.</li>
+            <li><strong>Asam Sitrat 5% wt:</strong> Crosslinker ramah lingkungan (non-glutaraldehida) untuk ketahanan mekanis membran dalam medium cair analit.</li>
+            <li><strong>Nanopartikel Fe3O4 3% wt:</strong> Elemen transduser magnetik superparamagnetik berukuran ~12 nm pembawa fluks respons medan.</li>
+            <li><strong>ADH (Adipic Dihydrazide):</strong> Reseptor biokimia spesifik untuk memastikan selektivitas tinggi terhadap formalin dibanding analit pengganggu lain.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Fahry Rizky Samsudin (1237030018) | Proposal Tugas Akhir Fisika UIN SGD Bandung</span>
+        <span class="slide-page-num">12 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 13: TEORI SVM VS QSVC -->
+    <div class="slide" id="slide-13">
+      <div class="slide-header">
+        <div class="slide-badge">Bab II: Tinjauan Pustaka</div>
+        <h2 class="slide-title">Landasan Teori IV: Komparasi Model SVM Klasik vs QSVC Kuantum</h2>
+        <p class="slide-sub">Perbedaan matematis pemetaan ruang fitur kernel klasik dan quantum feature map</p>
+      </div>
+      <div class="slide-content">
+        <div class="card">
+          <div class="card-badge">Model Benchmark Klasik</div>
+          <div class="card-title">Support Vector Machine (SVM)</div>
+          <ul class="bullet-list">
+            <li><strong>Formulasi Margin Optimal:</strong> Memaksimalkan batas pemisah: min (1/2)||w||² + C·∑ξi terhadap kendala margin kelas.</li>
+            <li><strong>Fungsi Kernel RBF:</strong> K(x, x') = exp(-γ·||x - x'||²). Memetakan fitur ke ruang dimensi kontinu tak berhingga.</li>
+            <li><strong>Kelebihan Komputasi:</strong> Proses optimasi kuadratik konveks yang matang, eksekusi cepat, dan bebas dari isu barren plateaus.</li>
+            <li><strong>Evaluasi Kinerja:</strong> Divalidasi menggunakan 5-Fold Stratified Cross Validation dengan metrik F1-score dan ROC-AUC.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-badge" style="color: var(--emerald);">Model Berbasis Sirkuit Kuantum</div>
+          <div class="card-title">Quantum Support Vector Classifier</div>
+          <ul class="bullet-list">
+            <li><strong>Sirkuit ZZFeatureMap:</strong> Keadaan kuantum |Φ(x)&gt; dikonstruksi melalui gerbang Hadamard H dan gerbang fasa terbelit exp(i·φij·Zi·Zj).</li>
+            <li><strong>Quantum Kernel Matrix:</strong> Elemen matriks kernel dihitung melalui overlap kuantum: K(xi, xj) = |&lt;Φ(xi)|Φ(xj)&gt;|².</li>
+            <li><strong>Kapasitas Representasi Kuantum:</strong> Menyediakan ruang Hilbert berdimensi 2⁴ = 16 untuk memisahkan fitur sensorik yang memiliki korelasi kompleks.</li>
+            <li><strong>Simulasi Qiskit:</strong> Dieksekusi menggunakan backend statevector/qasm simulator untuk membandingkan akurasi dan latensi inferensi.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Referensi: Cortes & Vapnik (1995); Havlicek et al. (Nature, 2019).</span>
+        <span class="slide-page-num">13 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 14: METODOLOGI ALAT & BAHAN -->
+    <div class="slide" id="slide-14">
+      <div class="slide-header">
+        <div class="slide-badge">Bab III: Metode Penelitian</div>
+        <h2 class="slide-title">Metodologi Penelitian: Waktu, Lokasi, serta Alat & Bahan</h2>
+        <p class="slide-sub">Jadwal pelaksanaan dan rincian peralatan laboratorium instrumentasi dan sintesis kimia</p>
+      </div>
+      <div class="slide-content">
+        <div class="card">
+          <div class="card-badge">Jadwal & Fasilitas Lab</div>
+          <div class="card-title">Waktu & Lokasi Penelitian</div>
+          <ul class="bullet-list">
+            <li><strong>Waktu Pelaksanaan:</strong> Semester Genap Tahun Akademik 2025/2026 (Maret – Agustus 2026).</li>
+            <li><strong>Lab Fisika Instrumentasi UIN SGD:</strong> Fabrikasi sirkuit PCB, perakitan mekanik 3D kumparan Helmholtz, kalibrasi sensor TMR, dan pengujian akuisisi sinyal elektrik.</li>
+            <li><strong>Lab Sains Terpadu UIN SGD:</strong> Sintesis sol-gel, elektrospinning nanofiber, fungsionalisasi ikatan ADH, dan preparasi kimia larutan spiking bakso.</li>
+            <li><strong>Pusat Komputasi Fisika:</strong> Pelatihan model komparasi machine learning klasik (SVM) dan simulasi sirkuit kuantum (QSVC Qiskit).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-badge">Inventaris Penelitian</div>
+          <div class="card-title">Spesifikasi Alat & Bahan Utama</div>
+          <ul class="bullet-list">
+            <li><strong>Perangkat Sensor & Sinyal:</strong> Sensor TMR ALT023-10E (NVE Corp.), IC In-Amp AD623, ADC ADS1115 16-Bit, mikrokontroler Arduino Uno R3.</li>
+            <li><strong>Perangkat Sumber Medan:</strong> Kumparan Helmholtz laboratorium (R ≈ 10 Ω), DC Power Supply variabel 0.0–16.0 V, Teslameter Digital presisi.</li>
+            <li><strong>Bahan Kimia & Sintesis:</strong> Polyvinyl Alcohol (PVA MW 89-98 kDa), Asam Sitrat p.a., Nanopartikel Fe3O4 (~12 nm), Adipic Dihydrazide (ADH), Formalin 37% p.a.</li>
+            <li><strong>Sampel Uji Pangan:</strong> Bakso sapi segar dari pasar tradisional teruji bebas pengawet.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Fahry Rizky Samsudin (1237030018) | Proposal Tugas Akhir Fisika UIN SGD Bandung</span>
+        <span class="slide-page-num">14 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 15: FLOWCHART PENELITIAN -->
+    <div class="slide" id="slide-15">
+      <div class="slide-header">
+        <div class="slide-badge">Bab III: Metode Penelitian</div>
+        <h2 class="slide-title">Diagram Alir Komprehensif Penelitian</h2>
+        <p class="slide-sub">Tahapan sistematis penelitian dari studi literatur, sintesis, fabrikasi, hingga pemodelan</p>
+      </div>
+      <div class="slide-content">
+        <div class="card" style="flex: 1.2;">
+          <div class="card-badge">Struktur Kerja Riset</div>
+          <div class="card-title">5 Tahapan Utama Penelitian</div>
+          <ul class="bullet-list">
+            <li><strong>Tahap 1 (Persiapan & Desain):</strong> Studi literatur, perancangan skematik PCB AD623/ADS1115, dan pemodelan statif 3D kumparan Helmholtz.</li>
+            <li><strong>Tahap 2 (Sintesis Nanofiber):</strong> Sol-gel PVA/Fe3O4/Sitrat, electrospinning tegangan tinggi 15 kV, dan fungsionalisasi reseptor ADH.</li>
+            <li><strong>Tahap 3 (Hardware & Software):</strong> Fabrikasi PCB rantai sinyal presisi, firmware Arduino, dan GUI Python visualisasi 3D.</li>
+            <li><strong>Tahap 4 (Karakterisasi & Sampel):</strong> Kalibrasi Helmholtz, pengujian sensitivitas TMR, dan pengujian analit bakso spiking formalin 0–1000 ppm.</li>
+            <li><strong>Tahap 5 (Machine Learning):</strong> Ekstraksi 5 fitur sinyal, pelatihan SVM vs QSVC, evaluasi metrik validasi, dan integrasi GUI.</li>
+          </ul>
+        </div>
+        <div class="media-card" style="flex: 1;">
+          <img src="Gambar/Bab3/babIII_DiagramAlirPenelitian.drawio.png" alt="Flowchart Penelitian" style="max-height: 420px;">
+          <div class="media-caption">Gambar 3.1: Diagram Alir Komprehensif Penelitian</div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Fahry Rizky Samsudin (1237030018) | Proposal Tugas Akhir Fisika UIN SGD Bandung</span>
+        <span class="slide-page-num">15 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 16: DESAIN HARDWARE -->
+    <div class="slide" id="slide-16">
+      <div class="slide-header">
+        <div class="slide-badge">Bab III: Metode Penelitian</div>
+        <h2 class="slide-title">Rancang Bangun Perangkat Keras (Hardware & Casing 3D)</h2>
+        <p class="slide-sub">Skematik PCB pengkondisi sinyal presisi dan konstruksi mekanik statif sensor</p>
+      </div>
+      <div class="slide-content">
+        <div class="card" style="flex: 1.1;">
+          <div class="card-badge">Arsitektur Perangkat Keras</div>
+          <div class="card-title">Integrasi Rantai Sinyal Elektrik</div>
+          <ul class="bullet-list">
+            <li><strong>Sensor TMR ALT023-10E:</strong> Dicatu tegangan +5.0 V dengan kapasitor decoupling 100 nF untuk meredam noise switching catu daya.</li>
+            <li><strong>In-Amp AD623 & VREF = 2.50 V:</strong> Tegangan diferensial TMR diperkuat dengan gain RG. Pin REF dihubungkan ke pembagi presisi 1.0 kΩ sehingga Vout berpusat di 2.50 V.</li>
+            <li><strong>ADC ADS1115 & Bus I2C:</strong> Membaca sinyal penguat secara diferensial dan mentransmisikan data digital ke Arduino pada 100 kHz.</li>
+            <li><strong>Statif Non-Magnetik 3D:</strong> Dicetak menggunakan filament PLA non-magnetik untuk memposisikan sensor tepat di sumbu tengah medan seragam kumparan Helmholtz.</li>
+          </ul>
+        </div>
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 14px;">
+          <div class="media-card">
+            <img src="Gambar/Bab3/babIII_skematik_TMR_grounding_fix.png" alt="Skematik PCB">
+            <div class="media-caption">Gambar 3.2: Skematik PCB Rantai Sinyal TMR, AD623 & ADS1115</div>
+          </div>
+          <div class="media-card">
+            <img src="Gambar/Bab3/babIII_Desainnnn.png" alt="Casing 3D">
+            <div class="media-caption">Gambar 3.3: Desain 3D Casing & Statif Posisi Sensor TMR</div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Fahry Rizky Samsudin (1237030018) | Proposal Tugas Akhir Fisika UIN SGD Bandung</span>
+        <span class="slide-page-num">16 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 17: DESAIN SOFTWARE -->
+    <div class="slide" id="slide-17">
+      <div class="slide-header">
+        <div class="slide-badge">Bab III: Metode Penelitian</div>
+        <h2 class="slide-title">Rancang Bangun Perangkat Lunak (Arduino & Python GUI)</h2>
+        <p class="slide-sub">Firmware akuisisi digital dan antarmuka analitik real-time berbasis CustomTkinter</p>
+      </div>
+      <div class="slide-content">
+        <div class="card" style="flex: 1.1;">
+          <div class="card-badge">Firmware & GUI Analisis</div>
+          <div class="card-title">Spesifikasi Perangkat Lunak</div>
+          <ul class="bullet-list">
+            <li><strong>Firmware Arduino:</strong> Mengonfigurasi ADS1115 mode diferensial, menerapkan filter moving average N=10, dan mentransmisikan data serial 115200 baud.</li>
+            <li><strong>Engine Akuisisi Berbasis Durasi:</strong> Menggunakan durasi waktu terukur ('Lama Detik', default 5.0 s) dengan eliminasi waktu transien awal (settling time 1.0 s).</li>
+            <li><strong>Visualisasi OriginLab 3D Scatter:</strong> Rendering grafik kurva respons kalibrasi dan pengujian analit bergaya bola 3D OriginLab beresolusi 300 DPI.</li>
+            <li><strong>Auto-Save Laporan Komprehensif:</strong> Otomasi ekspor data ke format spreadsheet multi-sheet Excel (.xlsx) dan metadata konstanta regresi JSON.</li>
+          </ul>
+        </div>
+        <div style="flex: 1; display: flex; gap: 12px;">
+          <div class="media-card" style="flex: 1;">
+            <img src="Gambar/Bab3/babIII_AlurSoftwareArduino.drawio.png" alt="Flowchart Arduino" style="max-height: 380px;">
+            <div class="media-caption">Gambar 3.4: Arduino</div>
+          </div>
+          <div class="media-card" style="flex: 1.2;">
+            <img src="Gambar/Bab3/babIII_DiagramAlirPython.drawio.png" alt="Flowchart Python" style="max-height: 380px;">
+            <div class="media-caption">Gambar 3.5: GUI Python</div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Fahry Rizky Samsudin (1237030018) | Proposal Tugas Akhir Fisika UIN SGD Bandung</span>
+        <span class="slide-page-num">17 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 18: SINTESIS NANOFIBER -->
+    <div class="slide" id="slide-18">
+      <div class="slide-header">
+        <div class="slide-badge">Bab III: Metode Penelitian</div>
+        <h2 class="slide-title">Tahap Sintesis Nanofiber Fe3O4/PVA-Sitrat-ADH</h2>
+        <p class="slide-sub">Proses electrospinning larutan sol-gel dan penautan reseptor spesifik aldehida</p>
+      </div>
+      <div class="slide-content">
+        <div class="card" style="flex: 1.2;">
+          <div class="card-badge">Sintesis & Fungsionalisasi</div>
+          <div class="card-title">Prosedur Fabrikasi Nanomaterial</div>
+          <ul class="bullet-list">
+            <li><strong>Preparasi Larutan Sol-Gel:</strong> PVA 10% wt dilarutkan dalam akuades pada 80°C selama 2 jam. Nanopartikel Fe3O4 3% wt dan asam sitrat 5% wt didispersikan via sonikasi 30 menit.</li>
+            <li><strong>Parameter Operasi Electrospinning:</strong> Tegangan tinggi: +15 kV DC; Jarak jarum ke kolektor: 12 cm; Laju alir pompa syringe: 0.5 mL/jam.</li>
+            <li><strong>Pematangan Crosslinking:</strong> Membran nanofiber dipanaskan pada 120°C selama 1 jam untuk menyempurnakan esterifikasi asam sitrat.</li>
+            <li><strong>Imobilisasi Reseptor ADH:</strong> Membran direndam dalam larutan Adipic Dihydrazide dengan aktivator EDC/NHS agar gugus hidrazida tertambat kokoh pada serat.</li>
+          </ul>
+        </div>
+        <div class="media-card" style="flex: 1;">
+          <img src="Gambar/Bab3/babIII_DiagramAlirSintesis.drawio.png" alt="Flowchart Sintesis" style="max-height: 420px;">
+          <div class="media-caption">Gambar 3.6: Diagram Alir Sintesis & Fungsionalisasi Nanofiber</div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Fahry Rizky Samsudin (1237030018) | Proposal Tugas Akhir Fisika UIN SGD Bandung</span>
+        <span class="slide-page-num">18 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 19: KALIBRASI HELMHOLTZ & TMR -->
+    <div class="slide" id="slide-19">
+      <div class="slide-header">
+        <div class="slide-badge">Bab III: Metode Penelitian</div>
+        <h2 class="slide-title">Karakterisasi Kumparan Helmholtz & Kalibrasi Sensor TMR</h2>
+        <p class="slide-sub">Pemetaan medan magnetik homogen dan kurva kalibrasi sensitivitas tegangan</p>
+      </div>
+      <div class="slide-content">
+        <div class="card">
+          <div class="card-badge">Sumber Medan Magnetik Terkontrol</div>
+          <div class="card-title">Karakterisasi Kumparan Helmholtz</div>
+          <ul class="bullet-list">
+            <li><strong>Persamaan Medan Magnetik Pusat:</strong> B = (4/5)^(3/2) * (μ0 * N * I / R). Memberikan medan magnet seragam pada rongga pusat kumparan.</li>
+            <li><strong>Catu Daya Variabel 0–16 V:</strong> Arus DC dialirkan dari 0 hingga ~1.6 A pada kumparan R ≈ 10 Ω, menghasilkan rentang medan hingga 11.5 mT.</li>
+            <li><strong>Sapuan Medan Karakterisasi:</strong> Rentang sapuan -4.0 mT hingga +4.0 mT dengan membalik polaritas terminal kumparan.</li>
+            <li><strong>Validasi Ground Truth:</strong> Medan diverifikasi langsung menggunakan teslameter digital presisi laboratorium.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-badge" style="color: var(--emerald);">Karakteristik Sensor ALT023</div>
+          <div class="card-title">Kalibrasi Sensitivitas Sensor TMR</div>
+          <ul class="bullet-list">
+            <li><strong>Model Respon Linear:</strong> Vout(B) = S * B + Voffset. Nilai kemiringan S merepresentasikan sensitivitas sensor (target S >= 15.0 mV/mT).</li>
+            <li><strong>Koefisien Determinasi:</strong> Target linearitas R² >= 0.995 pada rentang linear sensor.</li>
+            <li><strong>Penetapan Voffset:</strong> Pada B = 0, tegangan keluaran bertengger stabil di Voffset ≈ 2.50 V sesuai tegangan referensi AD623.</li>
+            <li><strong>Penyimpanan Konstanta:</strong> Parameter S dan Voffset disimpan otomatis ke file JSON konfigurasi untuk konversi instan pada pengujian analit.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Fahry Rizky Samsudin (1237030018) | Proposal Tugas Akhir Fisika UIN SGD Bandung</span>
+        <span class="slide-page-num">19 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 20: PREPARASI SAMPEL & EKSTRAKSI FITUR -->
+    <div class="slide" id="slide-20">
+      <div class="slide-header">
+        <div class="slide-badge">Bab III: Metode Penelitian</div>
+        <h2 class="slide-title">Protokol Preparasi Sampel Bakso & Ekstraksi Fitur Sinyal</h2>
+        <p class="slide-sub">Standardisasi pengujian analit dan ekstraksi 5 parameter fitur dinamis sensor</p>
+      </div>
+      <div class="slide-content">
+        <div class="card">
+          <div class="card-badge">Standardisasi Pengujian Analit</div>
+          <div class="card-title">Preparasi Sampel Bakso & Spiking</div>
+          <ul class="bullet-list">
+            <li><strong>Homogenisasi Sampel Bakso:</strong> Bakso sapi bebas formalin dihaluskan dan diekstraksi filtratnya menggunakan akuades steril.</li>
+            <li><strong>Variasi Konsentrasi Spiking:</strong> Dibuat 6 tingkat konsentrasi formalin: 0 ppm (kontrol murni), 10 ppm, 50 ppm, 100 ppm, 500 ppm, dan 1000 ppm.</li>
+            <li><strong>Volume Penetesan Mikro:</strong> Sebanyak 20 mikroliter larutan analit diteteskan secara presisi menggunakan mikropipet di atas membran nanofiber sensor.</li>
+            <li><strong>Replikasi Pengujian:</strong> Setiap tingkat konsentrasi diuji sebanyak minimal 10 kali pengulangan untuk menjamin signifikansi statistik.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-badge" style="color: var(--blue-accent);">Representasi Fitur Dinamis</div>
+          <div class="card-title">Ekstraksi 5 Fitur Sinyal Respons</div>
+          <ul class="bullet-list">
+            <li><strong>1. ΔV_max:</strong> Pergeseran tegangan maksimum antara baseline awal dan puncak respons: |Vpeak - Vbaseline|.</li>
+            <li><strong>2. t_response:</strong> Waktu yang dibutuhkan kurva respons untuk mencapai 90% dari nilai saturasi tegangan.</li>
+            <li><strong>3. (dV/dt)_initial:</strong> Kemiringan laju transien awal interaksi kinetika antara analit formalin dengan reseptor ADH.</li>
+            <li><strong>4. V_steady:</strong> Nilai tegangan kesetimbangan pada kondisi akhir pengukuran.</li>
+            <li><strong>5. AUC (Area Under Curve):</strong> Integral total luasan di bawah kurva respons tegangan terhadap waktu pengujian.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Fahry Rizky Samsudin (1237030018) | Proposal Tugas Akhir Fisika UIN SGD Bandung</span>
+        <span class="slide-page-num">20 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 21: MODEL ML (SVM VS QSVC) -->
+    <div class="slide" id="slide-21">
+      <div class="slide-header">
+        <div class="slide-badge">Bab III: Metode Penelitian</div>
+        <h2 class="slide-title">Alur Pemodelan Machine Learning (SVM vs QSVC) & Validasi</h2>
+        <p class="slide-sub">Pipeline prapemrosesan data, pelatihan model klasik & kuantum, serta metrik evaluasi</p>
+      </div>
+      <div class="slide-content">
+        <div class="card" style="flex: 1.1;">
+          <div class="card-badge">Klasik vs Kuantum</div>
+          <div class="card-title">Pipeline Pelatihan & Evaluasi Model</div>
+          <ul class="bullet-list">
+            <li><strong>Prapemrosesan Data:</strong> Standarisasi skala data menggunakan StandardScaler (mean=0, std=1) untuk menjaga netralitas kontribusi fitur.</li>
+            <li><strong>Pembagian Dataset:</strong> 80% data latih (training set) dan 20% data uji (test set) dengan skema 5-Fold Stratified Cross Validation.</li>
+            <li><strong>Pelatihan SVM Klasik:</strong> Kernel RBF dioptimasi melalui GridSearchCV untuk menentukan parameter C dan gamma terbaik.</li>
+            <li><strong>Pelatihan QSVC Kuantum:</strong> Sirkuit ZZFeatureMap 4-qubit pada Qiskit Aer untuk komputasi matriks quantum kernel.</li>
+            <li><strong>Metrik Evaluasi:</strong> Komparasi menyeluruh mencakup Akurasi, Presisi, Recall, F1-Score, kurva ROC-AUC, dan waktu inferensi.</li>
+          </ul>
+        </div>
+        <div class="media-card" style="flex: 1;">
+          <img src="Gambar/Bab3/babIII_ModelBuilding.drawio.png" alt="Model Building" style="max-height: 420px;">
+          <div class="media-caption">Gambar 3.7: Diagram Alir Pelatihan & Evaluasi Model SVM vs QSVC</div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Fahry Rizky Samsudin (1237030018) | Proposal Tugas Akhir Fisika UIN SGD Bandung</span>
+        <span class="slide-page-num">21 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 22: INTEGRASI & DEPLOY -->
+    <div class="slide" id="slide-22">
+      <div class="slide-header">
+        <div class="slide-badge">Bab III: Metode Penelitian</div>
+        <h2 class="slide-title">Integrasi & Deploy Sistem Instrumentasi</h2>
+        <p class="slide-sub">Implementasi model terlatih ke dalam antarmuka GUI untuk klasifikasi real-time</p>
+      </div>
+      <div class="slide-content">
+        <div class="card" style="flex: 1.1;">
+          <div class="card-badge">Desktop GUI Deployment</div>
+          <div class="card-title">Arsitektur Integrasi Sistem Cerdas</div>
+          <ul class="bullet-list">
+            <li><strong>Serialisasi Model Terlatih:</strong> Model klasifikasi terbaik diekspor ke berkas biner (joblib / qpy) untuk diakses langsung oleh GUI Python.</li>
+            <li><strong>Pipeline Inferensi Real-Time:</strong> Saat pengujian sampel selesai (5.0 detik), GUI mengekstrak 5 fitur secara otomatis dan memasukkannya ke model.</li>
+            <li><strong>Indikator Visual Cepat:</strong> Tampilan status instan pada layar: 'SAMPEL AMAN (Bebas Formalin)' atau 'TERKONTAMINASI FORMALIN (Estimasi X ppm)'.</li>
+            <li><strong>Penyimpanan Data Terpusat:</strong> Semua riwayat pengujian, nilai fitur, dan grafik respons tersimpan otomatis ke berkas Excel dan database lokal.</li>
+          </ul>
+        </div>
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 14px;">
+          <div class="media-card">
+            <img src="Gambar/Bab3/babIII_ModelDeploy.drawio.png" alt="Model Deploy">
+            <div class="media-caption">Gambar 3.8: Alur Deployment Model</div>
+          </div>
+          <div class="media-card">
+            <img src="Gambar/Bab3/babIII_desainluar.jpg" alt="Foto Casing Fisik">
+            <div class="media-caption">Gambar 3.9: Fisik Prototipe Alat</div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Fahry Rizky Samsudin (1237030018) | Proposal Tugas Akhir Fisika UIN SGD Bandung</span>
+        <span class="slide-page-num">22 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 23: JADWAL & ROADMAP -->
+    <div class="slide" id="slide-23">
+      <div class="slide-header">
+        <div class="slide-badge">Bab III: Metode Penelitian</div>
+        <h2 class="slide-title">Jadwal & Rencana Kerja Penelitian (Roadmap 6 Bulan)</h2>
+        <p class="slide-sub">Rencana kerja sistematis pelaksanaan tugas akhir Semester Genap 2026</p>
+      </div>
+      <div class="slide-content">
+        <div class="grid-3x2">
+          <div class="card">
+            <div class="card-badge">Bulan 1 (Maret 2026)</div>
+            <div class="card-title">Persiapan & Komponen</div>
+            <ul class="bullet-list">
+              <li><strong>Studi Pustaka:</strong> Kajian mendalam TMR, AD623 & Qiskit.</li>
+              <li><strong>Pengadaan:</strong> Sensor ALT023, ADS1115 & reagen.</li>
+              <li><strong>Desain Awal:</strong> Skematik PCB & statif kumparan.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-badge">Bulan 2 (April 2026)</div>
+            <div class="card-title">Fabrikasi Hardware & GUI</div>
+            <ul class="bullet-list">
+              <li><strong>Fabrikasi Sirkuit:</strong> Perakitan PCB pengondisi sinyal.</li>
+              <li><strong>Pencetakan 3D:</strong> Casing PLA dan statif sensor.</li>
+              <li><strong>Firmware & GUI:</strong> Pemrograman Arduino & Python.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-badge">Bulan 3 (Mei 2026)</div>
+            <div class="card-title">Sintesis Nanofiber</div>
+            <ul class="bullet-list">
+              <li><strong>Sol-Gel:</strong> Pencampuran PVA, Fe3O4 & sitrat.</li>
+              <li><strong>Electrospinning:</strong> Penarikan serat tegangan 15 kV.</li>
+              <li><strong>Fungsionalisasi:</strong> Imobilisasi reseptor ADH.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-badge" style="color: var(--emerald);">Bulan 4 (Juni 2026)</div>
+            <div class="card-title">Kalibrasi Helmholtz & TMR</div>
+            <ul class="bullet-list">
+              <li><strong>Helmholtz:</strong> Pemetaan medan magnet 0–11.5 mT.</li>
+              <li><strong>Kalibrasi TMR:</strong> Uji sensitivitas (S >= 15 mV/mT).</li>
+              <li><strong>Validasi Sistem:</strong> Uji stabilitas & noise rantai sinyal.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-badge" style="color: var(--emerald);">Bulan 5 (Juli 2026)</div>
+            <div class="card-title">Pengujian Sampel Bakso</div>
+            <ul class="bullet-list">
+              <li><strong>Preparasi:</strong> Spiking formalin bakso 0–1000 ppm.</li>
+              <li><strong>Akuisisi:</strong> Perekaman sinyal sensor TMR.</li>
+              <li><strong>Ekstraksi:</strong> Ekstraksi 5 parameter fitur dinamis.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-badge" style="color: var(--emerald);">Bulan 6 (Agustus 2026)</div>
+            <div class="card-title">Pemodelan ML & Laporan</div>
+            <ul class="bullet-list">
+              <li><strong>Pelatihan:</strong> Optimasi SVM vs simulasi QSVC Qiskit.</li>
+              <li><strong>Komparasi:</strong> Analisis akurasi, presisi & waktu.</li>
+              <li><strong>Penyusunan:</strong> Penulisan skripsi & publikasi ilmiah.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Fahry Rizky Samsudin (1237030018) | Proposal Tugas Akhir Fisika UIN SGD Bandung</span>
+        <span class="slide-page-num">23 / 24</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 24: KESIMPULAN SEMENTARA & PENUTUP -->
+    <div class="slide" id="slide-24">
+      <div class="slide-header">
+        <div class="slide-badge">Penutup</div>
+        <h2 class="slide-title">Kesimpulan Sementara & Sesi Tanya Jawab</h2>
+        <p class="slide-sub">Komitmen capaian kontribusi penelitian dan permohonan masukan dewan penguji</p>
+      </div>
+      <div class="slide-content">
+        <div class="card">
+          <div class="card-badge">Komitmen Target Kontribusi</div>
+          <div class="card-title">Kesimpulan Sementara Proposal</div>
+          <ul class="bullet-list">
+            <li><strong>Inovasi Biosensor Magnetik:</strong> Sistem instrumentasi sensor TMR ALT023-10E dengan fungsionalisasi nanofiber Fe3O4/PVA-Sitrat-ADH memberikan pendekatan baru yang sensitif dan selektif untuk deteksi formalin pada pangan.</li>
+            <li><strong>Rantai Sinyal Stabil & Terkalibrasi:</strong> Pengondisi in-amp AD623 (Vref=2.50V) dan ADC ADS1115 menjamin resolusi tinggi (0.1875 mV/count) dan stabilitas pengukuran.</li>
+            <li><strong>Eksplorasi Komparasi Klasik vs Kuantum:</strong> Perbandingan model SVM dan QSVC membuka wawasan empiris terkait penerapan Quantum Machine Learning pada pengolahan sinyal sensorik fisik.</li>
+            <li><strong>Kesiapan Pelaksanaan:</strong> Seluruh desain skematik, firmware, GUI analitik, dan prosedur sintesis telah siap direalisasikan secara penuh.</li>
+          </ul>
+        </div>
+        <div class="card" style="background: var(--light-blue); border-color: var(--blue-accent);">
+          <div class="card-badge" style="color: var(--blue-accent);">Seminar Proposal Skripsi</div>
+          <div class="card-title">Sesi Diskusi & Tanya Jawab</div>
+          <p style="font-size: 13.5px; line-height: 1.5; color: var(--text-main); margin-bottom: 12px; margin-top: 6px;">
+            Terima kasih yang sebesar-besarnya kepada Dewan Dosen Penguji dan Dosen Pembimbing atas arahan, bimbingan, dan evaluasi ilmiah yang diberikan.
+          </p>
+          <p style="font-size: 13px; line-height: 1.5; color: var(--text-body); margin-bottom: 24px;">
+            Kritik, masukan, dan saran yang konstruktif sangat kami harapkan guna penyempurnaan dan keberhasilan pelaksanaan penelitian ini.
+          </p>
+          <div style="border-top: 1px solid #bfdbfe; padding-top: 16px;">
+            <p style="font-size: 14px; font-weight: 700; color: var(--navy-dark);">Fahry Rizky Samsudin | NIM 1237030018</p>
+            <p style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Jurusan Fisika — UIN Sunan Gunung Djati Bandung (2026)</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Seminar Proposal Skripsi Program Studi Fisika UIN Sunan Gunung Djati Bandung</span>
+        <span class="slide-page-num">24 / 24</span>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 24;
+
+    function showSlide(n) {
+      if (n < 1) n = 1;
+      if (n > totalSlides) n = totalSlides;
+      currentSlide = n;
+
+      for (let i = 1; i <= totalSlides; i++) {
+        const slide = document.getElementById('slide-' + i);
+        if (slide) {
+          slide.classList.remove('active');
+        }
+      }
+      const activeSlide = document.getElementById('slide-' + currentSlide);
+      if (activeSlide) {
+        activeSlide.classList.add('active');
+      }
+      document.getElementById('counter').innerText = currentSlide + ' / ' + totalSlides;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        showSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        showSlide(currentSlide - 1);
+      }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        prevSlide();
+      } else if (e.key === 'Home') {
+        showSlide(1);
+      } else if (e.key === 'End') {
+        showSlide(totalSlides);
+      }
+    });
+  </script>
+</body>
+</html>
