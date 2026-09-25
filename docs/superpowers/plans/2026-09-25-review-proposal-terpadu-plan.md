@@ -58,12 +58,12 @@
 - Skills: `antislop-copywriting`, `scientific-critical-thinking`, `research-defense-radar`
 - Output: Skor kelayakan, daftar perbaikan narasi alur penalaran, verifikasi komparasi 4 model.
 
-- [ ] **Step 1: Ekstraksi dan audit argumen latar belakang**
+- [x] **Step 1: Ekstraksi dan audit argumen latar belakang**
   - Periksa 6 simpul penalaran: (1) Urgensi deteksi formalin pangan $\rightarrow$ (2) Keterbatasan sensor optik/kimia komersial $\rightarrow$ (3) Keunggulan reseptor nanofiber $\text{Fe}_3\text{O}_4$/PVA-Sitrat-ADH $\rightarrow$ (4) Transduser TMR ALT023-10E $\rightarrow$ (5) Integrasi pengkondisi sinyal AD623 & ADS1115 $\rightarrow$ (6) Komparasi komprehensif 4 model (SVM, RF, QSVC, VQC).
-- [ ] **Step 2: Pengecekan konsistensi Rumusan Masalah, Tujuan, dan Batasan Masalah**
+- [x] **Step 2: Pengecekan konsistensi Rumusan Masalah, Tujuan, dan Batasan Masalah**
   - Pastikan setiap butir Rumusan Masalah memiliki pasangan 1-ke-1 di Tujuan Penelitian.
   - Pastikan Batasan Masalah menegaskan konsentrasi formalin uji ($0.0 - 5.0\text{ ppm}$), sampel bakso lokal, dan simulator kuantum (Qiskit Statevector/Aer).
-- [ ] **Step 3: Dokumentasikan temuan audit Bab I ke laporan evaluasi**
+- [x] **Step 3: Dokumentasikan temuan audit Bab I ke laporan evaluasi**
 
 ---
 
@@ -77,20 +77,20 @@
 - Skills: `physical-review-b`, `prx-quantum`, `observability-and-instrumentation`
 - Output: Evaluasi ketepatan persamaan fisika, rantai sinyal, biokimia enzim, dan sirkuit kuantum.
 
-- [ ] **Step 1: Audit teori kemagnetan & transduser TMR**
+- [x] **Step 1: Audit teori kemagnetan & transduser TMR**
   - Evaluasi rumus TMR ratio: $\text{TMR} = \frac{R_{\text{AP}} - R_{\text{P}}}{R_{\text{P}}} = \frac{2P_1 P_2}{1 - P_1 P_2}$.
   - Evaluasi karakteristik jembatan Wheatstone TMR ALT023-10E bipolar dan linieritas rentang $\pm 1.0\text{ mT}$.
-- [ ] **Step 2: Audit teori instrumentasi elektronik & pengkondisi sinyal**
+- [x] **Step 2: Audit teori instrumentasi elektronik & pengkondisi sinyal**
   - Verifikasi formula penguatan AD623: $G = 1 + \frac{100\ \text{k}\Omega}{R_G}$.
   - Verifikasi tegangan referensi: $V_{\text{REF}} = \frac{R_4}{R_3 + R_4} V_{CC} = 2.50\text{ V}$.
   - Verifikasi kuantisasi ADS1115 16-bit: resolusi $0.1875\text{ mV/LSB}$ pada gain 2/3.
-- [ ] **Step 3: Audit sintesis nanomaterial & fungsionalisasi enzim ADH**
+- [x] **Step 3: Audit sintesis nanomaterial & fungsionalisasi enzim ADH**
   - Evaluasi mekanisme ikatan kovalen ADH via glutaraldehida terhadap gugus amina/hidroksil nanofiber PVA.
   - Evaluasi reaksi redoks formalin: $\text{HCHO} + \text{H}_2\text{O} + \text{NAD}^+ \xrightarrow{\text{ADH}} \text{HCOOH} + \text{NADH} + \text{H}^+$.
-- [ ] **Step 4: Audit landasan matematis 4 model Machine Learning**
+- [x] **Step 4: Audit landasan matematis 4 model Machine Learning**
   - Klasik: Optimasi Lagrangian SVM (dual problem dengan kernel RBF/linear), Ensembel bagging Random Forest (entropi/Gini).
   - Kuantum: *Quantum state preparation* $|\Phi(\mathbf{x})\rangle = U_{\Phi}(\mathbf{x}) |0\rangle^{\otimes n}$, estimasi kernel kuantum $K(\mathbf{x}_i, \mathbf{x}_j) = |\langle\Phi(\mathbf{x}_i)|\Phi(\mathbf{x}_j)\rangle|^2$ pada QSVC, dan optimasi gradien parameter sirkuit $U(\theta)$ pada VQC.
-- [ ] **Step 5: Dokumentasikan temuan audit Bab II ke laporan evaluasi**
+- [x] **Step 5: Dokumentasikan temuan audit Bab II ke laporan evaluasi**
 
 ---
 
@@ -105,21 +105,21 @@
 - Skills: `peer-review`, `cad-physics-validation`, `dfm`, `neurips-experiments`
 - Output: Evaluasi metodologi fabrikasi, akuisisi, skema validasi silang, dan metrik uji.
 
-- [ ] **Step 1: Audit Gambar 3.1 & desain mekatronika casing baru**
+- [x] **Step 1: Audit Gambar 3.1 & desain mekatronika casing baru**
   - Periksa integrasi `babIII-desainTMR.png` di baris 141–146.
   - Pastikan keterangan panel (a) tampak dalam dan (b) tampak luar sudah sinkron dengan gambar fisik.
   - Evaluasi DFM: ventilasi termal kumparan Helmholtz dan kepresisian dudukan kaca preparat di antara kumparan.
-- [ ] **Step 2: Audit Gambar 3.8 & diagram alir penelitian U-turn Draw.io**
+- [x] **Step 2: Audit Gambar 3.8 & diagram alir penelitian U-turn Draw.io**
   - Verifikasi bahwa diagram alir mempertahankan topologi profesional *U-turn flow* tanpa kekacauan visual.
   - Periksa konsistensi tahapan: Studi Literatur $\rightarrow$ Analisis Kebutuhan $\rightarrow$ Perancangan Hardware & Software $\rightarrow$ Sintesis Nanofiber $\rightarrow$ Karakterisasi Sensor $\rightarrow$ Pengujian Larutan Formalin $\rightarrow$ Ekstraksi Fitur $\rightarrow$ Komparasi 4 Model $\rightarrow$ Evaluasi Metrik & Analisis.
-- [ ] **Step 3: Audit protokol akuisisi data & parameter operasional**
+- [x] **Step 3: Audit protokol akuisisi data & parameter operasional**
   - Verifikasi durasi pengukuran: Lama Detik = 5.0 detik, settling time = 1.0 detik.
   - Verifikasi sapuan medan kumparan Helmholtz: tegangan $0.0 - 16.0\text{ V}$, arus maks $1.6\text{ A}$, resistansi koil $R \approx 10\ \Omega$.
   - Tegaskan bahwa pengaturan arus/tegangan bersifat manual via knob eksternal di meja uji.
-- [ ] **Step 4: Audit metodologi pemodelan & metrik evaluasi komparatif**
+- [x] **Step 4: Audit metodologi pemodelan & metrik evaluasi komparatif**
   - Periksa skema pemisahan data (*stratified split* 80:20) dan validasi silang (*5-fold cross-validation*).
   - Evaluasi metrik performa: Akurasi, Presisi, Recall, F1-Score, MCC (*Matthews Correlation Coefficient*), dan ROC-AUC.
-- [ ] **Step 5: Dokumentasikan temuan audit Bab III ke laporan evaluasi**
+- [x] **Step 5: Dokumentasikan temuan audit Bab III ke laporan evaluasi**
 
 ---
 
@@ -133,14 +133,14 @@
 - Skills: `citation-audit`, `reference-checker`
 - Output: Laporan integritas sitasi, daftar referensi terpakai vs tidak terpakai (*orphan keys*), verifikasi keberadaan PDF lokal.
 
-- [ ] **Step 1: Ekstraksi seluruh kunci sitasi dari naskah LaTeX**
+- [x] **Step 1: Ekstraksi seluruh kunci sitasi dari naskah LaTeX**
   - Jalankan skrip analisis untuk mengumpulkan seluruh `\cite{key}` di `Isi/Pendahuluan.tex`, `Isi/Tinjauan Pustaka.tex`, `Isi/Metode Penelitian.tex`.
-- [ ] **Step 2: Verifikasi silang terhadap references.bib**
+- [x] **Step 2: Verifikasi silang terhadap references.bib**
   - Pastikan setiap kunci yang disitasi memiliki entri lengkap di `references.bib` (Author, Title, Journal, Year, Volume, Pages, DOI).
   - Deteksi apakah ada sitasi yang hilang (*missing bib entry*).
-- [ ] **Step 3: Verifikasi ketersediaan berkas PDF di folder `referensi/`**
+- [x] **Step 3: Verifikasi ketersediaan berkas PDF di folder `referensi/`**
   - Periksa ketersediaan berkas PDF rujukan utama di folder `referensi/`.
-- [ ] **Step 4: Dokumentasikan temuan audit bibliografi ke laporan evaluasi**
+- [x] **Step 4: Dokumentasikan temuan audit bibliografi ke laporan evaluasi**
 
 ---
 
@@ -153,7 +153,7 @@
 - Skills: `research-defense-radar`, `doubt-driven-development`
 - Output: 10 pertanyaan paling tajam dosen penguji, analisis jebakan argumen, dan rekomendasi jawaban berbasis bukti eksperimen.
 
-- [ ] **Step 1: Identifikasi 10 area rawan pertanyaan penguji**
+- [x] **Step 1: Identifikasi 10 area rawan pertanyaan penguji**
   - Area 1: Mengapa memilih sensor TMR ALT023-10E dibandingkan Hall effect (A1302) atau GMR?
   - Area 2: Mengapa menggunakan enzim ADH dan bukan formaldehida dehidrogenase (FDH)?
   - Area 3: Mengapa $V_{\text{REF}}$ disetel ke 2.50 V, bukan 1.65 V atau ground?
@@ -164,7 +164,7 @@
   - Area 8: Bagaimana mengatasi ketidakseimbangan kelas (*class imbalance*) antara sampel bakso kontrol dan bakso berformalin?
   - Area 9: Apa batas deteksi (LOD) teoretis dan regulasi batas maksimum formalin pada pangan menurut BPOM/Permenkes?
   - Area 10: Bagaimana arsitektur *quantum feature map* memetakan fitur ke ruang Hilbert tanpa mengalami *exponential barren plateau*?
-- [ ] **Step 2: Susun panduan jawaban komprehensif, berbasis data dan teori naskah**
+- [x] **Step 2: Susun panduan jawaban komprehensif, berbasis data dan teori naskah**
 
 ---
 
@@ -178,7 +178,7 @@
 - Skills: `latex-compile-clean`
 - Output: Naskah proposal `skripsi.pdf` terkompilasi sempurna (0 error) dan dokumen laporan review utuh.
 
-- [ ] **Step 1: Jalankan kompilasi proposal 4-tahap**
+- [x] **Step 1: Jalankan kompilasi proposal 4-tahap**
   - Pastikan output `0 LaTeX Error (Sempurna)` dan ukuran file valid.
-- [ ] **Step 2: Tinjau kelengkapan laporan akhir `LAPORAN_EVALUASI_PROPOSAL_PASCA_REVISI.md`**
-- [ ] **Step 3: Commit dan push pembaruan ke Git**
+- [x] **Step 2: Tinjau kelengkapan laporan akhir `LAPORAN_EVALUASI_PROPOSAL_PASCA_REVISI.md`**
+- [x] **Step 3: Commit dan push pembaruan ke Git**
