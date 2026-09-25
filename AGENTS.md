@@ -104,6 +104,7 @@ Folder [.agents/skills](file:///c:/Users/Fahry%20Rizky%20S/Documents/Tugas%20Akh
 | **Arsitektur & Rekayasa** | `api-and-interface-design`, `frontend-ui-engineering`, `awesome-llm-apps`, `performance-optimization`, `observability-and-instrumentation`, `security-and-hardening` |
 | **Eksekusi & Otomasi** | `executing-plans`, `subagent-driven-development`, `incremental-implementation`, `dispatching-parallel-agents`, `latex-compile-clean`, `ci-cd-and-automation` |
 | **Git & Versioning** | `git-workflow-and-versioning`, `using-git-worktrees`, `finishing-a-development-branch`, `shipping-and-launch` |
+| **Desain CAD, CAE & Fabrikasi** | `cad`, `dfm`, `dfam-check`, `cad-constraint-kit`, `cad-physics-validation`, `multi-agent-cad`, `varen-ai-cad`, `cad-drawing-intelligence`, `dxf`, `engineering-drawing`, `step-parts`, `cad-viewer`, `urdf`, `sdf`, `srdf`, `bambu-labs`, `gcode`, `sendcutsend`, `aieng-cad-authoring`, `aieng-cad-cae-copilot`, `aieng-closed-loop-copilot`, `scad-coding`, `scad-planning`, `scad-validation-review`, `scad-repair`, `scad-library-bosl2`, `scad-library-threads`, `scad-library-round-anything` |
 | **Pengetahuan & Konteks** | `context-engineering`, `claude-mem`, `documentation-and-adrs`, `source-driven-development`, `using-superpowers`, `using-agent-skills`, `writing-skills` |
 
 ### Sinkronisasi ke Perangkat Baru (GitHub)
