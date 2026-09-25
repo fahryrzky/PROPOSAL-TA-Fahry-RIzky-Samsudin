@@ -37,10 +37,10 @@
         <mxCell id="m11" value="Apakah Nanofiber&#xa;Terbentuk Rata?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
           <mxGeometry x="400" y="470" width="160" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="m12" value="Perlakuan Thermal Curing Asam Sitrat:&#xa;Pemanasan dalam Oven 130°C (1 Jam)&#xa;untuk Membentuk Ikatan Esterifikasi" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+        <mxCell id="m12" value="Perlakuan Thermal Curing Asam Sitrat:&#xa;Pemanasan dalam Oven 130°C (1,5 Jam)&#xa;Guna Membentuk Ikatan Esterifikasi Tahan Air" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
           <mxGeometry x="360" y="365" width="240" height="55" as="geometry" />
         </mxCell>
-        <mxCell id="m13" value="Fungsionalisasi Cross-linking ADH:&#xa;Perendaman dalam ADH 2% b/v (4 Jam)&#xa;Menghasilkan Gugus Bebas -NH2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+        <mxCell id="m13" value="Fungsionalisasi Kemo-Reseptor ADH:&#xa;Perendaman dalam ADH 2% b/v (30 Menit)&#xa;Gugus Hidrazida (-NH-NH2) Penangkap Formalin" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
           <mxGeometry x="360" y="275" width="240" height="60" as="geometry" />
         </mxCell>
         <mxCell id="m14" value="Membran Nanofiber Komposit&#xa;Fe3O4/PVA-Sitrat-ADH Siap Pasang&#xa;pada Permukaan Sensor TMR" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
