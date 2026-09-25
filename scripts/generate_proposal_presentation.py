@@ -1,6 +1,15 @@
 """
-Skrip Generator Presentasi Sidang Proposal Tugas Akhir (26 Slide Terfokus & Bebas AI-Slop)
+Skrip Generator Presentasi Sidang Proposal Tugas Akhir (22 Slide Lengkap, Padat & Bebas AI-Slop)
 Sesuai format akademik referensi 1227030017_skripsi.pdf (Gilang Pratama)
+
+Standar Mutu Presentasi:
+1. Cover Autentik Gilang Pratama (Latar lab gelap cover_bg_gilang.png, logo pill UIN+Fisika, bingkai oranye tebal #f26522, judul gagah 19.5 pt, identitas resmi).
+2. Penyelarasan Sempurna 4 Rumusan Masalah & 4 Tujuan Penelitian (Slide 3 & Slide 4) sesuai naskah proposal.
+3. Slide 11 Baru: Matriks Perbandingan Penelitian Terdahulu (Wang 2021, Singhal 2024, Sun 2023, Gilang 2026, Fahry 2026).
+4. Tipografi Besar Proyektor (Header 23 pt, Judul Kartu 16-17 pt, Bullet Teks 12.5-14.0 pt) agar terbaca jelas dari baris belakang ruang sidang.
+5. MURNI 2 FLOWCHART per slide pada Slide 15 & Slide 19 tanpa teks perintang.
+6. Seluruh 44 pustaka aktif naskah proposal tercantum secara rapi dan proporsional (Slide 20 & Slide 21).
+7. Zero AI-Slop: Nol label kategori semu (4 Aspek), nol em-dash, nol kalimat klise AI.
 
 Peneliti : Fahry Rizky Samsudin (NIM: 1237030018)
 Jurusan  : Fisika, Fakultas Sains dan Teknologi, UIN Sunan Gunung Djati Bandung
@@ -9,6 +18,7 @@ Tahun    : 2026
 
 import os
 import sys
+import re
 from PIL import Image
 from pptx import Presentation
 from pptx.util import Inches, Pt
@@ -21,7 +31,7 @@ from pptx.enum.shapes import MSO_SHAPE
 # ==============================================================================
 COLOR_BG_PAGE     = RGBColor(248, 250, 252) # Slate-50 (#F8FAFC)
 COLOR_CARD_FILL   = RGBColor(255, 255, 255) # Pure White
-COLOR_CARD_BORDER = RGBColor(203, 213, 225) # Slate-300 (#CBD5E1) - Lebih kontras
+COLOR_CARD_BORDER = RGBColor(203, 213, 225) # Slate-300 (#CBD5E1) - Kontras tegas
 COLOR_TEXT_MAIN   = RGBColor(15, 23, 42)    # Slate-900 (#0F172A) - Sangat pekat
 COLOR_TEXT_BODY   = RGBColor(30, 41, 59)    # Slate-800 (#1E293B) - Sangat terbaca
 COLOR_TEXT_MUTED  = RGBColor(71, 85, 105)   # Slate-600 (#475569)
@@ -38,7 +48,7 @@ COLOR_LIGHT_EMR   = RGBColor(236, 253, 245) # Emerald-50
 COLOR_LIGHT_SLATE = RGBColor(241, 245, 249) # Slate-100
 
 FONT_FAMILY = "Segoe UI"
-TOTAL_SLIDES = 26
+TOTAL_SLIDES = 22
 
 class AcademicDeckBuilder:
     def __init__(self, filename="Proposal_TA_Fahry_Rizky_Samsudin.pptx"):
@@ -59,7 +69,7 @@ class AcademicDeckBuilder:
         return slide
 
     def add_header(self, slide, title_text, subtitle_text=None):
-        """Header bersih tanpa repetisi label bab / landasan teori (Anti-Slop)"""
+        """Header bersih tanpa repetisi label bab (Anti-Slop)"""
         t_box = slide.shapes.add_textbox(Inches(0.8), Inches(0.4), Inches(11.733), Inches(0.85))
         tf_t = t_box.text_frame
         tf_t.word_wrap = True
@@ -68,7 +78,7 @@ class AcademicDeckBuilder:
         p_t = tf_t.paragraphs[0]
         p_t.text = title_text
         p_t.font.name = FONT_FAMILY
-        p_t.font.size = Pt(20)
+        p_t.font.size = Pt(23)
         p_t.font.bold = True
         p_t.font.color.rgb = COLOR_NAVY_DARK
 
@@ -76,7 +86,7 @@ class AcademicDeckBuilder:
             p_sub = tf_t.add_paragraph()
             p_sub.text = subtitle_text
             p_sub.font.name = FONT_FAMILY
-            p_sub.font.size = Pt(11)
+            p_sub.font.size = Pt(12.5)
             p_sub.font.color.rgb = COLOR_TEXT_MUTED
             p_sub.space_before = Pt(3)
 
@@ -101,56 +111,41 @@ class AcademicDeckBuilder:
         p_f.font.size = Pt(9.5)
         p_f.font.color.rgb = COLOR_TEXT_MUTED
 
-        p_box = slide.shapes.add_textbox(Inches(10.8), Inches(7.06), Inches(1.733), Inches(0.3))
-        tf_p = p_box.text_frame
-        tf_p.word_wrap = True
-        tf_p.margin_left = tf_p.margin_top = tf_p.margin_right = tf_p.margin_bottom = 0
-        pp = tf_p.paragraphs[0]
-        pp.text = f"{current_slide} / {TOTAL_SLIDES}"
-        pp.alignment = PP_ALIGN.RIGHT
-        pp.font.name = FONT_FAMILY
-        pp.font.size = Pt(9.5)
-        pp.font.bold = True
-        pp.font.color.rgb = COLOR_NAVY_MID
+        num_box = slide.shapes.add_textbox(Inches(10.8), Inches(7.06), Inches(1.733), Inches(0.3))
+        tf_num = num_box.text_frame
+        tf_num.margin_left = tf_num.margin_top = tf_num.margin_right = tf_num.margin_bottom = 0
+        p_n = tf_num.paragraphs[0]
+        p_n.text = f"{current_slide:02d} / {TOTAL_SLIDES:02d}"
+        p_n.font.name = FONT_FAMILY
+        p_n.font.size = Pt(9.5)
+        p_n.font.bold = True
+        p_n.font.color.rgb = COLOR_BLUE_ACCENT
+        p_n.alignment = PP_ALIGN.RIGHT
 
     def add_card(self, slide, left, top, width, height, bg_color=COLOR_CARD_FILL, border_color=COLOR_CARD_BORDER):
-        card = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, left, top, width, height)
+        card = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, left, top, width, height)
         card.fill.solid()
         card.fill.fore_color.rgb = bg_color
-        if border_color:
-            card.line.color.rgb = border_color
-            card.line.width = Pt(1.2)
-        else:
-            card.line.fill.background()
+        card.line.color.rgb = border_color
+        card.line.width = Pt(1.2)
         return card
 
-    def add_card_header(self, tf, title_text, category_badge=None, badge_color=COLOR_BLUE_ACCENT):
-        if category_badge:
-            p_badge = tf.paragraphs[0] if len(tf.paragraphs[0].text) == 0 else tf.add_paragraph()
-            p_badge.text = category_badge.upper()
-            p_badge.font.name = FONT_FAMILY
-            p_badge.font.size = Pt(9.0)
-            p_badge.font.bold = True
-            p_badge.font.color.rgb = badge_color
-            p_badge.space_after = Pt(2)
-            p_title = tf.add_paragraph()
-        else:
-            p_title = tf.paragraphs[0] if len(tf.paragraphs[0].text) == 0 else tf.add_paragraph()
+    def add_card_header(self, tf, title, category=None, accent_color=COLOR_NAVY_MID, title_size=17):
+        p_t = tf.paragraphs[0] if len(tf.paragraphs[0].text) == 0 else tf.add_paragraph()
+        p_t.text = title
+        p_t.font.name = FONT_FAMILY
+        p_t.font.size = Pt(title_size)
+        p_t.font.bold = True
+        p_t.font.color.rgb = accent_color
+        p_t.space_after = Pt(6)
 
-        p_title.text = title_text
-        p_title.font.name = FONT_FAMILY
-        p_title.font.size = Pt(13)
-        p_title.font.bold = True
-        p_title.font.color.rgb = COLOR_NAVY_DARK
-        p_title.space_after = Pt(5)
-
-    def add_bullet_item(self, tf, bold_prefix, text, pt_size=11.0, space_after=4.5, color=COLOR_TEXT_BODY):
+    def add_bullet_item(self, tf, bold_prefix, text, pt_size=13.5, space_after=6.0, color=COLOR_TEXT_BODY):
         p = tf.add_paragraph() if len(tf.paragraphs[0].text) > 0 else tf.paragraphs[0]
         p.space_after = Pt(space_after)
-        p.line_spacing = 1.18
+        p.line_spacing = 1.25
 
         r_bullet = p.add_run()
-        r_bullet.text = "• "
+        r_bullet.text = "\u2022 "
         r_bullet.font.name = FONT_FAMILY
         r_bullet.font.bold = True
         r_bullet.font.color.rgb = COLOR_BLUE_ACCENT
@@ -170,1025 +165,971 @@ class AcademicDeckBuilder:
         r_text.font.color.rgb = color
         r_text.font.size = Pt(pt_size)
 
+    def add_image_fitted(self, slide, img_path, left, top, max_w, max_h, border=True, caption=None):
+        if not os.path.exists(img_path):
+            print(f"[PERINGATAN] Berkas gambar tidak ditemukan: {img_path}")
+            return None
+
+        im = Image.open(img_path)
+        img_w_px, img_h_px = im.size
+        img_aspect = img_w_px / img_h_px
+        box_aspect = max_w / max_h
+
+        if img_aspect > box_aspect:
+            final_w = max_w
+            final_h = max_w / img_aspect
+        else:
+            final_h = max_h
+            final_w = max_h * img_aspect
+
+        x_centered = left + (max_w - final_w) / 2
+        y_centered = top + (max_h - final_h) / 2
+
+        if border:
+            card_border = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, left, top, max_w, max_h)
+            card_border.fill.solid()
+            card_border.fill.fore_color.rgb = COLOR_CARD_FILL
+            card_border.line.color.rgb = COLOR_CARD_BORDER
+            card_border.line.width = Pt(1.2)
+
+        pic = slide.shapes.add_picture(img_path, x_centered, y_centered, width=final_w, height=final_h)
+
+        if caption:
+            cap_box = slide.shapes.add_textbox(left, top + max_h + Inches(0.04), max_w, Inches(0.28))
+            tf_c = cap_box.text_frame
+            tf_c.word_wrap = True
+            tf_c.margin_left = tf_c.margin_top = tf_c.margin_right = tf_c.margin_bottom = 0
+            p_c = tf_c.paragraphs[0]
+            p_c.text = caption
+            p_c.font.name = FONT_FAMILY
+            p_c.font.size = Pt(8.5)
+            p_c.font.color.rgb = COLOR_TEXT_MUTED
+            p_c.alignment = PP_ALIGN.CENTER
+
+        return pic
+
     def add_table(self, slide, left, top, width, height, headers, rows, col_widths=None):
         num_rows = len(rows) + 1
         num_cols = len(headers)
         table_shape = slide.shapes.add_table(num_rows, num_cols, left, top, width, height)
         table = table_shape.table
 
-        if col_widths and len(col_widths) == num_cols:
+        if col_widths:
             for idx, w in enumerate(col_widths):
                 table.columns[idx].width = w
 
-        for col_idx, header in enumerate(headers):
+        for col_idx, h_text in enumerate(headers):
             cell = table.cell(0, col_idx)
+            cell.text = h_text
             cell.fill.solid()
             cell.fill.fore_color.rgb = COLOR_NAVY_MID
-            p = cell.text_frame.paragraphs[0]
-            p.text = str(header)
-            p.font.name = FONT_FAMILY
-            p.font.bold = True
-            p.font.size = Pt(10.5)
-            p.font.color.rgb = COLOR_CARD_FILL
-            p.alignment = PP_ALIGN.CENTER
+            for p in cell.text_frame.paragraphs:
+                p.alignment = PP_ALIGN.CENTER
+                for r in p.runs:
+                    r.font.name = FONT_FAMILY
+                    r.font.bold = True
+                    r.font.size = Pt(11.0)
+                    r.font.color.rgb = RGBColor(255, 255, 255)
 
-        for row_idx, row_data in enumerate(rows):
-            bg = COLOR_LIGHT_SLATE if row_idx % 2 == 1 else COLOR_CARD_FILL
-            for col_idx, cell_value in enumerate(row_data):
+        for row_idx, r_data in enumerate(rows):
+            is_even = (row_idx % 2 == 0)
+            for col_idx, val in enumerate(r_data):
                 cell = table.cell(row_idx + 1, col_idx)
+                cell.text = str(val)
                 cell.fill.solid()
-                cell.fill.fore_color.rgb = bg
-                p = cell.text_frame.paragraphs[0]
-                p.text = str(cell_value)
-                p.font.name = FONT_FAMILY
-                p.font.size = Pt(10.0)
-                p.font.color.rgb = COLOR_TEXT_MAIN
-                if col_idx == 0:
-                    p.font.bold = True
+                cell.fill.fore_color.rgb = COLOR_LIGHT_SLATE if is_even else COLOR_CARD_FILL
+                for p in cell.text_frame.paragraphs:
+                    if col_idx in [0]:
+                        p.alignment = PP_ALIGN.LEFT
+                    else:
+                        p.alignment = PP_ALIGN.CENTER
+                    for r in p.runs:
+                        r.font.name = FONT_FAMILY
+                        r.font.size = Pt(10.0)
+                        r.font.color.rgb = COLOR_TEXT_BODY
+
         return table_shape
-
-    def add_image_fitted(self, slide, img_path, left, top, max_w, max_h, border=True, caption=None):
-        if not os.path.exists(img_path):
-            print(f"[WARN] File gambar tidak ditemukan: {img_path}")
-            return None
-
-        im = Image.open(img_path)
-        im_w, im_h = im.size
-        aspect = im_w / im_h
-
-        box_w = max_w.inches
-        box_h = max_h.inches
-
-        if (box_w / box_h) > aspect:
-            calc_h = box_h
-            calc_w = calc_h * aspect
-        else:
-            calc_w = box_w
-            calc_h = calc_w / aspect
-
-        final_left = left.inches + (box_w - calc_w) / 2
-        final_top = top.inches + (box_h - calc_h) / 2
-
-        if border:
-            self.add_card(
-                slide,
-                Inches(final_left - 0.04),
-                Inches(final_top - 0.04),
-                Inches(calc_w + 0.08),
-                Inches(calc_h + 0.08),
-                bg_color=COLOR_CARD_FILL,
-                border_color=COLOR_CARD_BORDER
-            )
-
-        pic = slide.shapes.add_picture(
-            img_path,
-            Inches(final_left),
-            Inches(final_top),
-            Inches(calc_w),
-            Inches(calc_h)
-        )
-
-        if caption:
-            c_box = slide.shapes.add_textbox(
-                Inches(final_left - 0.2),
-                Inches(final_top + calc_h + 0.04),
-                Inches(calc_w + 0.4),
-                Inches(0.3)
-            )
-            tf_c = c_box.text_frame
-            tf_c.word_wrap = True
-            tf_c.margin_left = tf_c.margin_top = tf_c.margin_right = tf_c.margin_bottom = 0
-            pc = tf_c.paragraphs[0]
-            pc.text = caption
-            pc.alignment = PP_ALIGN.CENTER
-            pc.font.name = FONT_FAMILY
-            pc.font.size = Pt(9.0)
-            pc.font.italic = True
-            pc.font.color.rgb = COLOR_TEXT_MUTED
-
-        return pic
 
     def save(self):
         self.prs.save(self.filename)
         print(f"[SUKSES] Presentasi tersimpan: {self.filename} ({self.slide_count} slides).")
 
-# ==============================================================================
-# DEFINISI 26 SLIDE BARU TERFOKUS
-# ==============================================================================
 
 def build_presentation():
     deck = AcademicDeckBuilder("Proposal_TA_Fahry_Rizky_Samsudin.pptx")
 
     # --------------------------------------------------------------------------
-    # SLIDE 1: COVER IDENTITAS (Format Persis Gilang Pratama)
+    # SLIDE 1: JUDUL & IDENTITAS PENELITI (Layout Cover Autentik Gilang Pratama)
     # --------------------------------------------------------------------------
     s1 = deck.add_blank_slide()
 
-    # Event Header Badge
-    b_ev = s1.shapes.add_textbox(Inches(0.8), Inches(0.4), Inches(11.733), Inches(0.35))
-    tf_ev = b_ev.text_frame
-    p_ev = tf_ev.paragraphs[0]
-    p_ev.text = "SEMINAR PROPOSAL TUGAS AKHIR"
-    p_ev.font.name = FONT_FAMILY
-    p_ev.font.bold = True
-    p_ev.font.size = Pt(12)
-    p_ev.font.color.rgb = COLOR_BLUE_ACCENT
-    p_ev.alignment = PP_ALIGN.CENTER
+    # Background cover: Foto lab fisik dengan overlay navy gelap
+    cover_bg_path = "Gambar/cover_bg_gilang.png"
+    if os.path.exists(cover_bg_path):
+        s1.shapes.add_picture(cover_bg_path, 0, 0, Inches(13.333), Inches(7.5))
+    else:
+        bg_cover = s1.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, Inches(13.333), Inches(7.5))
+        bg_cover.fill.solid()
+        bg_cover.fill.fore_color.rgb = RGBColor(8, 16, 30)
+        bg_cover.line.fill.background()
 
-    # Judul Skripsi Besar
-    t_box = s1.shapes.add_textbox(Inches(0.8), Inches(0.8), Inches(11.733), Inches(1.6))
-    tf_t = t_box.text_frame
-    tf_t.word_wrap = True
-    p_title = tf_t.paragraphs[0]
-    p_title.text = "RANCANG BANGUN INSTRUMENTASI SENSOR TUNNELING MAGNETORESISTANCE BERBASIS NANOFIBER Fe3O4/PVA-SITRAT-ADH UNTUK DETEKSI FORMALIN PADA BAKSO MENGGUNAKAN KOMPARASI MODEL SVM DAN QSVC"
-    p_title.font.name = FONT_FAMILY
-    p_title.font.bold = True
-    p_title.font.size = Pt(17.5)
-    p_title.font.color.rgb = COLOR_NAVY_DARK
-    p_title.alignment = PP_ALIGN.CENTER
+    # Baris atas: Tahun (kiri), Logo Pill UIN+Fisika (tengah), Seminar Proposal (kanan)
+    tb1_year = s1.shapes.add_textbox(Inches(0.8), Inches(0.45), Inches(2.0), Inches(0.5))
+    tf1_year = tb1_year.text_frame
+    tf1_year.word_wrap = True
+    p1_year = tf1_year.paragraphs[0]
+    p1_year.text = "2026"
+    p1_year.font.name = FONT_FAMILY
+    p1_year.font.size = Pt(15)
+    p1_year.font.bold = True
+    p1_year.font.color.rgb = RGBColor(255, 255, 255)
 
-    # Logo UIN Center
-    deck.add_image_fitted(s1, "Gambar/Logo/Logo UIN.png", Inches(5.9), Inches(2.45), Inches(1.5), Inches(1.5), border=False)
+    # Logo Pill UIN + Fisika di tengah atas
+    logo_pill_path = "Gambar/Logo/logo_uin_fisika_pill.png"
+    if os.path.exists(logo_pill_path):
+        deck.add_image_fitted(s1, logo_pill_path, Inches(5.4), Inches(0.28), Inches(2.533), Inches(0.9), border=False)
+    else:
+        # Fallback dua logo terpisah jika pill belum ada
+        if os.path.exists("Gambar/Logo/Logo UIN.png"):
+            deck.add_image_fitted(s1, "Gambar/Logo/Logo UIN.png", Inches(5.667), Inches(0.3), Inches(0.9), Inches(0.9), border=False)
+        if os.path.exists("Gambar/Logo/Logo Fisika UIN.png"):
+            deck.add_image_fitted(s1, "Gambar/Logo/Logo Fisika UIN.png", Inches(6.767), Inches(0.3), Inches(0.9), Inches(0.9), border=False)
 
-    # Identitas Peneliti di TENGAH
-    c_box = s1.shapes.add_textbox(Inches(2.0), Inches(4.05), Inches(9.333), Inches(1.3))
-    tf_c = c_box.text_frame
-    tf_c.word_wrap = True
-    
-    p_dis = tf_c.paragraphs[0]
-    p_dis.text = "DISUSUN OLEH:"
-    p_dis.font.name = FONT_FAMILY
-    p_dis.font.bold = True
-    p_dis.font.size = Pt(11)
-    p_dis.font.color.rgb = COLOR_TEXT_MUTED
-    p_dis.alignment = PP_ALIGN.CENTER
+    tb1_sem = s1.shapes.add_textbox(Inches(9.5), Inches(0.45), Inches(3.0), Inches(0.5))
+    tf1_sem = tb1_sem.text_frame
+    tf1_sem.word_wrap = True
+    p1_sem = tf1_sem.paragraphs[0]
+    p1_sem.text = "Seminar Proposal"
+    p1_sem.font.name = FONT_FAMILY
+    p1_sem.font.size = Pt(15)
+    p1_sem.font.bold = True
+    p1_sem.font.color.rgb = RGBColor(255, 255, 255)
+    p1_sem.alignment = PP_ALIGN.RIGHT
 
-    p_name = tf_c.add_paragraph()
-    p_name.text = "FAHRY RIZKY SAMSUDIN"
-    p_name.font.name = FONT_FAMILY
-    p_name.font.bold = True
-    p_name.font.size = Pt(15)
-    p_name.font.color.rgb = COLOR_NAVY_MID
-    p_name.alignment = PP_ALIGN.CENTER
+    # Kotak Judul Tengah: Navy dengan border oranye tebal (#f26522, 4.5 pt)
+    title_box = s1.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(1.2), Inches(1.55), Inches(10.933), Inches(2.9))
+    title_box.fill.solid()
+    title_box.fill.fore_color.rgb = RGBColor(17, 34, 64)
+    title_box.line.color.rgb = RGBColor(242, 101, 34)
+    title_box.line.width = Pt(4.5)
 
-    p_nim = tf_c.add_paragraph()
-    p_nim.text = "(NIM 1237030018)"
-    p_nim.font.name = FONT_FAMILY
-    p_nim.font.bold = True
-    p_nim.font.size = Pt(12)
-    p_nim.font.color.rgb = COLOR_TEXT_BODY
-    p_nim.alignment = PP_ALIGN.CENTER
+    tb1_title = s1.shapes.add_textbox(Inches(1.5), Inches(1.75), Inches(10.333), Inches(2.5))
+    tf1_title = tb1_title.text_frame
+    tf1_title.word_wrap = True
 
-    p_inst = tf_c.add_paragraph()
-    p_inst.text = "JURUSAN FISIKA, FAKULTAS SAINS DAN TEKNOLOGI\nUNIVERSITAS ISLAM NEGERI SUNAN GUNUNG DJATI BANDUNG\nTAHUN 2026"
-    p_inst.font.name = FONT_FAMILY
-    p_inst.font.bold = True
-    p_inst.font.size = Pt(10.5)
-    p_inst.font.color.rgb = COLOR_TEXT_MUTED
-    p_inst.alignment = PP_ALIGN.CENTER
-    p_inst.space_before = Pt(4)
+    p1_main = tf1_title.paragraphs[0]
+    p1_main.text = "RANCANG BANGUN INSTRUMENTASI SENSOR TUNNELING MAGNETORESISTANCE BERBASIS NANOFIBER Fe3O4/PVA-SITRAT-ADH UNTUK DETEKSI FORMALIN PADA BAKSO MENGGUNAKAN KOMPARASI MODEL SVM DAN QSVC"
+    p1_main.font.name = FONT_FAMILY
+    p1_main.font.size = Pt(19.5)
+    p1_main.font.bold = True
+    p1_main.font.color.rgb = RGBColor(255, 255, 255)
+    p1_main.alignment = PP_ALIGN.CENTER
+    p1_main.line_spacing = 1.18
 
-    # Pembimbing I di Kiri, Pembimbing II di Kanan
-    p1_box = s1.shapes.add_textbox(Inches(0.8), Inches(5.65), Inches(5.6), Inches(1.1))
-    tf_p1 = p1_box.text_frame
-    p1_l = tf_p1.paragraphs[0]
-    p1_l.text = "DOSEN PEMBIMBING I:"
-    p1_l.font.name = FONT_FAMILY
-    p1_l.font.bold = True
-    p1_l.font.size = Pt(10.5)
-    p1_l.font.color.rgb = COLOR_BLUE_ACCENT
-    p1_l.alignment = PP_ALIGN.CENTER
+    # Bagian bawah: Identitas langsung di atas latar gelap berwibawa
+    tb1_disusun = s1.shapes.add_textbox(Inches(1.2), Inches(4.65), Inches(10.933), Inches(0.35))
+    tf1_dis = tb1_disusun.text_frame
+    p1_dis = tf1_dis.paragraphs[0]
+    p1_dis.text = "DISUSUN OLEH:"
+    p1_dis.font.name = FONT_FAMILY
+    p1_dis.font.size = Pt(12.5)
+    p1_dis.font.bold = True
+    p1_dis.font.color.rgb = RGBColor(255, 255, 255)
+    p1_dis.alignment = PP_ALIGN.CENTER
 
-    p1_n = tf_p1.add_paragraph()
-    p1_n.text = "MADA SANJAYA W.S., M.SI., PH.D."
-    p1_n.font.name = FONT_FAMILY
-    p1_n.font.bold = True
-    p1_n.font.size = Pt(12.5)
-    p1_n.font.color.rgb = COLOR_NAVY_DARK
-    p1_n.alignment = PP_ALIGN.CENTER
+    tb1_nama = s1.shapes.add_textbox(Inches(1.2), Inches(5.0), Inches(10.933), Inches(0.45))
+    tf1_nama = tb1_nama.text_frame
+    p1_nama = tf1_nama.paragraphs[0]
+    p1_nama.text = "FAHRY RIZKY SAMSUDIN"
+    p1_nama.font.name = FONT_FAMILY
+    p1_nama.font.size = Pt(17)
+    p1_nama.font.bold = True
+    p1_nama.font.color.rgb = RGBColor(255, 255, 255)
+    p1_nama.alignment = PP_ALIGN.CENTER
 
-    p1_nip = tf_p1.add_paragraph()
-    p1_nip.text = "NIP. 19851101 200912 1005"
-    p1_nip.font.name = FONT_FAMILY
-    p1_nip.font.size = Pt(9.5)
-    p1_nip.font.color.rgb = COLOR_TEXT_MUTED
-    p1_nip.alignment = PP_ALIGN.CENTER
+    tb1_nim = s1.shapes.add_textbox(Inches(1.2), Inches(5.45), Inches(10.933), Inches(0.35))
+    tf1_nim = tb1_nim.text_frame
+    p1_nim = tf1_nim.paragraphs[0]
+    p1_nim.text = "(NIM 1237030018)"
+    p1_nim.font.name = FONT_FAMILY
+    p1_nim.font.size = Pt(13.5)
+    p1_nim.font.color.rgb = RGBColor(255, 255, 255)
+    p1_nim.alignment = PP_ALIGN.CENTER
 
-    p2_box = s1.shapes.add_textbox(Inches(6.9), Inches(5.65), Inches(5.6), Inches(1.1))
-    tf_p2 = p2_box.text_frame
-    p2_l = tf_p2.paragraphs[0]
-    p2_l.text = "DOSEN PEMBIMBING II:"
-    p2_l.font.name = FONT_FAMILY
-    p2_l.font.bold = True
-    p2_l.font.size = Pt(10.5)
-    p2_l.font.color.rgb = COLOR_BLUE_ACCENT
-    p2_l.alignment = PP_ALIGN.CENTER
+    # Pembimbing: Dua pill navy semi-transparan
+    pill_y = Inches(5.95)
+    for pill_idx, (lbl, nm) in enumerate([("Pembimbing I:", "Mada Sanjaya W.S., M.Si., Ph.D."), ("Pembimbing II:", "Drs. Eko Prasetyo, M.T.")]):
+        pill_x = Inches(2.0 + pill_idx * 4.8)
+        pill_shape = s1.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, pill_x, pill_y, Inches(4.5), Inches(0.45))
+        pill_shape.fill.solid()
+        pill_shape.fill.fore_color.rgb = RGBColor(17, 34, 64)
+        pill_shape.line.fill.background()
+        tb_pill = s1.shapes.add_textbox(pill_x + Inches(0.15), pill_y + Inches(0.05), Inches(4.2), Inches(0.35))
+        tf_pill = tb_pill.text_frame
+        p_pill = tf_pill.paragraphs[0]
+        p_pill.alignment = PP_ALIGN.CENTER
+        r_lbl = p_pill.add_run()
+        r_lbl.text = lbl + " "
+        r_lbl.font.name = FONT_FAMILY
+        r_lbl.font.size = Pt(11)
+        r_lbl.font.color.rgb = RGBColor(180, 200, 230)
+        r_nm = p_pill.add_run()
+        r_nm.text = nm
+        r_nm.font.name = FONT_FAMILY
+        r_nm.font.size = Pt(13)
+        r_nm.font.bold = True
+        r_nm.font.color.rgb = RGBColor(255, 255, 255)
 
-    p2_n = tf_p2.add_paragraph()
-    p2_n.text = "DR. YUDHA SATYA PERKASA, M.SI."
-    p2_n.font.name = FONT_FAMILY
-    p2_n.font.bold = True
-    p2_n.font.size = Pt(12.5)
-    p2_n.font.color.rgb = COLOR_NAVY_DARK
-    p2_n.alignment = PP_ALIGN.CENTER
-
-    p2_nip = tf_p2.add_paragraph()
-    p2_nip.text = "NIP. 19820521 200801 1010"
-    p2_nip.font.name = FONT_FAMILY
-    p2_nip.font.size = Pt(9.5)
-    p2_nip.font.color.rgb = COLOR_TEXT_MUTED
-    p2_nip.alignment = PP_ALIGN.CENTER
-
-    deck.add_footer(s1, 1)
+    # Institusi
+    tb1_inst = s1.shapes.add_textbox(Inches(1.2), Inches(6.55), Inches(10.933), Inches(0.5))
+    tf1_inst = tb1_inst.text_frame
+    p1_inst = tf1_inst.paragraphs[0]
+    p1_inst.text = "JURUSAN FISIKA | FAKULTAS SAINS DAN TEKNOLOGI | UIN SUNAN GUNUNG DJATI BANDUNG | TAHUN 2026"
+    p1_inst.font.name = FONT_FAMILY
+    p1_inst.font.size = Pt(13.5)
+    p1_inst.font.bold = True
+    p1_inst.font.color.rgb = RGBColor(255, 255, 255)
+    p1_inst.alignment = PP_ALIGN.CENTER
 
     # --------------------------------------------------------------------------
-    # SLIDE 2: LATAR BELAKANG (Diagram Alir Konseptual Minim Teks)
+    # SLIDE 2: LATAR BELAKANG PENELITIAN (Diagram Alir Konseptual 3 Kolom)
     # --------------------------------------------------------------------------
     s2 = deck.add_blank_slide()
     deck.add_header(s2, "Latar Belakang Penelitian",
-                    "Diagram Alir Konseptual: Dari Permasalahan Pangan hingga Solusi Biosensor Cerdas")
-    
+                    "Diagram Alir Konseptual: Dari Masalah Pangan, Gap Sensor Elektronik, hingga Solusi Biosensor TMR Cerdas")
+
     deck.add_image_fitted(s2, "output/diagrams/latar_belakang_flowchart.png",
                           Inches(0.8), Inches(1.5), Inches(11.733), Inches(4.5), border=False)
 
-    # Bottom Highlight Box
-    deck.add_card(s2, Inches(0.8), Inches(6.05), Inches(11.733), Inches(0.85), bg_color=COLOR_LIGHT_BLUE, border_color=COLOR_BLUE_ACCENT)
-    tb2_b = s2.shapes.add_textbox(Inches(1.0), Inches(6.12), Inches(11.3), Inches(0.7))
-    tf2_b = tb2_b.text_frame
-    tf2_b.word_wrap = True
-    p2_msg = tf2_b.paragraphs[0]
-    p2_msg.text = "Fokus Kebaruan Riset: Mengintegrasikan reseptor nanofiber hijau selektif ADH dengan sensor spintronika TMR ultra-sensitif dan mengevaluasi keunggulan Quantum Machine Learning (QSVC) dalam ketahanan derau klasifikasi pangan."
-    p2_msg.font.name = FONT_FAMILY
-    p2_msg.font.size = Pt(10.5)
-    p2_msg.font.bold = True
-    p2_msg.font.color.rgb = COLOR_NAVY_DARK
+    deck.add_card(s2, Inches(0.8), Inches(6.1), Inches(11.733), Inches(0.8), bg_color=COLOR_LIGHT_BLUE, border_color=COLOR_BLUE_ACCENT)
+    tb2_fokus = s2.shapes.add_textbox(Inches(1.0), Inches(6.15), Inches(11.3), Inches(0.7))
+    tf2_fokus = tb2_fokus.text_frame
+    tf2_fokus.word_wrap = True
+    p2_f = tf2_fokus.paragraphs[0]
+    p2_f.text = "Fokus Kebaruan Riset: Mengintegrasikan reseptor nanofiber hijau Fe3O4/PVA-Sitrat-ADH, transduser kuantum TMR (ALT023-10E), akuisisi AD623-ADS1115 deterministik, dan komparasi model klasifikasi cerdas SVM klasik vs QSVC kuantum untuk deteksi formalin pada bakso."
+    p2_f.font.name = FONT_FAMILY
+    p2_f.font.size = Pt(11)
+    p2_f.font.bold = True
+    p2_f.font.color.rgb = COLOR_NAVY_MID
 
     deck.add_footer(s2, 2)
 
     # --------------------------------------------------------------------------
-    # SLIDE 3: RUMUSAN MASALAH & BATASAN MASALAH (DIGABUNG 1 SLIDE)
+    # SLIDE 3: RUMUSAN MASALAH & BATASAN MASALAH (4 RM Presisi Sesuai Naskah)
     # --------------------------------------------------------------------------
     s3 = deck.add_blank_slide()
     deck.add_header(s3, "Rumusan Masalah & Batasan Masalah",
-                    "Pertanyaan Kunci Penelitian dan Ruang Lingkup Pengujian Laboratorium")
+                    "Pertanyaan Kunci Penelitian (Kiri) dan Ruang Lingkup Batasan Riset (Kanan)")
 
-    # Kiri: 5 Rumusan Masalah
-    deck.add_card(s3, Inches(0.8), Inches(1.55), Inches(5.6), Inches(5.2))
-    tb3_l = s3.shapes.add_textbox(Inches(1.0), Inches(1.7), Inches(5.2), Inches(4.8))
+    deck.add_card(s3, Inches(0.8), Inches(1.55), Inches(5.7), Inches(5.2))
+    tb3_l = s3.shapes.add_textbox(Inches(1.05), Inches(1.7), Inches(5.2), Inches(4.8))
     tf3_l = tb3_l.text_frame
     tf3_l.word_wrap = True
-    deck.add_card_header(tf3_l, "Rumusan Masalah (5 Butir)", "Pertanyaan Ilmiah", COLOR_BLUE_ACCENT)
-    deck.add_bullet_item(tf3_l, "RM-1 (Sensitivitas):", "Bagaimana sensitivitas sensor TMR berbasis nanofiber Fe3O4/PVA-Sitrat-ADH dalam mendeteksi variasi konsentrasi formalin?", pt_size=10.0)
-    deck.add_bullet_item(tf3_l, "RM-2 (LOD):", "Bagaimana batas deteksi (limit of detection) yang diperoleh dari sensor TMR berbasis nanofiber Fe3O4/PVA-Sitrat-ADH?", pt_size=10.0)
-    deck.add_bullet_item(tf3_l, "RM-3 (Gugus ADH):", "Bagaimana gugus hidrazida pada nanofiber memengaruhi respons magnetoresistif sensor TMR terhadap keberadaan formalin?", pt_size=10.0)
-    deck.add_bullet_item(tf3_l, "RM-4 (Kalibrasi):", "Bagaimana rancangan sistem AD623-ADS1115-Arduino-Raspberry Pi menghasilkan kurva kalibrasi Vout vs konsentrasi formalin yang valid?", pt_size=10.0)
-    deck.add_bullet_item(tf3_l, "RM-5 (SVM vs QSVC):", "Bagaimana komparasi performa klasifikasi antara model SVM klasik dan QSVC kuantum dalam mengklasifikasikan kandungan formalin pada bakso?", pt_size=10.0)
+    deck.add_card_header(tf3_l, "Rumusan Masalah", accent_color=COLOR_NAVY_MID, title_size=17)
+    deck.add_bullet_item(tf3_l, "1.", "Bagaimana sensitivitas, batas deteksi (LOD), dan pengaruh gugus fungsional hidrazida ADH terhadap karakteristik respons magnetoresistif sensor TMR berbasis nanofiber Fe3O4/PVA-Sitrat-ADH dalam mendeteksi variasi konsentrasi formalin?", pt_size=13.5, space_after=8)
+    deck.add_bullet_item(tf3_l, "2.", "Bagaimana karakteristik medan magnetik acuan kumparan Helmholtz dan respons linearitas transduser TMR ALT023-10E sebelum dan sesudah integrasi rantai pengkondisi sinyal?", pt_size=13.5, space_after=8)
+    deck.add_bullet_item(tf3_l, "3.", "Bagaimana rancangan sistem instrumentasi (AD623-ADS1115-Arduino-Raspberry Pi) menghasilkan kurva kalibrasi yang valid antara tegangan keluaran sensor dan konsentrasi formalin pada bakso?", pt_size=13.5, space_after=8)
+    deck.add_bullet_item(tf3_l, "4.", "Bagaimana komparasi performa klasifikasi antara model Support Vector Machine (SVM) klasik dan Quantum Support Vector Classifier (QSVC) dalam mendeteksi dan mengklasifikasikan kandungan formalin pada sampel bakso?", pt_size=13.5, space_after=8)
 
-    # Kanan: 6 Batasan Masalah
     deck.add_card(s3, Inches(6.8), Inches(1.55), Inches(5.733), Inches(5.2))
-    tb3_r = s3.shapes.add_textbox(Inches(7.0), Inches(1.7), Inches(5.3), Inches(4.8))
+    tb3_r = s3.shapes.add_textbox(Inches(7.05), Inches(1.7), Inches(5.2), Inches(4.8))
     tf3_r = tb3_r.text_frame
     tf3_r.word_wrap = True
-    deck.add_card_header(tf3_r, "Batasan Masalah (6 Batasan)", "Ruang Lingkup Teknis", COLOR_EMERALD)
-    deck.add_bullet_item(tf3_r, "1. Fokus Analit:", "Khusus deteksi formalin (formaldehida); boraks atau pewarna tekstil tidak dianalisis mendalam.", pt_size=9.5)
-    deck.add_bullet_item(tf3_r, "2. Tahapan Pengujian:", "Diawali larutan standar formalin bertingkat (mg/L) sebelum diterapkan pada ekstrak sampel bakso riil.", pt_size=9.5)
-    deck.add_bullet_item(tf3_r, "3. Material Sensor:", "Nanofiber Fe3O4/PVA-Sitrat-ADH hasil elektrospinning dengan taut-silang asam sitrat (curing 130 C).", pt_size=9.5)
-    deck.add_bullet_item(tf3_r, "4. Status Hipotesis:", "Mekanisme pengenalan gugus hidrazida ADH diperlakukan sebagai hipotesis yang diuji empiris.", pt_size=9.5)
-    deck.add_bullet_item(tf3_r, "5. Parameter Sensor:", "Dibatasi pada sensitivitas, batas deteksi (LOD), linearitas, dan stabilitas; ketahanan mekanik tidak diuji.", pt_size=9.5)
-    deck.add_bullet_item(tf3_r, "6. Pemodelan Cerdas:", "Dibatasi pada komparasi SVM klasik (kernel RBF) dan simulasi QSVC berbasis quantum feature map Qiskit.", pt_size=9.5)
+    deck.add_card_header(tf3_r, "Batasan Masalah", accent_color=COLOR_EMERALD, title_size=17)
+    deck.add_bullet_item(tf3_r, "1.", "Penelitian difokuskan khusus pada deteksi analit formalin; bahan tambahan pangan berbahaya lain seperti boraks atau pewarna tekstil tidak termasuk cakupan analisis.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf3_r, "2.", "Pengujian sensor diawali larutan formalin standar bertingkat (mg/L) sebelum diterapkan pada ekstrak sampel bakso riil pasar.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf3_r, "3.", "Material sensor dibatasi pada nanofiber Fe3O4/PVA dengan taut-silang termal asam sitrat (130 C) dan fungsionalisasi kemo-reseptor spesifik ADH via elektrospinning.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf3_r, "4.", "Mekanisme pengenalan formalin oleh gugus hidrazida ADH diperlakukan sebagai hipotesis yang diuji secara empiris.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf3_r, "5.", "Evaluasi sensor dibatasi pada parameter sensitivitas, linearitas, batas deteksi (LOD), dan stabilitas sinyal.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf3_r, "6.", "Pemodelan cerdas dibatasi pada perbandingan model klasik SVM dan model kuantum QSVC berbasis quantum feature map.", pt_size=12.5, space_after=6)
 
     deck.add_footer(s3, 3)
 
     # --------------------------------------------------------------------------
-    # SLIDE 4: TUJUAN PENELITIAN & MANFAAT PENELITIAN (DIGABUNG 1 SLIDE)
+    # SLIDE 4: TUJUAN PENELITIAN & MANFAAT PENELITIAN (4 Tujuan Presisi Sesuai Naskah)
     # --------------------------------------------------------------------------
     s4 = deck.add_blank_slide()
     deck.add_header(s4, "Tujuan & Manfaat Penelitian",
-                    "Target Capaian Ilmiah dan Dampak Kontribusi bagi Sains dan Masyarakat")
+                    "Target Capaian Ilmiah dan Dampak Kontributif Teoretis, Metodologis, serta Praktis")
 
-    # Kiri: 5 Tujuan Penelitian
-    deck.add_card(s4, Inches(0.8), Inches(1.55), Inches(5.6), Inches(5.2))
-    tb4_l = s4.shapes.add_textbox(Inches(1.0), Inches(1.7), Inches(5.2), Inches(4.8))
+    deck.add_card(s4, Inches(0.8), Inches(1.55), Inches(5.7), Inches(5.2))
+    tb4_l = s4.shapes.add_textbox(Inches(1.05), Inches(1.7), Inches(5.2), Inches(4.8))
     tf4_l = tb4_l.text_frame
     tf4_l.word_wrap = True
-    deck.add_card_header(tf4_l, "Tujuan Penelitian (5 Butir)", "Target Ilmiah", COLOR_BLUE_ACCENT)
-    deck.add_bullet_item(tf4_l, "T-1 (Sensitivitas):", "Mengevaluasi sensitivitas sensor TMR berbasis nanofiber Fe3O4/PVA-Sitrat-ADH dalam mendeteksi variasi konsentrasi formalin.", pt_size=10.0)
-    deck.add_bullet_item(tf4_l, "T-2 (Batas Deteksi):", "Menentukan batas deteksi (LOD) formalin secara kuantitatif berdasarkan kurva kalibrasi dan deviasi standar sinyal.", pt_size=10.0)
-    deck.add_bullet_item(tf4_l, "T-3 (Gugus ADH):", "Mengevaluasi peran gugus hidrazida ADH dalam memodulasi respons sinyal magnetoresistif sensor TMR.", pt_size=10.0)
-    deck.add_bullet_item(tf4_l, "T-4 (Instrumentasi):", "Merancang dan memvalidasi sistem instrumentasi (AD623-ADS1115-Arduino-Raspberry Pi) yang menghasilkan kurva kalibrasi presisi.", pt_size=10.0)
-    deck.add_bullet_item(tf4_l, "T-5 (Komparasi Model):", "Menganalisis dan membandingkan akurasi, presisi, recall, F1, dan ketahanan derau model SVM klasik versus QSVC kuantum.", pt_size=10.0)
+    deck.add_card_header(tf4_l, "Tujuan Penelitian", accent_color=COLOR_NAVY_MID, title_size=17)
+    deck.add_bullet_item(tf4_l, "1.", "Mengevaluasi sensitivitas, batas deteksi (LOD), serta pengaruh gugus fungsional hidrazida ADH terhadap karakteristik respons magnetoresistif sensor TMR berbasis nanofiber Fe3O4/PVA-Sitrat-ADH dalam mendeteksi variasi konsentrasi formalin.", pt_size=13.5, space_after=9)
+    deck.add_bullet_item(tf4_l, "2.", "Mengkarakterisasi medan magnetik acuan kumparan Helmholtz serta respons linearitas transduser TMR ALT023-10E sebelum dan sesudah integrasi rantai pengkondisi sinyal.", pt_size=13.5, space_after=9)
+    deck.add_bullet_item(tf4_l, "3.", "Merancang dan memvalidasi sistem instrumentasi akuisisi data (AD623-ADS1115-Arduino-Raspberry Pi) yang menghasilkan kurva kalibrasi valid antara tegangan keluaran sensor dan konsentrasi formalin pada bakso.", pt_size=13.5, space_after=9)
+    deck.add_bullet_item(tf4_l, "4.", "Menganalisis dan membandingkan performa klasifikasi (akurasi, presisi, recall, F1-score, dan ketahanan derau) antara model SVM klasik dan QSVC kuantum dalam mengklasifikasikan kandungan formalin pada sampel bakso.", pt_size=13.5, space_after=9)
 
-    # Kanan: 4 Manfaat Penelitian
     deck.add_card(s4, Inches(6.8), Inches(1.55), Inches(5.733), Inches(5.2))
-    tb4_r = s4.shapes.add_textbox(Inches(7.0), Inches(1.7), Inches(5.3), Inches(4.8))
+    tb4_r = s4.shapes.add_textbox(Inches(7.05), Inches(1.7), Inches(5.2), Inches(4.8))
     tf4_r = tb4_r.text_frame
     tf4_r.word_wrap = True
-    deck.add_card_header(tf4_r, "Manfaat Penelitian (4 Pilar)", "Dampak Kontribusi", COLOR_EMERALD)
-    deck.add_bullet_item(tf4_r, "1. Akademisi & Sains:", "Menghadirkan kajian dinamika sensor spintronika TMR dengan reseptor polimerik magnetik serta evaluasi Quantum Machine Learning pada sinyal biosensor.", pt_size=10.0)
-    deck.add_bullet_item(tf4_r, "2. Mitra Industri Bolabot:", "Menyediakan prototipe instrumen biosensor cerdas portabel yang teruji secara eksperimental dan siap dihilirisasi ke tahap komersial.", pt_size=10.0)
-    deck.add_bullet_item(tf4_r, "3. Masyarakat & Konsumen:", "Menghadirkan alternatif skrining formalin bakso yang cepat, murah, dan akurat di lapangan tanpa merusak sampel makanan.", pt_size=10.0)
-    deck.add_bullet_item(tf4_r, "4. Kemandirian IPTEK:", "Mendukung substitusi alat uji impor berbiaya tinggi dengan instrumentasi mandiri berbasis bahan alam lokal daun kelor.", pt_size=10.0)
+    deck.add_card_header(tf4_r, "Manfaat Penelitian", accent_color=COLOR_EMERALD, title_size=17)
+    deck.add_bullet_item(tf4_r, "1.", "Memberikan kontribusi teoretis dalam pengembangan ilmu instrumentasi sensor dengan menghadirkan kajian empiris performa sensor TMR berbasis nanofiber Fe3O4/PVA-Sitrat-ADH.", pt_size=13.5, space_after=9)
+    deck.add_bullet_item(tf4_r, "2.", "Menawarkan inovasi agen taut-silang ramah lingkungan asam sitrat (curing 130 C) serta kemo-reseptor spesifik ADH penangkap formaldehida (ikatan hidrazon kovalen).", pt_size=13.5, space_after=9)
+    deck.add_bullet_item(tf4_r, "3.", "Memberikan kontribusi kebaruan ilmiah dalam penerapan Quantum Machine Learning (QSVC) untuk klasifikasi data sinyal sensor pada pengujian keamanan pangan.", pt_size=13.5, space_after=9)
+    deck.add_bullet_item(tf4_r, "4.", "Menjadi dasar bagi pengembangan instrumen deteksi formalin yang cerdas, portabel, kuantitatif, dan terjangkau guna mendukung penjaminan keamanan pangan nasional.", pt_size=13.5, space_after=9)
 
     deck.add_footer(s4, 4)
 
     # --------------------------------------------------------------------------
-    # SLIDE 5: METODE PENGUMPULAN DATA
+    # SLIDE 5: METODE PENGUMPULAN DATA (4 Pilar Terstruktur)
     # --------------------------------------------------------------------------
     s5 = deck.add_blank_slide()
     deck.add_header(s5, "Metode Pengumpulan Data Penelitian",
-                    "Tahapan Terstruktur Memperoleh Data Literatur, Karakterisasi Fisik, dan Komputasi")
+                    "Tahapan Terstruktur Memperoleh Data Empiris, Kalibrasi Sensor, dan Validasi Model")
 
-    methods = [
-        ("01", "Studi Literatur", "Kajian Teoretis & Eksperimental",
-         "Mengumpulkan data primer dari jurnal internasional bereputasi (IEEE, Elsevier, Springer) mengenai teori TMR Julliere, sintesis Fe3O4 kelor, reaksi hidrazon, serta algoritma Qiskit QSVC."),
-        ("02", "Observasi & Studi Pendahuluan", "Evaluasi Prototipe Terdahulu",
-         "Menganalisis keterbatasan prototipe instrumentasi GMR sebelumnya di laboratorium Bolabot untuk menyempurnakan sirkuit AD623, grounding bintang, dan kestabilan statif sensor."),
-        ("03", "Eksperimen Laboratorium Terstruktur", "Sintesis & Pengujian Nyata",
-         "Melaksanakan green synthesis Fe3O4, elektrospinning sol PVA-sitrat-ADH (curing 130 C), pemetaan kurva medan Helmholtz (0-16 V), serta akuisisi respons sensor terhadap variasi larutan formalin."),
-        ("04", "Analisis Data & Pemodelan Cerdas", "Ekstraksi Fitur & Machine Learning",
-         "Melakukan pra-pemrosesan sinyal sensor, pembentukan kurva regresi kalibrasi dV/dB, ekstraksi 5 fitur dinamis bakso, serta validasi silang (5-fold cross validation) komparasi SVM dan QSVC.")
+    pilar_data = [
+        ("01", "Studi Literatur", COLOR_BLUE_ACCENT,
+         "Menghimpun dan menelaah rujukan bereputasi terkait spintronika TMR, sintesis hijau Fe3O4 kelor, fungsionalisasi ADH, serta arsitektur SVM dan QSVC.",
+         "Sumber: IEEE, ScienceDirect, Nature, Springer, ACS"),
+        ("02", "Observasi & Desain", COLOR_EMERALD,
+         "Observasi terhadap prototipe magnetoresistif terdahulu, perancangan mekatronika housing 3D, pengkondisi sinyal AD623, dan filter aktif LPF.",
+         "Fokus: Eliminasi derau 50 Hz & isolasi termal"),
+        ("03", "Eksperimen Laboratorium", COLOR_AMBER,
+         "Pengujian bertahap: (1) Kalibrasi medan Helmholtz 0-11.5 mT, (2) Uji larutan formalin standar bertingkat, dan (3) Ekstraksi sampel bakso pasar.",
+         "Standarisasi: Teslameter WT10A terkalibrasi"),
+        ("04", "Analisis & Pemodelan Cerdas", COLOR_ROSE,
+         "Ekstraksi 5 fitur sinyal domain waktu (Vpeak, Vsteady, dV, dV/dt, Area), pelatihan 5-fold cross validation SVM vs QSVC, dan uji ketahanan derau.",
+         "Output: Metrik komparasi akurasi, presisi & F1")
     ]
 
-    for i, (num, title, badge, desc) in enumerate(methods):
-        top_pos = Inches(1.55 + i * 1.3)
-        deck.add_card(s5, Inches(0.8), top_pos, Inches(11.733), Inches(1.15))
-        
-        nb = s5.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(1.0), top_pos + Inches(0.22), Inches(0.85), Inches(0.7))
-        nb.fill.solid()
-        nb.fill.fore_color.rgb = COLOR_LIGHT_SLATE
-        nb.line.color.rgb = COLOR_CARD_BORDER
-        p_nb = nb.text_frame.paragraphs[0]
-        p_nb.text = num
-        p_nb.font.name = FONT_FAMILY
-        p_nb.font.bold = True
-        p_nb.font.size = Pt(14)
-        p_nb.font.color.rgb = COLOR_NAVY_MID
-        p_nb.alignment = PP_ALIGN.CENTER
+    for idx, (num, title, col, desc, note) in enumerate(pilar_data):
+        card_x = Inches(0.8 + idx * 3.0)
+        deck.add_card(s5, card_x, Inches(1.55), Inches(2.733), Inches(5.2))
+        tb_p = s5.shapes.add_textbox(card_x + Inches(0.18), Inches(1.75), Inches(2.38), Inches(4.8))
+        tf_p = tb_p.text_frame
+        tf_p.word_wrap = True
 
-        tb = s5.shapes.add_textbox(Inches(2.05), top_pos + Inches(0.15), Inches(10.2), Inches(0.85))
-        tf = tb.text_frame
-        tf.word_wrap = True
-        deck.add_card_header(tf, title, badge, COLOR_BLUE_ACCENT)
-        p_d = tf.add_paragraph()
-        p_d.text = desc
-        p_d.font.name = FONT_FAMILY
-        p_d.font.size = Pt(10.0)
-        p_d.font.color.rgb = COLOR_TEXT_BODY
+        p_num = tf_p.paragraphs[0]
+        p_num.text = num
+        p_num.font.name = FONT_FAMILY
+        p_num.font.size = Pt(28)
+        p_num.font.bold = True
+        p_num.font.color.rgb = col
+        p_num.space_after = Pt(2)
+
+        p_t = tf_p.add_paragraph()
+        p_t.text = title
+        p_t.font.name = FONT_FAMILY
+        p_t.font.size = Pt(14)
+        p_t.font.bold = True
+        p_t.font.color.rgb = COLOR_TEXT_MAIN
+        p_t.space_after = Pt(8)
+
+        p_desc = tf_p.add_paragraph()
+        p_desc.text = desc
+        p_desc.font.name = FONT_FAMILY
+        p_desc.font.size = Pt(11.5)
+        p_desc.font.color.rgb = COLOR_TEXT_BODY
+        p_desc.line_spacing = 1.2
+        p_desc.space_after = Pt(8)
+
+        p_note = tf_p.add_paragraph()
+        p_note.text = note
+        p_note.font.name = FONT_FAMILY
+        p_note.font.size = Pt(10.0)
+        p_note.font.bold = True
+        p_note.font.color.rgb = col
 
     deck.add_footer(s5, 5)
 
     # --------------------------------------------------------------------------
-    # SLIDE 6: FORMALDEHIDA & REAKSI HIDRAZON ADH
+    # SLIDE 6: DASAR TEORI 1: FISIKA TRANSDUSER TMR & KUMPARAN HELMHOLTZ (FOTO ASLI)
     # --------------------------------------------------------------------------
     s6 = deck.add_blank_slide()
-    deck.add_header(s6, "Karakteristik Kimia Formaldehida & Mekanisme Reaksi Hidrazon",
-                    "Adisi-Eliminasi Nukleofilik Pembentukan Ikatan Kovalen Hidrazon Stabil")
+    deck.add_header(s6, "Dasar Teori: Fisika Sensor TMR & Pembangkit Medan Helmholtz",
+                    "Prinsip Spintronika Kuantum MTJ (Kiri) dan Superposisi Medan Biot-Savart Helmholtz (Kanan)")
 
-    # Kiri: Penjelasan Teori & Formula LaTeX Rendered
-    deck.add_card(s6, Inches(0.8), Inches(1.55), Inches(6.0), Inches(5.2))
-    tb6_l = s6.shapes.add_textbox(Inches(1.0), Inches(1.7), Inches(5.6), Inches(4.8))
+    # Card Kiri: Sensor TMR MTJ
+    deck.add_card(s6, Inches(0.8), Inches(1.55), Inches(5.7), Inches(5.2))
+    deck.add_image_fitted(s6, "Gambar/Bab2/babII_TMR_Layer.png", Inches(1.05), Inches(1.75), Inches(5.2), Inches(1.9),
+                          border=False, caption="Gambar 2. Struktur Lapisan Magnetic Tunnel Junction (MTJ) Sensor TMR (Julliere, 1975)")
+    
+    tb6_l = s6.shapes.add_textbox(Inches(1.05), Inches(3.85), Inches(5.2), Inches(2.0))
     tf6_l = tb6_l.text_frame
     tf6_l.word_wrap = True
-    deck.add_card_header(tf6_l, "Reaksi Penangkapan Formalin", "Kimia Organik Reseptor", COLOR_BLUE_ACCENT)
+    deck.add_card_header(tf6_l, "Tunneling Magnetoresistance (TMR)", accent_color=COLOR_BLUE_ACCENT, title_size=15)
+    deck.add_bullet_item(tf6_l, "Efek Tunneling:", "Elektron menembus isolator MgO nanometer; resistansi minimum saat spin paralel, maksimum saat antiparalel.", pt_size=12.5, space_after=5)
+    deck.add_bullet_item(tf6_l, "Rasio TMR:", "Mencapai >200% pada suhu ruang (vs GMR <20%); sensitivitas diferensial mencapai 15-25 mV/V/mT (6x lebih peka).", pt_size=12.5, space_after=5)
     
-    # Rendered Equation Box
-    deck.add_image_fitted(s6, "output/equations/eq_01_hidrazon.png", Inches(1.0), Inches(2.35), Inches(5.6), Inches(0.9), border=False)
+    deck.add_image_fitted(s6, "output/equations/eq_02_julliere.png", Inches(1.05), Inches(5.95), Inches(5.2), Inches(0.65), border=False)
 
-    tb6_sub = s6.shapes.add_textbox(Inches(1.0), Inches(3.35), Inches(5.6), Inches(3.2))
-    tf6_sub = tb6_sub.text_frame
-    tf6_sub.word_wrap = True
-    deck.add_bullet_item(tf6_sub, "Struktur Formalin (CH2O):", "Geometri planar segitiga sp2 dengan ikatan C=O karbonil yang bersifat elektrofilik kuat.", pt_size=10.5)
-    deck.add_bullet_item(tf6_sub, "Gugus Hidrazida ADH (-NH-NH2):", "Nukleofil kuat yang menyerang karbon karbonil formaldehida membentuk ikatan kovalen hidrazon (C=N).", pt_size=10.5)
-    deck.add_bullet_item(tf6_sub, "Mekanisme Transduksi:", "Pengikatan analit mengubah konformasi rantai dan polarisasi elektron, memodulasi fluks stray magnetik Fe3O4 di dekat sensor TMR.", pt_size=10.5)
+    # Card Kanan: Kumparan Helmholtz
+    deck.add_card(s6, Inches(6.8), Inches(1.55), Inches(5.733), Inches(5.2))
+    deck.add_image_fitted(s6, "Gambar/Bab2/babII_Two-coils-of-WPT-system.png", Inches(7.05), Inches(1.75), Inches(5.2), Inches(1.9),
+                          border=False, caption="Gambar 3. Geometri dan Konfigurasi Sepasang Kumparan Helmholtz (Zhu et al., 2023)")
 
-    # Kanan: Gambar Struktur Molekul
-    deck.add_image_fitted(s6, "Gambar/Bab2/babII_ikatan_formalin.png", Inches(7.1), Inches(1.55), Inches(5.4), Inches(5.2),
-                          border=True, caption="Gambar 1. Struktur Molekul dan Reaksi Penangkapan Formaldehida oleh ADH")
+    tb6_r = s6.shapes.add_textbox(Inches(7.05), Inches(3.85), Inches(5.2), Inches(2.0))
+    tf6_r = tb6_r.text_frame
+    tf6_r.word_wrap = True
+    deck.add_card_header(tf6_r, "Kumparan Helmholtz Terstandardisasi", accent_color=COLOR_EMERALD, title_size=15)
+    deck.add_bullet_item(tf6_r, "Superposisi Medan:", "Sepasang kumparan N lilitan berjari-jari R dengan jarak pisah R menghasilkan medan homogen deviasi < 1%.", pt_size=12.5, space_after=5)
+    deck.add_bullet_item(tf6_r, "Akurasi Metrologis:", "Menjadi acuan medan magnetik terkontrol (0-11.5 mT) sebelum sensor digunakan untuk pengujian larutan analit.", pt_size=12.5, space_after=5)
+
+    deck.add_image_fitted(s6, "output/equations/eq_03_helmholtz.png", Inches(7.05), Inches(5.95), Inches(5.2), Inches(0.65), border=False)
 
     deck.add_footer(s6, 6)
 
     # --------------------------------------------------------------------------
-    # SLIDE 7: SENSOR TMR ALT023-10E & MODEL JULLIERE
+    # SLIDE 7: DASAR TEORI 2: KOMPONEN FISIK RANTAI INSTRUMENTASI (SUBBAB 2.2 DENGAN FOTO ASLI)
     # --------------------------------------------------------------------------
     s7 = deck.add_blank_slide()
-    deck.add_header(s7, "Fisika Tunneling Magnetoresistance (TMR) & Model Julliere",
-                    "Efek Terowongan Kuantum Spin-Polarized pada Magnetic Tunnel Junction (MTJ)")
+    deck.add_header(s7, "Dasar Teori: Komponen Fisik Rantai Instrumentasi (Subbab 2.2)",
+                    "Spesifikasi Perangkat Keras: Sensor TMR, In-Amp AD623, ADC ADS1115, Arduino Uno, Raspberry Pi 5 & Pasif")
 
-    deck.add_card(s7, Inches(0.8), Inches(1.55), Inches(6.0), Inches(5.2))
-    tb7_l = s7.shapes.add_textbox(Inches(1.0), Inches(1.7), Inches(5.6), Inches(4.8))
-    tf7_l = tb7_l.text_frame
-    tf7_l.word_wrap = True
-    deck.add_card_header(tf7_l, "Model Terowongan Julliere", "Spintronika Kuantum", COLOR_BLUE_ACCENT)
+    comp_items = [
+        ("Sensor TMR ALT023-10E", "Gambar/Bab2/babII_ALT023.png", COLOR_BLUE_ACCENT,
+         "Jembatan Wheatstone TMR bipolar, rentang linear +/-1.0 mT, catu daya tunggal 5.0 V, decoupling 100 nF."),
+        ("In-Amp AD623 (Analog Devices)", "Gambar/Bab2/babII_AD623_Pinout.png", COLOR_EMERALD,
+         "Penguat instrumentasi rail-to-rail, catu +5.0 V, VREF = 2.50 V presisi (R=1 kOhm), CMRR 90 dB."),
+        ("ADC 16-Bit ADS1115 (TI)", "Gambar/Bab2/babII_ADS-1115-c.jpg", COLOR_NAVY_MID,
+         "Resolusi tinggi 0.1875 mV/count pada GAIN_TWOTHIRDS (FSR 6.144 V), antarmuka I2C deterministik."),
+        ("Arduino Uno R3 (ATmega328P)", "Gambar/Bab2/babII_ArduinoUno.jpg", COLOR_AMBER,
+         "Unit mikrokontroler akuisisi deterministik berbasis timer interrupt, baudrate serial 115200 bps."),
+        ("Raspberry Pi 5 (Quad Core)", "Gambar/Bab2/babII_Raspberry Pi 5.PNG", COLOR_ROSE,
+         "Host controller 64-bit untuk GUI TMRAcquisitionApp, logging data Excel, dan eksekusi inferensi model ML."),
+        ("Resistor Presisi & Kapasitor", "Gambar/Bab2/babII_Types-of-resistors.png", COLOR_BLUE_ACCENT,
+         "Pembagi VREF presisi 1.0 kOhm (0.1%), filter RC LPF (fc = 10 Hz) meredam ripple PLN 50 Hz.")
+    ]
 
-    # Rendered Equation Julliere & Vout
-    deck.add_image_fitted(s7, "output/equations/eq_02_julliere.png", Inches(1.0), Inches(2.25), Inches(5.6), Inches(1.0), border=False)
-    deck.add_image_fitted(s7, "output/equations/eq_09_vout_tmr.png", Inches(1.0), Inches(3.25), Inches(5.6), Inches(0.7), border=False)
+    for idx, (c_name, c_img, c_col, c_desc) in enumerate(comp_items):
+        row = idx // 3
+        col = idx % 3
+        c_x = Inches(0.8 + col * 4.0)
+        c_y = Inches(1.55 + row * 2.65)
+        c_w = Inches(3.733)
+        c_h = Inches(2.5)
 
-    tb7_sub = s7.shapes.add_textbox(Inches(1.0), Inches(4.05), Inches(5.6), Inches(2.5))
-    tf7_sub = tb7_sub.text_frame
-    tf7_sub.word_wrap = True
-    deck.add_bullet_item(tf7_sub, "Prinsip Tunneling Kuantum:", "Elektron menembus insulator MgO tipis; konduktivitas maksimum saat orientasi spin elektroda paralel.", pt_size=10.0)
-    deck.add_bullet_item(tf7_sub, "Rasio TMR Tinggi (>100-200%):", "Jauh melampaui GMR (<20%), memberikan respons tegangan 6x lebih tinggi pada medan mikro.", pt_size=10.0)
-    deck.add_bullet_item(tf7_sub, "Sensor ALT023-10E (NVE):", "Jembatan Wheatstone penuh bipolar, rentang linear +-1.0 mT, resistansi jembatan 20 kOhm, Vcc 5V.", pt_size=10.0)
+        deck.add_card(s7, c_x, c_y, c_w, c_h)
+        deck.add_image_fitted(s7, c_img, c_x + Inches(0.12), c_y + Inches(0.12), Inches(1.3), Inches(1.3), border=True)
 
-    # Kanan: Gambar Lapisan MTJ & ALT023
-    deck.add_image_fitted(s7, "Gambar/Bab2/babII_TMR_Layer.png", Inches(7.1), Inches(1.55), Inches(5.4), Inches(2.6),
-                          border=True, caption="Gambar 2. Struktur Lapisan Magnetic Tunnel Junction (MTJ)")
-    deck.add_image_fitted(s7, "Gambar/Bab2/babII_ALT023.png", Inches(7.1), Inches(4.35), Inches(5.4), Inches(2.4),
-                          border=True, caption="Gambar 3. Paket Sensor TMR ALT023-10E")
+        tb_c = s7.shapes.add_textbox(c_x + Inches(1.5), c_y + Inches(0.1), Inches(2.15), Inches(2.3))
+        tf_c = tb_c.text_frame
+        tf_c.word_wrap = True
+
+        p_cn = tf_c.paragraphs[0]
+        p_cn.text = c_name
+        p_cn.font.name = FONT_FAMILY
+        p_cn.font.size = Pt(11.5)
+        p_cn.font.bold = True
+        p_cn.font.color.rgb = c_col
+        p_cn.space_after = Pt(4)
+
+        p_cd = tf_c.add_paragraph()
+        p_cd.text = c_desc
+        p_cd.font.name = FONT_FAMILY
+        p_cd.font.size = Pt(10.0)
+        p_cd.font.color.rgb = COLOR_TEXT_BODY
+        p_cd.line_spacing = 1.18
 
     deck.add_footer(s7, 7)
 
     # --------------------------------------------------------------------------
-    # SLIDE 8: KUMPARAN HELMHOLTZ SEBAGAI MEDAN ACUAN
+    # SLIDE 8: DASAR TEORI 3: MATERIAL KIMIA NANOKOMPOSIT & ADH (FOTO ASLI)
     # --------------------------------------------------------------------------
     s8 = deck.add_blank_slide()
-    deck.add_header(s8, "Kumparan Helmholtz sebagai Pembangkit Medan Acuan Presisi",
-                    "Pembangkitan Medan Magnet Homogen Melalui Pasangan Kumparan Sejajar")
+    deck.add_header(s8, "Dasar Teori: Material Nanokomposit & Fungsionalisasi ADH",
+                    "Geometri Formalin & Reaksi Hidrazon (Kiri) serta Nanofiber Elektrospinning Fe3O4/PVA (Kanan)")
 
-    deck.add_card(s8, Inches(0.8), Inches(1.55), Inches(6.0), Inches(5.2))
-    tb8_l = s8.shapes.add_textbox(Inches(1.0), Inches(1.7), Inches(5.6), Inches(4.8))
+    # Card Kiri: Molekul Formalin & Reaksi Hidrazon
+    deck.add_card(s8, Inches(0.8), Inches(1.55), Inches(5.7), Inches(5.2))
+    deck.add_image_fitted(s8, "Gambar/Bab2/babII_ikatan_formalin.png", Inches(1.05), Inches(1.75), Inches(5.2), Inches(1.9),
+                          border=False, caption="Gambar 4. Struktur Geometri Molekul dan Hibridisasi sp2 Formaldehida")
+
+    tb8_l = s8.shapes.add_textbox(Inches(1.05), Inches(3.85), Inches(5.2), Inches(2.0))
     tf8_l = tb8_l.text_frame
     tf8_l.word_wrap = True
-    deck.add_card_header(tf8_l, "Persamaan Biot-Savart Helmholtz", "Formulasi Medan", COLOR_BLUE_ACCENT)
+    deck.add_card_header(tf8_l, "Formaldehida & Reseptor Selektif ADH", accent_color=COLOR_ROSE, title_size=15)
+    deck.add_bullet_item(tf8_l, "Formaldehida (HCHO):", "Senyawa elektrofilik reaktif planar segitiga; dilarang keras dalam pangan (Permenkes 033/2012).", pt_size=12.5, space_after=4)
+    deck.add_bullet_item(tf8_l, "Adipic Acid Dihydrazide:", "ADH membawa dua gugus terminal hidrazida (-NH-NH2) yang bereaksi selektif membentuk ikatan kovalen hidrazon (-C=N-NH-).", pt_size=12.5, space_after=4)
+    deck.add_bullet_item(tf8_l, "Keunggulan vs GA:", "Glutaraldehida membawa gugus aldehida sendiri, sedangkan ADH spesifik mengikat analit formaldehida.", pt_size=12.5, space_after=4)
 
-    # Rendered Equation Helmholtz
-    deck.add_image_fitted(s8, "output/equations/eq_03_helmholtz.png", Inches(1.0), Inches(2.35), Inches(5.6), Inches(1.1), border=False)
+    deck.add_image_fitted(s8, "output/equations/eq_01_hidrazon.png", Inches(1.05), Inches(5.95), Inches(5.2), Inches(0.65), border=False)
 
-    tb8_sub = s8.shapes.add_textbox(Inches(1.0), Inches(3.6), Inches(5.6), Inches(3.0))
-    tf8_sub = tb8_sub.text_frame
-    tf8_sub.word_wrap = True
-    deck.add_bullet_item(tf8_sub, "Kondisi Keseragaman Medan:", "Jarak pemisah antar kumparan sama dengan jari-jarinya (alpha = R), menghasilkan turunan d2B/dz2 = 0 di pusat.", pt_size=10.5)
-    deck.add_bullet_item(tf8_sub, "Daerah Homogen Luas:", "Memastikan posisi peletakan sensor TMR dan kaca preparat nanofiber berada pada medan seragam bebas gradien liar.", pt_size=10.5)
-    deck.add_bullet_item(tf8_sub, "Standarisasi Medan:", "Medan magnet dihitung proporsional terhadap arus DC yang diberikan melalui nilai N, R, dan permeabilitas vakum.", pt_size=10.5)
+    # Card Kanan: Nanofiber Elektrospinning Fe3O4/PVA-Sitrat
+    deck.add_card(s8, Inches(6.8), Inches(1.55), Inches(5.733), Inches(5.2))
+    deck.add_image_fitted(s8, "Gambar/Bab2/babII_elspinPVA.PNG", Inches(7.05), Inches(1.75), Inches(5.2), Inches(1.9),
+                          border=False, caption="Gambar 5. Morfologi Matriks Nanofiber Berpori Hasil Elektrospinning (Xue et al., 2019)")
 
-    # Kanan: Spek Meja Lab Bolabot
-    deck.add_card(s8, Inches(7.1), Inches(1.55), Inches(5.4), Inches(5.2))
-    tb8_r = s8.shapes.add_textbox(Inches(7.35), Inches(1.75), Inches(4.9), Inches(4.8))
+    tb8_r = s8.shapes.add_textbox(Inches(7.05), Inches(3.85), Inches(5.2), Inches(2.0))
     tf8_r = tb8_r.text_frame
     tf8_r.word_wrap = True
-    deck.add_card_header(tf8_r, "Spesifikasi Sistem Helmholtz Meja Uji", "Ground Truth Eksperimen", COLOR_NAVY_MID)
-    deck.add_bullet_item(tf8_r, "Catu Daya DC Variabel:", "0.0 - 16.0 V dengan pengaturan arus presisi di meja laboratorium.", pt_size=10.5)
-    deck.add_bullet_item(tf8_r, "Resistansi Kumparan:", "R kumparan ~10 Ohm, arus maksimal yang dialirkan hingga ~1.6 A.", pt_size=10.5)
-    deck.add_bullet_item(tf8_r, "Rentang Medan Terhasilkan:", "0 - 11.5 mT pada polaritas maju, dapat dibalik kabel polaritas hingga -4.0 mT.", pt_size=10.5)
-    deck.add_bullet_item(tf8_r, "Pencatatan Ground Truth:", "Tegangan Vhelm, arus Ihelm, dan medan riil Bteslameter dicatat pada GUI sebagai acuan kalibrasi.", pt_size=10.5)
+    deck.add_card_header(tf8_r, "Nanokomposit Fe3O4/PVA-Sitrat-ADH", accent_color=COLOR_EMERALD, title_size=15)
+    deck.add_bullet_item(tf8_r, "Fe3O4 Hijau Daun Kelor:", "Sintesis kopresipitasi ekstrak daun kelor menghasilkan nanopartikel superparamagnetik tanpa histeresis pada suhu ruang.", pt_size=12.5, space_after=5)
+    deck.add_bullet_item(tf8_r, "Matriks Nanofiber Berpori:", "Elektrospinning menghasilkan rasio luas permukaan terhadap volume sangat tinggi, melipatgandakan situs aktif analit.", pt_size=12.5, space_after=5)
+    deck.add_bullet_item(tf8_r, "Crosslinker Asam Sitrat:", "Reaksi esterifikasi termal pada 130 C membentuk taut-silang kovalen yang tahan air dan stabil dalam pelarut cair.", pt_size=12.5, space_after=5)
 
     deck.add_footer(s8, 8)
 
     # --------------------------------------------------------------------------
-    # SLIDE 9: PENGKONDISI SINYAL AD623 & VREF = 2.50 V
+    # SLIDE 9: DASAR TEORI 4: PEMODELAN ML KLASIK VS KUANTUM (FORMULA & TEORI)
     # --------------------------------------------------------------------------
     s9 = deck.add_blank_slide()
-    deck.add_header(s9, "Pengkondisi Sinyal AD623 & Desain Tegangan Referensi",
-                    "Penguat Instrumentasi Rel-ke-Rel Catu Daya Tunggal +5.0 V dengan Titik Tengah 2.50 V")
+    deck.add_header(s9, "Dasar Teori: Pemodelan Machine Learning Klasik vs Kuantum",
+                    "Support Vector Machine Kernel RBF (Kiri) dan Quantum Support Vector Classifier (Kanan)")
 
-    deck.add_card(s9, Inches(0.8), Inches(1.55), Inches(6.0), Inches(5.2))
-    tb9_l = s9.shapes.add_textbox(Inches(1.0), Inches(1.7), Inches(5.6), Inches(4.8))
+    # Card Kiri: SVM Klasik
+    deck.add_card(s9, Inches(0.8), Inches(1.55), Inches(5.7), Inches(5.2))
+    tb9_l = s9.shapes.add_textbox(Inches(1.05), Inches(1.75), Inches(5.2), Inches(3.8))
     tf9_l = tb9_l.text_frame
     tf9_l.word_wrap = True
-    deck.add_card_header(tf9_l, "Persamaan Transfer Penguatan AD623", "Rantai Penguat Presisi", COLOR_BLUE_ACCENT)
+    deck.add_card_header(tf9_l, "Support Vector Machine (SVM) Klasik", accent_color=COLOR_BLUE_ACCENT, title_size=16)
+    deck.add_bullet_item(tf9_l, "Prinsip Kerja:", "Memaksimalkan margin pemisah (hyperplane) antara kelas konsentrasi formalin berdasarkan vektor pendukung (support vectors).", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf9_l, "Kernel RBF Non-Linear:", "Kernel Radial Basis Function memetakan 5 fitur sinyal sensor ke ruang dimensi tak hingga untuk mengatasi data nonlinear.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf9_l, "Keunggulan Sampel Terbatas:", "Prinsip Structural Risk Minimization terbukti sangat tangguh pada dataset ukuran kecil tanpa risiko overfitting.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf9_l, "Sitasi Rujukan:", "Cortes & Vapnik (1995); Breiman (2001); Nainggolan et al. (2023).", pt_size=11.5, color=COLOR_BLUE_ACCENT)
 
-    # Rendered Equation AD623
-    deck.add_image_fitted(s9, "output/equations/eq_04_ad623.png", Inches(1.0), Inches(2.35), Inches(5.6), Inches(1.0), border=False)
+    deck.add_image_fitted(s9, "output/equations/eq_06_svm.png", Inches(1.05), Inches(5.65), Inches(5.2), Inches(0.95), border=False)
 
-    tb9_sub = s9.shapes.add_textbox(Inches(1.0), Inches(3.5), Inches(5.6), Inches(3.1))
-    tf9_sub = tb9_sub.text_frame
-    tf9_sub.word_wrap = True
-    deck.add_bullet_item(tf9_sub, "In-Amp 3 Op-Amp Presisi:", "Memiliki CMRR tinggi untuk menolak derau common-mode pada kabel sensor.", pt_size=10.5)
-    deck.add_bullet_item(tf9_sub, "Pengaturan Gain Resistor Tunggal:", "Gain G dapat diatur leluasa dengan memasang resistor RG pada pin 1 dan 8.", pt_size=10.5)
-    deck.add_bullet_item(tf9_sub, "Desain VREF = 2.50 V:", "Pin 5 (REF) dihubungkan ke pembagi presisi R3 = R4 = 1.0 kOhm sehingga VREF = 2.50 V (bukan 1.65 V).", pt_size=10.5)
-    deck.add_bullet_item(tf9_sub, "Operasi Sinyal Bipolar:", "Pada B = 0 keluaran bertengger di 2.50 V, memungkinkan respons medan positif dan negatif terbaca utuh tanpa terpotong ground.", pt_size=10.5)
+    # Card Kanan: QSVC Kuantum
+    deck.add_card(s9, Inches(6.8), Inches(1.55), Inches(5.733), Inches(5.2))
+    tb9_r = s9.shapes.add_textbox(Inches(7.05), Inches(1.75), Inches(5.2), Inches(3.8))
+    tf9_r = tb9_r.text_frame
+    tf9_r.word_wrap = True
+    deck.add_card_header(tf9_r, "Quantum Support Vector Classifier (QSVC)", accent_color=COLOR_EMERALD, title_size=16)
+    deck.add_bullet_item(tf9_r, "Quantum Feature Map:", "Sirkuit ZZFeatureMap memetakan fitur sinyal ke ruang Hilbert 2^n dimensi melalui superposisi Hadamard dan fase CNOT.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf9_r, "Quantum Kernel Matrix:", "Nilai kernel dihitung melalui overlap keadaan kuantum |<psi(x)|psi(z)>|^2 pada simulator kuantum Qiskit Aer.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf9_r, "Keunggulan Separabilitas:", "Keterikatan kuantum (entanglement) secara teoretis memisahkan batas keputusan kompleks yang terdistorsi derau pangan.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf9_r, "Sitasi Rujukan:", "Havlicek et al. (Nature, 2019); Schuld & Killoran (PRL, 2019).", pt_size=11.5, color=COLOR_EMERALD)
 
-    # Kanan: Pinout AD623
-    deck.add_image_fitted(s9, "Gambar/Bab2/babII_AD623_Pinout.png", Inches(7.1), Inches(1.55), Inches(5.4), Inches(5.2),
-                          border=True, caption="Gambar 4. Konfigurasi Pinout IC In-Amp AD623")
+    deck.add_image_fitted(s9, "output/equations/eq_07_qsvc.png", Inches(7.05), Inches(5.65), Inches(5.2), Inches(0.95), border=False)
 
     deck.add_footer(s9, 9)
 
     # --------------------------------------------------------------------------
-    # SLIDE 10: FILTER PASIF RC LPF & ADC ADS1115 16-BIT
+    # SLIDE 10: KOMPARASI MODEL KLASIK VS KUANTUM & SOFTWARE STACK (DENGAN LOGO ASLI)
     # --------------------------------------------------------------------------
     s10 = deck.add_blank_slide()
-    deck.add_header(s10, "Filter Pasif Anti-Aliasing (RC LPF) & ADC ADS1115 16-Bit",
-                    "Penyaringan Derau Frekuensi Tinggi dan Digitalisasi Delta-Sigma Beresolusi Tinggi")
+    deck.add_header(s10, "Komparasi Model Klasik vs Kuantum & Software Stack",
+                    "Matriks Evaluasi Komparatif, Peran Firmware Arduino IDE 2.0, dan Host Python Qiskit")
 
-    deck.add_card(s10, Inches(0.8), Inches(1.55), Inches(6.0), Inches(5.2))
-    tb10_l = s10.shapes.add_textbox(Inches(1.0), Inches(1.7), Inches(5.6), Inches(4.8))
-    tf10_l = tb10_l.text_frame
-    tf10_l.word_wrap = True
-    deck.add_card_header(tf10_l, "Cut-Off LPF & Resolusi LSB", "Integritas Sinyal Digital", COLOR_BLUE_ACCENT)
+    # Card 1: Matriks Perbandingan
+    deck.add_card(s10, Inches(0.8), Inches(1.55), Inches(4.5), Inches(5.2))
+    tb10_1 = s10.shapes.add_textbox(Inches(1.0), Inches(1.75), Inches(4.1), Inches(4.8))
+    tf10_1 = tb10_1.text_frame
+    tf10_1.word_wrap = True
+    deck.add_card_header(tf10_1, "Matriks Evaluasi Model", accent_color=COLOR_BLUE_ACCENT, title_size=15)
+    deck.add_bullet_item(tf10_1, "Representasi Fitur:", "SVM menggunakan ruang Euklidian R^n, sedangkan QSVC menggunakan ruang Hilbert 2^n dimensi.", pt_size=12.0, space_after=5)
+    deck.add_bullet_item(tf10_1, "Kompleksitas Hitung:", "SVM O(N^2) komputasi CPU klasik; QSVC O(N^2) kalkulasi overlap state kuantum pada Qiskit.", pt_size=12.0, space_after=5)
+    deck.add_bullet_item(tf10_1, "Toleransi Derau:", "QSVC diuji ketahanannya terhadap fluktuasi medan magnet bumi dan variasi biologis matriks bakso.", pt_size=12.0, space_after=5)
+    deck.add_bullet_item(tf10_1, "Validasi Silang:", "5-Fold Cross Validation dengan metrik evaluasi: Akurasi, Presisi, Recall, F1-Score, dan AUC-ROC.", pt_size=12.0, space_after=5)
 
-    # Rendered Equation LPF & ADC
-    deck.add_image_fitted(s10, "output/equations/eq_05_lpf_adc.png", Inches(1.0), Inches(2.35), Inches(5.6), Inches(1.1), border=False)
+    # Card 2: Arduino IDE 2.0 (FOTO ASLI)
+    deck.add_card(s10, Inches(5.5), Inches(1.55), Inches(3.4), Inches(5.2))
+    deck.add_image_fitted(s10, "Gambar/Bab2/babII_Arduino IDE.PNG", Inches(5.7), Inches(1.75), Inches(3.0), Inches(1.8),
+                          border=True, caption="Gambar 6. Lingkungan Pengembangan Arduino IDE 2.0")
+    tb10_2 = s10.shapes.add_textbox(Inches(5.7), Inches(3.8), Inches(3.0), Inches(2.8))
+    tf10_2 = tb10_2.text_frame
+    tf10_2.word_wrap = True
+    deck.add_card_header(tf10_2, "Firmware Arduino IDE 2.0", accent_color=COLOR_EMERALD, title_size=13.5)
+    deck.add_bullet_item(tf10_2, "Sampling Deterministik:", "Timer interrupt membaca ADS1115 via I2C pada kecepatan teratur.", pt_size=11.5, space_after=4)
+    deck.add_bullet_item(tf10_2, "Filtering Rerata:", "Moving average filter internal untuk menekan noise frekuensi tinggi.", pt_size=11.5, space_after=4)
+    deck.add_bullet_item(tf10_2, "Protokol Serial:", "Mengirim paket data terstruktur ke GUI Python (115200 bps).", pt_size=11.5, space_after=4)
 
-    tb10_sub = s10.shapes.add_textbox(Inches(1.0), Inches(3.6), Inches(5.6), Inches(3.0))
-    tf10_sub = tb10_sub.text_frame
-    tf10_sub.word_wrap = True
-    deck.add_bullet_item(tf10_sub, "Filter Anti-Aliasing RC Pasif:", "R = 1 kOhm dan C = 10 nF menghasilkan cut-off fc ~ 15.9 kHz, meredam switching noise jala-jala sebelum masuk ADC.", pt_size=10.0)
-    deck.add_bullet_item(tf10_sub, "Arsitektur Delta-Sigma 16-Bit:", "Melakukan oversampling dan noise shaping untuk mendorong derau kuantisasi keluar pita sinyal analit.", pt_size=10.0)
-    deck.add_bullet_item(tf10_sub, "Sensitivitas Tegangan Tinggi:", "Pada skala penuh FSR +-6.144 V (GAIN_TWOTHIRDS), LSB adalah 0.1875 mV/count, sangat peka terhadap perubahan sinyal formalin.", pt_size=10.0)
-
-    # Kanan: LPF & ADS1115
-    deck.add_image_fitted(s10, "Gambar/Bab2/babII_LPF.PNG", Inches(7.1), Inches(1.55), Inches(5.4), Inches(2.5),
-                          border=True, caption="Gambar 5. Rangkaian Filter RC Low-Pass Pasif Orde 1")
-    deck.add_image_fitted(s10, "Gambar/Bab2/babII_ADS-1115-c.jpg", Inches(7.1), Inches(4.25), Inches(5.4), Inches(2.5),
-                          border=True, caption="Gambar 6. Modul Konverter ADC 16-Bit ADS1115")
+    # Card 3: Python GUI & Qiskit (FOTO ASLI)
+    deck.add_card(s10, Inches(9.1), Inches(1.55), Inches(3.433), Inches(5.2))
+    deck.add_image_fitted(s10, "Gambar/Bab2/babII_Python.png", Inches(9.3), Inches(1.75), Inches(3.0), Inches(1.8),
+                          border=True, caption="Gambar 7. Ekosistem Pemrograman Python 3.13")
+    tb10_3 = s10.shapes.add_textbox(Inches(9.3), Inches(3.8), Inches(3.0), Inches(2.8))
+    tf10_3 = tb10_3.text_frame
+    tf10_3.word_wrap = True
+    deck.add_card_header(tf10_3, "GUI Python 3 & Qiskit", accent_color=COLOR_NAVY_MID, title_size=13.5)
+    deck.add_bullet_item(tf10_3, "CustomTkinter GUI:", "Visualisasi sinyal real-time dan kendali durasi akuisisi.", pt_size=11.5, space_after=4)
+    deck.add_bullet_item(tf10_3, "Ekstraksi Fitur:", "Ekstraksi otomatis 5 fitur sinyal sensor domain waktu.", pt_size=11.5, space_after=4)
+    deck.add_bullet_item(tf10_3, "Qiskit Machine Learning:", "Simulasi quantum circuit QSVC dan pemetaan quantum kernel.", pt_size=11.5, space_after=4)
 
     deck.add_footer(s10, 10)
 
     # --------------------------------------------------------------------------
-    # SLIDE 11: TEKNOLOGI ELEKTROSPINNING NANOFIBER PVA
+    # SLIDE 11: PERBANDINGAN DENGAN PENELITIAN TERDAHULU & KEBARUAN RISET (SLIDE BARU)
     # --------------------------------------------------------------------------
-    s11 = deck.add_blank_slide()
-    deck.add_header(s11, "Teknologi Elektrospinning untuk Fabrikasi Nanofiber PVA",
-                    "Elektrohidrodinamika Pembentukan Membran Serat Nano dengan Rasio Luas Permukaan Tinggi")
+    s11_comp = deck.add_blank_slide()
+    deck.add_header(s11_comp, "Perbandingan dengan Penelitian Terdahulu & Kebaruan Riset",
+                    "Matriks Komparasi Sensor Formalin, Reseptor Nanofiber, dan Algoritma Cerdas Terdahulu")
 
-    deck.add_card(s11, Inches(0.8), Inches(1.55), Inches(6.0), Inches(5.2))
-    tb11_l = s11.shapes.add_textbox(Inches(1.0), Inches(1.75), Inches(5.6), Inches(4.8))
-    tf11_l = tb11_l.text_frame
-    tf11_l.word_wrap = True
-    deck.add_card_header(tf11_l, "4 Tahapan Proses Elektrospinning", "Prinsip Fisis Elektrospinning", COLOR_EMERALD)
-    deck.add_bullet_item(tf11_l, "1. Pembentukan Taylor Cone:", "Gaya tolak elektrostatik pada permukaan tetesan polimer di ujung spinneret melampaui tegangan permukaan cairan.", pt_size=10.5)
-    deck.add_bullet_item(tf11_l, "2. Pemanjangan Jet Lurus:", "Jet cairan bermuatan listrik meluncur lurus mengikuti gradien medan listrik tegangan tinggi.", pt_size=10.5)
-    deck.add_bullet_item(tf11_l, "3. Whipping & Bending Instability:", "Ketidakstabilan lentur membentangkan jet polimer secara eksponensial hingga diameter mencapai orde puluhan nanometer.", pt_size=10.5)
-    deck.add_bullet_item(tf11_l, "4. Solidifikasi & Deposisi:", "Pelarut menguap seketika di udara, membentuk serat padat acak pada drum kolektor silinder berputar.", pt_size=10.5)
-    deck.add_bullet_item(tf11_l, "Parameter Kunci Operasi:", "Tegangan tinggi 15 kV, laju alir syringe pump 0.5 mL/jam, jarak ujung jarum ke drum kolektor 15 cm.", pt_size=10.5)
+    # Tabel Komparasi 6 kolom x 6 baris (header + 5 data)
+    comp_headers = ["Peneliti & Tahun", "Analit", "Transduser", "Material Reseptor", "Model Pemrosesan", "LOD & Celah Riset (Gap)"]
+    comp_rows = [
+        ["Wang et al. (2021)", "Gas Formaldehida", "MOS SnO2", "Lapisan Oksida", "Regresi Linier", "0.05 ppm; suhu 300 C, interferensi alkohol"],
+        ["Singhal et al. (2024)", "Formalin Pangan", "Elektrokimia", "Enzim FDH", "Amperometrik", "0.02 mg/L; enzim labil <3 minggu, fouling lemak"],
+        ["Sun et al. (2023)", "Formalin Makanan", "Kolorimetri Optik", "Reagen Nash", "Citra Digital & K-NN", "1.0 mg/L; bias kekeruhan & pigmen bakso"],
+        ["Gilang Pratama (2026)", "Glukosa Saliva", "GMR", "Nanofiber Fe3O4/PVA-GOx", "Random Forest", "0.08 mg/mL; rasio GMR 10-15%, model klasik"],
+        ["Penelitian Ini (2026)", "Formalin Bakso", "TMR ALT023-10E", "Nanofiber Fe3O4/PVA-Sitrat-ADH", "SVM vs QSVC", "Target sub-ppm; suhu ruang, hidrazon kovalen, TMR >200%"]
+    ]
+    table_shape = deck.add_table(s11_comp, Inches(0.8), Inches(1.55), Inches(11.733), Inches(3.5),
+                                  comp_headers, comp_rows,
+                                  col_widths=[Inches(1.8), Inches(1.4), Inches(1.6), Inches(2.2), Inches(1.7), Inches(3.033)])
 
-    # Kanan: Gambar Sistem Elektrospinning
-    deck.add_image_fitted(s11, "Gambar/Bab2/babII_elspinPVA.PNG", Inches(7.1), Inches(1.55), Inches(5.4), Inches(5.2),
-                          border=True, caption="Gambar 7. Skema Rangkaian Sistem Elektrospinning Nanofiber PVA")
+    # Highlight baris terakhir (Penelitian Ini)
+    table = table_shape.table
+    for col_idx in range(6):
+        cell = table.cell(5, col_idx)
+        cell.fill.solid()
+        cell.fill.fore_color.rgb = COLOR_NAVY_MID
+        for p in cell.text_frame.paragraphs:
+            for r in p.runs:
+                r.font.bold = True
+                r.font.color.rgb = RGBColor(255, 255, 255)
+                r.font.size = Pt(10.5)
 
-    deck.add_footer(s11, 11)
+    # Kotak Kebaruan di bawah tabel
+    deck.add_card(s11_comp, Inches(0.8), Inches(5.2), Inches(11.733), Inches(1.55), bg_color=COLOR_LIGHT_BLUE, border_color=COLOR_BLUE_ACCENT)
+    tb11c = s11_comp.shapes.add_textbox(Inches(1.05), Inches(5.35), Inches(11.2), Inches(1.3))
+    tf11c = tb11c.text_frame
+    tf11c.word_wrap = True
+    deck.add_card_header(tf11c, "Tiga Pilar Kebaruan Ilmiah Penelitian Ini", accent_color=COLOR_NAVY_MID, title_size=15)
+    deck.add_bullet_item(tf11c, "1. Reseptor ADH Kovalen:", "Ikatan hidrazon spesifik tanpa glutaraldehida toksik; stabilitas kimiawi jauh melampaui enzim FDH.", pt_size=12.0, space_after=4)
+    deck.add_bullet_item(tf11c, "2. Transduser TMR >200%:", "Sensor spintronika ALT023-10E beresolusi 6x lebih tinggi dari GMR konvensional pada suhu ruang.", pt_size=12.0, space_after=4)
+    deck.add_bullet_item(tf11c, "3. Komparasi SVM vs QSVC:", "Studi komparasi pionir antara kernel RBF klasik dan quantum feature map pada matriks analitik pangan.", pt_size=12.0, space_after=4)
+
+    deck.add_footer(s11_comp, 11)
 
     # --------------------------------------------------------------------------
-    # SLIDE 12: MATRIKS POLIMER PVA & GREEN SYNTHESIS FE3O4
+    # SLIDE 12: METODOLOGI: WAKTU, LOKASI RISET, ALAT & BAHAN
     # --------------------------------------------------------------------------
-    s12 = deck.add_blank_slide()
-    deck.add_header(s12, "Matriks Polimer PVA & Nanopartikel Fe3O4 Sintesis Hijau Kelor",
-                    "Carrier Serat Nanofiber dan Material Magnetik Berbasis Ekstrak Moringa oleifera")
+    s12_tools = deck.add_blank_slide()
+    deck.add_header(s12_tools, "Metodologi: Waktu, Lokasi Riset, dan Spesifikasi Alat & Bahan",
+                    "Rincian Jadwal 4 Bulan di Bolabot, Fasilitas Instrumentasi Presisi, dan Bahan Kimia Analitik")
 
-    # Kiri: PVA Matrix
-    deck.add_card(s12, Inches(0.8), Inches(1.55), Inches(5.6), Inches(5.2))
-    tb12_l = s12.shapes.add_textbox(Inches(1.0), Inches(1.75), Inches(5.2), Inches(4.8))
-    tf12_l = tb12_l.text_frame
-    tf12_l.word_wrap = True
-    deck.add_card_header(tf12_l, "Polivinil Alkohol (PVA) 10% wt", "Matriks Polimer Pembawa", COLOR_BLUE_ACCENT)
-    deck.add_bullet_item(tf12_l, "Struktur Molekul:", "Rantai hidrokarbon semi-kristalin dengan gugus hidroksil berulang (-CH2-CH(OH)-)n.", pt_size=10.5)
-    deck.add_bullet_item(tf12_l, "Kapasitas Fiber-Forming:", "Viskoelastisitas optimal pada konsentrasi 10% wt memungkinkan pembentukan jet stabil tanpa putus (beads-free).", pt_size=10.5)
-    deck.add_bullet_item(tf12_l, "Sifat Hidrofilik Kuat:", "Gugus -OH melimpah membentuk ikatan hidrogen kuat, namun mudah larut dalam air sehingga mutlak butuh crosslinking.", pt_size=10.5)
-    deck.add_bullet_item(tf12_l, "Biokompatibilitas Penuh:", "Aman digunakan dalam analisis sampel bahan pangan konsumsi.", pt_size=10.5)
+    deck.add_card(s12_tools, Inches(0.8), Inches(1.55), Inches(11.733), Inches(0.95), bg_color=COLOR_LIGHT_SLATE)
+    tb11_lok = s12_tools.shapes.add_textbox(Inches(1.0), Inches(1.65), Inches(11.3), Inches(0.75))
+    tf11_lok = tb11_lok.text_frame
+    tf11_lok.word_wrap = True
+    p11_w = tf11_lok.paragraphs[0]
+    p11_w.text = "Waktu Pelaksanaan : September 2026 - Desember 2026 (Durasi 4 Bulan Efektif)"
+    p11_w.font.name = FONT_FAMILY
+    p11_w.font.size = Pt(11.5)
+    p11_w.font.bold = True
+    p11_w.font.color.rgb = COLOR_NAVY_DARK
 
-    # Kanan: Fe3O4 Green Nanoparticles
-    deck.add_card(s12, Inches(6.8), Inches(1.55), Inches(5.733), Inches(5.2))
-    tb12_r = s12.shapes.add_textbox(Inches(7.0), Inches(1.75), Inches(5.3), Inches(4.8))
+    p11_l = tf11_lok.add_paragraph()
+    p11_l.text = "Lokasi Penelitian : Laboratorium Fisika Instrumentasi UIN Sunan Gunung Djati Bandung & Bolabot Techno Robotic School, Bandung"
+    p11_l.font.name = FONT_FAMILY
+    p11_l.font.size = Pt(10.5)
+    p11_l.font.color.rgb = COLOR_TEXT_BODY
+
+    # Tabel Alat (Kiri)
+    headers_alat = ["Kategori", "Nama Peralatan", "Fungsi Utama"]
+    rows_alat = [
+        ["Transduser", "Sensor TMR ALT023-10E", "Mendeteksi fluks medan magnet lokal jembatan Wheatstone"],
+        ["Pengkondisi", "IC AD623 & LPF Aktif", "Penguatan tegangan diferensial (VREF = 2.50 V) & filter 10 Hz"],
+        ["Digitasi", "ADC ADS1115 16-Bit", "Konversi analog ke digital resolusi 0.1875 mV/count via I2C"],
+        ["Kontroler", "Arduino Uno & RPi 5", "Akuisisi deterministik mikrokontroler & inferensi model host"],
+        ["Pembangkit", "Sepasang Helmholtz Coil", "Pembangkitan medan magnetik acuan homogen (0-11.5 mT)"],
+        ["Kalibrator", "Teslameter WT10A", "Ground truth pembacaan medan magnet riil terstandardisasi"]
+    ]
+    deck.add_table(s12_tools, Inches(0.8), Inches(2.65), Inches(5.7), Inches(4.1), headers_alat, rows_alat,
+                   col_widths=[Inches(1.2), Inches(2.1), Inches(2.4)])
+
+    # Tabel Bahan (Kanan)
+    headers_bahan = ["Bahan Kimia / Sampel", "Spesifikasi", "Fungsi dalam Penelitian"]
+    rows_bahan = [
+        ["Daun Kelor (M. oleifera)", "Ekstrak Segar 50 g/250 mL", "Reduktor & penudung sintesis hijau Fe3O4"],
+        ["Prekursor Besi", "FeCl3.6H2O & FeCl2.4H2O", "Sumber ion Fe3+ dan Fe2+ rasio stoikiometri 2:1"],
+        ["Polivinil Alkohol (PVA)", "Mw 89.000-98.000 g/mol", "Matriks polimer utama pembentuk serat nanofiber"],
+        ["Asam Sitrat", "P.a. Merck (99.5%)", "Agen penaut silang (crosslinker) ramah lingkungan"],
+        ["Adipic Acid Dihydrazide", "ADH Merck (98%)", "Gugus reseptor penangkap formaldehida (hidrazon)"],
+        ["Sampel Bakso", "Pedagang Pasar Tradisional", "Matriks pangan riil pengujian validasi sistem"]
+    ]
+    deck.add_table(s12_tools, Inches(6.8), Inches(2.65), Inches(5.733), Inches(4.1), headers_bahan, rows_bahan,
+                   col_widths=[Inches(1.7), Inches(1.8), Inches(2.233)])
+
+    deck.add_footer(s12_tools, 12)
+
+    # --------------------------------------------------------------------------
+    # SLIDE 13: METODOLOGI: DIAGRAM ALIR PENELITIAN KOMPREHENSIF (6 TAHAPAN)
+    # --------------------------------------------------------------------------
+    s13_flow = deck.add_blank_slide()
+    deck.add_header(s13_flow, "Metodologi: Diagram Alir Penelitian Komprehensif",
+                    "6 Tahapan Eksekusi Riset: Dari Sintesis Material Hijau hingga Komparasi Model Klasik vs Kuantum")
+
+    deck.add_image_fitted(s13_flow, "Gambar/Bab3/BABIII_DiagramAlirPenelitian.drawio.png",
+                          Inches(0.8), Inches(1.55), Inches(5.8), Inches(5.2),
+                          border=True, caption="Gambar 8. Diagram Alir Komprehensif Metodologi Penelitian")
+
+    deck.add_card(s13_flow, Inches(6.8), Inches(1.55), Inches(5.733), Inches(5.2))
+    tb12_r = s13_flow.shapes.add_textbox(Inches(7.05), Inches(1.75), Inches(5.2), Inches(4.8))
     tf12_r = tb12_r.text_frame
     tf12_r.word_wrap = True
-    deck.add_card_header(tf12_r, "Sintesis Hijau Fe3O4 Daun Kelor", "Green Nanomaterial", COLOR_EMERALD)
-    deck.add_bullet_item(tf12_r, "Ekstrak Moringa oleifera:", "Kaya akan senyawa metabolit sekunder polifenol, flavonoid, dan asam askorbat.", pt_size=10.5)
-    deck.add_bullet_item(tf12_r, "Peran Reduktor & Capping:", "Mereduksi prekursor garam besi (FeCl3 dan FeCl2) dan melapisi permukaan nanopartikel agar terdispersi stabil tanpa surfaktan sintetis beracun.", pt_size=10.5)
-    deck.add_bullet_item(tf12_r, "Sifat Superparamagnetik:", "Ukuran kristal sub-20 nm memberikan magnetisasi tinggi saat terkena medan bias Helmholtz dan nol saat medan mati (tanpa histeresis remanen).", pt_size=10.5)
+    deck.add_card_header(tf12_r, "6 Tahapan Eksekusi Riset", accent_color=COLOR_NAVY_MID, title_size=16)
+    deck.add_bullet_item(tf12_r, "Tahap 1: Sintesis Nanofiber:", "Ekstraksi kelor, kopresipitasi Fe3O4, formulasi sol PVA-Sitrat-ADH, dan elektrospinning 15 kV.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf12_r, "Tahap 2: Curing Termal 130 C:", "Pemanasan oven 130 C selama 1.5 jam untuk esterifikasi asam sitrat agar nanofiber kokoh.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf12_r, "Tahap 3: Rancang Mekatronika:", "Desain sirkuit PCB AD623-ADS1115-Arduino, housing 3D statif non-magnetik, dan firmware interrupt.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf12_r, "Tahap 4: Kalibrasi Helmholtz:", "Pemetaan medan 0-11.5 mT vs arus 0-1.6 A serta karakterisasi sensitivitas diferensial TMR ALT023.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf12_r, "Tahap 5: Pengujian Larutan & Bakso:", "Uji bertingkat standar formalin (mg/L) dan ekstrak bakso riil, dilanjutkan ekstraksi 5 fitur sinyal.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf12_r, "Tahap 6: Komparasi SVM vs QSVC:", "Pelatihan 5-fold cross validation, pemetaan quantum kernel pada Qiskit, dan analisis metrik.", pt_size=12.5, space_after=6)
 
-    deck.add_footer(s12, 12)
+    deck.add_footer(s13_flow, 13)
 
     # --------------------------------------------------------------------------
-    # SLIDE 13: ASAM SITRAT SEBAGAI CAPPING AGENT & GREEN CROSSLINKER
+    # SLIDE 14: METODOLOGI: DESAIN HARDWARE TERPADU & SKEMATIK SIRKUIT
     # --------------------------------------------------------------------------
-    s13 = deck.add_blank_slide()
-    deck.add_header(s13, "Asam Sitrat sebagai Capping Agent & Green Crosslinker (Curing 130 C)",
-                    "Dua Peran Fungsional: Stabilisasi Partikel Fe3O4 dan Esterifikasi Termal Matriks PVA")
+    s14_hw = deck.add_blank_slide()
+    deck.add_header(s14_hw, "Metodologi: Desain Hardware Terpadu & Skematik Sirkuit",
+                    "Skematik Elektronika Sensor TMR, Penguat AD623, Filter RC, ADC ADS1115, dan Wiring Mekatronika")
 
-    deck.add_card(s13, Inches(0.8), Inches(1.55), Inches(5.6), Inches(5.2))
-    tb13_l = s13.shapes.add_textbox(Inches(1.0), Inches(1.75), Inches(5.2), Inches(4.8))
-    tf13_l = tb13_l.text_frame
-    tf13_l.word_wrap = True
-    deck.add_card_header(tf13_l, "Peran 1: Capping Agent Fe3O4", "Stabilisasi Dispersi Sol", COLOR_AMBER)
-    deck.add_bullet_item(tf13_l, "Mencegah Sedimentasi:", "Partikel Fe3O4 memiliki densitas tinggi (~5.2 g/cm3) yang rentan mengendap selama proses elektrospinning.", pt_size=10.5)
-    deck.add_bullet_item(tf13_l, "Koordinasi Kovalen:", "Gugus karboksilat (-COO-) asam sitrat mengikat kation besi (Fe2+/Fe3+) pada permukaan magnetit.", pt_size=10.5)
-    deck.add_bullet_item(tf13_l, "Gaya Tolak Elektrostatik:", "Membangkitkan potensial zeta negatif kuat yang mencegah aglomerasi dan penyumbatan jarum suntik.", pt_size=10.5)
+    deck.add_image_fitted(s14_hw, "Gambar/Bab3/babIII_skematik_TMR_grounding_fix.png",
+                          Inches(0.8), Inches(1.55), Inches(6.8), Inches(5.2),
+                          border=True, caption="Gambar 9. Skematik Sirkuit Sensor TMR, AD623, Filter RC, dan ADS1115 Grounding Fix")
 
-    deck.add_card(s13, Inches(6.8), Inches(1.55), Inches(5.733), Inches(5.2))
-    tb13_r = s13.shapes.add_textbox(Inches(7.0), Inches(1.75), Inches(5.3), Inches(4.8))
+    deck.add_card(s14_hw, Inches(7.8), Inches(1.55), Inches(4.733), Inches(5.2))
+    tb13_r = s14_hw.shapes.add_textbox(Inches(8.05), Inches(1.75), Inches(4.2), Inches(4.8))
     tf13_r = tb13_r.text_frame
     tf13_r.word_wrap = True
-    deck.add_card_header(tf13_r, "Peran 2: Green Crosslinker (130 C)", "Ketahanan Air Nanofiber", COLOR_EMERALD)
-    deck.add_bullet_item(tf13_r, "Esterifikasi Fisher Termal:", "Asam sitrat tri-karboksilat bereaksi dengan gugus -OH rantai PVA membentuk jembatan ester kovalen silang.", pt_size=10.5)
-    deck.add_bullet_item(tf13_r, "Suhu Optimal 130 C (1.5 Jam):", "Pemanasan oven pada 130 C mengaktifkan ikatan ester secara tuntas tanpa mendegradasi termal polimer maupun gugus ADH.", pt_size=10.5)
-    deck.add_bullet_item(tf13_r, "Sifat Water-Insoluble:", "Mengubah membran nanofiber menjadi tidak larut air saat ditetesi ekstrak analit bakso, menjaga integritas sensor.", pt_size=10.5)
+    deck.add_card_header(tf13_r, "Integritas Rantai Sinyal Presisi", accent_color=COLOR_BLUE_ACCENT, title_size=16)
+    deck.add_bullet_item(tf13_r, "TMR ALT023-10E:", "Jembatan Wheatstone presisi dicatu 5.0 V DC teregulasi dengan kapasitor bypass 100 nF dekat pin VCC.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf13_r, "Penguat AD623:", "Gain diferensial diatur via resistor RG. Pin 5 REF diberi tegangan 2.50 V stabil dari pembagi tegangan 1 kOhm.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf13_r, "Active RC Filter:", "Frekuensi potong fc = 10 Hz memblok derau jala-jala 50 Hz sebelum masuk ke saluran ADC.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf13_r, "ADC 16-Bit ADS1115:", "Saluran diferensial A0-GND membaca sinyal dengan resolusi 0.1875 mV/count pada FSR 6.144 V.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf13_r, "Grounding Star Fix:", "Pemisahan ground analog (AGND) dan digital (DGND) pada PCB untuk mencegah ground loop derau.", pt_size=12.5, space_after=6)
 
-    deck.add_footer(s13, 13)
-
-    # --------------------------------------------------------------------------
-    # SLIDE 14: ADIPIC ACID DIHYDRAZIDE (ADH) & ELEMEN RESEPTOR
-    # --------------------------------------------------------------------------
-    s14 = deck.add_blank_slide()
-    deck.add_header(s14, "Adipic Acid Dihydrazide (ADH) & Reseptor Nanokomposit",
-                    "Gugus Hidrazida Terminal sebagai Formaldehyde Scavenger dan Mekanisme Transduksi TMR")
-
-    deck.add_card(s14, Inches(0.8), Inches(1.55), Inches(5.6), Inches(5.2))
-    tb14_l = s14.shapes.add_textbox(Inches(1.0), Inches(1.75), Inches(5.2), Inches(4.8))
-    tf14_l = tb14_l.text_frame
-    tf14_l.word_wrap = True
-    deck.add_card_header(tf14_l, "Keunggulan Fungsional ADH", "Situs Pengenal Molekuler", COLOR_BLUE_ACCENT)
-    deck.add_bullet_item(tf14_l, "Homobifungsional Simetris:", "Mengandung dua gugus hidrazida terminal (-CO-NH-NH2) di kedua ujung rantai alkil.", pt_size=10.5)
-    deck.add_bullet_item(tf14_l, "Selektivitas Tinggi Terhadap Formalin:", "Reaksi pembentukan hidrazon berlangsung spontan pada suhu ruang, bertindak sebagai formaldehyde scavenger spesifik.", pt_size=10.5)
-    deck.add_bullet_item(tf14_l, "Bebas Ambiguitas:", "Berbeda dari glutaraldehida yang sendiri merupakan aldehida, ADH bereaksi dengan aldehida sehingga tidak merusak selektivitas pengujian.", pt_size=10.5)
-
-    deck.add_card(s14, Inches(6.8), Inches(1.55), Inches(5.733), Inches(5.2))
-    tb14_r = s14.shapes.add_textbox(Inches(7.0), Inches(1.75), Inches(5.3), Inches(4.8))
-    tf14_r = tb14_r.text_frame
-    tf14_r.word_wrap = True
-    deck.add_card_header(tf14_r, "Mekanisme Transduksi Sensor TMR", "Perturbasi Medan Stray", COLOR_NAVY_MID)
-    deck.add_bullet_item(tf14_r, "Integrasi 4 Komponen:", "PVA (kerangka serat) + Fe3O4 (penghasil sinyal magnetik) + Asam Sitrat (tahan air) + ADH (penangkap analit).", pt_size=10.5)
-    deck.add_bullet_item(tf14_r, "Perturbasi Momen Magnetik:", "Saat molekul formalin terikat kovalen pada gugus ADH, terjadi transfer muatan lokal dan perubahan kerapatan matriks yang mendistorsi fluks stray Fe3O4.", pt_size=10.5)
-    deck.add_bullet_item(tf14_r, "Pembacaan Diferensial TMR:", "Distorsi medan stray mikro diterjemahkan oleh elemen MTJ sensor TMR menjadi perubahan tegangan keluaran Delta V yang linear terhadap konsentrasi formalin.", pt_size=10.5)
-
-    deck.add_footer(s14, 14)
+    deck.add_footer(s14_hw, 14)
 
     # --------------------------------------------------------------------------
-    # SLIDE 15: SUPPORT VECTOR MACHINE (SVM) KLASIK
+    # SLIDE 15: METODOLOGI: PERANGKAT LUNAK [MURNI 2 FLOWCHART, TANPA TEKS LAIN]
     # --------------------------------------------------------------------------
-    s15 = deck.add_blank_slide()
-    deck.add_header(s15, "Pemodelan Support Vector Machine (SVM) Klasik",
-                    "Prinsip Hyperplane Margin Maksimal dan Pemetaan Fungsi Kernel RBF Gauss")
+    s15_sw = deck.add_blank_slide()
+    deck.add_header(s15_sw, "Metodologi: Perancangan Perangkat Lunak Mikrokontroler & GUI Host",
+                    "Diagram Alir Firmware Arduino Uno (Kiri) dan Aplikasi GUI Python TMRAcquisitionApp (Kanan)")
 
-    deck.add_card(s15, Inches(0.8), Inches(1.55), Inches(6.0), Inches(5.2))
-    tb15_l = s15.shapes.add_textbox(Inches(1.0), Inches(1.7), Inches(5.6), Inches(4.8))
-    tf15_l = tb15_l.text_frame
-    tf15_l.word_wrap = True
-    deck.add_card_header(tf15_l, "Formulasi Optimasi Konveks SVM", "Pembelajaran Mesin Terawasi", COLOR_BLUE_ACCENT)
+    deck.add_image_fitted(s15_sw, "Gambar/Bab3/babIII_AlurSoftwareArduino.drawio.png", Inches(0.8), Inches(1.55), Inches(5.7), Inches(5.2),
+                          border=True, caption="Gambar 10. Diagram Alir Firmware Mikrokontroler Arduino Uno")
 
-    # Rendered Equation SVM
-    deck.add_image_fitted(s15, "output/equations/eq_06_svm.png", Inches(1.0), Inches(2.35), Inches(5.6), Inches(1.1), border=False)
+    deck.add_image_fitted(s15_sw, "Gambar/Bab3/babIII_DiagramAlirPython.drawio.png", Inches(6.8), Inches(1.55), Inches(5.733), Inches(5.2),
+                          border=True, caption="Gambar 11. Diagram Alir Aplikasi GUI Python TMRAcquisitionApp")
 
-    tb15_sub = s15.shapes.add_textbox(Inches(1.0), Inches(3.6), Inches(5.6), Inches(3.0))
-    tf15_sub = tb15_sub.text_frame
-    tf15_sub.word_wrap = True
-    deck.add_bullet_item(tf15_sub, "Margin Pemisah Maksimal:", "Membangun bidang batas w dan bias b yang memaksimalkan jarak pemisah antarkelas konsentrasi formalin.", pt_size=10.5)
-    deck.add_bullet_item(tf15_sub, "Kernel Radial Basis Function (RBF):", "Mentransformasikan data non-linear ke ruang berdimensi tak terhingga melalui parameter lebar gamma.", pt_size=10.5)
-    deck.add_bullet_item(tf15_sub, "Regularisasi C & Variabel Slack:", "Mengontrol kompromi antara margin pemisah lebar dan toleransi kesalahan pada sampel tercemar.", pt_size=10.5)
-
-    # Kanan: Karakteristik SVM
-    deck.add_card(s15, Inches(7.1), Inches(1.55), Inches(5.4), Inches(5.2))
-    tb15_r = s15.shapes.add_textbox(Inches(7.35), Inches(1.75), Inches(4.9), Inches(4.8))
-    tf15_r = tb15_r.text_frame
-    tf15_r.word_wrap = True
-    deck.add_card_header(tf15_r, "Pipeline Klasifikasi Fitur Sensor", "Metodologi Klasik", COLOR_NAVY_MID)
-    deck.add_bullet_item(tf15_r, "Vektor Masukan 5 Fitur:", "Menerima 5 fitur sinyal dinamis: dVmax, waktu respons, slope transien awal, Vsteady, dan AUC.", pt_size=10.5)
-    deck.add_bullet_item(tf15_r, "Prapemrosesan Standard Scaler:", "Normalisasi skala nilai z-score agar kontribusi kelima fitur seimbang.", pt_size=10.5)
-    deck.add_bullet_item(tf15_r, "Validasi Silang (5-Fold CV):", "Evaluasi berulang pada 5 subset data acak untuk mencegah overfitting.", pt_size=10.5)
-    deck.add_bullet_item(tf15_r, "Status Model Baseline:", "Berfungsi sebagai model acuan klasik teruji untuk menguji signifikansi performa model kuantum QSVC.", pt_size=10.5)
-
-    deck.add_footer(s15, 15)
+    deck.add_footer(s15_sw, 15)
 
     # --------------------------------------------------------------------------
-    # SLIDE 16: QUANTUM SUPPORT VECTOR CLASSIFIER (QSVC)
+    # SLIDE 16: METODOLOGI: SINTESIS NANOFIBER & ELEKTROSPINNING
     # --------------------------------------------------------------------------
-    s16 = deck.add_blank_slide()
-    deck.add_header(s16, "Pemodelan Quantum Support Vector Classifier (QSVC)",
-                    "Pemetaan Fitur Kuantum ke Ruang Hilbert 2^n Qubit dan Matriks Quantum Kernel")
-
-    deck.add_card(s16, Inches(0.8), Inches(1.55), Inches(6.0), Inches(5.2))
-    tb16_l = s16.shapes.add_textbox(Inches(1.0), Inches(1.7), Inches(5.6), Inches(4.8))
-    tf16_l = tb16_l.text_frame
-    tf16_l.word_wrap = True
-    deck.add_card_header(tf16_l, "Quantum Feature Map & Kernel Fidelity", "Quantum Machine Learning", COLOR_EMERALD)
-
-    # Rendered Equation QSVC
-    deck.add_image_fitted(s16, "output/equations/eq_07_qsvc.png", Inches(1.0), Inches(2.35), Inches(5.6), Inches(1.1), border=False)
-
-    tb16_sub = s16.shapes.add_textbox(Inches(1.0), Inches(3.6), Inches(5.6), Inches(3.0))
-    tf16_sub = tb16_sub.text_frame
-    tf16_sub.word_wrap = True
-    deck.add_bullet_item(tf16_sub, "Sirkuit ZZFeatureMap:", "Gerbang rotasi fase dan keterikatan (entanglement) dua-qubit memetakan data klasik ke status kuantum register n-qubit.", pt_size=10.5)
-    deck.add_bullet_item(tf16_sub, "Quantum State Fidelity:", "Matriks kernel kuantum KQ dihitung sebagai produk dalam status kuantum, merefleksikan jarak antar fitur dalam ruang Hilbert eksponensial.", pt_size=10.5)
-    deck.add_bullet_item(tf16_sub, "Eksploitasi Superposisi:", "Mampu memisahkan pola non-linear rumit yang saling bertumpuk akibat fluktuasi sinyal sensor di lapangan.", pt_size=10.5)
-
-    # Kanan: Keunggulan QSVC
-    deck.add_card(s16, Inches(7.1), Inches(1.55), Inches(5.4), Inches(5.2))
-    tb16_r = s16.shapes.add_textbox(Inches(7.35), Inches(1.75), Inches(4.9), Inches(4.8))
-    tf16_r = tb16_r.text_frame
-    tf16_r.word_wrap = True
-    deck.add_card_header(tf16_r, "Hipotesis Keunggulan Kuantum", "Resistensi Derau", COLOR_NAVY_MID)
-    deck.add_bullet_item(tf16_r, "Separasi Kelas Lebih Tegas:", "Representasi ruang Hilbert 2^n qubit mempermudah hyperplane linear memisahkan konsentrasi formalin rendah.", pt_size=10.5)
-    deck.add_bullet_item(tf16_r, "Ketahanan Derau (Noise Robustness):", "QSVC dihipotesiskan lebih tahan terhadap gangguan derau gaussian dan pergeseran baseline sensor dibanding kernel RBF.", pt_size=10.5)
-    deck.add_bullet_item(tf16_r, "Simulasi Qiskit Aer:", "Model dibangun menggunakan pustaka Qiskit Machine Learning dengan simulator statevector kuantum presisi.", pt_size=10.5)
-
-    deck.add_footer(s16, 16)
-
-    # --------------------------------------------------------------------------
-    # SLIDE 17: KOMPARASI MODEL KLASIK VS KUANTUM & SOFTWARE
-    # --------------------------------------------------------------------------
-    s17 = deck.add_blank_slide()
-    deck.add_header(s17, "Komparasi Model Klasik vs Kuantum & Lingkungan Perangkat Lunak",
-                    "Perbandingan Parameter Komputasi Serta Peran Arduino IDE dan Python")
-
-    headers_comp = ["Parameter Pembanding", "SVM Klasik (Baseline)", "QSVC Kuantum (Kebaruan)"]
-    rows_comp = [
-        ["Ruang Fitur", "Ruang Euclidean tak berhingga (RBF)", "Ruang Hilbert 2^n qubit ter-entangle"],
-        ["Transformasi Data", "Fungsi matematika analitik Gauss", "Sirkuit kuantum uniter ZZFeatureMap"],
-        ["Estimasi Kernel", "Jarak kuadratik numerik ||x - x'||", "Probabilitas transisi fidelitas status kuantum"],
-        ["Ketahanan Derau", "Sensitif terhadap fluktuasi acak sinyal", "Terbukti lebih resilien pada data berderau"],
-        ["Pustaka Komputasi", "Scikit-Learn Python (CPU)", "Qiskit Machine Learning / Qiskit Aer"]
-    ]
-    deck.add_table(s17, Inches(0.8), Inches(1.55), Inches(11.733), Inches(3.2), headers_comp, rows_comp,
-                   col_widths=[Inches(3.2), Inches(4.2), Inches(4.333)])
-
-    # Bottom Cards: Arduino IDE & Python
-    deck.add_card(s17, Inches(0.8), Inches(4.95), Inches(5.7), Inches(1.8), bg_color=COLOR_LIGHT_SLATE)
-    tb17_b1 = s17.shapes.add_textbox(Inches(1.0), Inches(5.05), Inches(5.3), Inches(1.6))
-    tf17_b1 = tb17_b1.text_frame
-    tf17_b1.word_wrap = True
-    deck.add_card_header(tf17_b1, "Peran Arduino IDE 2.0", "Firmware Mikrokontroler", COLOR_BLUE_ACCENT)
-    deck.add_bullet_item(tf17_b1, "Fungsi Utama:", "Mengompilasi dan mengunggah kode C/C++ pembacaan ADC ADS1115 via I2C serta streaming serial data mentah.", pt_size=9.5)
-
-    deck.add_card(s17, Inches(6.8), Inches(4.95), Inches(5.733), Inches(1.8), bg_color=COLOR_LIGHT_SLATE)
-    tb17_b2 = s17.shapes.add_textbox(Inches(7.0), Inches(5.05), Inches(5.3), Inches(1.6))
-    tf17_b2 = tb17_b2.text_frame
-    tf17_b2.word_wrap = True
-    deck.add_card_header(tf17_b2, "Peran Python 3.x Host", "Analisis & Pemodelan Cerdas", COLOR_EMERALD)
-    deck.add_bullet_item(tf17_b2, "Fungsi Utama:", "Akuisisi serial (pySerial), GUI CustomTkinter, regresi kalibrasi, ekstraksi 5 fitur, dan pelatihan SVM & QSVC.", pt_size=9.5)
-
-    deck.add_footer(s17, 17)
-
-    # --------------------------------------------------------------------------
-    # SLIDE 18: METODOLOGI: WAKTU, TEMPAT, ALAT & BAHAN
-    # --------------------------------------------------------------------------
-    s18 = deck.add_blank_slide()
-    deck.add_header(s18, "Metodologi: Waktu, Lokasi Riset, dan Spesifikasi Alat & Bahan",
-                    "Pelaksanaan Riset di Bolabot Techno Robotic Institute (September - Desember 2026)")
-
-    # Location Banner
-    deck.add_card(s18, Inches(0.8), Inches(1.55), Inches(11.733), Inches(0.85), bg_color=COLOR_LIGHT_BLUE, border_color=COLOR_BLUE_ACCENT)
-    tb18_loc = s18.shapes.add_textbox(Inches(1.0), Inches(1.62), Inches(11.3), Inches(0.7))
-    tf18_loc = tb18_loc.text_frame
-    tf18_loc.word_wrap = True
-    p18_l1 = tf18_loc.paragraphs[0]
-    p18_l1.text = "Waktu Pelaksanaan : September 2026 - Desember 2026 (Durasi 4 Bulan Efektif)"
-    p18_l1.font.name = FONT_FAMILY
-    p18_l1.font.bold = True
-    p18_l1.font.size = Pt(11)
-    p18_l1.font.color.rgb = COLOR_NAVY_DARK
-    p18_l2 = tf18_loc.add_paragraph()
-    p18_l2.text = "Lokasi Penelitian : Kantor Bolabot Techno Robotic Institute, Jl. Sauyunan VI No. 10 Blok F6, Bandung, Jawa Barat"
-    p18_l2.font.name = FONT_FAMILY
-    p18_l2.font.size = Pt(10)
-    p18_l2.font.color.rgb = COLOR_TEXT_BODY
-
-    # Tabel Alat & Bahan
-    headers_ab = ["Kategori", "Item / Instrumen", "Spesifikasi / Parameter", "Fungsi Utama"]
-    rows_ab = [
-        ["Hardware Sensor", "TMR ALT023-10E", "Bipolar bridge, linear +-1.0 mT, Vcc 5V", "Transduser medan magnetik distorsi formalin"],
-        ["Hardware Sinyal", "In-Amp AD623 & ADS1115", "Catu 5V, VREF 2.50V, ADC 16-Bit I2C", "Pengkondisi sinyal & digitalisasi presisi"],
-        ["Hardware Medan", "Kumparan Helmholtz", "R ~ 10 Ohm, 0 - 16 V DC, 0 - 11.5 mT", "Pembangkit medan magnet acuan homogen"],
-        ["Hardware Kontrol", "Arduino Uno & Raspberry Pi 5", "ATmega328P & Quad-Core ARM Cortex-A76", "Unit akuisisi serial & komputasi ML edge"],
-        ["Bahan Kimia", "Ekstrak Kelor & Prekursor Besi", "Moringa oleifera, FeCl3 & FeCl2 (2:1)", "Green synthesis nanopartikel Fe3O4 magnetik"],
-        ["Bahan Polimer", "PVA, Asam Sitrat, ADH", "PVA 10% wt, Sitrat 5% wt, ADH 3% wt", "Matriks nanofiber elektrospinning selektif"],
-        ["Sampel Uji", "Formalin Standar & Bakso", "HCHO 37% & Bakso Pasar Tradisional", "Kurva kalibrasi & pengujian klasifikasi riil"]
-    ]
-    deck.add_table(s18, Inches(0.8), Inches(2.55), Inches(11.733), Inches(4.3), headers_ab, rows_ab,
-                   col_widths=[Inches(2.2), Inches(3.2), Inches(3.5), Inches(2.833)])
-
-    deck.add_footer(s18, 18)
-
-    # --------------------------------------------------------------------------
-    # SLIDE 19: METODOLOGI: DIAGRAM ALIR PENELITIAN
-    # --------------------------------------------------------------------------
-    s19 = deck.add_blank_slide()
-    deck.add_header(s19, "Metodologi: Diagram Alir Penelitian Komprehensif",
-                    "6 Tahapan Alur Kerja Sistematis dari Desain Sistem hingga Evaluasi Komparasi Model")
-
-    deck.add_card(s19, Inches(0.8), Inches(1.55), Inches(5.6), Inches(5.2))
-    tb19_l = s19.shapes.add_textbox(Inches(1.0), Inches(1.75), Inches(5.2), Inches(4.8))
-    tf19_l = tb19_l.text_frame
-    tf19_l.word_wrap = True
-    deck.add_card_header(tf19_l, "6 Tahapan Eksekusi Riset", "Tahapan Metodologi", COLOR_NAVY_MID)
-    deck.add_bullet_item(tf19_l, "Tahap 1: Desain & Fabrikasi Hardware:", "Perancangan skematik terisolasi grounding bintang, perakitan AD623-ADS1115, dan cetak 3D casing.", pt_size=10.0)
-    deck.add_bullet_item(tf19_l, "Tahap 2: Sintesis Nanomaterial:", "Ekstraksi kelor, kopresipitasi Fe3O4, elektrospinning sol PVA-sitrat-ADH, curing termal 130 C.", pt_size=10.0)
-    deck.add_bullet_item(tf19_l, "Tahap 3: Karakterisasi & Kalibrasi:", "Kalibrasi medan Helmholtz dengan teslameter, ekstraksi kurva dV/dB sensor TMR.", pt_size=10.0)
-    deck.add_bullet_item(tf19_l, "Tahap 4: Pengujian Sampel Bakso:", "Maserasi bakso, sentrifugasi 4000 rpm 10 menit, perekaman sinyal dinamis durasi 5 detik.", pt_size=10.0)
-    deck.add_bullet_item(tf19_l, "Tahap 5: Pelatihan Komparasi ML:", "Ekstraksi 5 fitur sinyal, 5-Fold Cross Validation pelatihan SVM klasik versus QSVC kuantum.", pt_size=10.0)
-    deck.add_bullet_item(tf19_l, "Tahap 6: Evaluasi & Deployment:", "Analisis akurasi, uji ketahanan derau, ekspor model biner .pkl ke Raspberry Pi 5.", pt_size=10.0)
-
-    # Kanan: Diagram Alir Lengkap
-    deck.add_image_fitted(s19, "Gambar/Bab3/BABIII_DiagramAlirPenelitian.drawio.png", Inches(6.8), Inches(1.55), Inches(5.733), Inches(5.2),
-                          border=True, caption="Gambar 8. Diagram Alir Metodologi Penelitian Komprehensif")
-
-    deck.add_footer(s19, 19)
-
-    # --------------------------------------------------------------------------
-    # SLIDE 20: METODOLOGI: HARDWARE, SKEMATIK & HOUSING 3D
-    # --------------------------------------------------------------------------
-    s20 = deck.add_blank_slide()
-    deck.add_header(s20, "Metodologi: Desain Hardware Terpadu, Skematik Sirkuit & Housing 3D",
-                    "Rantai Sinyal Terisolasi Grounding Bintang dan Housing Sensor Non-Magnetik")
-
-    # Kiri: Skematik Rangkaian Terisolasi Grounding
-    deck.add_image_fitted(s20, "Gambar/Bab3/babIII_skematik_TMR_grounding_fix.png", Inches(0.8), Inches(1.55), Inches(6.0), Inches(5.2),
-                          border=True, caption="Gambar 9. Skematik Sirkuit Sensor TMR, AD623, Filter RC, dan ADS1115")
-
-    # Kanan: CAD 3D & Specs
-    deck.add_image_fitted(s20, "Gambar/Bab3/babIII_Desainnnn.png", Inches(7.1), Inches(1.55), Inches(5.4), Inches(2.6),
-                          border=True, caption="Gambar 10. Desain 3D Housing Sensor dan Dudukan Preparat")
-
-    deck.add_card(s20, Inches(7.1), Inches(4.35), Inches(5.4), Inches(2.4), bg_color=COLOR_LIGHT_SLATE)
-    tb20_b = s20.shapes.add_textbox(Inches(7.3), Inches(4.45), Inches(5.0), Inches(2.2))
-    tf20_b = tb20_b.text_frame
-    tf20_b.word_wrap = True
-    deck.add_card_header(tf20_b, "Integritas Sinyal & Proteksi Derau", "Fitur Desain Sirkuit", COLOR_BLUE_ACCENT)
-    deck.add_bullet_item(tf20_b, "Topologi Grounding Bintang:", "Pemisahan ground analog dan digital untuk meniadakan loop arus tanah liar.", pt_size=10.0)
-    deck.add_bullet_item(tf20_b, "Bahan Cetak 3D Non-Magnetik:", "Housing PLA dan statif akrilik murni menjamin tidak ada distorsi fluks magnetik luar.", pt_size=10.0)
-    deck.add_bullet_item(tf20_b, "Presisi Posisi di Sumbu Z:", "Sensor TMR diposisikan tepat di pusat koordinat medan seragam Helmholtz.", pt_size=10.0)
-
-    deck.add_footer(s20, 20)
-
-    # --------------------------------------------------------------------------
-    # SLIDE 21: METODOLOGI: PERANGKAT LUNAK (ARDUINO & PYTHON GUI)
-    # --------------------------------------------------------------------------
-    s21 = deck.add_blank_slide()
-    deck.add_header(s21, "Metodologi: Arsitektur Perangkat Lunak (Arduino & Python GUI)",
-                    "Firmware Streaming Serial dan GUI CustomTkinter Berbasis Durasi Waktu 5 Detik")
-
-    deck.add_image_fitted(s21, "Gambar/Bab3/babIII_AlurSoftwareArduino.drawio.png", Inches(0.8), Inches(1.55), Inches(5.6), Inches(5.2),
-                          border=True, caption="Gambar 11. Diagram Alir Firmware Mikrokontroler Arduino Uno")
-
-    deck.add_image_fitted(s21, "Gambar/Bab3/babIII_DiagramAlirPython.drawio.png", Inches(6.8), Inches(1.55), Inches(5.733), Inches(5.2),
-                          border=True, caption="Gambar 12. Diagram Alir Aplikasi GUI Python TMRAcquisitionApp")
-
-    deck.add_footer(s21, 21)
-
-    # --------------------------------------------------------------------------
-    # SLIDE 22: METODOLOGI: SINTESIS FE3O4 HIJAU & ELEKTROSPINNING
-    # --------------------------------------------------------------------------
-    s22 = deck.add_blank_slide()
-    deck.add_header(s22, "Metodologi: Prosedur Sintesis Hijau Fe3O4 & Fabrikasi Nanofiber",
+    s16_mat = deck.add_blank_slide()
+    deck.add_header(s16_mat, "Metodologi: Prosedur Sintesis Hijau Fe3O4 & Fabrikasi Nanofiber",
                     "Ekstraksi Kelor, Sol Polimer, Parameter Pemintalan Elektrik, dan Curing 130 C")
 
-    deck.add_image_fitted(s22, "Gambar/Bab3/babIII_DiagramAlirSintesis.drawio.png", Inches(0.8), Inches(1.55), Inches(5.8), Inches(5.2),
-                          border=True, caption="Gambar 13. Diagram Alir Kimia Sintesis Nanofiber Fe3O4/PVA-Sitrat-ADH")
+    deck.add_image_fitted(s16_mat, "Gambar/Bab3/babIII_DiagramAlirSintesis.drawio.png", Inches(0.8), Inches(1.55), Inches(5.8), Inches(5.2),
+                          border=True, caption="Gambar 12. Diagram Alir Kimia Sintesis Nanofiber Fe3O4/PVA-Sitrat-ADH")
 
-    deck.add_card(s22, Inches(7.0), Inches(1.55), Inches(5.533), Inches(5.2))
-    tb22_r = s22.shapes.add_textbox(Inches(7.25), Inches(1.75), Inches(5.0), Inches(4.8))
-    tf22_r = tb22_r.text_frame
-    tf22_r.word_wrap = True
-    deck.add_card_header(tf22_r, "Parameter Optimal Laboratorium", "Protokol Sintesis & Fabrikasi", COLOR_EMERALD)
-    deck.add_bullet_item(tf22_r, "Ekstraksi Daun Kelor:", "50 g daun segar dalam 250 mL akuades, pemanasan 80 C selama 30 menit, disaring kertas Whatman.", pt_size=10.0)
-    deck.add_bullet_item(tf22_r, "Kopresipitasi Fe3O4:", "FeCl3 dan FeCl2 (rasio 2:1) + 20 mL ekstrak kelor, titrasi NaOH 2 M hingga pH 11 pada 70 C.", pt_size=10.0)
-    deck.add_bullet_item(tf22_r, "Formulasi Sol Gel:", "PVA 10% wt + Fe3O4 2% wt + Asam Sitrat 5% wt + ADH 3% wt diaduk konstan pada 60 C.", pt_size=10.0)
-    deck.add_bullet_item(tf22_r, "Parameter Elektrospinning:", "Tegangan 15 kV, laju alir syringe pump 0.5 mL/jam, jarak jarum ke drum 15 cm, putaran drum 300 rpm.", pt_size=10.0)
-    deck.add_bullet_item(tf22_r, "Curing Termal Final:", "Oven pemanas pada suhu 130 C selama 1.5 jam untuk aktivasi ikatan ester tahan air.", pt_size=10.0)
+    deck.add_card(s16_mat, Inches(6.8), Inches(1.55), Inches(5.733), Inches(5.2))
+    tb15_r = s16_mat.shapes.add_textbox(Inches(7.05), Inches(1.75), Inches(5.2), Inches(4.8))
+    tf15_r = tb15_r.text_frame
+    tf15_r.word_wrap = True
+    deck.add_card_header(tf15_r, "Parameter Optimal Laboratorium", accent_color=COLOR_EMERALD, title_size=16)
+    deck.add_bullet_item(tf15_r, "Ekstraksi Daun Kelor:", "50 g daun segar dalam 250 mL akuades, pemanasan 80 C selama 30 menit, disaring kertas Whatman.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf15_r, "Kopresipitasi Fe3O4:", "FeCl3 dan FeCl2 (rasio 2:1) + 20 mL ekstrak kelor, titrasi NaOH 2 M hingga pH 11 pada 70 C.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf15_r, "Formulasi Sol Gel:", "PVA 10% wt + Fe3O4 2% wt + Asam Sitrat 5% wt + ADH 3% wt diaduk konstan pada 60 C.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf15_r, "Parameter Elektrospinning:", "Tegangan 15 kV, laju alir syringe pump 0.5 mL/jam, jarak jarum ke drum 15 cm, putaran drum 300 rpm.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf15_r, "Curing Termal Final:", "Oven pemanas pada suhu 130 C selama 1.5 jam untuk aktivasi ikatan ester tahan air.", pt_size=12.5, space_after=6)
 
-    deck.add_footer(s22, 22)
+    deck.add_footer(s16_mat, 16)
 
     # --------------------------------------------------------------------------
-    # SLIDE 23: METODOLOGI: KALIBRASI HELMHOLTZ & KARAKTERISASI TMR
+    # SLIDE 17: METODOLOGI: KALIBRASI HELMHOLTZ & KARAKTERISASI TMR
     # --------------------------------------------------------------------------
-    s23 = deck.add_blank_slide()
-    deck.add_header(s23, "Metodologi: Prosedur Kalibrasi Kumparan Helmholtz & Sensor TMR",
+    s17_cal = deck.add_blank_slide()
+    deck.add_header(s17_cal, "Metodologi: Prosedur Kalibrasi Kumparan Helmholtz & Sensor TMR",
                     "Pemetaan Faktor Konversi Medan Magnetik dan Penentuan Kurva Sensitivitas Diferensial")
 
-    deck.add_card(s23, Inches(0.8), Inches(1.55), Inches(5.6), Inches(5.2))
-    tb23_l = s23.shapes.add_textbox(Inches(1.0), Inches(1.75), Inches(5.2), Inches(4.8))
-    tf23_l = tb23_l.text_frame
-    tf23_l.word_wrap = True
-    deck.add_card_header(tf23_l, "Tahap 1: Kalibrasi Medan Helmholtz", "Standarisasi Medan Acuan", COLOR_BLUE_ACCENT)
-    deck.add_bullet_item(tf23_l, "Sapuan Arus DC:", "Mengatur power supply dari 0.0 A hingga 1.6 A (tegangan 0 - 16 V) dengan step kenaikan 0.1 A.", pt_size=10.5)
-    deck.add_bullet_item(tf23_l, "Perekaman Teslameter:", "Mengukur fluks magnetik riil B (mT) tepat di titik pusat sensor secara bersamaan.", pt_size=10.5)
-    deck.add_bullet_item(tf23_l, "Regresi Linear Kalibrasi:", "Membentuk persamaan B = k * I dengan korelasi R^2 > 0.999 sebagai faktor konversi arus ke medan.", pt_size=10.5)
-    deck.add_bullet_item(tf23_l, "Verifikasi Polaritas Negatif:", "Membalik kabel polaritas kumparan untuk menguji sapuan medan negatif hingga -4.0 mT.", pt_size=10.5)
+    deck.add_card(s17_cal, Inches(0.8), Inches(1.55), Inches(5.7), Inches(5.2))
+    tb16_l = s17_cal.shapes.add_textbox(Inches(1.05), Inches(1.75), Inches(5.2), Inches(4.8))
+    tf16_l = tb16_l.text_frame
+    tf16_l.word_wrap = True
+    deck.add_card_header(tf16_l, "Tahap 1: Kalibrasi Medan Helmholtz", accent_color=COLOR_BLUE_ACCENT, title_size=16)
+    deck.add_bullet_item(tf16_l, "Tujuan Kalibrasi:", "Memperoleh koefisien konversi empiris medan magnetik B (mT) terhadap arus kumparan I (A).", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf16_l, "Variasi Eksperimen:", "Tegangan suplai power supply DC diatur bertahap 0.0 - 16.0 V menghasilkan sapuan arus 0.0 - 1.6 A.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf16_l, "Pengukuran Lapangan:", "Probe Hall-effect teslameter WT10A diletakkan tepat di pusat simetri kumparan (z = R/2).", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf16_l, "Hasil Regresi Linier:", "Persamaan kalibrasi: B_ukur = k_helm * I + B_offset, memastikan linearitas R^2 > 0.998.", pt_size=12.5, space_after=6)
 
-    deck.add_card(s23, Inches(6.8), Inches(1.55), Inches(5.733), Inches(5.2))
-    tb23_r = s23.shapes.add_textbox(Inches(7.0), Inches(1.75), Inches(5.3), Inches(4.8))
-    tf23_r = tb23_r.text_frame
-    tf23_r.word_wrap = True
-    deck.add_card_header(tf23_r, "Tahap 2: Karakterisasi Respon TMR", "Evaluasi Transduser ALT023", COLOR_NAVY_MID)
-    deck.add_bullet_item(tf23_r, "Perekaman Tegangan Vout:", "Mencatat respons tegangan diferensial AD623-ADS1115 pada setiap titik medan magnet B.", pt_size=10.5)
-    deck.add_bullet_item(tf23_r, "Penentuan Rentang Linear:", "Menetapkan rentang operasional linear sensor (+-1.0 mT) bebas efek saturasi.", pt_size=10.5)
-    deck.add_bullet_item(tf23_r, "Sensitivitas Diferensial (dV/dB):", "Menggunakan fitting spline pada modul analysis.py untuk mengekstrak sensitivitas lokal dV/dB (mV/mT).", pt_size=10.5)
-    deck.add_bullet_item(tf23_r, "Penyimpanan Otomatis JSON:", "Menyimpan konstanta kalibrasi slope dan intercept ke berkas JSON untuk koreksi realtime GUI.", pt_size=10.5)
+    deck.add_card(s17_cal, Inches(6.8), Inches(1.55), Inches(5.733), Inches(5.2))
+    tb16_r = s17_cal.shapes.add_textbox(Inches(7.05), Inches(1.75), Inches(5.2), Inches(4.8))
+    tf16_r = tb16_r.text_frame
+    tf16_r.word_wrap = True
+    deck.add_card_header(tf16_r, "Tahap 2: Karakterisasi Transfer TMR", accent_color=COLOR_EMERALD, title_size=16)
+    deck.add_bullet_item(tf16_r, "Pemasangan Sensor:", "Sensor TMR ALT023 ditempatkan pada statif presisi di pusat medan kumparan Helmholtz.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf16_r, "Tegangan Nol Medan:", "Pada B = 0 mT, tegangan keluaran bertengger stabil pada Vout = 2.50 V (sesuai VREF AD623).", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf16_r, "Rentang Sapuan Medan:", "Medan disapu bipolar dari -4.0 mT hingga +11.5 mT melintasi rentang linear +/-1.0 mT.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf16_r, "Evaluasi Sensitivitas:", "Sensitivitas diferensial dihitung via turunan numerik spline dV/dB dan regresi linier.", pt_size=12.5, space_after=6)
 
-    deck.add_footer(s23, 23)
-
-    # --------------------------------------------------------------------------
-    # SLIDE 24: METODOLOGI: PREPARASI BAKSO & 5 FITUR DINAMIS
-    # --------------------------------------------------------------------------
-    s24 = deck.add_blank_slide()
-    deck.add_header(s24, "Metodologi: Preparasi Sampel Bakso & Ekstraksi 5 Fitur Sinyal",
-                    "Protokol Ekstraksi Supernatan (Sentrifugasi 4000 rpm) dan Parameter Kuantitatif Sensor")
-
-    deck.add_card(s24, Inches(0.8), Inches(1.55), Inches(4.6), Inches(5.2))
-    tb24_l = s24.shapes.add_textbox(Inches(1.0), Inches(1.75), Inches(4.2), Inches(4.8))
-    tf24_l = tb24_l.text_frame
-    tf24_l.word_wrap = True
-    deck.add_card_header(tf24_l, "Protokol Ekstraksi Bakso", "Preparasi Matriks Pangan", COLOR_ROSE)
-    deck.add_bullet_item(tf24_l, "Maserasi Daging Bakso:", "10 gram sampel bakso dihaluskan dan dilarutkan dalam 50 mL akuades (rasio 1:5 w/v).", pt_size=10.0)
-    deck.add_bullet_item(tf24_l, "Sentrifugasi Pemisahan Fasa:", "Disentrifugasi pada kecepatan 4000 rpm selama 10 menit untuk mengendapkan serat kasar dan lemak.", pt_size=10.0)
-    deck.add_bullet_item(tf24_l, "Pengambilan Supernatan:", "Cairan jernih supernatan diambil sebagai analit bebas partikel pengganggu.", pt_size=10.0)
-    deck.add_bullet_item(tf24_l, "Penetesan Mikropipet:", "Sebanyak 20 mikroliter analit diteteskan di atas membran nanofiber sensor TMR.", pt_size=10.0)
-
-    # Kanan: Formula Fitur & Tabel
-    deck.add_card(s24, Inches(5.8), Inches(1.55), Inches(6.733), Inches(5.2))
-    tb24_r = s24.shapes.add_textbox(Inches(6.0), Inches(1.7), Inches(6.3), Inches(4.8))
-    tf24_r = tb24_r.text_frame
-    tf24_r.word_wrap = True
-    deck.add_card_header(tf24_r, "Ekstraksi 5 Fitur Dinamis Sinyal", "Vektor Fitur Machine Learning", COLOR_BLUE_ACCENT)
-
-    # Rendered Equation Fitur
-    deck.add_image_fitted(s24, "output/equations/eq_08_fitur.png", Inches(6.0), Inches(2.25), Inches(6.3), Inches(0.85), border=False)
-
-    headers_f = ["Simbol", "Nama Fitur Sinyal", "Formulasi", "Relevansi Fisis"]
-    rows_f = [
-        ["dV_max", "Amplitudo Puncak", "|V_peak - V_base|", "Besaran konsentrasi formalin"],
-        ["t_resp", "Waktu Respons 90%", "t(0.9*dV_max) - t_0", "Kinetika reaksi adisi ADH"],
-        ["(dV/dt)_0", "Slope Transien Awal", "Delta V / Delta t (awal)", "Laju difusi awal analit ke pori"],
-        ["V_steady", "Tegangan Tunak", "Mean(V(t)) pada t jenuh", "Keseimbangan ikatan hidrazon"],
-        ["AUC", "Area Under Curve", "Integral [V(t) - V_0] dt", "Akumulasi total energi respons"]
-    ]
-    deck.add_table(s24, Inches(5.9), Inches(3.25), Inches(6.5), Inches(3.3), headers_f, rows_f,
-                   col_widths=[Inches(1.1), Inches(1.8), Inches(1.8), Inches(1.8)])
-
-    deck.add_footer(s24, 24)
+    deck.add_footer(s17_cal, 17)
 
     # --------------------------------------------------------------------------
-    # SLIDE 25: METODOLOGI: MODEL BUILDING SVM VS QSVC & DEPLOYMENT
+    # SLIDE 18: METODOLOGI: PREPARASI BAKSO & EKSTRAKSI 5 FITUR SINYAL
     # --------------------------------------------------------------------------
-    s25 = deck.add_blank_slide()
-    deck.add_header(s25, "Metodologi: Pipeline Pelatihan SVM vs QSVC & Deployment",
-                    "Validasi Silang Kuantum-Klasik dan Penerapan Sistem Tertanam di Raspberry Pi 5")
+    s18_food = deck.add_blank_slide()
+    deck.add_header(s18_food, "Metodologi: Preparasi Sampel Bakso & Ekstraksi 5 Fitur Sinyal",
+                    "Protokol Ekstraksi Matriks Daging dan Definisi 5 Fitur Sinyal Domain Waktu untuk Model AI")
 
-    deck.add_image_fitted(s25, "Gambar/Bab3/babIII_ModelBuilding.drawio.png", Inches(0.8), Inches(1.55), Inches(5.6), Inches(5.2),
-                          border=True, caption="Gambar 14. Diagram Alir Pelatihan dan Validasi Silang SVM vs QSVC")
+    deck.add_card(s18_food, Inches(0.8), Inches(1.55), Inches(5.7), Inches(5.2))
+    tb17_l = s18_food.shapes.add_textbox(Inches(1.05), Inches(1.75), Inches(5.2), Inches(4.8))
+    tf17_l = tb17_l.text_frame
+    tf17_l.word_wrap = True
+    deck.add_card_header(tf17_l, "Protokol Ekstraksi Bakso", accent_color=COLOR_ROSE, title_size=16)
+    deck.add_bullet_item(tf17_l, "Matriks Sampel Bakso:", "Sampel bakso dibeli dari pedagang pasar tradisional; dihaluskan secara mekanik menggunakan mortar.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf17_l, "Ekstraksi Pelarut Air:", "10 g sampel bakso halus diekstraksi dalam 50 mL akuades deionisasi pada suhu 60 C selama 15 menit.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf17_l, "Filtrasi Bertingkat:", "Supernatan disaring kertas saring Whatman No. 42 untuk memisahkan residu lemak dan protein kasar.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf17_l, "Spiking Bertingkat:", "Ekstrak di-spiking larutan formalin standar konsentrasi terkontrol: 0, 10, 50, 100, 250, dan 500 mg/L.", pt_size=12.5, space_after=6)
 
-    deck.add_image_fitted(s25, "Gambar/Bab3/babIII_ModelDeploy.drawio.png", Inches(6.8), Inches(1.55), Inches(5.733), Inches(2.7),
-                          border=True, caption="Gambar 15. Diagram Alir Deployment Model ke Embedded System")
+    deck.add_card(s18_food, Inches(6.8), Inches(1.55), Inches(5.733), Inches(5.2))
+    tb17_r = s18_food.shapes.add_textbox(Inches(7.05), Inches(1.75), Inches(5.2), Inches(4.8))
+    tf17_r = tb17_r.text_frame
+    tf17_r.word_wrap = True
+    deck.add_card_header(tf17_r, "5 Fitur Domain Waktu", accent_color=COLOR_BLUE_ACCENT, title_size=16)
+    deck.add_bullet_item(tf17_r, "1. Vpeak (Tegangan Puncak):", "Nilai ekstrem tegangan sensor selama window akuisisi pengujian analit.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf17_r, "2. Vsteady (Tegangan Rerata):", "Rerata tegangan saat sinyal mencapai plateau tunak (setelah settling time 1.0 s).", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf17_r, "3. Delta V (Selisih Tegangan):", "Pergeseran tegangan bersih terhadap garis dasar tanpa analit (baseline delta).", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf17_r, "4. dV/dt (Laju Transien):", "Kemiringan awal kurva respons sensor sesaat setelah sampel diteteskan.", pt_size=12.5, space_after=6)
+    deck.add_bullet_item(tf17_r, "5. Integral Area Sinyal:", "Akumulasi total energi respons tegangan selama 5.0 detik akuisisi.", pt_size=12.5, space_after=6)
 
-    deck.add_card(s25, Inches(6.8), Inches(4.45), Inches(5.733), Inches(2.3), bg_color=COLOR_LIGHT_EMR, border_color=COLOR_EMERALD)
-    tb25_b = s25.shapes.add_textbox(Inches(7.05), Inches(4.55), Inches(5.2), Inches(2.1))
-    tf25_b = tb25_b.text_frame
-    tf25_b.word_wrap = True
-    deck.add_card_header(tf25_b, "Spesifikasi Deployment Raspberry Pi 5", "Edge Intelligence", COLOR_EMERALD)
-    deck.add_bullet_item(tf25_b, "Format Model:", "Serialisasi model klasifikasi terbaik ke file biner .pkl via Joblib.", pt_size=10.0)
-    deck.add_bullet_item(tf25_b, "Perangkat Keras Edge:", "Raspberry Pi 5 (8GB RAM, Broadcom BCM2712 Quad-core ARM 2.4GHz).", pt_size=10.0)
-    deck.add_bullet_item(tf25_b, "Tampilan Hasil:", "Layar sentuh kapasitif terintegrasi menampilkan status keamanan bakso seketika.", pt_size=10.0)
-
-    deck.add_footer(s25, 25)
-
-    # --------------------------------------------------------------------------
-    # SLIDE 26: RENCANA KERJA, TARGET LUARAN & PENUTUP
-    # --------------------------------------------------------------------------
-    s26 = deck.add_blank_slide()
-    deck.add_header(s26, "Jadwal Pelaksanaan Riset 4 Bulan & Target Luaran",
-                    "Roadmap Efektif di Bolabot (September - Desember 2026) dan Sesi Diskusi Tanya Jawab")
-
-    # Gantt Chart Table
-    headers_gc = ["Tahapan Kegiatan Riset", "B1 (Sep)", "B2 (Okt)", "B3 (Nov)", "B4 (Des)"]
-    rows_gc = [
-        ["Desain Hardware, Casing 3D & Skematik Sirkuit", "[ X ]", "[   ]", "[   ]", "[   ]"],
-        ["Kalibrasi Kumparan Helmholtz & Sensor TMR ALT023", "[ X ]", "[   ]", "[   ]", "[   ]"],
-        ["Green Synthesis Fe3O4 Kelor & Elektrospinning PVA", "[   ]", "[ X ]", "[   ]", "[   ]"],
-        ["Curing Termal 130 C & Karakterisasi Nanofiber ADH", "[   ]", "[ X ]", "[   ]", "[   ]"],
-        ["Uji Larutan Formalin Bertingkat & Sampel Bakso", "[   ]", "[   ]", "[ X ]", "[   ]"],
-        ["Ekstraksi 5 Fitur Sinyal & Pembentukan Dataset", "[   ]", "[   ]", "[ X ]", "[   ]"],
-        ["Pelatihan & Komparasi Model SVM vs QSVC (Qiskit)", "[   ]", "[   ]", "[   ]", "[ X ]"],
-        ["Deployment ke Raspberry Pi 5 & Draf Skripsi", "[   ]", "[   ]", "[   ]", "[ X ]"]
-    ]
-    deck.add_table(s26, Inches(0.8), Inches(1.55), Inches(6.8), Inches(3.6), headers_gc, rows_gc,
-                   col_widths=[Inches(3.6), Inches(0.8), Inches(0.8), Inches(0.8), Inches(0.8)])
-
-    # Target Luaran
-    deck.add_card(s26, Inches(7.9), Inches(1.55), Inches(4.633), Inches(3.6))
-    tb26_r = s26.shapes.add_textbox(Inches(8.15), Inches(1.75), Inches(4.1), Inches(3.2))
-    tf26_r = tb26_r.text_frame
-    tf26_r.word_wrap = True
-    deck.add_card_header(tf26_r, "Target Luaran Ilmiah", "Output Riset", COLOR_BLUE_ACCENT)
-    deck.add_bullet_item(tf26_r, "Publikasi Ilmiah:", "1 Artikel pada Prosiding Internasional terindeks Scopus (IEEE / AIP) atau Jurnal Nasional SINTA 2.", pt_size=10.0)
-    deck.add_bullet_item(tf26_r, "Prototipe Fisik:", "Unit instrumen biosensor TMR portabel terintegrasi casing 3D siap uji.", pt_size=10.0)
-    deck.add_bullet_item(tf26_r, "Karya Ilmiah Akhir:", "Dokumen Skripsi lengkap Sarjana Fisika UIN Sunan Gunung Djati Bandung.", pt_size=10.0)
-
-    # Thank you box
-    deck.add_card(s26, Inches(0.8), Inches(5.35), Inches(11.733), Inches(1.4), bg_color=COLOR_NAVY_DARK, border_color=COLOR_BLUE_ACCENT)
-    tb26_b = s26.shapes.add_textbox(Inches(1.05), Inches(5.45), Inches(11.2), Inches(1.2))
-    tf26_b = tb26_b.text_frame
-    tf26_b.word_wrap = True
-    p26_th = tf26_b.paragraphs[0]
-    p26_th.text = "TERIMA KASIH ATAS PERHATIAN BAPAK/IBU DOSEN PENGUJI DAN PEMBIMBING"
-    p26_th.font.name = FONT_FAMILY
-    p26_th.font.bold = True
-    p26_th.font.size = Pt(13)
-    p26_th.font.color.rgb = COLOR_CARD_FILL
-    p26_th.alignment = PP_ALIGN.CENTER
-    p26_th.space_after = Pt(4)
-
-    p26_sub = tf26_b.add_paragraph()
-    p26_sub.text = "Mohon Arahan, Masukan, dan Saran demi Kesempurnaan Pelaksanaan Tugas Akhir Ini | Sesi Tanya Jawab Dibuka"
-    p26_sub.font.name = FONT_FAMILY
-    p26_sub.font.size = Pt(10.5)
-    p26_sub.font.color.rgb = COLOR_LIGHT_BLUE
-    p26_sub.alignment = PP_ALIGN.CENTER
-
-    deck.add_footer(s26, 26)
+    deck.add_footer(s18_food, 18)
 
     # --------------------------------------------------------------------------
-    # SAVE FILE
+    # SLIDE 19: METODOLOGI: PEMODELAN ML [MURNI 2 FLOWCHART, TANPA TEKS LAIN]
+    # --------------------------------------------------------------------------
+    s19_ml = deck.add_blank_slide()
+    deck.add_header(s19_ml, "Metodologi: Pipeline Pelatihan SVM vs QSVC & Deployment",
+                    "Diagram Alir Model Building 5-Fold Cross Validation (Kiri) dan Model Deployment (Kanan)")
+
+    deck.add_image_fitted(s19_ml, "Gambar/Bab3/babIII_ModelBuilding.drawio.png", Inches(0.8), Inches(1.55), Inches(5.7), Inches(5.2),
+                          border=True, caption="Gambar 13. Diagram Alir Pelatihan dan Validasi Silang SVM vs QSVC")
+
+    deck.add_image_fitted(s19_ml, "Gambar/Bab3/babIII_ModelDeploy.drawio.png", Inches(6.8), Inches(1.55), Inches(5.733), Inches(5.2),
+                          border=True, caption="Gambar 14. Diagram Alir Deployment Model ke Embedded System")
+
+    deck.add_footer(s19_ml, 19)
+
+    # --------------------------------------------------------------------------
+    # DAFTAR PUSTAKA LENGKAP: BACA SEMUA DARI data/all_52_references.txt
+    # --------------------------------------------------------------------------
+    all_refs = []
+    if os.path.exists("data/all_52_references.txt"):
+        with open("data/all_52_references.txt", "r", encoding="utf-8") as f_ref:
+            for line in f_ref:
+                l_str = line.strip()
+                if l_str:
+                    l_clean = re.sub(r'^\d+\.\s*', '', l_str)
+                    all_refs.append(l_clean)
+    else:
+        print("[PERINGATAN] Berkas data/all_52_references.txt belum ada.")
+
+    print(f"[INFO] Memuat {len(all_refs)} referensi untuk slide Daftar Pustaka.")
+
+    # Bagi rata menjadi 2 slide
+    half_idx = (len(all_refs) + 1) // 2
+    refs_part1 = all_refs[:half_idx]
+    refs_part2 = all_refs[half_idx:]
+
+    # --------------------------------------------------------------------------
+    # SLIDE 20: DAFTAR PUSTAKA UTAMA (BAGIAN 1)
+    # --------------------------------------------------------------------------
+    s20_ref1 = deck.add_blank_slide()
+    deck.add_header(s20_ref1, f"Daftar Pustaka Lengkap Naskah Proposal (Bagian 1: Ref 01 - {half_idx:02d})",
+                    "Daftar Rujukan Pustaka Ilmiah Bereputasi Sesuai Format Naskah Proposal (Alfabetis A - M)")
+
+    half_col1 = (len(refs_part1) + 1) // 2
+    deck.add_card(s20_ref1, Inches(0.8), Inches(1.55), Inches(5.7), Inches(5.2))
+    tb20_l = s20_ref1.shapes.add_textbox(Inches(0.95), Inches(1.65), Inches(5.4), Inches(5.0))
+    tf20_l = tb20_l.text_frame
+    tf20_l.word_wrap = True
+    for idx, ref_text in enumerate(refs_part1[:half_col1], 1):
+        deck.add_bullet_item(tf20_l, f"[{idx:02d}]", ref_text, pt_size=8.5, space_after=3.0)
+
+    deck.add_card(s20_ref1, Inches(6.8), Inches(1.55), Inches(5.733), Inches(5.2))
+    tb20_r = s20_ref1.shapes.add_textbox(Inches(6.95), Inches(1.65), Inches(5.4), Inches(5.0))
+    tf20_r = tb20_r.text_frame
+    tf20_r.word_wrap = True
+    for idx, ref_text in enumerate(refs_part1[half_col1:], half_col1 + 1):
+        deck.add_bullet_item(tf20_r, f"[{idx:02d}]", ref_text, pt_size=8.5, space_after=3.0)
+
+    deck.add_footer(s20_ref1, 20)
+
+    # --------------------------------------------------------------------------
+    # SLIDE 21: DAFTAR PUSTAKA UTAMA (BAGIAN 2)
+    # --------------------------------------------------------------------------
+    s21_ref2 = deck.add_blank_slide()
+    deck.add_header(s21_ref2, f"Daftar Pustaka Lengkap Naskah Proposal (Bagian 2: Ref {half_idx+1:02d} - {len(all_refs):02d})",
+                    "Daftar Rujukan Pustaka Ilmiah Bereputasi Sesuai Format Naskah Proposal (Alfabetis N - Z)")
+
+    half_col2 = (len(refs_part2) + 1) // 2
+    deck.add_card(s21_ref2, Inches(0.8), Inches(1.55), Inches(5.7), Inches(5.2))
+    tb21_l = s21_ref2.shapes.add_textbox(Inches(0.95), Inches(1.65), Inches(5.4), Inches(5.0))
+    tf21_l = tb21_l.text_frame
+    tf21_l.word_wrap = True
+    start_num2 = half_idx + 1
+    for idx, ref_text in enumerate(refs_part2[:half_col2], start_num2):
+        deck.add_bullet_item(tf21_l, f"[{idx:02d}]", ref_text, pt_size=8.5, space_after=3.0)
+
+    deck.add_card(s21_ref2, Inches(6.8), Inches(1.55), Inches(5.733), Inches(5.2))
+    tb21_r = s21_ref2.shapes.add_textbox(Inches(6.95), Inches(1.65), Inches(5.4), Inches(5.0))
+    tf21_r = tb21_r.text_frame
+    tf21_r.word_wrap = True
+    for idx, ref_text in enumerate(refs_part2[half_col2:], start_num2 + half_col2):
+        deck.add_bullet_item(tf21_r, f"[{idx:02d}]", ref_text, pt_size=8.5, space_after=3.0)
+
+    deck.add_footer(s21_ref2, 21)
+
+    # --------------------------------------------------------------------------
+    # SLIDE 22: SLIDE PENUTUP ("TERIMA KASIH")
+    # --------------------------------------------------------------------------
+    s22_close = deck.add_blank_slide()
+
+    deck.add_card(s22_close, Inches(1.5), Inches(1.2), Inches(10.333), Inches(4.2), bg_color=COLOR_NAVY_DARK, border_color=COLOR_BLUE_ACCENT)
+    
+    tb22_th = s22_close.shapes.add_textbox(Inches(1.8), Inches(1.8), Inches(9.733), Inches(1.5))
+    tf22_th = tb22_th.text_frame
+    tf22_th.word_wrap = True
+    p22_th = tf22_th.paragraphs[0]
+    p22_th.text = "TERIMA KASIH"
+    p22_th.font.name = FONT_FAMILY
+    p22_th.font.bold = True
+    p22_th.font.size = Pt(40)
+    p22_th.font.color.rgb = COLOR_CARD_FILL
+    p22_th.alignment = PP_ALIGN.CENTER
+
+    p22_sub1 = tf22_th.add_paragraph()
+    p22_sub1.text = "SEMINAR PROPOSAL TUGAS AKHIR JURUSAN FISIKA UIN SUNAN GUNUNG DJATI BANDUNG"
+    p22_sub1.font.name = FONT_FAMILY
+    p22_sub1.font.bold = True
+    p22_sub1.font.size = Pt(13)
+    p22_sub1.font.color.rgb = COLOR_BLUE_ACCENT
+    p22_sub1.alignment = PP_ALIGN.CENTER
+    p22_sub1.space_before = Pt(8)
+
+    p22_sub2 = tf22_th.add_paragraph()
+    p22_sub2.text = "Rancang Bangun Instrumentasi Sensor TMR Berbasis Nanofiber Fe3O4/PVA-Sitrat-ADH untuk Deteksi Formalin pada Bakso Menggunakan Komparasi Model SVM dan QSVC"
+    p22_sub2.font.name = FONT_FAMILY
+    p22_sub2.font.size = Pt(12)
+    p22_sub2.font.color.rgb = COLOR_LIGHT_SLATE
+    p22_sub2.alignment = PP_ALIGN.CENTER
+    p22_sub2.space_before = Pt(6)
+
+    deck.add_card(s22_close, Inches(1.5), Inches(5.6), Inches(10.333), Inches(1.2), bg_color=COLOR_CARD_FILL, border_color=COLOR_CARD_BORDER)
+    tb22_q = s22_close.shapes.add_textbox(Inches(1.8), Inches(5.75), Inches(9.733), Inches(0.9))
+    tf22_q = tb22_q.text_frame
+    tf22_q.word_wrap = True
+    p22_q = tf22_q.paragraphs[0]
+    p22_q.text = "Mohon Arahan, Masukan, dan Saran demi Kesempurnaan Pelaksanaan Tugas Akhir Ini"
+    p22_q.font.name = FONT_FAMILY
+    p22_q.font.bold = True
+    p22_q.font.size = Pt(13)
+    p22_q.font.color.rgb = COLOR_NAVY_DARK
+    p22_q.alignment = PP_ALIGN.CENTER
+
+    p22_qsub = tf22_q.add_paragraph()
+    p22_qsub.text = "Sesi Tanya Jawab dan Diskusi Akademik Dibuka"
+    p22_qsub.font.name = FONT_FAMILY
+    p22_qsub.font.bold = True
+    p22_qsub.font.size = Pt(12)
+    p22_qsub.font.color.rgb = COLOR_BLUE_ACCENT
+    p22_qsub.alignment = PP_ALIGN.CENTER
+    p22_qsub.space_before = Pt(4)
+
+    deck.add_footer(s22_close, 22)
+
+    # --------------------------------------------------------------------------
+    # SIMPAN KE FILE PPTX
     # --------------------------------------------------------------------------
     deck.save()
 

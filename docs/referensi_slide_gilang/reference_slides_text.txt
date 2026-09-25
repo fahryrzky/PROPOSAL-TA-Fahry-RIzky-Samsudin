@@ -1,0 +1,713 @@
+=== SLIDE 1 ===
+DISUSUN OLEH:
+GILANG PRATAMA PUTRA SISWANTO
+(NIM 1227030017)
+18 Februari
+2026
+IMPLEMENTASI RANDOM FOREST INSTRUMENTASI 
+SENSOR GIANT MAGNETORESISTANCE DENGAN 
+NANOFIBER Fe3O4/PVA-GOX UNTUK UJI SENSITIVITAS 
+GLUKOSA NON-INVASIF PADA SALIVA
+JURUSAN FISIKA
+FAKULTAS SAINS DAN TEKNOLOGI
+UNIVERSITAS ISLAM NEGERI SUNAN GUNUNG DJATI BANDUNG
+TAHUN 2026
+DOSEN PEMBIMBING I:                                                 DOSEN PEMBIMBING II:
+MADA SANJAYA W.S., M.SI., PH.D.                           DR. YUDHA SATYA PERKASA, M.SI. 
+Sidang
+Munaqasyah
+
+=== SLIDE 2 ===
+LATAR BELAKANG
+Diabetes:
+537 mil.(2021) - 784 mil. (2045)
+(Dey et al., 2025)
+Finger Prick test ->
+Konsentrasi penderita diabetes (1.5-
+2.5 mM) dengan individu sehat (0.2-
+0.5 mM) (Calixto et al., 2025).
+Saliva
+Biokompatibel
+Biosensor 
+GOx/Fe₃O₄-PVA/Sn
+(Sanaeifar et al., 2017)
+(Mohanty et al., 2021)
+PVA-Fe3O4
+Respons magnetik
+yang baik (Fe3O4)
+Sensor Giant Magnetoresistance (GMR)
+(Antarnusa et al., 2022)
+Sensitivitas 
+tinggi,  portabel
+Stabilitas sinyal 
+(Fe₃O₄@TEOS/PEG 
+)
+(Ardiyanti et al., 2025)
+Random Forest Machine Learning
+Akurasi 97.7% dalam klasifikasi diabetes 
+(Nainggolan & Sinaga, 2023)
+Akurasi prediksi glukosa sinyal 
+multimodal berbasis millimeter-wave 
+dan near-infrared (NIR),  deteksi 2-20mM 
+(Sun, et al., 2023) .
+Integrasi nanofiber 
+Fe3O4/PVA-GOx 
+berbasis sensor GMR-
+machine learning 
+random forest untuk 
+deteksi konsentrasi 
+glukosa?
+Gap Research
+
+
+=== SLIDE 3 ===
+RUMUSAN MASALAH
+1. Menentukan sensitivitas dan linearitas (R²) sensor 
+GMR berlabel Fe3O4/PVA-GOx sebagai hubungan 
+ΔV terhadap konsentrasi D-(+)-Glucose 
+Monohydrate pada saliva?
+2.Membandingkan sensitivitas dan linearitas sensor 
+GMR berbasis Fe3O4/PVA dengan dan tanpa GOx?
+3.Menilai peningkatan akurasi sinyal (MSE, MAE, R²)
+setelah integrasi Random Forest pada sensor GMR
+berlabel GOx dibanding regresi linear baseline?
+4.Menentukan seberapa efektif Random Forest 
+meningkatkan akurasi regresi kadar glukosa saliva 
+pada kondisi dengan dan tanpa GOx?
+TUJUAN PENELITIAN
+1. Mengukur sensitivitas (slope) dan linearitas (R²) 
+sensor GMR berlabel Fe3O4/PVA-GOx terhadap 
+perubahan tegangan versus konsentrasi D-(+)-
+Glucose Monohydrate.
+2.Membandingkan performa deteksi (sensitivitas 
+dan R²) sensor GMR Fe3O4/PVA dengan dan tanpa 
+immobilisasi GOx setelah integrasi Random Forest.
+3.Mengimplementasikan dan mengoptimalkan 
+Random Forest untuk meningkatkan akurasi 
+estimasi konsentrasi (MSE, MAE, R²) dibandingkan 
+regresi linear baseline.
+4.Menilai efektivitas Random Forest dalam 
+meningkatkan akurasi regresi kadar glukosa saliva.
+
+
+=== SLIDE 4 ===
+• Fenomena kuantum pada struktur logam 
+tipis berlapis. Resistansi berubah signifikan 
+akibat medan magnet eksternal (Ricci et 
+al., 2023).
+• Mengacu Wibowo et al. (2023) & Ardiyanti 
+et al. (2023), rasio perubahan resistansi 
+relatif diekspresikan sebagai:
+Giant Magnetoresistance (GMR)
+Gambar 1. Sensor GMR 
+pada Konfigurasi Plat saat 
+(a) Lapisan Magnetisasi 
+Paralel, dan (b) Lapisan 
+Magnetisasi Antiparalel
+• Sensor GMR tersusun 
+sebagai jembatan 
+Wheatstone dengan dua 
+elemen aktif.
+Gambar 2. Konfigurasi Jembatan 
+Wheatstone Sensor GMR
+• Terdiri dari dua kumparan identik berarus 
+searah, sejajar pada satu sumbu (Zhu et 
+al., 2023).
+• Dirancang menghasilkan medan magnet 
+homogen di sekitar pusat sistem (Ardiyani 
+et al., 2015).
+• Dengan memilih 𝛼=𝑅 (aturan klasik 
+Helmholtz) diperoleh bentuk (Zhu et al., 
+2023):
+Kumparan Helmholtz
+Gambar 3. 
+Kumparan 
+Helmholtz
+
+
+=== SLIDE 5 ===
+• Rangkaian op-amp yang menghasilkan 
+tegangan keluaran sebanding dengan 
+selisih dua masukan (Green et al., 2019).
+• Terdiri dari empat resistor yang mengatur 
+rasio penguatan (gain) (Jung, 2002).
+Op-Amp Subtraktor
+• Konsep elektronika yang dapat 
+meloloskan sinyal frekuensi rendah, 
+menahan frekuensi tinggi (Firmansyah, 
+2017).
+• Parameter utama: Cut-off frequency (fc) 
+→ batas transisi antara sinyal dilewatkan 
+dan dilemahkan (Supriyanto et al., 2023).
+Passive Low-Pass Filter (LPF)
+• ADC mengubah sinyal analog menjadi 
+representasi digital melalui proses sampling 
+dan kuantisasi (Shylu et al., 2020).
+• Kinerja ADC ditentukan oleh resolusi (bit), 
+kecepatan sampling, linieritas, SNR, dan 
+efisiensi daya (Shylu et al., 2020).
+Analog to Digital Converter (ADC)
+• Electrospinning menggunakan fenomena 
+elektrohidrodinamika untuk menghasilkan serat 
+nano dari larutan atau lelehan polimer (Xue et 
+al., 2019).
+• Sistem terdiri atas power supply tegangan 
+tinggi, pompa syringe, spinneret, dan kolektor 
+konduktif (Xue et al., 2019).
+Gambar 6. Ilustrasi Proses 
+Electrospinning
+Electrospinning
+
+=== SLIDE 6 ===
+• Glukosa (C₆H₁₂O₆·H₂O); Glukosa monohidrat 
+merupakan monosakarida utama dalam 
+metabolisme energi (Giaretta et al., 2024).
+• Dalam tubuh, glukosa terdapat di darah dan 
+juga saliva melalui difusi paracellular dari 
+plasma ke cairan gingiva (Piekarz et al., 2024).
+• Kadar glukosa saliva normal: < 2 mg/100 mL 
+(individu sehat) (Piekarz et al., 2024).
+• PVA (Polyvinyl Alcohol): polimer semi-
+kristalin dengan film-forming baik, 
+biokompatibel, biodegradable, dan hidrofilik 
+(Türkoğlu et al., 2024).
+• Fe₃O₄ (magnetit): nanopartikel magnetik 
+yang umum dikompositkan dengan PVA 
+(Türkoğlu et al., 2024).
+Nanofiber Fe₃O₄/PVA
+Glukosa Monohidrat pada Saliva
+Random Forest
+• Diperkenalkan oleh Breiman (2001) 
+sebagai metode ensemble learning 
+berbasis bagging dan randomisasi fitur 
+(Breiman, 2001).
+• Menggabungkan banyak Classification 
+and Regression Trees (CART) untuk 
+meningkatkan akurasi dan mengurangi 
+overfitting (Tyralis et al., 2019).
+Glukosa Oksidase (GOx)
+GOx adalah enzim flavoprotein yang 
+digunakan sebagai elemen pengenal pada 
+biosensor glukosa karena spesifisitas tinggi 
+terhadap beta-D-glukosa, stabilitas relatif, dan 
+mekanisme katalitik jelas (Bauer et al., 2022).
+
+=== SLIDE 7 ===
+Penelitian ini telah dilaksanakan pada bulan 
+Agustus hingga Oktober 2025, bertempat di Kantor 
+Bolabot Techno Robotic Institute, Jl. Sauyunan VI 
+No. 10 Blok F6, Kelurahan Cipadung, Kecamatan 
+Panyileukan, Kota Bandung, Provinsi Jawa Barat 
+40614.
+TEMPAT DAN WAKTU PENELITIAN ALAT DAN BAHAN
+Tabel 1. Daftar Alat dan Bahan Penelitian
+PERANCANGAN 
+PERANGKAT KERAS
+Gambar 8. Realisasi Desain Mekatronika Kit 
+Instrumentasi
+Gambar 7. Desain Prototipe Mekatronika Kit 
+Instrumentasi Sensor GMR (a) Tampak Luar, 
+(b) Tampak Dalam 
+Gambar 9. Desain Rangkaian Perangkat Keras Kit Instrumentasi GMR
+
+=== SLIDE 8 ===
+PERANCANGAN PERANGKAT LUNAK
+Gambar 11. Diagram Alir Pemrograman Python untuk a) Akuisisi Dataset, b) Pelatihan Model, c) 
+Implementasi Model Random Forest Untuk Uji Sensitivitas Glucose Monohydrate pada Saliva
+Gambar 10. Diagram Alir 
+Pemrograman Arduino 
+b) c)b)a)
+
+=== SLIDE 9 ===
+Kalibrasi kumparan Helmholtz menunjukkan hubungan 
+linear sensitivitas 0,06839 mT/V, R2 senilai 0,99936, dan r 
+senilai 0,99968.
+Kalibrasi Medan Magnet Kumparan Helmholtz
+Gambar 12 Grafik Kalibrasi Medan Magnet 
+Eksternal Kumparan Helmholtz
+Tabel 1 Kalibrasi Medan Magnet Eksternal 
+Kumparan Helmholtz
+V (Volt) B (mT)
+0 0
+1 0,1
+2 0,1
+3 0,2
+4 0,3
+5 0,3
+6 0,4
+7 0,5
+8 0,5
+9 0,62
+10 0,68
+11 0,74
+12 0,81
+13 0,88
+14 0,96
+15 1,01
+16 1,1
+17 1,16
+18 1,24
+
+
+=== SLIDE 10 ===
+Keluaran sensor GMR meningkat hampir linear dari 0,855 V 
+menjadi 0,937 V untuk perubahan medan sekitar 0,05 
+hingga 1,20 mT dengan ΔV senilai 0,082 V.
+Analisis Uji Responsivitas Sensor GMR Terhadap 
+Perubahan Medan Magnet Kumparan Helmholtz
+Gambar 13 Grafik Uji Responsivitas Sensor GMR Terhadap 
+Perubahan Medan Magnet Kumparan Helmholtz
+Tabel 2 Pengujian Responsivitas Sensor GMR Terhadap 
+Perubahan Medan Magnet Kumparan Helmholtz
+B (mT) V_chip (V)
+0,07 0,856172492
+0,14 0,863831024
+0,21 0,870447898
+0,28 0,876562
+0,32 0,883074288
+0,4 0,890244032
+0,46 0,897378153
+0,53 0,903190186
+0,62 0,90825
+0,68 0,913287508
+0,74 0,918108109
+0,81 0,921804169
+0,88 0,925563373
+0,96 0,928757102
+1,01 0,931706305
+1,1 0,933762678
+1,16 0,935519847
+1,24 0,936327153
+
+
+=== SLIDE 11 ===
+Sensor GMR menunjukkan respons sinyal yang stabil dan 
+linear terhadap konsentrasi Fe3O4 5 hingga 50 mg/mL 
+dengan slope 0,00109 V per (mg/mL), R2 senilai 0,99459, 
+dan r bernilai 0,99729.
+Analisis Sensitivitas dan Linearitas Sensor 
+GMR Terhadap Magnetik Nanopartikel Fe3O4
+Tabel 3 Uji Performa Sensor GMR Terhadap Variasi Konsentrasi Magnetik 
+Nanopartikel Fe3O4
+Konsentrasi, C (mg/mL)
+Sinyal, V_chip-average (V) 
+Iterasi 1 Iterasi 2 Iterasi 3
+5 0,70353735 0,703766383 0,703821733
+10 0,713256067 0,713396483 0,71325935
+20 0,72148967 0,72177175 0,721361233
+30 0,734262183 0,732034117 0,735080983
+40 0,7428717 0,745321683 0,742531033
+50 0,756084417 0,752409117 0,7544972
+Gambar 14 Uji Sensitivitas Sensor GMR Terhadap Variasi Konsentrasi Magnetik 
+Nanopartikel Fe3O4
+Gambar 15 Uji Linearitas Sensor GMR Terhadap Variasi Konsentrasi Magnetik 
+Nanopartikel Fe3O4
+
+
+=== SLIDE 12 ===
+Sensor GMR menunjukkan peningkatan sinyal linear 
+terhadap konsentrasi nanofiber Fe3O4/PVA 10 hingga 14 
+persen dengan slope 0,00175 V per persen, R2 mencapai 
+0,98678, dan deviasi kurang dari 0,6 mV, sehingga 
+menegaskan sensitivitas, dan performa nanofiber sebagai 
+label magnetik untuk biosensing glukosa saliva.
+Analisis Sensitivitas dan Linearitas Sensor 
+GMR Terhadap Variasi Konsentrasi Nanofiber 
+Komposit Fe3O4/PVA
+Gambar 16 Grafik Uji Sensitivitas Sensor GMR Terhadap Variasi
+Konsentrasi Nanofiber Komposit Fe3O4
+Tabel 4 Uji Performa Sensor GMR Terhadap Konsentrasi 
+Variasi Nanofiber Komposit Fe3O4/PVA
+Konsentrasi, C 
+(%)
+Sinyal, V_chip-average (V) 
+Iterasi 1 Iterasi 2 Iterasi 3
+10 0,893505933 0,893659267 0,893699567
+11 0,895612467 0,895915183 0,8953966
+12 0,897827917 0,897937 0,897877783
+13 0,898900067 0,898853067 0,898765333
+14 0,9007782 0,90079385 0,900737583 Gambar 17 Grafik Uji Linearitas Sensor GMR Terhadap Variasi
+Konsentrasi Nanofiber Komposit Fe3O4
+
+
+=== SLIDE 13 ===
+Sensor GMR berlabel nanofiber Fe3O4/PVA 14% 
+menunjukkan peningkatan sinyal yang stabil dan linear 
+terhadap konsentrasi D-(+)-glukosa monohidrat 0,02 
+hingga 0,15 mg/mL dengan slope 0,03239 V per mg/mL, R2 
+senilai 0,98612, dengan noise kurang dari 25 µV, sehingga 
+menegaskan sensitivitas dan kelayakan sistem untuk 
+deteksi glukosa saliva non-invasif
+Analisis Sensitivitas dan Linearitas Sensor GMR 
+Terhadap Variasi Konsentrasi D-(+)-Glukosa 
+Monohidrat dengan Label Nanofiber Fe3O4/PVA 14% 
+Gambar 18 Grafik Uji Sensitivitas Sensor GMR Terhadap Variasi 
+Konsentrasi D-(+)-Glukosa Monohidrat Berbasis Label Fe3O4/PVA 14%Tabel 5 Uji Performa Sensor GMR Terhadap Variasi Konsentrasi D-(+)-Glukosa
+Monohidrat Berbasis Label Fe3O4/PVA 14%
+Gambar 19 Grafik Uji Linearitas Sensor GMR Terhadap Variasi 
+Konsentrasi D-(+)-Glukosa Monohidrat Berbasis Label Fe3O4/PVA 14%
+Konsentrasi, C 
+(mg/mL)
+Sinyal, V_chip-average (V) 
+Iterasi 1 Iterasi 2 Iterasi 3
+0,02 0,9035496 0,903543167 0,9035448
+0,04 0,904218413 0,90421437 0,904218283
+0,05 0,904686 0,9046838 0,9046788
+0,06 0,905211287 0,905214403 0,905207235
+0,08 0,905612433 0,905615033 0,905624783
+0,1 0,906362433 0,90636655 0,906375
+0,12 0,907123267 0,9071237 0,907123867
+0,15 0,907624655 0,907633733 0,9076792
+
+
+=== SLIDE 14 ===
+Sensor GMR berlabel Fe3O4/PVA-GOx menunjukkan 
+respons linear terhadap konsentrasi D-(+)-glukosa 
+monohidrat 0,02 hingga 0,15 mg/mL dengan sensitivitas 
+sekitar 0,03209 V per mg/mL, R2 senilai 0,97929, serta 
+penambahan GOx tanpa mengubah slope, sehingga 
+meningkatkan efisiensi penandaan untuk deteksi 
+kuantitatif glukosa saliva.
+Analisis dan Komparasi Performa Sensor GMR 
+Terhadap Variasi Konsentrasi D-(+)-Glukosa 
+Monohidrat dengan Label-GOx
+Gambar 20 Grafik Uji 
+Sensitivitas Sensor GMR 
+Terhadap Variasi Konsentrasi 
+D-(+)-Glukosa Monohidrat 
+Berbasis Label Fe3O4/PVA 14%-
+GOx
+Tabel 6 Uji Komparasi Performa Sensor GMR Terhadap Variasi Konsentrasi 
+D-(+)-Glukosa Monohidrat Berbasis Label Fe3O4/PVA 14%-GOx
+Gambar 21 Grafik Uji Linearitas 
+Sensor GMR Terhadap Variasi 
+Konsentrasi D-(+)-Glukosa 
+Monohidrat Berbasis Label 
+Fe3O4/PVA 14%-GOx
+Concentration, C 
+(mg/mL)
+Signal without Gox, Vchip-
+avg (V)
+Signal with Gox, Vchip-
+avg (V)
+0,02 0,903545856 0,904632211
+0,04 0,904217022 0,905216531
+0,05 0,904682867 0,905682867
+0,06 0,905210975 0,906210975
+0,08 0,905617417 0,906815194
+0,1 0,906367994 0,9075414
+0,12 0,907123611 0,908140206
+0,15 0,907645863 0,908587596
+Gambar 22 Grafik Uji 
+Komparasi Linearitas Sensor 
+GMR Terhadap Variasi 
+Konsentrasi D-(+)-Glukosa 
+Monohidrat Berbasis Label 
+Fe3O4/PVA 14% dengan dan 
+tanpa GOx
+
+
+=== SLIDE 15 ===
+Model regresi Random Forest menunjukkan akurasi tinggi 
+dengan kurva kalibrasi linear, MAE dan MSE kecil, grafik 
+paritas berimpit dengan garis ideal.
+Analisis Performa Model Regresi Machine Learning 
+RandomForest untuk Uji Regresi Konsentrasi D-(+)-
+Glukosa Monohidrat Berbasis Label
+Gambar 23 Kurva Kalibrasi Pelatihan Model Random Forest untuk Dataset
+Glukosa Monohidrat dengan Label
+ Gambar 24 Komparasi Nilai MSE Pelatihan Model Random Forest untuk 
+Dataset Glukosa Monohidrat dengan Label
+Gambar 25 Komparasi Nilai MAE Pelatihan Model Random Forest untuk 
+Dataset Glukosa Monohidrat dengan Label
+
+=== SLIDE 16 ===
+Analisis Performa Model Regresi Machine Learning 
+RandomForest untuk Uji Regresi Konsentrasi D-(+)-
+Glukosa Monohidrat Berbasis Label
+Gambar 27 Komparasi Nilai R2 Pelatihan Model Random 
+Forest untuk Dataset Glukosa Monohidrat dengan Label
+Gambar 26 Paritas Pelatihan Model Random Forest untuk 
+Dataset Glukosa Monohidrat dengan Label
+Gambar 28 Residual Pelatihan Model Random Forest untuk 
+Dataset Glukosa Monohidrat dengan Label
+
+=== SLIDE 17 ===
+Analisis Performa Model Regresi Machine Learning 
+RandomForest untuk Uji Regresi Konsentrasi D-(+)-
+Glukosa Monohidrat Berbasis Label-GOx
+Gambar 29 Kurva Kalibrasi Pelatihan Model Random Forest untuk 
+Dataset Glukosa Monohidrat dengan Label-GOx
+Gambar 31 Komparasi Nilai MSE Pelatihan Model Random Forest untuk 
+Dataset Glukosa Monohidrat dengan Label-GOx
+Gambar 30 Komparasi Nilai MSE Pelatihan Model Random Forest untuk 
+Dataset Glukosa Monohidrat dengan Label-GOx
+Model Random Forest pada dataset glukosa monohidrat 
+berlabel GOx menunjukkan kurva kalibrasi linear yang 
+sangat rapat, nilai MAE dan MSE paling kecil dibanding 
+Linear Regression dan SVR, plot paritas berimpit dengan 
+garis ideal.
+
+
+=== SLIDE 18 ===
+Analisis Performa Model Regresi Machine Learning 
+RandomForest untuk Uji Regresi Konsentrasi D-(+)-
+Glukosa Monohidrat Berbasis Label-GOx
+Gambar 33 Komparasi Nilai R2 Pelatihan Model Random Forest 
+untuk Dataset Glukosa Monohidrat dengan Label-GOx
+Gambar 32 Paritas Pelatihan Model Random Forest untuk 
+Dataset Glukosa Monohidrat dengan Label-GOx
+Gambar 34 Residual Pelatihan Model Random Forest untuk 
+Dataset Glukosa Monohidrat dengan Label-GOx
+
+
+=== SLIDE 19 ===
+Pada kondisi medan konstan 0,46 mT, model Random 
+Forest pada sensor GMR Fe3O4/PVA-GOx menunjukkan 
+respons sinyal yang stabil dan mendekati linear pada 
+rentang 0,02–0,15 mg/mL dengan sensitivitas sekitar 0,039 V 
+per mg/mL serta kemampuan generalisasi yang baik pada 
+konsentrasi baru.
+Uji Performa Model Regresi Random Forest Sensor GMR 
+Terhadap Variasi Konsentrasi D-(+)-Glukosa 
+Monohidrat berbasis Label
+Gambar 35 Uji Sensitivitas Model Regresi Random Forest Sensor GMR 
+Terhadap Variasi Konsentrasi Glukosa Monohidrat dengan Label
+Tabel 7 Uji Performa Model Regresi Random Forest Sensor GMR Terhadap
+Variasi Konsentrasi Glukosa Monohidrat dengan Label
+Konsentrasi Diprediksi, C_pred 
+(mg/mL)
+Sinyal, V_chip-average (V) 
+Iterasi 1 Iterasi 2 Iterasi 3
+0,02 0,903240667 0,9033415 0,903512
+0,036 0,9039495 0,903933667 0,9038695
+0,04 0,904131833 0,904137 0,904119333
+0,05 0,904522167 0,904500333 0,904652
+0,06 0,905205667 0,905083167 0,905073
+0,08 0,905626833 0,9056205 0,905629333
+0,1 0,906479 0,906482 0,906553333
+0,12 0,906946167 0,906990333 0,9071205
+0,146 0,907512667 0,9075075 0,907519
+0,15 0,908435167 0,908442167 0,908434667 Gambar 36 Uji Linearitas Model Regresi Random Forest Sensor GMR 
+Terhadap Variasi Konsentrasi Glukosa Monohidrat dengan Label
+
+
+=== SLIDE 20 ===
+Pada medan konstan 0,46 mT, model Random Forest pada 
+sensor GMR Fe3O4/PVA-GOx menunjukkan kenaikan sinyal 
+stabil sebesar 5,19 mV pada rentang 0,02–0,15 mg/mL 
+dengan deviasi antar iterasi sangat kecil, hubungan linear 
+dengan slope 0,03258 V per mg/mL serta kemampuan 
+interpolasi baik pada konsentrasi baru.
+Uji Performa Model Regresi Random Forest Sensor GMR 
+Terhadap Variasi Konsentrasi D-(+)-Glukosa 
+Monohidrat berbasis Label-GOx
+Gambar 37 Uji Sensitivitas Model Regresi Random Forest Sensor GMR 
+Terhadap Variasi Konsentrasi Glukosa Monohidrat dengan Label-GOx Tabel 8 Uji Performa Model Regresi Random Forest Sensor GMR Terhadap
+Variasi Konsentrasi Glukosa Monohidrat dengan Label-GOx
+Gambar 38 Uji Linearitas Model Regresi Random Forest Sensor GMR 
+Terhadap Variasi Konsentrasi Glukosa Monohidrat dengan Label-GOx
+Konsentrasi Diprediksi, C_pred 
+(mg/mL)
+Sinyal, V_chip-average (V) 
+Iterasi 1 Iterasi 2 Iterasi 3
+0,02 0,903240667 0,9033415 0,903512
+0,036 0,9039495 0,903933667 0,9038695
+0,04 0,904131833 0,904137 0,904119333
+0,05 0,904522167 0,904500333 0,904652
+0,06 0,905205667 0,905083167 0,905073
+0,08 0,905626833 0,9056205 0,905629333
+0,1 0,906479 0,906482 0,906553333
+0,12 0,906946167 0,906990333 0,9071205
+0,146 0,907512667 0,9075075 0,907519
+0,15 0,908435167 0,908442167 0,908434667
+
+
+=== SLIDE 21 ===
+Random Forest lebih baik pada akurasi fitting tanpa GOx (R² 0,98612 vs 0,98358; 
+RSS 1,97×10⁻⁷ vs 4,24×10⁻⁷), namun regresi linear menunjukkan sensitivitas lebih 
+tinggi (0,03593 vs 0,03239 V/(mg/mL)), sedangkan pada sistem berlabel GOx 
+kedua model hampir setara baik dari R² (0,98455 vs 0,97929) maupun slope 
+(0,03258 vs 0,03209 V/(mg/mL)).
+Komparasi Performa Model Regresi Random Forest Terhadap Linear
+Regresi Sederhana Sensor GMR Berbasis Label-GOx untuk Variasi
+Konsentrasi D-(+)-Glukosa Monohidrat
+Gambar 39 Grafik Komparasi Akurasi Linearitas Model Regresi Random Forest
+Sensor GMR Terhadap Variasi Konsentrasi Glukosa Monohidrat dengan Label
+Gambar 40 Grafik Komparasi Akurasi Linearitas Model Regresi Random Forest 
+Sensor GMR Terhadap Variasi Konsentrasi Glukosa Monohidrat dengan Label-GOx
+
+
+=== SLIDE 22 ===
+Pada medan konstan 0,46 mT, Random Forest pada sensor 
+GMR Fe3O4/PVA-GOx membedakan tiga kondisi saliva 
+pada 0,02, 0,06, dan 0,08 mg/mL dengan selisih total sekitar 
+2,84 mV, serta linearitas baik, mendukung saliva sebagai 
+sampel non-invasif estimasi glukosa.
+Analisis Performa Model Regresi Random Forest 
+Sensor GMR Terhadap Variasi Keadaan Saliva 
+berbasis Label
+Gambar 41 Uji Sensitivitas Model Regresi Random Forest Sensor GMR
+Terhadap Variasi Keadaan Saliva dengan Label
+Tabel 9 Uji Performa Model Regresi Random Forest Sensor GMR Terhadap
+Variasi Keadaan Saliva dengan Label
+Gambar 42 Uji Linearitas Model Regresi Random Forest Sensor GMR
+Terhadap Variasi Keadaan Saliva dengan Label
+Konsentrasi Diprediksi, 
+C_pred (mg/mL)
+Sinyal, V_chip-average (V) 
+Iterasi 1 Iterasi 2 Iterasi 3 Iterasi 4 Iterasi 5
+(Belum makan) 0,02 0,902811442 0,90286118 0,90271603 0,90279484 0,90273624
+(Olahraga) 0,06 0,90518317 0,90514484 0,90515541 0,90510747 0,90516276
+(Sudah makan) 0,08 0,9056288 0,90562314 0,90562877 0,9056344 0,90562689
+
+
+=== SLIDE 23 ===
+Pada medan konstan 7 V setara 0,46 mT, model Random 
+Forest pada sensor GMR Fe3O4/PVA-GOx menunjukkan 
+pemisahan sinyal saliva yang reproduktif pada 0,02–0,08 
+mg/mL dengan selisih total 2,59 mV, linearitas sangat kuat 
+r=0,99413 dan R2 senilai 0,9883.
+Analisis dan Komparasi Performa Model Regresi 
+Random Forest Sensor GMRTerhadap Variasi Keadaan 
+Saliva berbasis Label-GOxGambar 43 Grafik Uji 
+Sensitivitas Sensor GMR 
+Terhadap Variasi Variasi 
+Keadaan Saliva Berbasis Label 
+Fe3O4/PVA 14%-GOx
+Tabel 10 Uji Komparasi Performa Model Regresi Random 
+Forest Sensor GMR Terhadap Variasi Keadaan Saliva 
+dengan Label-GOx
+Gambar 44 Grafik Uji Linearitas Sensor 
+GMR Terhadap Variasi Keadaan Saliva 
+Berbasis Label Fe3O4/PVA 14%-GOx
+Gambar 45 Grafik Uji Komparasi 
+Linearitas Sensor GMR Terhadap 
+Variasi Keadaan Saliva Berbasis 
+Label Fe3O4/PVA 14% dengan 
+dan tanpa GOx
+Predicted Concentration, 
+C_pred (mg/mL)
+Signal without Gox, 
+Vchip-avg (V)
+Signal with Gox, 
+Vchip-avg (V)
+0,02 0,902783946 0,904038232
+0,06 0,90515073 0,90602491
+0,08 0,9056284 0,906630166
+
+
+=== SLIDE 24 ===
+KESIMPULAN
+1. Sensor GMR terintegrasi Random Forest dengan label nanofiber Fe₃O₄/PVA-GOx mampu 
+mendeteksi variasi D-(+)-Glucose Monohydrate pada rentang 0,02-0,15 mg/mL dengan 
+respons stabil dan hampir linear dengan R² mencapai 0,98455; Pearson r pada 0,99225.
+2.Immobilisasi GOx secara konsisten meningkatkan amplitudo sinyal (offset 0,879–1,254 mV) 
+tanpa menghilangkan linearitas respons, sehingga intercept dan slope tetap terjaga.
+3.Optimasi Random Forest dibanding regresi linear sederhana menghasilkan peningkatan R² 
+sebesar 0,00254 dan Pearson r sebesar 0,00127, serta penurunan RSS sebesar 2,27×10⁻⁷ yang 
+menunjukkan reduksi kesalahan prediksi dan peningkatan kemampuan generalisasi model.
+4.Meskipun Random Forest meningkatkan keandalan estimasi kadar glukosa saliva dan 
+kemampuan interpolasi, keterbatasan ukuran sampel, jarak antar-konsentrasi yang kecil, 
+dan variasi matriks saliva menuntut validasi klinis yang lebih luas.
+
+
+=== SLIDE 25 ===
+DAFTAR PUSTAKA
+• Antarnusa, G., Esmawan, A., Jayanti, P. D., Fitriani, S. R., Suherman, A., Palupi, E. K., Umam, R., & Ardimas. (2022). Synthesis of 
+Fe₃O₄ at different reaction temperatures and investigation of its magnetic properties on giant magnetoresistance (GMR) 
+sensors for bio-detection applications. Journal of Magnetism and Magnetic Materials, 563, 169903.
+• Antarnusa, G., Nene, A., Swastika, P. E., Denny, Y. R., Umam, R., Panse, V. R., Syafutra, H., & Irzaman. (2025). Enhancing giant 
+magnetoresistance biosensor sensitivity through TEOS-coated Fe₃O₄ superparamagnetic nanoparticles. Measurement, 256, 
+118386.
+• Antarnusa, G., Swastika, P. E., & Suharyadi, E. (2018). Wheatstone bridge-giant magnetoresistance (GMR) sensors based on 
+Co/Cu multilayers for bio-detection applications. Journal of Physics: Conference Series, 1011, 012061. IOP Publishing.
+• Ardiyani, G., Erwin, & Salomo. (2015). Desain pembuatan dan uji coba kumparan Helmholtz berbentuk lingkaran. JOM FMIPA, 
+2(1), 24–32.
+• Ardiyanti, H., Mabarroh, N., Wibowo, N., Istiqomah, N. I., Tumbelaka, R. M., Absor, M. A. U., & Suharyadi, E. (2023). New design of a 
+commercial chip-based GMR sensor with magnetite nanoparticles for biosensing applications. Journal of Science: 
+Advanced Materials and Devices, 8, 100556.
+• Ardiyanti, H., Mabarroh, N., Wibowo, N., et al. (2025). Facile and fast assay of biomolecule using ICS-based giant 
+magnetoresistance chip sensor with green synthesized magnetite nanotag. Sensors and Imaging, 26, 75.
+• Arduino Team. (2022). Arduino open source report 2022 [Technical report]. Arduino AG.
+• Breiman, L. (2001). Random forests. Machine Learning, 45(1), 5–32.
+• Calixto, P. S., Ferraz, F. C., Dutra, G. C., Pelozzo, M. J. B., Trovão, M. E., Rego, F. G. de M., Picheth, G., Campelo, P. M. S., & Sari, M. H. M. 
+(2025). Exploring saliva as a sample for non-invasive glycemic monitoring in diabetes: A scoping review. Biomedicines, 
+13(3), 713.
+
+=== SLIDE 26 ===
+DAFTAR PUSTAKA
+• Dey, K., Santra, T. S., & Tseng, F. G. (2025). Advancements in glucose monitoring: From traditional methods to wearable 
+sensors. Applied Sciences, 15(5), 2523.
+• Di Filippo, D., Sunstrum, F. N., Khan, J. U., & Welsh, A. W. (2023). Non-invasive glucose sensing technologies and products: A 
+comprehensive review for researchers and clinicians. Sensors, 23(22), 9130.
+• Ennen, I., Kappe, D., Rempel, T., Glenske, C., & Hütten, A. (2016). Giant magnetoresistance: Basic concepts, microstructure, 
+magnetic interactions and applications. Sensors, 16(6), 904.
+• Firmansyah, R. (2017). Perancangan sistem electromyography (EMG) sebagai penggerak jari robot [Undergraduate thesis].
+• Giaretta, J., Zulli, R., Prabhakar, T., Rath, R. J., Naficy, S., Spilimbergo, S., Weiss, P. S., Farajikhah, S., & Dehghani, F. (2024). Glucose 
+sensing in saliva. Advanced Sensor Research, 3, 2400065.
+• Green, T., Semig, P., & Wells, C. (Eds.). (2019). Analog engineer’s circuit cookbook: Amplifiers (2nd ed.). Texas Instruments.
+• Jung, W. G. (2002). Op amp applications. Analog Devices, Inc.
+• Kushwaha, P., & Chauhan, P. (2023). Facile synthesis of water-soluble Fe₃O₄ and Fe₃O₄@PVA nanoparticles for dual-contrast 
+T₁- and T₂-weighted magnetic resonance imaging. Magnetic Resonance Imaging, 95, 50–58.
+• Millman, K. J., & Aivazis, M. (2007). Python for scientists. Computing in Science & Engineering, 9(3), 10–20.
+• Mohanty, S., Panwar, V., & Khanduri, P. (2021). Development of PVA/Fe₃O₄ nanocomposite membrane. Materials Today: 
+Proceedings, 46, 10875–10878.
+• Nainggolan, S. P., & Sinaga, A. (2023). Comparative analysis of accuracy of random forest and gradient boosting classifier 
+algorithm for diabetes classification. Sebatik, 27(1), 97–105.
+• Piekarz, I., Skarzynski, K., Piekarz, B., Wincza, K., Gruszczynski, S., Sloma, M., & Sorocki, J. (2024). Additively manufactured 
+microwave sensor for glucose level detection in saliva. Scientific Reports, 14, 28235.
+
+=== SLIDE 27 ===
+DAFTAR PUSTAKA
+• Python Software Foundation. (2025). Welcome to python.org. https://www.python.org
+• Ricci, A., Celeita, D., & Ramos, G. (2023). Smart current measurement in modern power grids with a Raspberry Pi and GMR 
+effect-based sensor. International Journal of Electrical and Electronic Engineering & Telecommunications, 12(2), 142–149.
+• Rifai, D., Abdalla, A. N., Ali, K., & Razali, R. (2016). Giant magnetoresistance sensors: A review on structures and non-destructive 
+eddy current testing applications. Sensors, 16(3), 298.
+• Sanaeifar, N., Rabiee, M., Abdolrahim, M., Tahriri, M., Vashaee, D., & Tayebi, L. (2017). A novel electrochemical biosensor based 
+on Fe₃O₄ nanoparticles-polyvinyl alcohol composite for sensitive detection of glucose. Analytical Biochemistry, 519, 19–26.
+• Scornet, E., Biau, G., & Vert, J.-P. (2015). Consistency of random forests. The Annals of Statistics, 43(4), 1716–1741.
+• Shylu, D. S., Sam Paul, P., Jackuline Moni, D., & Arolin Monica Helan, J. (2020). A power efficient delta-sigma ADC with series-
+bilinear switch capacitor voltage-controlled oscillator. TELKOMNIKA Telecommunication, Computing, Electronics and Control, 
+18(5), 2618–2627.
+• Supriyanto, E., Fitriyanto, A., & Nurfaizah, Y. (2023). Rancang bangun modul low pass filter (LPF) orde 1 dan orde 2 sebagai 
+penunjang praktikum rangkaian elektronika dan bengkel elektronika komunikasi. Integrated Lab Journal, 11, 22–33.
+• Sun, Y., Cano-Garcia, H., Kallos, E., O’Brien, F., Akintonde, A., Motei, D. E., Ancu, O., Mackenzie, R. W. A., & Kosmas, P. (2023). 
+Random forest analysis of combined millimeter-wave and near-infrared sensing for noninvasive glucose detection. IEEE 
+Sensors Journal, 23(17), 20294–20309.
+• Touil, D. R., Daas, A., Helifa, B., Lahrech, A. C., & Khaldoun, L. I. (2022). Simple giant magnetoresistance probe-based eddy 
+current system of defect characterization for non-destructive testing. Applied Electromagnetics and Mechanics, 11(2), 43–
+52.
+
+=== SLIDE 28 ===
+DAFTAR PUSTAKA
+• Türkoğlu, G. C., Khomarloo, N., Mohsenzadeh, E., Gospodinova, D. N., Neznakomova, M., & Salaün, F. (2024). PVA-based 
+electrospun materials—A promising route to designing nanofiber mats with desired morphological shape: A review. 
+International Journal of Molecular Sciences, 25(3), 1668.
+• Vitayaya, O., Nehan, P. Z. Z., Munazat, D. R., Manawan, M. T. E., & Kurniawan, B. (2024). Magnetoresistance (MR) properties of 
+magnetic materials. RSC Advances, 14, 18617–18628.
+• Wibowo, N. A., Riyanto, C. A., Suharyadi, E., & Sabarman, H. (2023). Giant magnetoresistance sensor for rapid and simple 
+bovine serum albumin assay with Ag-functionalized iron oxide nanoparticles label. IEEE Sensors Journal, 23(9), 9204–9212.
+• Xue, J., Wu, T., Dai, Y., & Xia, Y. (2019). Electrospinning and electrospun nanofibers: Methods, materials, and applications. 
+Chemical Reviews, 119(8), 5298–5415.
+• Yudhistira, & Wibowo, P. (2019). Pengukuran medan magnetik Helmholtz coil melalui konversi tegangan efek Hall. Seminar 
+Nasional Sains dan Teknologi 2019, Fakultas Teknik Universitas Muhammadiyah Jakarta.
+• Zhu, X., Liu, C., Su, H., Miao, Y., & Cheng, H. (2023). Design of improved four-coil structure with high uniformity and effective 
+coverage rate. Heliyon, 9, e15193.
+
+=== SLIDE 29 ===
+LAMPIRAN PENELITIAN
+Presenter dan First Author pada 
+proceeding paper International 
+Conference on Science and Technology 
+(ICST) by University of Mataram (19-20 
+November 2025).
+Author publikasi paten sederhana 
+(diberi paten tertanggal 20 November 
+2025).
+
+=== SLIDE 30 ===
+TERIMA KASIH
+
+
