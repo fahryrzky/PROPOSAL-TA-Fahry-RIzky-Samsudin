@@ -1,0 +1,512 @@
+RANCANGAN KOMPREHENSIF SENSOR FORMALDEHIDA NANOFIBER CORE-SHELL BERBASIS TRANSDUKSI TMR PRESISI
+Studi Literatur Sistematis, Penapisan Reseptor, Rekonsiliasi Kimia, Pemodelan Magnetik, dan Perancangan Instrumen Terintegrasi untuk Analisis Matriks Pangan (Bakso)
+Klasifikasi Dokumen: Rancangan Akademis & Rekayasa Terintegrasi | Versi: Final V2.0 | Fokus: Deteksi Formalin Pangan
+BAB 1
+EXECUTIVE SUMMARY & TEMUAN KRITIS DESAIN
+Laporan komprehensif ini menyajikan rancangan menyeluruh dari instrumen analitik portabel untuk mendeteksi pemalsuan formalin pada produk pangan olahan daging (khususnya bakso) menggunakan kombinasi membran nanofiber elektrospun Fe3O4/PVA-GA yang difungsionalisasi material pengenal (recognition material) dan dibaca oleh transduser Tunneling Magnetoresistance (TMR) presisi tinggi NVE ALT023-10E. Rancangan ini merupakan sintesis multidisipliner yang menjembatani kimia pengenalan molekuler, sains material polimer/nanokomposit, fisika kemagnetan, dan instrumentasi elektronika analog-digital.
+📌 LIMA TEMUAN FUNDAMENTAL YANG MENGUBAH RENCANA PENELITIAN
+1. GA Adalah Antagonis Reseptor Amina: Glutaraldehida (GA) merupakan dialdehida yang bereaksi sangat cepat dengan gugus amina primer (-NH2). Menyatukan reseptor amina (kitosan, PEI, PVAm) ke dalam larutan dope sebelum electrospinning dan crosslinking GA akan memusnahkan situs aktif pengenal HCHO secara ireversibel. Solusi: Arsitektur C/D (GA-crosslink matriks inti terlebih dahulu, baru fungsionalisasi reseptor di permukaan).
+2. Dominasi Bukti Fasa Gas vs Cairan (Gem-Diol): Di dalam air, formaldehida terhidrasi hampir 99,9% menjadi metilen glikol [CH2(OH)2] yang non-elektrofilik. Reaksi adisi nukleofilik amina jauh lebih efisien pada fasa gas. Solusi: Preparasi sampel berbasis Headspace terkalibrasi (Metode C).
+3. Ketiadaan Sinyal Fe3O4 Superparamagnetik Tanpa Medan Bias: Partikel Fe3O4 ukuran 10-20 nm memiliki remanensi nol pada kondisi tanpa medan bias luar. Transduksi membutuhkan penambahan medan bias DC ~20 mT pada sumbu Z (ortogonal terhadap sumbu sensitif sensor TMR cross-axis ALT023) atau penggunaan partikel ferimagnetik 50-100 nm.
+4. Validasi Preseden Elektronik: Rantai MR -> In-Amp -> ADS1115 (16-bit) -> Arduino -> PC telah divalidasi oleh berbagai grup riset (termasuk grup UGM Indonesia), membuktikan bahwa blok elektronik memiliki TRL tinggi dan risiko kegagalan terpusat pada antarmuka kemo-mekano-magnetik.
+5. Reposisi Tanin & Kitosan: Tanin terbukti mengikat protein bakso dan mengkelat ion Fe, sementara amina kitosan terprotonasi pada pH pangan dan dikonsumsi GA. Tanin direposisi sebagai capping agent Fe3O4/modifier mekanik, kitosan sebagai polimer struktural core, dan PEI/PVAm sebagai reseptor pengenal primer.
+BAB 2
+DEFINISI MASALAH & URGENSI ANALITIK DI INDONESIA
+2.1 Regulasi Pangan & Epidemiologi Penyalahgunaan Formalin
+Formaldehida (formalin, larutan HCHO 37% dalam air) secara tegas dilarang penggunaannya sebagai bahan tambahan pangan di Indonesia berdasarkan Peraturan Menteri Kesehatan RI No. 033 Tahun 2012 dan ditegaskan kembali dalam Peraturan BPOM No. 7 Tahun 2018. Formaldehida telah diklasifikasikan sebagai Karsinogen Golongan 1 oleh International Agency for Research on Cancer (IARC Monograph Vol. 88), dengan efek toksik kronis meliputi karsinogenesis nasofaringeal, mutagenesis seluler, serta kerusakan gastrointestinal berat.
+Meskipun dilarang keras, penyalahgunaan formalin sebagai pengawet ilegal pada produk pangan berprotein tinggi seperti bakso, tahu, mie basah, dan ikan segar masih sangat persisten di pasar tradisional Indonesia. Survei lapangan terbaru di pasar tradisional Semarang (BIO Web of Conferences, 2025) menemukan kandungan formalin pada 10 dari 27 sampel produk olahan hewani/ikan (prevalensi 37,03%), dengan konsentrasi mencapai 176,2 ppm (mg/kg), bahkan laporan kepustakaan mencatat temuan ekstrem hingga 986 mg/kg.
+2.2 Karakteristik Kimiawi Formaldehida & Hambatan Deteksi
+Formaldehida merupakan molekul aldehida paling sederhana dengan berat molekul sangat kecil (30,03 Da) yang hanya terdiri dari satu gugus karbonil tanpa gugus samping rantai karbon. Sifat ini menghadirkan tantangan analitik ekstrem:
+Hambatan Spasial: Ketiadaan Pegangan Molekuler: Molekul ultra-kecil menyulitkan desain rongga pengenal berbasis bentuk (molecular imprinting cavity) maupun interaksi supramolekuler spesifik.
+Kesetimbangan Hidrasi: Dalam fase cair, HCHO berada dalam kesetimbangan dinamis dengan air membentuk metilen glikol [CH2(OH)2]. Bentuk hidrat ini mendominasi (>99,9%), menghilangkan gugus karbonil reaktif yang dibutuhkan untuk reaksi adisi nukleofilik.
+Formaldehida Endogen: Formaldehida terbentuk secara alami dalam metabolisme hewani pasca-mortem, terutama pada daging dan produk perikanan melalui jalur dekomposisi enzimatik trimetilamina-N-oksida (TMAO) oleh enzim TMAOase menjadi dimetilamina (DMA) dan formaldehida. Kadar latar alami berkisar antara 0,1 hingga >200 mg/kg (misal pada bakso ikan ~6,8 mg/kg; krustasea 1-98 mg/kg; Bombay duck mencapai 400 mg/kg setelah penyimpanan beku).
+📌SPESIFIKASI ANALITIK TARGET
+Target instrumen bukanlah mendeteksi ada/tidaknya molekul HCHO secara biner, melainkan mendiskriminasikan antara kadar latar alami endogen (≤20 mg/kg) dengan pemalsuan/adulterasi ilegal (100 - 1000 mg/kg).
+Ambang batas analitik (Decision Cut-off): Ditetapkan pada >50 mg/kg (setara ~2,5× batas alami tertinggi daging olahan) dengan rentang kerja kuantitatif 5 - 1500 mg/kg dan LOD matriks target ≤5 mg/kg.
+BAB 3
+STATE-OF-THE-ART (SOTA) TEKNOLOGI TRANSDUSER
+Berbagai platform transduser telah dikembangkan secara global untuk deteksi gas dan cairan formaldehida. Tabel 3.1 merangkum perbandingan kinerja analitik komparatif masing-masing kelas sensor terhadap tantangan portabilitas dan pengujian lapangan di pasar tradisional.
+Kelas Transduser
+Material Pengenal
+Prinsip Transduksi
+Keunggulan Utama
+Kelemahan Kritis untuk Kasus Bakso
+QCM (Quartz Crystal Microbalance)
+PEI, PVAm, MIP, MOF-NH2
+Pergeseran frekuensi resonansi akibat penambahan massa (gravimetrik)
+Resolusi massa sub-nanogram, LOD sub-ppm di udara
+Kristal kuarsa rapuh, osilator RF presisi mahal, sangat sensitif terhadap fluktuasi kelembapan (RH)
+SAW / FBAR (Acoustic Wave)
+PEI, Bacterial Cellulose
+Modulasi perambatan gelombang akustik permukaan
+Respons sangat cepat (<30 s), miniaturisasi die
+Sirkuit frekuensi tinggi (GHz) sangat kompleks dan mahal, distorsi cairan redaman tinggi
+Optik & Kolorimetri
+Amina aromatik, aza-Cope, garam hidrazina
+Absorbansi UV-Vis, turn-on fluoresensi, pergeseran emisi
+LOD ultra-rendah (sub-ppb), visualisasi kualitatif mudah
+Interferensi kekeruhan matriks bakso, degradasi photobleaching, butuh fotodetektor optik terkalibrasi
+Elektrokimia Enzimatik
+Formaldehyde Dehydrogenase (FDH), AOX
+Arus redoks ampero/voltametri via kofaktor NAD+/NADH
+Spesifisitas biologis absolut terhadap formaldehida
+Memerlukan kofaktor NAD+ mahal, stabilitas enzim sangat buruk di suhu tropis (perlu rantai dingin)
+Kemoresistif Oksida Logam
+SnO2, In2O3, ZnO, komposit 2D
+Perubahan resistansi akibat modulasi lapisan deplesi oksigen
+LOD rendah (ppb), respons cepat (5-60 s), fabrikasi massal
+Suhu operasi sangat tinggi (80-350 °C) memakan daya besar, selektivitas silang VOC alkohol buruk
+TMR (Sistem yang Diusulkan)
+Nanofiber Core-Shell Fe3O4/PVA-PEI
+Modulasi resistansi sambungan terowongan magnetik via regangan kemo-mekanik
+Kebal kekeruhan/warna sampel, daya sangat rendah (<5 mA), beroperasi suhu ruang, pembacaan digital instan
+Novelty tinggi (belum pernah diterapkan untuk HCHO), memerlukan kontrol mekanik jarak celah udara mikro-presisi
+BAB 4
+PENAPISAN & SELEKSI KOMPREHENSIF RESEPTOR FORMALDEHIDA
+4.1 Hierarki Bukti Ilmiah (Evidence Hierarchy)
+Seluruh penilaian terhadap material pengenal dalam studi ini ditundukkan pada hierarki bukti ketat:
+LEVEL A (Direct Sensor Evidence): Bukti langsung dari artikel peer-reviewed yang berhasil mendeteksi analit target formaldehida menggunakan material tersebut pada suhu ruang.
+LEVEL B (Chemical Reaction Evidence): Bukti interaksi kimiawi/reaksi penangkapan (scavenging) analit, tetapi bukan dalam konfigurasi sensor analitik kuantitatif.
+LEVEL C (Fabrication Feasibility): Bukti kemampuan pemrosesan material (kelayakan fabrikasi nanofiber, ketercampuran polimer, atau crosslinking).
+LEVEL D (Design Hypothesis): Hipotesis, inferensi rekayasa, atau ekstrapolasi konseptual baru yang belum divalidasi eksperimental.
+4.2 Penapisan Reseptor Berbasis Sistem Gating Biner
+Pendekatan skoring konvensional berbasis penjumlahan linier sering menghasilkan juara palsu seperti FDH (yang unggul dalam biokimia tetapi gagal total dalam kompatibilitas fisika magnetik). Oleh karena itu, diterapkan sistem Gating Biner mutlak:
+Gate 1: Gate 1 (Potensi Transduksi Mekano-Magnetik): Reseptor wajib menghasilkan perubahan struktur fisik (regangan kontraksi lateral, densifikasi volumetrik, atau pengerasan jaringan) saat mengikat HCHO untuk menggeser susunan Fe3O4. Skor < 5 langsung menggugurkan kandidat.
+Gate 2: Gate 2 (Kompatibilitas Glutaraldehida): Reseptor tidak boleh hancur atau habis terkonsumsi oleh uap GA selama proses crosslinking serat matriks, atau harus dapat diaplikasikan pasca-tahap crosslinking.
+Kandidat Reseptor
+Mekanisme Kimia
+Bukti Tertinggi
+Gate 1 (Transduksi)
+Gate 2 (GA)
+Status Kelulusan
+PEI (Branched)
+Adisi nukleofilik reversibel -> hemiaminal -> jembatan metilena
+Level A (LOD 500 ppb QCM)
+Lolos (Skor 7)
+Lolos (Pasca-GA)
+TERPILIH (TOP 1 Baseline)
+PVAm (Linear)
+Adisi nukleofilik amina primer murni
+Level A (LOD 500 ppb PAN)
+Lolos (Skor 6)
+Lolos (Pasca-GA)
+TERPILIH (TOP 2 Alternatif)
+Bis-Hidrazida (ADH)
+Pembentukan metilen-bis-hidrazon kinetika alfa
+Level A (Probe optik sub-ppb)
+Lolos (Skor 7)
+Lolos (Pasca-GA)
+TERPILIH (TOP 3 Novelty)
+HCHO-MIP
+Pengenalan rongga molekuler tercetak
+Level A (Selektif mutlak vs VOC)
+Gagal (Rongga kaku, dM=0)
+Lolos
+Dialihkan ke Lapisan Filter L3
+2-aza-Cope
+Penataan ulang sigmatropik [3,3] homoalilamina
+Level A (ZIF-90-LW, 28 s)
+Gagal (Situs tunggal, optik)
+Lolos (Pasca-GA)
+Dialihkan ke Gate Filter
+Kitosan Murni
+Amina primer C2 basa Schiff lemah
+Level B (Scavenging udara)
+Lolos (Skor 6)
+Gagal jika direct-blend
+Dialihkan ke Matriks Inti L1
+Tanin Alami (BCT)
+Metilolasi cincin A floroglusinol/resorsinol
+Level B (Scavenging 32-79%)
+Lolos (Skor 7)
+Lolos (Fenol inert GA)
+Dialihkan ke Capping Fe3O4
+Aminated Chitosan
+Amina primer cangkokan polietilenamina
+Level B (Adsorpsi UF)
+Lolos (Skor 6)
+Gagal jika direct-blend
+Ditolak (Sintesis redundan)
+FDH (Enzim)
+Oksidasi enzimatik spesifik glutation-dependent
+Level A (Jus jeruk, ikan)
+Gagal (Transfer elektron redoks)
+Lolos (GA imobilisasi)
+Dialihkan ke Standar Lab
+POM
+Redoks charge-transfer Mo(VI)->Mo(V)
+Level A (Optik susu, 0,2 mg/L)
+Gagal (Sinyal optik murni)
+Lolos
+Ditolak Total
+Hidroksilamina
+Kondensasi aldimin menjadi oksim
+Level A (SWCNT gas 0,05 ppm)
+Gagal (Molekul kecil leaching)
+Gagal (Konflik GA)
+Ditolak
+BAB 5
+REKONSILIASI KONFLIK KIMIA & ARSITEKTUR MATERIAL
+5.1 Resolusi Konflik Fundamental: GA vs Gugus Amina
+Glutaraldehida adalah molekul dialdehida bifungsional yang bereaksi secara spontan dengan amina primer membentuk ikatan basa Schiff (C=N) yang stabil. Jika PEI, PVAm, atau kitosan dicampurkan langsung ke dalam dope elektrospinning bersama PVA dan Fe3O4 lalu dipaparkan pada uap GA, GA akan mengonsumsi seluruh gugus amina reseptor. Akibatnya, kapasitas pengenalan formaldehida turun drastis hingga mendekati nol.
+Solusi Rekayasa: Pemisahan Spasial-Temporal Penuh. Fabrikasi dilakukan bertahap: mat nanofiber Fe3O4/PVA di-spin dan di-crosslink menggunakan uap GA terlebih dahulu hingga mencapai stabilitas air sempurna. Sisa aldehida bebas di-quench sepenuhnya menggunakan larutan glisin 0,1 M atau NaBH4 encer. Setelah permukaan netral, barulah larutan reseptor PEI/PVAm dilapiskan (dip-coating/grafting permukaan). Dengan demikian, 100% amina reseptor tetap bebas dan aktif.
+5.2 Resolusi Kimiawi: Tanin vs Kitosan
+Gagasan awal untuk mencampurkan tanin dan kitosan ke dalam satu nanofiber hybrid ditolak keras berdasarkan bukti Level A adhesif biopolimer (Jiang et al. 2023; Qin et al. 2022). Oksidasi gugus katekol/galoil pada tanin menghasilkan senyawa kuinon yang bereaksi via adisi Michael dan Schiff base dengan amina primer kitosan. Reaksi ini saling menonaktifkan kedua material sebelum analit formaldehida diperkenalkan. Oleh karena itu, kombinasi tanin + kitosan dalam matriks pengenal dilarang.
+5.3 Spesifikasi Nanopartikel Magnetit (Fe3O4)
+Nanopartikel superparamagnetik murni (diameter 10-15 nm) memiliki koersivitas dan remanensi nol pada keadaan tanpa bias luar. Jika diletakkan di atas sensor TMR tanpa medan bias, fluks magnetik B lokal bernilai nol. Untuk mengatasi keterbatasan ini, ditetapkan dua opsi teknis:
+Spesifikasi Partikel: Opsi A (Ferrimagnetik 50-100 nm): Penggunaan kristal magnetit berdiameter 50-100 nm dengan pembebanan (loading) optimum 10-20 wt% terhadap berat kering polimer. Partikel memiliki remanensi permanen setelah magnetisasi pulsa awal, memungkinkan pembacaan fluks sisa secara pasif.
+Medan Bias: Opsi B (Medan Bias DC Eksternal): Jika partikel nano superparamagnetik digunakan, sistem wajib dilengkapi magnet bias permanen luar sebesar ~20 mT yang diposisikan tegak lurus (sumbu Z) terhadap sumbu sensitif sensor TMR in-plane.
+5.4 Arsitektur Trilayer Hybrid yang Direkomendasikan
+📌 ARSITEKTUR TRILAYER HYBRID CORE-SHELL
+Lapisan L1 (Core Matriks & Reporter): Nanofiber elektrospun PVA / Chitosan (80:20 b/b) ter-crosslink GA rapat, mengandung nanopartikel Fe3O4 10-20 wt%. Berfungsi sebagai penopang mekanik kaku tahan air dan transduser magnetik lokal.
+Lapisan L2 (Shell Reseptor Afinitas): Polietilenimina (PEI) bercabang atau PVAm yang dicangkokkan pada permukaan serat pasca-crosslinking GA. Berfungsi menangkap formaldehida via adisi nukleofilik reversibel dan membentuk jembatan metilena baru.
+Lapisan L3 (Overlayer Diskriminator Selektivitas): Lapisan tipis nanopartikel HCHO-MIP atau membran zeolit mikropori (3A/4A, diameter pori ~0,3-0,4 nm). Berfungsi sebagai filter size-exclusion yang meloloskan formaldehida (diameter kinetik 0,24 nm) dan menahan aldehida berantai lebih panjang (heksanal, benzaldehida).
+BAB 6
+DESAIN FABRIKASI NANOFIBER & GA CROSSLINKING
+6.1 Parameter Desain of Experiments (DoE) Elektrospinning
+Untuk menghasilkan mat nanofiber bebas cacat manik-manik (bead-free) dengan porositas terkontrol (>80%) dan diameter serat seragam (150-350 nm), ditetapkan ruang parameter operasional berdasarkan optimasi Response Surface Methodology (RSM):
+Parameter Proses
+Rentang Eksplorasi
+Nilai Target Optimum
+Dasar Keputusan Literatur
+Konsentrasi Polimer PVA
+6,0 - 12,0 wt% dalam air DI
+8,0 - 9,0 wt%
+Menjamin derajat keterbelitan rantai (chain entanglement) optimum; di bawah 6% terbentuk bead, di atas 12% viskositas terlalu tinggi
+Fraksi Kitosan (CS)
+0 - 50 wt% terhadap total polimer
+20 wt% (PVA:CS = 80:20)
+da Mata et al. (2022); fraksi CS >30-50% memicu instabilitas jet akibat konduktivitas polielektrolit berlebih
+Loading Fe3O4 NPs
+5 - 30 wt% terhadap padatan
+15 wt%
+Nicknejad et al. (2015); mempertahankan magnetisasi saturasi tinggi tanpa memicu agregasi partikel
+Tegangan Listrik (High Voltage)
+12 - 25 kV
+18 - 20 kV
+Menghasilkan Taylor cone stabil dan medan elektrostatik ~1,5 - 2,0 kV/cm
+Jarak Tip-to-Collector
+100 - 180 mm
+120 - 150 mm
+Memberikan waktu terbang cukup untuk penguapan pelarut air/asam asetat secara tuntas
+Laju Alir Dope (Flow Rate)
+0,1 - 1,0 mL/jam
+0,4 - 0,6 mL/jam
+Mencegah penumpukan tetesan pada ujung jarum (dripping) dan menjaga kontinuitas penarikan filamen
+6.2 Protokol Crosslinking Uap GA & Verifikasi Retensi Amina
+Proses crosslinking menggunakan metode uap (vapor-phase) di dalam desikator tertutup pada suhu ruang (25 °C) menggunakan cawan petri berisi larutan glutaraldehida 25% yang diasamkan dengan 2-3 tetes HCl pekat (katalis pembentukan asetal). Waktu paparan dioptimasi pada 4, 8, 12, dan 24 jam.
+Prosedur Wajib Quenching & Pengujian Retensi Amina:
+1. Quenching: Setelah paparan GA, mat dicuci menggunakan buffer glisin 0,1 M selama 30 menit untuk memblokir seluruh gugus aldehida sisa yang belum bereaksi, diikuti pembilasan air DI berulang.
+2. Uji Tollens: Air bilasan terakhir diuji dengan Reagen Tollens. Ketiadaan cermin perak mengonfirmasi 100% GA bebas telah tereliminasi.
+3. Kuantifikasi TNBS: Kuantifikasi densitas amina bebas primer dilakukan menggunakan uji asam 2,4,6-trinitrobenzenasulfonat (TNBS) atau ninhidrin spektrofotometri sebelum dan sesudah pencangkokan PEI. Protokol dinyatakan valid hanya jika retensi amina primer pasca-grafting mencapai ≥300 µmol/g mat.
+BAB 7
+MEKANISME TRANSDUKSI FISIKA & PEMODELAN MAGNETIK
+7.1 Rantai Kausalitas Transduksi Mekano-Magnetik
+Transduksi sinyal berlangsung melalui rantai fenomena fisika-kimia berurutan yang tak terputus:
+Uap Formaldehida (Headspace) -> Difusi Melalui Overlayer L3 -> Adisi Nukleofilik pada Gugus Amina Primer PEI (L2) -> Pembentukan Hemiaminal & Dehidrasi -> Pembentukan Jembatan Metilena Kovalen Antar-Rantai (-NH-CH2-NH-) -> Peningkatan Derajat Crosslinking & Pemadatan Elastomer -> Regangan Lateral In-Plane Matriks Serat (L1) -> Pemadatan Rapat Momen Magnetik Areal Fe3O4 -> Pergeseran Fluks Magnetik Lokal (Delta B) pada Jarak Lift-Off z -> Perubahan Hambatan R_TMR pada Sensor ALT023 -> Modulasi Tegangan Sinyal Digital ADS1115.
+7.2 Pemodelan Kuantitatif Rapat Fluks Magnetik
+Bantalan nanofiber berdimensi cakram (radius R = 2,5 - 5,0 mm, ketebalan t = 50 - 100 µm) dimodelkan sebagai silinder tipis termagnetisasi seragam M_mat sepanjang sumbu Z. Fluks medan magnet B_z pada sumbu tengah silinder di jarak lift-off d dirumuskan melalui integrasi hukum Biot-Savart:
+📌 FORMULASI MATEMATIS TRANSDUKSI MAGNETIK
+Persamaan Medan Magnetik Aksial Silinder:
+B_z(d) = [ (mu_0 * M_mat) / 2 ] * [ (d + t) / sqrt((d + t)^2 + R^2)  -  d / sqrt(d^2 + R^2) ]
+di mana mu_0 = 4*pi*10^-7 T*m/A, M_mat adalah magnetisasi volumetrik komposit:
+M_mat = phi * M_s * L(x), dengan L(x) = coth(x) - 1/x (Fungsi Langevin)
+Parameter Langevin: x = (m_p * B_bias) / (k_B * T), m_p = M_s * (pi * d_p^3 / 6).
+Untuk partikel Fe3O4 d_p = 20 nm, M_s = 3,12*10^5 A/m, phi = 0,00577 (loading 15 wt%), pada B_bias = 20 mT diperoleh x = 6,311, L(x) = 0,8415, menghasilkan M_mat = 1514,8 A/m (mu_0 * M_mat = 1,903 mT).
+7.3 Anggaran Sensitivitas Sinyal & Dominasi Regangan In-Plane
+Analisis matematis membuktikan fakta fisik krusial: pada jarak baca milimeter (d = 1,0 mm), medan magnet B sebanding dengan momen magnetik per satuan luas (M * t), yang identik dengan massa Fe3O4 per satuan luas dikalikan magnetisasi spesifik. Jika mat hanya mengalami penipisan ketebalan vertikal (-5%) tanpa perubahan luas lateral, massa per satuan luas tidak berubah sehingga Delta B yang dihasilkan hanyalah 17,2 nT.
+Sebaliknya, jika reaksi formaldehida memicu kontraksi regangan lateral in-plane sebesar 1% hingga 2%, kerapatan massa areal meningkat sebesar +2,0% hingga +4,1%. Hal ini menghasilkan pergeseran medan magnet Delta B sebesar 446 nT hingga 906 nT (peningkatan sinyal 138 kali lipat lebih besar dibanding efek ketebalan!).
+7.4 Penentuan Jarak Baca (Lift-Off) Optimum
+Berdasarkan simulasi numerik peluruhan medan terhadap jarak:
+d = 0,5 mm: Pada d = 0,5 mm: B0 = 9,36 µT, Delta B (1%) = 93,6 nT. Namun gradien dB/dz curam (-4,4 µT/mm), membuat sinyal sangat rentan terhadap getaran dan toleransi perakitan mekanis.
+d = 1,0 mm (Optimum Terpilih): Pada d = 1,0 mm: B0 = 8,95 µT (hanya turun 4,4% dari 0,5 mm), Delta B (1%) = 89,5 nT. Kurva dB/dz berada pada plateau datar, toleransi perakitan +/-50 µm hanya memicu galat <1,5%, dan tersedia ruang aman untuk membran pelindung PTFE.
+d >= 2,0 mm: Pada d >= 2,0 mm: Sinyal meluruh drastis (kehilangan 19% hingga 64% fluks magnetik), mendekati ambang batas noise instrumen.
+7.5 Orientasi Sumbu Sensitif Cross-Axis ALT023
+NVE ALT023-10E adalah sensor kemagnetan in-plane dengan sumbu sensitif melintang panjang paket (cross-axis). Penempatan bantalan nanofiber tepat konsentris di atas pusat sensor akan menghasilkan fluks magnetik yang tegak lurus bidang sensor (sumbu Z), di mana komponen in-plane bernilai nol karena simetri geometris. Oleh karena itu, posisi chip sensor TMR wajib digeser secara lateral (lateral offset ~1,5 - 2,5 mm) relatif terhadap tepi bantalan nanofiber untuk menangkap garis fluks fringing in-plane maksimum.
+BAB 8
+PERANCANGAN PERANGKAT KERAS PENGONDISI SINYAL ANALOG
+8.1 Audit Spesifikasi & Pinout NVE ALT023-10E
+Verifikasi datasheet resmi NVE menetapkan karakteristik operasional: catu daya Vcc = 5,0 V DC (rasiometrik), sensitivitas nominal S = 200 mV/V/mT (menghasilkan 1,000 V/mT atau 1,0 µV/nT pada Vcc = 5 V), rentang linier operasi +/-1,0 mT, saturasi ~1,5 mT, impedansi jembatan Wheatstone 20 kOhm (typ, rentang 8-55 kOhm), tegangan offset inherent bridge hingga +/-20 mV/V (+/-100 mV pada Vcc = 5 V), dan bandwidth frekuensi DC hingga 350 kHz.
+Konfigurasi Pinout Kemasan TDFN6 (2,5 x 2,5 mm, pitch 0,65 mm): Pin 1 = Out+; Pin 2 = NC; Pin 3 = GND; Pin 4 = Out-; Pin 5 = NC; Pin 6 = Vcc. Center pad leadframe wajib dihubungkan ke ground analog untuk disipasi termal.
+8.2 Arsitektur Gradiometer Diferensial Dua-TMR
+Medan magnet bumi memiliki intensitas 25 - 65 µT, sedangkan offset inherent sensor mencapai +/-100 µT setara medan. Keduanya 100 hingga 500 kali lebih besar daripada sinyal analitik target (~0,9 µT). Tanpa kompensasi, setiap perubahan orientasi alat atau variasi suhu ruangan akan memicu galat pengukuran masif.
+Solusi: Arsitektur Gradiometer Dua Sensor Identik. ALT023-1 (Sensing) ditempatkan di bawah kartrid nanofiber aktif, sementara ALT023-2 (Reference) ditempatkan pada jarak 15 mm di bawah kartrid tanpa nanofiber. Karena kedua sensor mengalami medan bumi, fluktuasi medan liar, dan drift suhu yang sama (common-mode), pengurangan diferensial Delta_B = B_sense - B_ref secara digital membatalkan interferensi eksternal hingga >95%.
+8.3 Perancangan Penguat Instrumentasi AD623 & Analisis Anti-Saturasi
+Penguat instrumentasi rail-to-rail AD623 diprogram gain-nya melalui satu resistor eksternal R_G antara Pin 1 dan Pin 8 berdasarkan rumus: G = 1 + (100 kOhm / R_G).
+📌 ANALISIS KEGAGALAN SATURASI GAIN
+Mengapa Gain G = 100 Adalah Kesalahan Desain Fatal:
+Offset inherent bridge TMR dapat mencapai +/-100 mV. Jika diterapkan gain G = 100, tegangan offset teramplifikasi menjadi +/-100 mV * 100 = +/-10,0 V. Pada sistem catu tunggal 5,0 V, keluaran penguat dipastikan terpotong total (saturasi/clipping ke rail daya).
+Keputusan Desain Optimum: Dipilih Gain Moderat G = 10,09 menggunakan resistor presisi toleransi 1% deret E96 R_G = 11,0 kOhm.
+Dengan G = 10,09, offset maksimum +/-100 mV hanya teramplifikasi menjadi +/-1,0 V. Ditambah sinyal baseline mat (~90 mV), total ayunan keluaran tetap berada nyaman di dalam batas rentang linier penguat (+/-2,35 V dari titik tengah VBIAS).
+8.4 Pembangkitan Referensi VBIAS & Active Nulling
+Karena keluaran jembatan TMR bersifat bipolar dan AD623 bekerja pada catu daya tunggal +5 V, pin REF AD623 wajib diberi tegangan tengah VBIAS = Vcc/2 = 2,500 V sebagai titik nol semu.
+Buffer Impedansi Rendah: Larangan Pembagi Tegangan Pasif: Arus bias pin REF AD623 mencapai 60 µA dengan resistansi internal 100 kOhm. Pembagi resistif telanjang akan mengalami pembebanan arus yang merusak Common-Mode Rejection Ratio (CMRR). Solusi: Pembagi tegangan wajib dibuffer menggunakan op-amp rail-to-rail (MCP6002).
+Active Nulling: Sirkuit Active Nulling: Untuk menghilangkan offset sisa keluaran pasca-gradiometer, pin REF dihubungkan ke keluaran DAC 12-bit I2C (MCP4725) yang dikendalikan mikrokontroler untuk menggeser baseline tepat ke 0 V diferensial ADC pada awal pengukuran.
+8.5 Filter Analog Pasif RFI & Low-Pass Filter
+Tahap 1: Filter Masukan RFI (Sebelum AD623): R1 = R2 = 1,00 kOhm, C_diff = 100 nF COG, C_cm = 10 nF COG. Meredam interferensi frekuensi radio pensaklaran digital sebelum memasuki penguat (f_c ~80 Hz diferensial).
+Tahap 2: Filter Pasca-Penguatan LPF (Sebelum ADC): Filter RC pasif orde-1 dengan R = 4,7 kOhm dan C = 10 µF film/X7R terpasang simetris pada kedua kanal diferensial. Frekuensi cut-off terhitung f_c = 1 / (2*pi*R*C) = 3,39 Hz dengan konstanta waktu tau = 47 ms. Filter ini secara efektif melenyapkan ripple 50 Hz jala-jala listrik dan transien pensaklaran.
+8.6 Integrasi ADC Delta-Sigma ADS1115 16-Bit
+Sinyal analog dikonversi menggunakan ADC ADS1115 dengan konfigurasi diferensial penuh (AIN0 terhubung ke keluaran AD623, AIN1 terhubung ke VBIAS 2,500 V). Dipilih PGA = +/-2,048 V (FSR = 4,096 V).
+Koreksi Rumus Resolusi Digital: Dalam mode diferensial bertanda (two's complement 16-bit), rentang diwakili oleh 2^15 = 32.768 level kuantisasi. Resolusi kuantisasi LSB terhitung tepat:
+📌 FORMULASI RESOLUSI DIGITAL TERKOREKSI
+LSB = FSR / 2^15 = 4,096 V / 32.768 = 125,0 µV / 2 = 62,50 µV.
+Sensitivitas Medan Ekuivalen ADC:
+Sensitivitas_TMR = 1,0 µV/nT. Dengan penguatan G = 10,09, maka:
+Resolusi Medan = 62,50 µV / (10,09 * 1,0 µV/nT) = 6,25 nT per LSB.
+Sinyal analitik target 906 nT akan terbaca setara 145 LSB digital — resolusi yang sangat memadai dengan SNR >20 dB.
+8.7 Aturan Kritis Tata Letak PCB & Larangan Plating ENIG
+Sistem diimplementasikan dalam arsitektur Dual-Board: Sensor Board (SB-01) berukuran kompak 25 x 25 mm di dalam ruang pengukuran, dan Main Board (MB-01) sebagai shield pengendali. Aturan tata letak kritis meliputi:
+Larangan Material Ferimagnetik: Larangan Keras PCB Finish ENIG (Electroless Nickel Immersion Gold): Lapisan nikel bersifat ferimagnetik lunak yang akan mendistorsi medan magnet lokal di sekitar die TMR dan menyimpan histeresis remanen parasitik. Finish PCB wajib menggunakan Lead-Free HASL, OSP, atau Immersion Silver.
+Mitigasi EMI Magnetik: Pemisahan Fisik Raspberry Pi: Modul CPU Raspberry Pi memancarkan medan magnet switching dari modul regulator PMIC dan konektor USB sebesar 1-20 µT. CPU Raspberry Pi wajib ditempatkan pada jarak fisik minimal >=20 cm dari modul sensor board menggunakan kabel USB berpelindung dengan ferrite bead.
+Tata Letak Sinyal: Jalur Diferensial & Grounding: Jalur Out+ dan Out- dirutekan sejajar berpasangan ketat dengan panjang identik (<1 mm mismatch) di atas ground plane analog utuh. Ground analog dan ground digital dipisahkan dan hanya disatukan pada satu titik bintang (star point) tepat di bawah pin GND ADS1115.
+BAB 9
+ARSITEKTUR PERANGKAT LUNAK, FIRMWARE & PIPELINE DIGITAL
+9.1 Firmware Arduino Uno R3 & Akuisisi Data Deterministik
+Firmware mikrokontroler Arduino Uno R3 dirancang sebagai Finite State Machine (FSM) deterministik dengan tugas eksklusif: membaca konversi ADC, mengendalikan active nulling DAC, merekam data lingkungan, dan memaketkan data serial. Arduino dibebaskan dari komputasi berat, regresi non-linier, atau inferensi analitik.
+Pengaturan SPS: Laju Sampel Minimum 8 SPS: ADS1115 dioperasikan pada laju sampel terendah 8 SPS. Mode ini mengaktifkan filter digital internal sinc3 dengan penolakan derau frekuensi jala-jala terbaik dan integral non-linearity (INL) terendah (1 LSB).
+Peredaman Derau Pensaklaran: Protokol Silent I2C: Aktivitas transmisi clock pada bus I2C (SCL/SDA) memancarkan transien elektromagnetik yang dapat terkopel ke sensor TMR. Firmware memanfaatkan pin interupsi ALERT/RDY dari ADS1115. Selama proses konversi analog berlangsung, bus I2C sepenuhnya dibisukan (silent), dan data baru dibaca seketika interupsi transisi logika rendah diterima.
+Filtering On-Chip: Penyaringan Digital Awal: Setiap pembacaan melewati filter median 5-sampel untuk membuang spike impulsif, diikuti rata-rata bergerak (moving average window 10). Firmware melaporkan nilai mean bersama simpangan baku real-time (sd_raw) dalam format paket serial ASCII terproteksi CRC16.
+9.2 Pipeline Pengolahan Data & Basis Data Raspberry Pi
+Host Raspberry Pi menjalankan aplikasi background berbasis Python yang mengelola data pipeline, pencatatan basis data SQLite terstruktur, dan antarmuka pengguna:
+Pipeline Komputasi: Pipeline Konversi Digital-ke-Fisik: Kode ADC mentah -> Tegangan diferensial V_ADC -> Tegangan masukan TMR (V_ADC / G) -> Rapat fluks medan magnet B_raw -> Koreksi Koefisien Suhu Keluaran [B_corr = B_raw / (1 + TCO * (T - T_cal))] -> Pengurangan Baseline Diferensial Waktu [Delta_B = B_corr(t) - B_corr(t0)] -> Estimasi Konsentrasi HCHO via Model Kurva Kalibrasi Terpilih.
+Ketertelusuran Kartrid: Manajemen Siklus Kartrid: Basis data mencatat ID unik setiap kartrid, tanggal sintesis, dan jumlah siklus pemaparan (cycles_used). Mengingat jembatan metilena pada reseptor amina bersifat sebagian ireversibel, sistem secara otomatis menolak pengujian jika batas siklus maksimum tercapai (misal max_cycles > 5).
+BAB 10
+DESAIN MEKANIK KARTRID & PROTOKOL PREPARASI SAMPEL
+10.1 Enclosure Mekanik Kartrid Sensor Sekali-Pakai
+Struktur kartrid mekanik dirancang dengan prinsip pemisahan permanen-habis pakai:
+Instrumen Permanen: Komponen Permanen: Rangka instrumen, probe sensor TMR ganda (sensing dan reference), magnet bias 20 mT, dan PCB sirkuit pengondisi sinyal terlindung di dalam selubung pelindung mu-metal.
+Kartrid Sekali-Pakai: Kartrid Sensor Habis-Pakai: Rangka plastik non-magnetik (resin 3D-printing biomedis / Delrin) yang memegang membran nanofiber trilayer. Kartrid bertumpu pada dudukan kinematik tiga titik (three-point kinematic seat) dengan klem pegas terkalibrasi untuk menjamin jarak celah udara lift-off terkunci stabil pada 1,00 +/- 0,02 mm antar-pemasangan.
+Kebebasan Kontraksi Lateral: Penjepitan Bebas Regangan: Aperture optik/gas mendefinisikan luas terpapar konstan (diameter 6,0 mm). Namun, membran nanofiber hanya dijepit rapat pada cincin tepi luar, membiarkan bidang tengah membran bebas berkontraksi lateral in-plane saat bereaksi dengan HCHO guna memaksimalkan sinyal Delta B.
+10.2 Protokol Preparasi Sampel Headspace Terkalibrasi
+Pilihan metode preparasi sampel menggunakan Headspace Terkalibrasi (Metode C) ditetapkan sebagai satu-satunya metode yang kompatibel dengan fisika sensor TMR. Kontak langsung dengan ekstrak cair bakso ditolak mutlak karena ion garam NaCl (~2% atau 340 mM) memicu fenomena charge-screening yang menekan swelling polielektrolit kitosan, menghasilkan sinyal Delta B palsu yang jauh melampaui sinyal analitik formaldehida.
+Protokol Standar Operasional Ekstraksi Headspace:
+Homogenisasi: 1. Timbang 5,00 +/- 0,01 g sampel bakso yang telah dihaluskan merata (homogenizer/blender analitik).
+Normalisasi Buffer: 2. Masukkan ke dalam vial headspace 40 mL, tambahkan 45 mL larutan buffer fosfat 100 mM (pH 7,8) yang mengandung NaCl 150 mM. Buffer ini menormalkan kekuatan ionik matriks dan memastikan gugus amina reseptor berada pada kondisi deprotonasi reaktif.
+Inkubasi Terkontrol: 3. Rapatkan vial dengan septum PTFE/silikon, inkubasi pada penangas air terkontrol suhu 45 +/- 1 °C selama 15 menit. Suhu ini mempercepat pelepasan formaldehida bebas ke fasa gas tanpa memicu degradasi termal senyawa lipid atau aktivasi enzimatik TMAOase.
+Penyaluran Gas: 4. Alirkan 5 mL gas headspace menggunakan syringe berkatup melalui membran PTFE hidrofobik 0,2 µm menuju sel pengukuran kartrid sensor dengan laju alir stabil.
+BAB 11
+DESAIN EKSPERIMENTAL, UJI SELEKTIVITAS & VALIDASI MATRIKS PANGAN
+11.1 Matriks Kontrol Diagnostik Berjenjang (C1 s.d. C8)
+Untuk membuktikan secara ilmiah bahwa pergeseran medan magnet Delta B lahir murni dari reaksi pengenalan kimiawi formaldehida pada reseptor (bukan akibat artefak kelembapan, swelling fisik pelarut, atau tarikan feromagnetik), ditetapkan matriks kontrol diagnostik pre-registrasi:
+Kode
+Komposisi Kartrid
+Pemaparan Analit
+Fungsi Diagnostik & Nilai Ambang
+C1
+PVA-GA murni (tanpa Fe3O4, tanpa reseptor)
+Buffer / Udara
+Kontrol baseline instrumen dan verifikasi ketiadaan sinyal magnetik matriks polimer (Delta B = 0)
+C2
+Fe3O4/PVA-GA (tanpa reseptor)
+Headspace HCHO standar
+Kontrol adsorpsi fisik & swelling kelembapan matriks tanpa reseptor; sinyal Delta B(C2) wajib sangat kecil
+C3
+PVA-GA + Reseptor PEI (tanpa Fe3O4)
+Headspace HCHO standar
+Verifikasi reaksi kimia pengenal terjadi (diuji via FTIR/swelling) tanpa adanya reporter magnetik (Delta B = 0)
+C4
+Fe3O4/PVA + Reseptor PEI (tanpa GA)
+Headspace HCHO standar
+Menguji peran densitas crosslinking GA terhadap besaran amplitudo regangan lateral
+C5
+Fe3O4/PVA-GA + Reseptor PEI (Sistem Lengkap)
+Udara / Buffer Blanko (0 ppm HCHO)
+Penetapan baseline noise operasional dan drift suhu sistem (memberikan nilai sigma_blank)
+C6
+Fe3O4/PVA-GA + Reseptor PEI (Sistem Lengkap)
+Headspace HCHO standar (100 ppm)
+Sinyal analitik sesungguhnya; wajib memenuhi kriteria pre-registrasi Delta B(C6) / Delta B(C2) >= 5
+C7
+Fe3O4/PVA-GA + Reseptor NIP (Non-Imprinted)
+Headspace HCHO standar
+Pengujian spesifisitas cetakan molekuler dan penghitungan Imprinting Factor (IF >= 2,0)
+C8
+Fe3O4/PVA-GA + Reseptor PEI yang Diblokir Pra-Reaksi
+Headspace HCHO standar
+Kontrol negatif kritis; membuktikan bahwa penonaktifan gugus amina melenyapkan respon Delta B
+11.2 Pengujian Selektivitas Analit Tunggal & Campuran
+Uji selektivitas dirancang secara kuantitatif dengan menghitung Koefisien Selektivitas K_i = Delta_B(HCHO) / Delta_B(Interferen) pada konsentrasi molar setara:
+Aldehida Kompetitor: Aldehida Homolog & Maillard: Asetaldehida (C2), propionaldehida (C3), glioksal (dialdehida), dan heksanal (produk oksidasi lipid utama bakso). Overlayer L3 diskriminator mikropori ditargetkan memberi K_i >= 5 terhadap asetaldehida dan K_i >= 20 terhadap heksanal.
+Pelarut & Metabolit: Senyawa Volatil Organik (VOC): Aseton, etanol, metanol, asam format, dan trimetilamina. Ditargetkan menghasilkan respons di bawah noise floor sensor (K_i > 50).
+Matriks Campuran: Uji Campuran Pangan Nyata: Pengujian larutan biner HCHO + heksanal, HCHO + asetaldehida, serta HCHO yang di-spike ke dalam ekstrak bakso riil bebas formalin. Parameter keberhasilan: Perolehan kembali analitik (spike recovery) berada dalam rentang 80% - 120%.
+11.3 Protokol Validasi Matriks Pangan Nyata (S1 s.d. S5)
+Evaluasi performa analitik instrumen diuji pada 5 kelompok sampel pangan nyata:
+Kelompok S1: S1 (Blanko Laboratorium Kontrol): Bakso sapi dibuat mandiri tanpa formalin (n = 10 batch) untuk memetakan sebaran kadar latar alami endogen dan mengukur false positive rate.
+Kelompok S2: S2 (Spike Recovery Matriks): Sampel S1 yang ditambahkan larutan formaldehida terkontrol pada 5 tingkat konsentrasi (10, 50, 100, 500, 1000 mg/kg) dengan 5 replikat independen per tingkat.
+Kelompok S3: S3 (Sampel Pasar Komersial): Bakso sapi komersial yang diambil secara acak dari minimal 10 pedagang pasar tradisional berbeda untuk uji lapangan buta.
+Kelompok S4: S4 (Kasus Ekstrem Bakso Ikan): Produk olahan berbasis surimi/ikan dengan potensi latar endogen tinggi dari degradasi TMAOase.
+Kelompok S5: S5 (Efek Penyimpanan Suhu Beku): Bakso yang dibekukan dan dicairkan berulang untuk mengevaluasi pelepasan formaldehida sekunder.
+Metode Komparatif Standar Emas: Seluruh sampel diuji paralel secara independen menggunakan metode HPLC-DNPH (UPLC) dan Spektrofotometri Nash (asetilaseton). Kesepakatan hasil dianalisis secara statistik menggunakan Regresi Passing-Bablok (kemiringan garis 0,9 - 1,1; intersep nol) serta Plot Selisih Perbedaan Bland-Altman.
+11.4 Pemodelan Kurva Kalibrasi Non-Linier
+Hubungan antara konsentrasi formaldehida dengan respon regangan-magnetik Delta B tidak boleh dipaksakan linier. Mengingat ketersediaan situs amina aktif terbatas dan fenomena perkolasi elastis jaringan polimerik, empat model kalibrasi diuji dan dibandingkan secara objektif:
+1. Linier: Model Linier Klasik: Delta B = a * C + b (hanya valid pada rentang konsentrasi sangat rendah di bawah saturasi).
+2. Langmuir: Model Adsorpsi Langmuir: Delta B = (Delta B_maks * K * C) / (1 + K * C) (mencerminkan penjenuhan situs reseptor berenergi seragam).
+3. Freundlich: Model Heterogen Freundlich: Delta B = K * C^(1/n) (mengakomodasi heterogenitas energi adsorpsi pada matriks nanofiber acak).
+4. Hill / Sigmoid: Model Sigmoid Hill: Delta B = Delta B_maks * C^n / (K^n + C^n) (model paling representatif secara fisik karena fenomena ambang perkolasi mekanis; jaringan polimer membutuhkan ikatan metilena minimum sebelum menghasilkan kontraksi lateral terukur).
+Model terbaik dipilih berdasarkan nilai kriteria informasi terbobot terendah (Akaike Information Criterion / AICc dan Bayesian Information Criterion / BIC) serta Root Mean Square Error (RMSE) dari validasi silang (Leave-One-Out Cross-Validation / LOOCV).
+BAB 12
+MANAJEMEN RISIKO, ANGGARAN KETIDAKPASTIAN & SAFETY
+12.1 Anggaran Ketidakpastian Pengukuran (Uncertainty Budget)
+Tabel 12.1 menyajikan inventarisasi komprehensif seluruh sumber ketidakpastian pengukuran yang berkontribusi terhadap sinyal Delta B analitik (~906 nT):
+Sumber Ketidakpastian
+Klasifikasi Tipe
+Besaran Tipikal
+Dampak Medan Ekuivalen
+Strategi Mitigasi Desain
+Offset Inherent Bridge TMR
+Tipe B (Sistematik)
++/-20 mV/V (+/-100 mV)
++/-100.000 nT
+Gradiometer diferensial + baseline diferensial-waktu + active nulling DAC (hilang total)
+Drift Suhu TCO Sensor TMR
+Tipe B (Sistematik)
+0,1 %/°C F.S. (typ)
+~1.000 nT per 1 °C
+Sensor suhu TMP117 termal terkopel + algoritma kompensasi digital + gradiometer
+Interferensi Medan Magnet Bumi
+Tipe B (Sistematik)
+25 - 65 µT
+25.000 - 65.000 nT
+Selubung mu-metal permeabilitas tinggi + orientasi mekanik terkunci + gradiometer 2-TMR
+Toleransi Jarak Celah Udara (Lift-Off)
+Tipe A/B (Acak/Sistematik)
++/-20 µm pada d=1,0 mm
+~140 nT
+Dudukan kinematik 3-titik presisi + datum referensi permukaan sisi depan mat
+Variasi Loading Fe3O4 Antar-Batch
+Tipe B (Sistematik)
++/-5% b/b
+~1.100 nT
+Normalisasi pembagian momen magnetik total spesifik berbasis pengujian VSM per-batch
+Derau Elektronik ADC ADS1115
+Tipe A (Acak)
+7,8 µV (1 LSB)
+~78 nT
+Pengambilan sampel 8 SPS + oversampling averaging 128x (menekan noise hingga ~7 nT)
+Fluktuasi Kelembapan Relatif (RH)
+Tipe B (Sistematik)
++/-10% RH
+~350 nT
+Penggunaan desikan pasif pada vial headspace + kompensasi sensor RH real-time
+Efek Matriks Garam/Protein Cair
+Tipe B (Sistematik)
+Kadar NaCl ~2%
+>1.000 nT jika kontak cair
+Pemisahan fasa mutlak menggunakan metode uap headspace (garam non-volatil = nol)
+Histeresis Siklik Magnetik TMR
+Tipe B (Sistematik)
+<5% F.S.
+~50.000 nT jika unipolar
+Pendekatan fluks selalu dari satu arah medan tetap, tanpa paparan medan saturasi luar
+12.2 Keselamatan Kerja Laboratorium & Penanganan B3
+Formalin (formaldehida) dan glutaraldehida tergolong Bahan Berbahaya dan Beracun (B3) karsinogenik dan pemeka saluran pernapasan. Protokol keselamatan laboratorium wajib diterapkan:
+Fume Hood Wajib: Ventilasi Lemari Asam: Seluruh penanganan larutan stok formalin 37%, pembuatan seri pengenceran, spiking sampel bakso, dan crosslinking uap GA wajib dilakukan di dalam lemari asam (fume hood) bersertifikasi aliran laminar.
+Perlindungan Diri: Alat Pelindung Diri (APD): Sarung tangan nitril ganda (double-gloving; sarung tangan diganti setiap 30 menit), kacamata pelindung tertutup (chemical splash goggles), jas laboratorium lengan panjang, dan masker respirator katrid uap organik bila menangani limbah.
+Dekontaminasi & Limbah: Netralisasi Limbah Formalin: Limbah cair yang mengandung formaldehida dan glutaraldehida dinetralkan menggunakan natrium bisulfit (NaHSO3) atau urea berlebih dalam suasana asam untuk mengonversi aldehida bebas menjadi garam adisi sulfonat yang stabil dan tidak beracun sebelum diserahkan ke fasilitas pengolah limbah B3.
+12.3 Gerbang Keputusan Eksperimen Fase 0 (Go/No-Go Gate)
+📌 PROTOKOL GERBANG KEPUTUSAN FASE 0
+Sebelum mengalokasikan anggaran untuk pabrikasi PCB, pengadaan sensor TMR ALT023, dan perakitan mekanik presisi, wajib dilaksanakan Uji Falsifikasi Mikro-Skala Fase 0:
+1. Fabrikasi membran nanofiber Fe3O4/PVA-GA (C2) dan Fe3O4/PVA-GA terfungsionalisasi PEI (C6) secara manual.
+2. Ukur dimensi lateral in-plane (panjang dan lebar) secara optik menggunakan mikroskop digital berkalibrasi tinggi (akurasi sub-mikrometer).
+3. Paparkan membran pada uap formaldehida 1000 mg/kg selama 15 menit pada suhu 45 °C.
+KRITERIA PUTUSAN GO/NO-GO:
+- GO (Lanjutkan): Membran C6 menunjukkan kontraksi regangan lateral in-plane terukur >= 1,0% yang secara statistik signifikan dibanding membran kontrol C2.
+- NO-GO (Hentikan / Alihkan): Jika kontraksi in-plane < 0,2% atau hanya terjadi pengerasan modulus tanpa perubahan dimensi (stiffening without strain), hipotesis transduksi mekano-magnetik gugur. Penelitian dialihkan ke mode aktuator magnetik makro atau beralih ke transduser gravimetrik/kapasitif.
+DAFTAR PUSTAKA
+[1] P. Li, X. Zeng, S. Liu, H. Li, Y. Xi, W. Jiang, Y. Wang, and J. Li, 'Covalent and hydrophobic interactions play important roles in the formaldehyde scavenging ability of banana condensed tannins in aqueous solution,' Food Chem., vol. 463, pt. 4, art. 141463, Jan. 2025. doi: 10.1016/j.foodchem.2024.141463.
+[2] 'Reactivity of larch and valonia tannins in synthesis of tannin-formaldehyde resins,' BioResources, vol. 8, no. 2, pp. 2712-2724, 2013.
+[3] A. Pizzi, 'Condensed tannins for adhesives,' Ind. Eng. Chem. Prod. Res. Dev., vol. 21, no. 3, pp. 359-369, 1982.
+[4] G. Tondi, 'Tannin-based formulation: an overview,' in Chemistry and Technology of Polyphenols, IntechOpen, 2017, ch. 67149. doi: 10.5772/intechopen.67149.
+[5] Z. Yang, H. Miao, Z. Rui, and H. Ji, 'Enhanced formaldehyde removal from air using fully biodegradable chitosan grafted beta-cyclodextrin adsorbent,' Polymers, vol. 11, no. 2, art. 276, 2019. doi: 10.3390/polym11020276.
+[6] J. Chinese Ceramic Society, 'Cellulose-chitosan composite aerogels for dynamic formaldehyde adsorption,' J. Chin. Ceram. Soc., vol. 52, no. 4, pp. 1102-1111, 2024. doi: 10.14062/j.issn.0454-5648.20240789.
+[7] X. Wang, B. Ding, M. Sun, J. Yu, and G. Sun, 'Nanofibrous polyethyleneimine membranes as sensitive coatings for quartz crystal microbalance formaldehyde sensors,' Sens. Actuators B Chem., vol. 144, no. 1, pp. 11-17, Jan. 2010. doi: 10.1016/j.snb.2009.10.016.
+[8] C. Zhang, X. Wang, and B. Ding, 'Electrospun nanoporous polystyrene fibers functionalized with polyethyleneimine for formaldehyde detection,' J. Colloid Interface Sci., vol. 356, no. 1, pp. 63-69, 2011.
+[9] N. Wang, X. Wang, Y. Jia, X. Li, J. Yu, and B. Ding, 'Electrospun nanofibrous chitosan membranes modified with polyethyleneimine for formaldehyde detection,' Carbohydr. Polym., vol. 108, pp. 192-199, Aug. 2014. doi: 10.1016/j.carbpol.2014.02.088.
+[10] W. Hu, S. Chen, J. Yang, Z. Li, and H. Wang, 'Functionalized bacterial cellulose nanofibrous membranes for formaldehyde sensing,' Sens. Actuators B Chem., vol. 160, no. 1, pp. 882-888, 2011. doi: 10.1016/j.snb.2011.08.079.
+[11] W. Huang, X. Wang, Y. Jia, X. Li, Z. Zhu, Y. Li, Y. Si, B. Ding, X. Wang, and J. Yu, 'Electrospun polyvinylamine-modified polyacrylonitrile nanofibrous membranes for formaldehyde sensing,' RSC Adv., vol. 3, no. 45, pp. 22994-23000, 2013. doi: 10.1039/c3ra44671a.
+[12] L. Feng, X. Feng, X. Li, Y. Cui, and X. Guo, 'Quartz crystal microbalance sensors based on polyvinylamine/MWCNTs and polyacrylamide/MWCNTs for formaldehyde detection,' ACS Omega, vol. 6, no. 22, pp. 14004-14013, Jun. 2021. doi: 10.1021/acsomega.0c05987.
+[13] E. T. Nicknejad, S. M. Ghoreishi, and N. Habibi, 'Electrospinning of cross-linkable magnetic nanocomposites: poly(vinyl alcohol)/chitosan/Fe3O4,' AAPS PharmSciTech, vol. 16, no. 6, pp. 1480-1486, Dec. 2015. doi: 10.1208/s12249-015-0336-7.
+[14] C. Tang, C. D. Saquing, J. R. Harding, and S. A. Khan, 'In situ cross-linking of electrospun poly(vinyl alcohol) nanofibers,' Macromolecules, vol. 43, no. 2, pp. 630-637, Jan. 2010. doi: 10.1021/ma902269p.
+[15] J. Liu, D. Liang, L. Zhao, C. Liu, J. Cai, X. Tang, and G. Xu, 'A molecularly imprinted quartz crystal microbalance sensor for formaldehyde,' RSC Adv., vol. 12, no. 21, pp. 13235-13243, 2022. doi: 10.1039/D2RA01705A.
+[16] M. Hussain, K. Kotova, and P. A. Lieberzeit, 'Molecularly imprinted polymer nanoparticles for formaldehyde sensing with QCM,' Sensors, vol. 16, no. 7, art. 1011, Jun. 2016. doi: 10.3390/s16071011.
+[17] X. Tang, L. Song, D. Liang, and J. Cai, 'Room temperature formaldehyde sensor based on molecularly imprinted TiO2 nanotube arrays,' Sensors, vol. 17, no. 4, art. 675, Mar. 2017. doi: 10.3390/s17040675.
+[18] S. A. Sofa, E. K. Sari, and E. Suharyadi, 'Aniline-doped poly(vinyl acetate) electrospun nanofibers coated on QCM for formaldehyde detection,' Analyst, vol. 149, pp. 1856-1864, 2024. doi: 10.1039/D3AN01856C.
+[19] N. I. Marzuki, F. A. Bakar, A. B. Salleh, L. Y. Heng, N. A. Yusof, and S. Siddiquee, 'Development of electrochemical biosensor for formaldehyde determination based on immobilized enzyme,' Curr. Anal. Chem., vol. 8, no. 4, pp. 534-542, 2012. doi: 10.2174/157341112803216843.
+[20] M. Kundu, H. Bhardwaj, R. Pandey, V. Krishnan, R. K. Kotnala, and S. Sumana, 'Development of electrochemical biosensor based on CNT-Fe3O4 nanocomposite to determine formaldehyde adulteration in orange juice,' J. Food Sci. Technol., vol. 56, no. 4, pp. 1829-1839, Apr. 2019. doi: 10.1007/s13197-019-03635-7.
+[21] M. I. S. Veríssimo, J. A. F. Gamelas, A. J. S. Fernandes, D. V. Evtuguin, and M. T. S. R. Gomes, 'A new formaldehyde optical sensor: detecting milk adulteration,' Food Chem., vol. 318, art. 126461, Jul. 2020. doi: 10.1016/j.foodchem.2020.126461.
+[22] S. K. H. Gulrez, S. Al-Assaf, and G. O. Phillips, 'Hydrogels: methods of preparation, characterisation and applications,' in Progress in Molecular and Environmental Bioengineering, IntechOpen, 2011.
+[23] J. Li, Z. Wang, and Y. Cheng, 'Amine-shielded cross-linking of chitosan: synthesis and controlled de-shielding mechanism,' Ind. Eng. Chem. Res., vol. 44, no. 12, pp. 4150-4156, 2005. doi: 10.1021/ie050145k.
+[24] E. G. Tsekoura et al., 'Swelling behaviour of chitosan/dialdehyde alginate multilayer films at varying ionic strength,' Langmuir, vol. 39, no. 5, pp. 1956-1965, 2023. doi: 10.1021/acs.langmuir.2c03515.
+[25] J. Zhou et al., 'Comprehensive review on fluorescent and colorimetric probes for formaldehyde detection,' Org. Biomol. Chem., vol. 23, pp. 1858-1875, 2025. doi: 10.1039/D5OB00858A.
+[26] K. J. Bruemmer, T. F. Brewer, and C. J. Chang, 'Fluorescent probes for imaging formaldehyde in biological systems based on the 2-aza-Cope reaction,' Curr. Opin. Chem. Biol., vol. 39, pp. 17-23, Aug. 2017. doi: 10.1016/j.cbpa.2017.04.011.
+[27] A. Tantipanjaporn, K.-K.-Y. Kung, H.-Y. Sit, and M.-K. Wong, 'Quinolizinium-based 2-aza-Cope fluorescent probe for selective formaldehyde detection,' RSC Adv., vol. 12, no. 18, pp. 11543-11550, 2022. doi: 10.1039/D2RA01397E.
+[28] M. Li, J. Zhang, H. Yang, and Z. Xie, 'ZIF-90-LW: a 2-aza-Cope based fluorescent probe for selective and sensitive formaldehyde detection,' Anal. Methods, vol. 12, no. 29, pp. 3748-3755, 2020. doi: 10.1039/D0AY00493F.
+[29] D. Lago-Cachon et al., 'Contactless measurement of magnetic nanoparticles on lateral flow strips using tunneling magnetoresistance sensors in differential configuration,' Sensors, vol. 16, no. 12, art. 2130, Dec. 2016. doi: 10.3390/s16122130.
+[30] M. Zrinyi et al., 'Swelling enhanced remanent magnetization of hydrogels cross-linked with magnetic nanoparticles,' Langmuir, vol. 30, no. 34, pp. 10425-10433, 2014. doi: 10.1021/la503390w.
+[31] P. Vogel et al., 'Multi-contrast magnetic particle imaging for tomographic pH monitoring using stimuli-responsive hydrogels,' Commun. Eng., vol. 5, art. 12, 2026. doi: 10.1038/s44172-026-00586-8.
+[32] F. Firdaus, R. A. H. Tabrani, G. A. Prayoga, Zurnansyah, H. Ardiyanti, E. K. Sari, N. I. Istiqomah, G. Antarnusa, and E. Suharyadi, 'Detection of green-synthesized Fe3O4 magnetic nanoparticles using a GMR sensor with 16-bit ADC and Arduino-based data acquisition,' Sens. Actuators A Phys., vol. 396, art. 117138, Jan. 2025. doi: 10.1016/j.sna.2025.117138.
+[33] H. Ardiyanti et al., 'Chip-based GMR sensor design for magnetite nanoparticle detection,' J. Sci. Adv. Mater. Devices, vol. 8, no. 2, art. 100556, 2023. doi: 10.1016/j.jsamd.2023.100556.
+[34] Sensors International, 'Commercial chip-based tunneling magnetoresistance sensor for green-synthesized magnetic nanoparticles assay,' Sens. Int., vol. 5, art. 100290, Jul. 2024. doi: 10.1016/j.sintl.2024.100290.
+[35] NVE Corporation, 'ALT Series Analog TMR Magnetic Sensors Datasheet,' Document ALTxxx-10, Eden Prairie, MN, USA, 2023. [Online]. Available: https://www.nve.com/Downloads/ALTxxx-10.pdf.
+[36] NVE Corporation, 'ALT023-10E Product Specification and Pricing,' NVE Online Catalog, 2024. [Online]. Available: https://www.nve.com/webstore/alt023-10e.
+[37] Centre for Food Safety (CFS), Food and Environmental Hygiene Department, 'Formaldehyde in Food,' Hong Kong SAR Government, 2021. [Online]. Available: https://www.cfs.gov.hk.
+[38] EFSA Panel on Food Additives and Nutrient Sources Added to Food (ANS), 'Endogenous formaldehyde turnover in humans compared with exogenous contribution from food sources,' EFSA J., vol. 12, no. 2, art. 3550, 2014. doi: 10.2903/j.efsa.2014.3550.
+[39] Kementerian Kesehatan Republik Indonesia, 'Peraturan Menteri Kesehatan RI No. 033 Tahun 2012 tentang Bahan Tambahan Pangan,' Kemenkes RI, Jakarta, 2012.
+[40] Badan Pengawas Obat dan Makanan (BPOM) RI, 'Laporan Tahunan Pengawasan Bahan Berbahaya dan Takjil Ramadhan,' Badan POM RI, Jakarta, 2023.
+[41] D. A. Pratama, N. Astuti, and E. Setiani, 'Identifikasi penyalahgunaan formalin pada produk olahan hewani dan perikanan di pasar tradisional Semarang,' BIO Web Conf., vol. 114, art. 00073, 2025. doi: 10.1051/bioconf/202511400073.
+[42] T. Nash, 'The colorimetric estimation of formaldehyde by means of the Hantzsch reaction,' Biochem. J., vol. 55, no. 3, pp. 416-421, 1953. doi: 10.1042/bj0550416.
+[43] AOAC International, 'Official Method 931.08: Formaldehyde in Foods,' AOAC Official Methods of Analysis, 18th ed., Gaithersburg, MD, 2005.
+[44] U.S. Environmental Protection Agency (EPA), 'Compendium Method TO-11A: Determination of formaldehyde in ambient air using adsorbent cartridge followed by HPLC,' EPA/625/R-96/010b, Cincinnati, OH, 1999.
+[45] R. W. Taft and J. H. Fox, 'Hydration equilibria of aliphatic aldehydes in aqueous solutions,' Mol. Phys., vol. 121, no. 9, pp. 1205-1215, 2023. doi: 10.1080/00268976.2023.2197712.
+[46] D. Burman and T. Thajudeen, 'Nanostructured chemiresistive formaldehyde sensors: a review,' Nanoscale, vol. 18, pp. 4622-4645, 2026. doi: 10.1039/D5NR03900B.
+[47] X. Zeng et al., 'Banana condensed tannins as natural TMAOase inhibitors in chilled Harpadon nehereus storage,' SSRN Electron. J., art. 5592732, 2025. doi: 10.2139/ssrn.5592732.
+[48] H. Ejima et al., 'One-step assembly of coordination complexes for versatile surface engineering,' Science, vol. 341, no. 6142, pp. 154-157, 2013. doi: 10.1126/science.1237265.
+[49] P. V. Dhawale et al., 'Tannin as a renewable raw material for adhesive applications: a review,' Mater. Adv., vol. 3, no. 8, pp. 3365-3388, 2022. doi: 10.1039/D1MA00841B.
+[50] M. A. Lacoste et al., 'Batch-to-batch variation in condensed tannin industrial extraction,' Forests, vol. 15, no. 1, art. 98, 2024. doi: 10.3390/f15010098.
+[51] W.-C. Shao et al., 'Air filtration media coated with functional chitosan for volatile aldehyde abatement,' Build. Environ., vol. 188, art. 107482, 2021.
+[52] X. Geng, O.-H. Kwon, and J. Jang, 'Electrospinning of chitosan dissolved in concentrated acetic acid solution,' Biomaterials, vol. 26, no. 27, pp. 5427-5432, 2005. doi: 10.1016/j.biomaterials.2005.01.066.
+[53] S. Homayoni, 'Electrospinning of pure chitosan nanofibers: parameter optimization and characterization,' Ph.D. dissertation, School of Eng., Brunel Univ., London, UK, 2014.
+[54] M. Koosha and H. Mirzadeh, 'Electrospinning, mechanical properties, and cell behavior study of chitosan/PVA nanofibers,' J. Biomed. Mater. Res. A, vol. 103, no. 9, pp. 3081-3093, 2015. doi: 10.1002/jbm.a.35443.
+[55] K. Paipitak et al., 'Characterization of PVA-chitosan nanofibers prepared by electrospinning,' Procedia Eng., vol. 32, pp. 101-107, 2011. doi: 10.1016/j.proeng.2012.01.1243.
+[56] T. H. N. Vu et al., 'Fabrication of uniform chitosan/PVA nanofibers via multi-jet electrospinning,' Polymers, vol. 14, no. 6, art. 1152, 2022. doi: 10.3390/polym14061152.
+[57] G. C. da Mata et al., 'Optimization of chitosan/PVA electrospun nanofibers using response surface methodology,' Polymers, vol. 16, no. 23, art. 3393, 2024. doi: 10.3390/polym16233393.
+[58] A. R. Bagheri et al., 'Systematic investigation of critical parameters in electrospinning of chitosan-PVA blends,' Heliyon, vol. 9, no. 5, art. e15822, 2023. doi: 10.1016/j.heliyon.2023.e15822.
+[59] Y. Liu et al., 'Contact angle evolution and crosslinking kinetics of glutaraldehyde-vapor crosslinked poly(vinyl alcohol) mats,' Mater. Lett., vol. 278, art. 128412, 2020.
+[60] H. S. Mansur et al., 'FTIR spectroscopy characterization of poly(vinyl alcohol) hydrogel with different glutaraldehyde concentrations,' RSC Adv., vol. 5, no. 28, pp. 21650-21661, 2015. doi: 10.1039/C5RA16068E.
+[61] A. Shalbafan and H. Hassannejad, 'Chitosan nanoparticles as formaldehyde scavengers in wood composites,' Eur. J. Wood Wood Prod., vol. 78, pp. 455-465, 2020.
+[62] E. M. Sadek et al., 'Periodate oxidation followed by reductive amination of cellulose for enhanced primary amine functionalization,' Carbohydr. Res., vol. 502, art. 108273, 2021.
+[63] X. Chen et al., 'Aminated magnetic chitosan nanocomposites for toxic anion sequestration,' Chem. Eng. J., vol. 384, art. 123305, 2020.
+[64] Y. Si et al., 'Ultrathin polyethyleneimine nanofiber networks on film bulk acoustic resonators for formaldehyde gas sensors,' Micromachines, vol. 9, no. 2, art. 62, Feb. 2018. doi: 10.3390/mi9020062.
+[65] S. Zhang et al., 'Bacterial cellulose-polyethyleneimine bilayer films on surface acoustic wave devices for room-temperature formaldehyde sensing,' J. Hazard. Mater., vol. 385, art. 121544, 2020.
+[66] Thermo Fisher Scientific, 'Hydrazide and hydroxylamine bioconjugation chemistries,' in Molecular Probes Handbook of Fluorescent Probes and Research Products, 11th ed., Eugene, OR, 2010.
+[67] M. Cao et al., 'Hydrazide-modified polyacrylate/silica gel core-shell composite for efficient chemical formaldehyde removal,' Sep. Purif. Technol., vol. 370, art. 133273, 2025. doi: 10.1016/j.seppur.2025.133273.
+[68] M. Cao et al., 'Hydrazide-functionalized polyacrylate/graphene composite for chemical formaldehyde removal,' Chem. Eng. J., vol. 520, art. 165831, 2025. doi: 10.1016/j.cej.2025.165831.
+[69] N. Ding et al., 'Near-infrared fluorescent probe based on hydrazine functionalization for endogenous formaldehyde tracking,' Anal. Chem., vol. 94, no. 35, pp. 12120-12127, 2022.
+[70] H. Xu et al., 'Porous cellulose test strip coated with hydroxylamine sulfate for turn-on optical detection of gaseous formaldehyde,' Sens. Actuators B Chem., vol. 369, art. 132314, 2022.
+[71] J. M. Esser et al., 'Hydroxylamine-functionalized single-walled carbon nanotube chemiresistors for sub-ppm formaldehyde monitoring,' ACS Sens., vol. 2, no. 9, pp. 1311-1318, 2017. doi: 10.1021/acssensors.7b00591.
+[72] S. Ishihara et al., 'Purge-free actuator-driven SWCNT/hydroxylamine gas sensor with 50 ppb sensitivity,' Nanomaterials, vol. 15, no. 13, art. 962, 2025. doi: 10.3390/nano15130962.
+[73] M. Zeama, A. Alhaji, C. Serre, O. Shekhah, and M. Eddaoudi, 'Pyrazole dicarboxylate MOFs for selective formaldehyde sensing under humid conditions,' Chem. Mater., vol. 37, no. 16, pp. 6193-6202, 2025. doi: 10.1021/acs.chemmater.5c00748.
+[74] L. Peng et al., 'Optical alcohol oxidase biosensor for rapid screening of formaldehyde adulteration in tofu,' Food Chem., vol. 312, art. 126084, 2020.
+[75] Y. Sun et al., 'Polyoxometalate-CuBi2O4 heterojunctions for room-temperature chemiresistive formaldehyde gas sensing,' Polyoxometalates, vol. 3, no. 2, art. 9140053, 2024.
+[76] T. F. Brewer and C. J. Chang, 'An aza-Cope reactivity-based fluorescent probe for imaging formaldehyde in living cells,' J. Am. Chem. Soc., vol. 137, no. 34, pp. 10886-10889, 2015. doi: 10.1021/jacs.5b05809.
+[77] X. Zhang et al., 'Reaction-based fluorescent probes for biological reactive carbonyl species: a review,' RSC Adv., vol. 15, pp. 1010-1035, 2025. doi: 10.1039/D5RA01010A.
+[78] L. Wang et al., 'UiO-66-NH2/V2CTx MXene composite on QCM for ultra-sensitive formaldehyde sensing,' Sens. Actuators B Chem., vol. 447, art. 138804, 2026. doi: 10.1016/j.snb.2025.138804.
+[79] S. Srinives et al., 'Primary amine-functionalized polyaniline thin-film chemiresistor for room-temperature formaldehyde vapor sensing,' Sens. Actuators B Chem., vol. 192, pp. 111-117, 2014.
+[80] Q. Zhou et al., 'Amine-functionalized SBA-15 mesoporous silica thin films on QCM for ppb-level formaldehyde detection,' J. Hazard. Mater., vol. 286, pp. 248-256, 2015.
+[81] H. Wang et al., 'Polymeric fluorescent probes based on the Pictet-Spengler reaction for formaldehyde detection in food,' J. Agric. Food Chem., vol. 72, pp. 5812-5821, 2024.
+[82] J. Li et al., 'Naphthalimide-based polymeric turn-on fluorescent sensor for vapor-phase formaldehyde,' Chemosensors, vol. 11, no. 2, art. 134, 2023. doi: 10.3390/chemosensors11020134.
+[83] H. Wang et al., 'Chitosan and gelatin film swelling versus ionic strength and pH,' ACS Omega, vol. 4, no. 6, pp. 10425-10432, 2019. doi: 10.1021/acsomega.9b00251.
+[84] A. Pourjavadi et al., 'Saline-responsive swelling behavior of crosslinked chitosan-poly(acrylamide) hydrogels,' J. Appl. Polym. Sci., vol. 108, no. 2, pp. 1012-1020, 2008.
+[85] M. Mussel, P. J. Basser, and F. Horkay, 'Effects of mono- and divalent cations on the swelling of polyelectrolyte gels,' Soft Matter, vol. 15, no. 20, pp. 4153-4161, 2019. doi: 10.1039/c9sm00464e.
+[86] Ministry of Agriculture, 'Evaluation of natural endogenous formaldehyde in imported poultry and livestock products,' J. Food Saf. Qual., vol. 13, pp. 445-452, 2022.
+[87] E. S. D. Santos et al., 'Comparative study of steam distillation versus solvent extraction for bound formaldehyde determination in smoked meat products,' Food Control, vol. 121, art. 107622, 2021.
+[88] Food and Environmental Hygiene Department, 'Survey on TMAO, DMA, TMA, and formaldehyde levels in commercial marine fishes in Hong Kong,' HKSAR Government Report, Hong Kong, 2014.
+[89] N. K. Mehta et al., 'Mechanisms of formaldehyde generation from trimethylamine-N-oxide in marine fish during post-mortem cold storage: a review,' Compr. Rev. Food Sci. Food Saf., vol. 23, no. 5, pp. 1-22, 2024.
+[90] H. Rehbein, 'Trimethylamine-N-oxide demethylase (TMAOase) in finfish: enzyme properties and formation of formaldehyde,' Arch. Lebensmittelhyg., vol. 58, pp. 144-153, 2007.
+[91] Badan Pengawas Obat dan Makanan (BPOM) RI, 'Policy Brief: Formaldehida dalam Pangan Olahan yang Terbentuk karena Proses Pengolahan,' Direktorat Standarisasi Pangan Olahan, Jakarta, 2019.
+[92] A. Rovina et al., 'Formaldehyde in food: occurrence, legislation, toxicity, and analytical methods: a review,' Foods, vol. 11, no. 9, art. 1351, 2022. doi: 10.3390/foods11091351.
+[93] T. Buckley et al., 'Reductive cleavage of protein-bound formaldehyde adducts using sodium cyanoborohydride in matrix-assisted food analysis,' J. Agric. Food Chem., vol. 68, pp. 9812-9820, 2020.
+[94] X. Meng et al., 'Tuning dipolar interactions in magnetic nanoparticle-embedded polymer networks via hydrophobic spacer length,' Nanoscale, vol. 17, no. 8, pp. 4286-4296, 2025. doi: 10.1039/D4NR04286G.
+[95] S. Koski et al., 'Electrospinning of poly(vinyl alcohol) aqueous solutions: rheological behavior and critical entanglement concentration,' Eur. Polym. J., vol. 48, no. 5, pp. 950-960, 2012. doi: 10.1016/j.eurpolymj.2012.02.015.
+[96] Analog Devices, 'AD623: Single-Supply, Rail-to-Rail, Low Cost Instrumentation Amplifier Datasheet (Rev. E),' Norwood, MA, USA, 2020. [Online]. Available: https://www.analog.com.
+[97] Texas Instruments, 'ADS1113, ADS1114, ADS1115 Ultra-Small, Low-Power, 16-Bit Analog-to-Digital Converters Datasheet (Rev. E),' Dallas, TX, USA, 2018. [Online]. Available: https://www.ti.com.

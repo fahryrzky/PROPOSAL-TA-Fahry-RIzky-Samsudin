@@ -1,0 +1,44 @@
+01. "Adipic acid dihydrazide (adh), product information." Sigma-Aldrich, 2024.
+02. "Adipic acid dihydrazide - a unique crosslinking agent and curative." Gantrade, 2024.
+03. "Lembar data keselamatan bahan (msds): Formalin/formaldehida." Kementerian Lingkungan Hidup dan Kehutanan Republik Indonesia, 2021.
+04. "Magnetic tunnel junction (mtj) biosensors, in: Magnetic nanoparticles in nanomedicine." arXiv preprint, 2018.
+05. "Nve introduces ultraminiature analog tmr sensors." Magnetics Magazine, 2023.
+06. A. R. Pratama and N. Hidayat, "Identifikasi kandungan formalin pada bakso menggunakan metode rapid test kit di kawasan wisata dan sekolah yogyakarta," Jurnal Pengawasan Keamanan Pangan, vol. 4, no. 1, pp. 12-19, 2025.
+07. Analog Devices, Inc., AD623: Single-Supply, Rail-to-Rail, Low Cost Instrumentation Amplifier Data Sheet, 2020. Rev. E.
+08. C. Birck, S. Degoutin, N. Tabary, V. Miri, and M. Bacquet, "New crosslinked cast films based on poly(vinyl alcohol): Preparation and physico-chemical properties," Express Polymer Letters, vol. 8, no. 12, pp. 941-952, 2014.
+09. C. Cortes and V. Vapnik, "Support-vector networks," Machine Learning, vol. 20, no. 3, pp. 273-297, 1995.
+10. C. Singhal, A. Sharma, and C. S. Pundir, "Advances in electrochemical biosensors for formaldehyde detection in food matrices: Challenges and prospects," Biosensors and Bioelectronics, vol. 245, p. 115850, 2024.
+11. D. Agustin, R. Yulianti, and D. Kurniawati, "Identifikasi kandungan formalin pada bakso dan mie kuning yang beredar di jalan soebrantas kota pekanbaru secara kualitatif," Forte Journal, vol. 3, no. 1, pp. 45-52, 2023.
+12. D. S. Shylu, P. Sam Paul, D. Jackuline Moni, and J. Arolin Monica Helan, "A power efficient delta-sigma adc with series-bilinear switch capacitor voltage-controlled oscillator," TELKOMNIKA Telecommunication, Computing, Electronics and Control, vol. 18, no. 5, pp. 2618-2627, 2020.
+13. E. Supriyanto, A. Fitriyanto, and Y. Nurfaizah, "Rancang bangun modul low pass filter (lpf) orde 1 dan orde 2 sebagai penunjang praktikum rangkaian elektronika dan bengkel elektronika komunikasi," Integrated Lab Journal, vol. 11, pp. 22-33, April 2023.
+14. F. Faradila, Y. Alioes, and E. Syamsir, "Identifikasi formalin pada bakso yang dijual pada beberapa tempat di kota padang," Jurnal Kesehatan Andalas, vol. 3, no. 2, pp. 154-158, 2014.
+15. G. Antarnusa, A. Esmawan, P. D. Jayanti, S. R. Fitriani, A. Suherman, E. K. Palupi, R. Umam, and Ardimas, "Synthesis of fe3o4 at different reaction temperatures and investigation of its magnetic properties on giant magnetoresistance (gmr) sensors for bio-detection applications," Journal of Magnetism and Magnetic Materials, vol. 563, p. 169903, 2022.
+16. G. Ardiyani, Erwin, and Salomo, "Desain pembuatan dan uji coba kumparan helmholtz berbentuk lingkaran," JOM FMIPA, vol. 2, no. 1, pp. 24-32, 2015.
+17. G. C. Turkoglu, N. Khomarloo, E. Mohsenzadeh, D. N. Gospodinova, M. Neznakomova, and F. Salaun, "Pva-based electrospun materials - a promising route to designing nanofiber mats with desired morphological shape - a review," International Journal of Molecular Sciences, vol. 25, no. 3, p. 1668, 2024.
+18. G. Pratama, "Rancang bangun instrumentasi sensor giant magnetoresistance berbasis nanofiber fe3o4/pva-gox untuk deteksi glukosa saliva menggunakan random forest," skripsi, Jurusan Fisika, Fakultas Sains dan Teknologi, UIN Sunan Gunung Djati Bandung, 2026.
+19. H. Ardiyanti, N. Mabarroh, N. Wibowo, et al., "Facile and fast assay of biomolecule using ics-based giant magnetoresistance chip sensor with green-synthesized magnetite nanotag," Sensors and Imaging, vol. 26, p. 75, 2025.
+20. J. Sun, B. Luo, and H. Li, "A review on the conventional capacitors, supercapacitors, and emerging hybrid ion capacitors: Past, present, and future," Advanced Energy and Sustainability Research, vol. 3, no. 6, p. 2100191, 2022. \endthebibliography
+21. J. Xue, T. Wu, Y. Dai, and Y. Xia, "Electrospinning and electrospun nanofibers: methods, materials, and applications," Chemical Reviews, vol. 119, no. 8, pp. 5298-5415, 2019.
+22. K. J. Millman and M. Aivazis, "Python for scientists," Computing in Science \& Engineering, vol. 9, no. 3, pp. 10-20, 2007.
+23. M. A. Dheyab, A. A. Aziz, M. S. Jameel, O. A. Noqta, P. M. Khaniabadi, and B. Mehrdel, "Simple rapid stabilization method through citric acid modification for magnetite nanoparticles," Scientific Reports, vol. 10, p. 10793, 2020.
+24. M. S. W. S. and G. P. P. Siswanto, Basic Mobile Robot Arduino Berbasis Pemrograman IDE Arduino + Interface Python. BOLABOT, 2025.
+25. M. S. W. S., G. P. P. Siswanto, and D. Anggraeni, Membuat Robot Berbasis Raspberry Pi Pico W + Pemrograman Python. Bolabot, 1 ed., Sept. 2025. Editor: Aceng Sambas.
+26. M. Schuld and N. Killoran, "Quantum machine learning in feature hilbert spaces," Physical Review Letters, vol. 122, no. 4, p. 040504, 2019.
+27. M. Siregar and R. Nasution, "Identifikasi kandungan formalin pada produk daging olahan berdasarkan standar keamanan pangan," Jurnal Penelitian Sains Terapan, vol. 5, pp. 150-156, 2022.
+28. NVE Corporation, ALT-Series Analog TMR Magnetic Sensors Datasheet, 2024. SB-00-117 Rev. B.
+29. NVE Corporation, EVB01 Evaluation Board for ALT023-10E TMR Magnetic Sensor, 2024.
+30. R. Firmansyah, "Perancangan sistem electromyography (emg) sebagai penggerak jari robot," 2017.
+31. R. Shi, Z. Zhang, Q. Liu, Y. Han, L. Zhang, D. Chen, and W. Tian, "Citric acid/poly(vinyl alcohol) composite films for food packaging," Journal of Applied Polymer Science, vol. 110, no. 1, pp. 551-558, 2008.
+32. Raspberry Pi Ltd, "Raspberry pi 5 product brief," tech. rep., Raspberry Pi Ltd, January 2025. Accessed: 2025-09-26.
+33. Sunar, Pemrograman Arduino untuk Pemula. Semarang: Cipta Prima Nusantara, 2021.
+34. T. Green, P. Semig, and C. Wells, eds., Analog Engineer’s Circuit Cookbook: Amplifiers, Second Edition. Texas Instruments, 2019. Document SLYY137, revised January 2019.
+35. T. S. Gaaz, A. B. Sulong, M. N. Akhtar, A. A. H. Kadhum, A. B. Mohamad, and A. A. Al-Amiery, "Properties and applications of polyvinyl alcohol, halloysite nanotubes and their nanocomposites," Molecules, vol. 20, no. 12, pp. 22833-22847, 2015.
+36. Texas Instruments, ADS1113, ADS1114, ADS1115: Ultra-Small, Low-Power, 16-Bit Analog-to-Digital Converters with Internal Reference (Rev. B), 2009. Datasheet, SBAS444B.
+37. V. Havlicek, A. D. Corcoles, K. Temme, A. W. Harrow, A. Kandala, J. M. Chow, and J. M. Gambetta, "Supervised learning with quantum-enhanced feature spaces," Nature, vol. 567, no. 7747, pp. 209-212, 2019.
+38. W. G. Jung, Op Amp Applications. United States: Analog Devices, Inc., 2002.
+39. W. Liu, X. Sun, X. Yan, Y. Gao, X. Zhang, K. Wang, and Y. Ma, "Review of energy storage capacitor technology," Batteries, vol. 10, no. 8, p. 271, 2024.
+40. X. Zhu, C. Liu, H. Su, Y. Miao, and H. Cheng, "Design of improved four-coil structure with high uniformity and effective coverage rate," Heliyon, vol. 9, p. e15193, 2023.
+41. Y. M. Dinata, Arduino Itu Pintar. Elex Media Komputindo, 2016.
+42. Y. Sun, M. Zhao, K. Liu, and J. Wang, "Smartphone-integrated colorimetric sensor array for rapid detection of formaldehyde in meat products," Food Chemistry, vol. 402, p. 134235, 2023.
+43. Yudhistira and P. Wibowo, "Pengukuran medan magnetik helmholtz coil melalui konversi tegangan efek hall," in Seminar Nasional Sains dan Teknologi 2019, Fakultas Teknik Universitas Muhammadiyah Jakarta, Fakultas Teknik UMJ, 2019.
+44. Z. Wang, H. Zhang, Y. Gao, and X. Li, "Highly sensitive and selective formaldehyde gas sensor based on porous sno2/in2o3 heterojunctions," Sensors and Actuators B: Chemical, vol. 334, p. 129651, 2021.
