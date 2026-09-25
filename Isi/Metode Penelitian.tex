@@ -7,137 +7,115 @@ Penelitian \textquotedblleft Rancang Bangun Instrumentasi Sensor \textit{Tunneli
 \subsection{Alat Penelitian}
 Adapun alat yang digunakan pada proses penelitian adalah sebagai berikut.
 
-\begin{singlespace}
-\small
-\begin{longtable}{|c|p{9.0cm}|c|}
-    \caption{Alat yang Digunakan dalam Penelitian} \label{tab:alatbahan} \\
+\begin{longtable}{|l|l|c|}
+    \caption{Alat yang Digunakan} \label{tab:alatbahan} \\
     \hline
-    No. & Alat & Jumlah \\ \hline
+    No. &  Alat   & Jumlah  \\ \hline
     \endfirsthead
-    
-    \multicolumn{3}{c}{\small\textit{Lanjutan Tabel \ref{tab:alatbahan} Alat yang Digunakan dalam Penelitian}} \\[0.15cm]
     \hline
-    No. & Alat & Jumlah \\ \hline
+    No. &  Alat   & Jumlah  \\ \hline
     \endhead
-    
     \hline
     \endfoot
-    
     \hline
     \endlastfoot
-    
-    1.  & Mesin \textit{Laser Cutting}           & 1 set \\ \hline
-    2.  & Raspberry Pi 5 dan Monitor             & 1 kit \\ \hline
-    3.  & Solder                                 & 1 buah \\ \hline
-    4.  & Tang Pemotong                          & 1 buah \\ \hline
-    5.  & Gunting                                & 1 buah \\ \hline
-    6.  & Obeng                                  & 1 buah \\ \hline
-    7.  & Mikropipet                             & 1 buah \\ \hline
-    8.  & \textit{Tweezer} Pencapit              & 1 buah \\ \hline
-    9.  & Timbangan Digital                      & 1 buah \\ \hline
-    10. & Sonikator                              & 1 buah \\ \hline
-    11. & \textit{Electrospinning}               & 1 kit \\ \hline
-    12. & \textit{Magnetic Stirrer}              & 1 kit \\ \hline
-    13. & Spatula                                & 1 buah \\ \hline
-    14. & \textit{Magnetic Bar}                  & 1 buah \\ \hline
-    15. & Vial                                   & Secukupnya \\ \hline
-    16. & Gelas Ukur                             & 1 buah \\ \hline
-    17. & \textit{Fume Hood}                     & 1 buah \\ \hline
-    18. & Gaussmeter / Teslameter                & 1 buah \\ \hline
-    19. & Catu Daya                              & 1 buah \\ \hline
-    20. & Oven Pengering / \textit{Vacuum Oven}  & 1 buah \\ \hline
+    1.  &  Mesin \textit{Laser Cutting}           & 1 set \\ \hline
+    2.  &  Raspberry Pi 5 dan Monitor & 1 kit \\ \hline
+    3.  &  Solder & 1 buah \\ \hline
+    4.  &  Tang Pemotong & 1 buah \\ \hline
+    5.  &  Gunting & 1 buah\\ \hline
+    6.  &  Obeng & 1 buah \\ \hline
+    7.  &  Mikropipet & 1 buah  \\ \hline
+    8.  & \textit{Tweezer} Pencapit      &  1 buah   \\ \hline
+    9.  & Timbangan Digital      &  1 buah   \\ \hline
+    10. & Sonikator      &  1 buah   \\ \hline
+    11. & \textit{Electrospinning}      &  1 kit   \\ \hline
+    12. & \textit{Magnetic Stirrer} &  1 kit   \\ \hline
+    13. & Spatula &  1 buah   \\ \hline
+    14. & \textit{Magnetic Bar} &  1 buah   \\ \hline
+    15. & Vial &  Secukupnya   \\ \hline
+    16. & Gelas Ukur &  1 buah   \\ \hline
+    17. & \textit{Fume Hood} & 1 buah   \\ \hline
+    18. & Gaussmeter / Teslameter & 1 buah   \\ \hline
+    19. & Catu Daya & 1 buah   \\ \hline
+    20. & Oven Pengering / \textit{Vacuum Oven} & 1 buah   \\ \hline
 \end{longtable}
-\end{singlespace}
 
 Tabel~\ref{tab:alatbahan} merinci peralatan yang digunakan dalam penelitian ini. Perangkat fabrikasi dan karakterisasi utama mencakup unit \textit{electrospinning} untuk penarikan serat nano komposit, sonikator dan \textit{magnetic stirrer} untuk homogenisasi larutan prekursor, \textit{fume hood} untuk menjamin keselamatan reaksi kimia sintesis, serta oven pengering untuk aktivasi \textit{thermal curing} asam sitrat pada suhu $130\,^{\circ}\text{C}$. Pada sistem instrumentasi, kumparan Helmholtz dan teslameter digunakan sebagai sumber serta acuan medan magnet kalibrasi, sedangkan Raspberry Pi 5 terintegrasi monitor berfungsi sebagai unit pemroses utama data akuisisi secara \textit{realtime}.
 
-\begin{singlespace}
-\small
-\begin{longtable}{|c|p{3.2cm}|c|c|p{5.5cm}|}
-    \caption{Perangkat Lunak (\textit{Software}) yang Digunakan} \label{tab:software} \\
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{|c|p{2.2cm}|p{1.4cm}|p{1.4cm}|p{5.8cm}|}
+    \caption{Perangkat Lunak (Software) yang Digunakan} \label{tab:software} \\
     \hline
-    No. & Nama Perangkat & Tipe & Lisensi & Kegunaan \\ \hline
+    No. & Nama Perangkat & Tipe Berkas & Tipe Software & Kegunaan \\ \hline
     \endfirsthead
-    
-    \multicolumn{5}{c}{\small\textit{Lanjutan Tabel \ref{tab:software} Perangkat Lunak (\textit{Software}) yang Digunakan}} \\[0.15cm]
     \hline
-    No. & Nama Perangkat & Tipe & Lisensi & Kegunaan \\ \hline
+    No. & Nama Perangkat & Tipe Berkas & Tipe Software & Kegunaan \\ \hline
     \endhead
-    
     \hline
     \endfoot
-    
     \hline
     \endlastfoot
-    
-    1.  & Arduino IDE 2.3.4       & EXE     & Freeware & Pemrograman mikrokontroler Arduino \\ \hline
-    2.  & Python 3.12.10          & EXE     & Freeware & Bahasa pemrograman analisis data \& integrasi \\ \hline
-    3.  & matplotlib 3.7.1        & Package & Freeware & Visualisasi grafik dan kurva kalibrasi \\ \hline
-    4.  & tk 0.1.0                & Package & Freeware & Antarmuka GUI (\textit{Graphical User Interface}) \\ \hline
-    5.  & pyserial 3.5            & Package & Freeware & Komunikasi serial Arduino dan Python \\ \hline
-    6.  & pandas 2.2.3            & Package & Freeware & Pengelolaan dan manipulasi data tabular \\ \hline
-    7.  & scikit-learn 1.6.1      & Package & Freeware & Analisis data dan pemodelan klasik (SVM, RF) \\ \hline
-    8.  & numpy 1.26.4            & Package & Freeware & Perhitungan numerik larik multidimensi \\ \hline
-    9.  & scipy 1.15.3            & Package & Freeware & Komputasi ilmiah dan analisis statistik \\ \hline
-    10. & Qiskit 1.0.2            & Package & Freeware & Perancangan sirkuit dan simulasi kuantum \\ \hline
-    11. & Qiskit ML 0.7.2         & Package & Freeware & Implementasi model kuantum (QSVC, VQC) \\ \hline
-    12. & CorelDraw 2019          & ZIP     & Freeware & Desain mekatronika 2D casing instrumen \\ \hline
-    13. & LaserDRW 2013.02        & EXE     & Freeware & Eksekusi pemotongan casing pada mesin laser \\ \hline
+    1. & Arduino IDE 2.3.4 & EXE & Freeware & Pemrograman mikrokontroler Arduino \\ \hline
+    2. & Python 3.12.10 & EXE & Freeware & Bahasa pemrograman untuk analisis data dan integrasi perangkat \\ \hline
+    3. & matplotlib 3.7.1 & Package & Freeware & Membuat grafik visual dari data \\ \hline
+    4. & tk 0.1.0 & Package & Freeware & Membuat antarmuka GUI (\textit{Graphical User Interface}) \\ \hline
+    5. & pyserial 3.5 & Package & Freeware & Modul komunikasi serial antara Arduino dan Python \\ \hline
+    6. & pandas 2.2.3 & Package & Freeware & Mengolah, mengelola, dan menganalisis data tabular \\ \hline
+    7. & scikit-learn 1.6.1 & Package & Freeware & Analisis data dan implementasi model klasik (SVM dan RF) \\ \hline
+    8. & numpy 1.26.4 & Package & Freeware & Perhitungan numerik dengan array multidimensi \\ \hline
+    9. & scipy 1.15.3 & Package & Freeware & Komputasi ilmiah dan analisis matematis lanjutan \\ \hline
+    10. & Qiskit 1.0.2 & Package & Freeware & Perancangan sirkuit kuantum dan simulasi \textit{statevector} \\ \hline
+    11. & Qiskit Machine Learning 0.7.2 & Package & Freeware & Implementasi model kuantum (QSVC dan VQC) \\ \hline
+    12. & CorelDraw 2019 & ZIP & Freeware & Desain grafis untuk casing instrumen \\ \hline
+    13. & LaserDRW 2013.02 & EXE & Freeware & Mencetak desain casing menggunakan mesin laser \\ \hline
 \end{longtable}
-\end{singlespace}
+\renewcommand{\arraystretch}{1.0}
 
 Tabel~\ref{tab:software} merangkum perangkat lunak dan pustaka komputasi yang digunakan. Arduino IDE berperan dalam pemrograman mikrokontroler untuk akuisisi data mentah, sedangkan lingkungan Python yang didukung pustaka \textit{pyserial}, \textit{pandas}, \textit{numpy}, dan \textit{scipy} digunakan untuk komunikasi serial, pengolahan statistik, dan analisis regresi kalibrasi. Penerapan model pembelajaran mesin klasik (SVM dan RF) didukung oleh pustaka \textit{scikit-learn}, sedangkan implementasi model kuantum (QSVC dan VQC) dibangun menggunakan pustaka \textit{Qiskit} dan \textit{Qiskit Machine Learning}. Perancangan fisik casing instrumen dirancang menggunakan CorelDraw dan diproduksi melalui LaserDRW. Seluruh perangkat lunak ini terintegrasi dalam alur rancang bangun dan pengujian performa sistem instrumentasi sensor TMR.
 
 \subsection{Bahan Penelitian}
 Adapun bahan yang digunakan dalam penelitian adalah sebagai berikut.
 
-\begin{singlespace}
-\small
-\begin{longtable}{|c|p{9.0cm}|c|}
-    \caption{Bahan yang Digunakan dalam Penelitian} \label{tab:bahan} \\
+\begin{longtable}{|l|l|c|}
+    \caption{Bahan yang Digunakan} \label{tab:bahan} \\
     \hline
-    No. & Bahan & Jumlah \\ \hline
+    No. &  Bahan   & Jumlah  \\ \hline
     \endfirsthead
-    
-    \multicolumn{3}{c}{\small\textit{Lanjutan Tabel \ref{tab:bahan} Bahan yang Digunakan dalam Penelitian}} \\[0.15cm]
     \hline
-    No. & Bahan & Jumlah \\ \hline
+    No. &  Bahan   & Jumlah  \\ \hline
     \endhead
-    
     \hline
     \endfoot
-    
     \hline
     \endlastfoot
-    
-    1.  & Sensor TMR ALT023-10E (EVB01)                  & 1 buah \\ \hline
-    2.  & IC \textit{Instrumentation Amplifier} AD623    & 1 buah \\ \hline
-    3.  & Resistor 1 k$\Omega$ (filter RFI \& pembagi bias \texttt{REF}) & 4 buah \\ \hline
-    4.  & Resistor 10 k$\Omega$ ($R_G$ gain AD623 \& filter pasif LPF)  & 2 buah \\ \hline
-    5.  & Resistor 4,7 k$\Omega$ (\textit{pull-up} I2C)  & 2 buah \\ \hline
-    6.  & Kapasitor 100 nF (C0G/NP0)                     & Secukupnya \\ \hline
-    7.  & Kapasitor 10 nF                                & 2 buah \\ \hline
-    8.  & Kapasitor elektrolitik 10 $\mu$F               & 1 buah \\ \hline
-    9.  & ADC ADS1115 16-bit                             & 1 buah \\ \hline
-    10. & Arduino Uno R3                                 & 1 buah \\ \hline
-    11. & PCB Kit Instrumentasi                          & 1 buah \\ \hline
-    12. & Timah solder                                   & Secukupnya \\ \hline
-    13. & \ch{FeSO4} (prekursor sintesis \ch{Fe3O4})     & 7,5 mL \\ \hline
-    14. & \ch{FeCl3} (prekursor sintesis \ch{Fe3O4})     & 7,5 mL \\ \hline
-    15. & Ekstrak \textit{Moringa oleifera} (MO)         & 10 mL \\ \hline
-    16. & \ch{NH4OH} (amonia)                            & 12 mL \\ \hline
-    17. & Aquades                                        & Secukupnya \\ \hline
-    18. & PVA (\textit{Polyvinyl Alcohol})               & 0,55 gram \\ \hline
-    19. & Serbuk \ch{Fe3O4} hasil sintesis               & 0,2 gram \\ \hline
-    20. & Asam Sitrat (\textit{Citric Acid}, pro-analisis)& Secukupnya \\ \hline
-    21. & ADH (\textit{Adipic Acid Dihydrazide})         & Secukupnya \\ \hline
-    22. & Etanol                                         & Secukupnya \\ \hline
-    23. & Aluminium foil ($20 \times 10$ cm)             & Secukupnya \\ \hline
-    24. & Tape perekat                                   & Secukupnya \\ \hline
-    25. & Larutan formalin standar (37\%)                & Secukupnya \\ \hline
-    26. & Sampel bakso (kontrol \& uji)                  & Secukupnya \\ \hline
+    1.  & Sensor TMR ALT023-10E (EVB01)  & 1 buah \\ \hline
+    2.  & IC \textit{Instrumentation Amplifier} AD623 & 1 buah \\ \hline
+    3.  & Resistor 1k $\Omega$ (filter RFI \& pembagi bias \texttt{REF}) & 4 buah \\ \hline
+    4.  & Resistor 10k $\Omega$ ($R_G$ gain AD623 \& filter pasif LPF) & 2 buah \\ \hline
+    5.  & Resistor 4,7k $\Omega$ (\textit{pull-up} I2C) & 2 buah \\ \hline
+    6.  & Kapasitor 100 nF (C0G/NP0) & Secukupnya \\ \hline
+    7.  & Kapasitor 10 nF & 2 buah \\ \hline
+    8.  & Kapasitor elektrolitik 10 $\mu$F & 1 buah \\ \hline
+    9.  & ADC ADS1115 & 1 buah \\ \hline
+    10. & Arduino Uno R3 & 1 buah \\ \hline
+    11. & PCB Kit Instrumentasi & 1 buah \\ \hline
+    12. & Timah & Secukupnya \\ \hline
+    13. & \ch{FeSO4} (prekursor sintesis \ch{Fe3O4}) & 7,5 mL \\ \hline
+    14. & \ch{FeCl3} (prekursor sintesis \ch{Fe3O4}) & 7,5 mL \\ \hline
+    15. & Ekstrak \textit{Moringa oleifera} (MO) & 10 mL \\ \hline
+    16. & \ch{NH4OH} (amonia) & 12 mL \\ \hline
+    17. & Aquades & Secukupnya \\ \hline
+    18. & PVA (\textit{Polyvinyl Alcohol}) & 0,55 gram \\ \hline
+    19. & Serbuk \ch{Fe3O4} hasil sintesis & 0,2 gram \\ \hline
+    20. & Asam Sitrat (\textit{Citric Acid}, pro-analisis) & Secukupnya \\ \hline
+    21. & ADH (\textit{Adipic Acid Dihydrazide}) & Secukupnya \\ \hline
+    22. & Etanol & Secukupnya \\ \hline
+    23. & Aluminium foil (20 $\times$ 10 cm) & Secukupnya \\ \hline
+    24. & Tape perekat & Secukupnya \\ \hline
+    25. & Larutan formalin standar (37\%) & Secukupnya \\ \hline
+    26. & Sampel bakso (kontrol \& uji) & Secukupnya \\ \hline
 \end{longtable}
-\end{singlespace}
 
 Tabel~\ref{tab:bahan} merinci bahan kimia dan komponen perangkat keras yang digunakan dalam penelitian ini. Pada bagian perangkat keras, sensor TMR ALT023-10E berperan sebagai transduser \textit{tunneling magnetoresistance} yang sensitif terhadap perubahan medan magnet. Rangkaian pengkondisi sinyal menggunakan IC AD623 sebagai \textit{instrumentation amplifier}, didukung oleh resistor 1~k$\Omega$ untuk filter RFI dan pembagi tegangan referensi, serta resistor $R_G = 10{,}0\,\text{k}\Omega$ penentu penguatan ($G = 11$). Kapasitor 100~nF dan 10~nF ditambahkan sebagai filter RFI dan \textit{anti-aliasing} untuk mereduksi derau. Konversi sinyal analog ke digital dilakukan oleh ADC ADS1115 dengan resolusi 16-bit, yang hasilnya kemudian diproses oleh mikrokontroler Arduino Uno R3 melalui antarmuka I2C. Kit instrumentasi terintegrasi pada satu PCB cetak dan direkatkan dengan timah. Pada aspek bahan kimia, PVA digunakan sebagai polimer dasar pembentuk serat, \ch{Fe3O4} berfungsi sebagai partikel magnetik superparamagnetik utama, asam sitrat berperan ganda sebagai agen penstabil dispersi (\textit{capping agent}) nanopartikel sekaligus agen penaut silang hijau tunggal (\textit{green crosslinker}) melalui esterifikasi termal, dan ADH berfungsi khusus sebagai molekul pengenal (\textit{chemo-receptor}) yang menyediakan gugus hidrazida terminal bebas untuk mengikat analit formaldehida secara kovalen. Aquades berperan sebagai pelarut, sedangkan aluminium foil dan perekat digunakan sebagai media kolektor \textit{electrospinning}. Kombinasi material ini menghasilkan nanofiber \ch{Fe3O4}/PVA-Sitrat-ADH yang menjadi elemen reseptor pada sensor TMR. Larutan formalin standar digunakan sebagai analit acuan untuk kalibrasi sistem, sedangkan sampel bakso (kontrol tanpa formalin dan uji mengandung formalin) digunakan sebagai sampel riil untuk validasi kemampuan deteksi sensor.
 

@@ -131,3 +131,15 @@ Berdasarkan format baku Gilang Pratama (1227030017) dan arahan peneliti, slide p
 6. **Proteksi Integritas Berkas**:
    - File utama slide adalah `Proposal_TA_Fahry_Rizky_Samsudin.pptx` dan `presentation_preview.html`. Dilarang menimpa kedua berkas ini dengan generator generik AI slop.
 
+---
+
+## 7. Pedoman Baku Penulisan Tabel LaTeX (Anti-Slop Typography)
+
+1. **Ukuran Font & Layout Kolom Wajib Proporsional dan Asli**:
+   - Format tabel wajib mempertahankan ukuran font dokumen asli (`normalsize`/standar, dilarang mengecilkan ke `\small` atau `\footnotesize` secara kerdil tanpa instruksi eksplisit).
+   - Struktur dan lebar kolom wajib mengikuti spesifikasi asli naskah (misal `|l|l|c|` untuk alat/bahan, atau lebar kolom yang proporsional dan lega).
+2. **Larangan Keras Filler & Teks AI-Slop Pemutusan Halaman**:
+   - Saat tabel panjang terpotong antarhalaman (*page-break* via `longtable`), **DILARANG KERAS** menambahkan teks bertele-tele AI-slop seperti *"Lanjutan Tabel ..."* atau *"Bersambung ke halaman berikutnya"*.
+   - Tabel yang terpotong cukup melanjutkan baris data secara natural dengan kepala kolom tabel biasa tanpa teks filler naratif.
+
+
