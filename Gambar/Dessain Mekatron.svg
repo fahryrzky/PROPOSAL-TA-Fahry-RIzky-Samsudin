@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 950 650" width="950" height="650" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: Arial, Helvetica, sans-serif; fill: #333333; }
+    .lbl-title { font-size: 19px; }
+    .lbl-sub   { font-size: 15px; }
+    .lbl-small { font-size: 13px; }
+    .lbl-caption { font-size: 14px; }
+    .stroke-main { stroke:#000000; stroke-width:3; stroke-linejoin:round; stroke-linecap:round; }
+    .wire { fill:none; stroke-linejoin:round; stroke-linecap:round; stroke-width:3.2; }
+  </style>
+  <g style="" transform="matrix(1.23573, 0, 0, 1.198033, -62.972582, -47.787809)">
+    <title>Tampak depan terbuka</title>
+    <g style="" transform="matrix(0.5507, 0, 0, 0.547763, 384.389812, 45.953187)">
+      <rect x="14" y="60" width="490" height="230" rx="18" ry="18" fill="#EAEAEA" class="stroke-main" style="opacity: 0.5; stroke: rgb(174, 174, 174);"/>
+      <rect x="311.26" y="102" width="165.202" height="185" rx="28" ry="28" fill="#D8500A" class="stroke-main" style="stroke: rgb(231, 74, 28);"/>
+      <rect x="248.288" y="209.647" width="28" height="89.847" rx="4" ry="4" fill="#D8D8D8" class="stroke-main" stroke-width="2.4" style="stroke: rgb(216, 216, 216); transform-box: fill-box; transform-origin: 69.8321% 47.5624%;"/>
+      <rect x="244.288" y="207.274" width="36" height="8.303" rx="3" ry="3" fill="#2A92FF" class="stroke-main" stroke-width="2.4" style="transform-box: fill-box; transform-origin: 65.425% 500.798%;"/>
+      <rect x="14" y="290" width="490" height="110" rx="14" ry="14" class="stroke-main" style="fill: rgb(218, 218, 218); stroke: rgb(218, 218, 218);"/>
+      <rect x="18.482" y="293.786" width="480.397" height="102.798" rx="14" ry="14" class="stroke-main" style="stroke-width: 3; stroke: rgba(203, 200, 200, 0); fill: rgb(195, 195, 195);"/>
+      <path class="wire" d="M 194.597 284.876 L 194.6 294.748 L 255.06 295.548 L 356.626 295.072 L 355.365 282.141" style="stroke: rgb(231, 74, 28);"/>
+      <ellipse cx="76" cy="348" rx="52" ry="20" fill="#FFFFFF" class="stroke-main" stroke-width="2.6"/>
+      <circle cx="60" cy="348" r="12" fill="#000000"/>
+      <path class="wire" stroke="#000000" d="M 60 348 L 60 302 L 172.729 303.388 L 172.729 281.447"/>
+      <circle cx="92" cy="348" r="12" fill="#FF3131"/>
+      <path class="wire" d="M 92 348 L 92 312 L 189.052 312.944 L 377.577 314.777 L 376.883 284.224" stroke="#FF3131"/>
+      <rect x="44.308" y="102" width="165.202" height="185" rx="28" ry="28" fill="#D8500A" class="stroke-main" style="stroke: rgb(231, 74, 28);"/>
+    </g>
+    <g transform="matrix(0.512513, 0, 0, 0.719837, -124.674549, 16.840067)" style="">
+      <rect x="689.341" y="115.794" width="200" height="230" rx="16" ry="16" class="stroke-main" style="fill: rgb(235, 235, 235);"/>
+      <rect x="709.341" y="137.794" width="120" height="38" rx="4" ry="4" fill="#FFFFFF" stroke="#000000" stroke-width="1.6"/>
+      <text x="769.341" y="163.794" text-anchor="middle" class="lbl-sub" fill="#e00000" style="white-space: pre; font-size: 15px;">0.00 V</text>
+      <rect x="709.341" y="185.794" width="120" height="38" rx="4" ry="4" fill="#FFFFFF" stroke="#000000" stroke-width="1.6"/>
+      <text x="769.341" y="211.794" text-anchor="middle" class="lbl-sub" fill="#e00000" style="white-space: pre; font-size: 15px;">0.00 A</text>
+      <circle cx="724.341" cy="253.794" r="8" fill="#FFD400" stroke="#000000" stroke-width="1.4"/>
+      <circle cx="724.341" cy="275.794" r="8" fill="#FFD400" stroke="#000000" stroke-width="1.4"/>
+      <ellipse cx="779.341" cy="323.794" rx="46" ry="17" fill="#FFFFFF" class="stroke-main" stroke-width="2.4"/>
+      <circle cx="764.341" cy="323.794" r="10" fill="#000000"/>
+      <circle cx="794.341" cy="323.794" r="10" fill="#FF3131"/>
+    </g>
+    <path class="wire" stroke="#FF3131" d="M 438.344 239.791 L 439.076 297.862 L 339.192 297.862 L 284.272 296.51 L 283.535 248.181"/>
+    <path class="wire" stroke="#000000" d="M 415.792 236.862 L 417.631 285.424 L 265.615 284.14 L 264.949 248.905"/>
+  </g>
+  <g transform="matrix(1.23573, 0, 0, 1.198033, -64.956423, 274.249276)" style="">
+    <title>Tampak depan terbuka</title>
+    <g style="" transform="matrix(0.5507, 0, 0, 0.547763, 384.389812, 45.953187)">
+      <rect x="14" y="60" width="490" height="230" rx="18" ry="18" fill="#EAEAEA" class="stroke-main" style="opacity: 0.5; stroke: rgb(174, 174, 174);"/>
+      <rect x="160" y="102" width="56" height="185" rx="28" ry="28" fill="#D8500A" class="stroke-main" style="stroke: rgb(231, 74, 28);"/>
+      <rect x="335" y="102" width="56" height="185" rx="28" ry="28" fill="#D8500A" class="stroke-main" style="stroke: rgb(231, 74, 28);"/>
+      <rect x="47.223" y="103.096" width="165.202" height="185" rx="28" ry="28" fill="#D8500A" class="stroke-main" style="stroke: rgb(231, 74, 28);"/>
+      <rect x="253.736" y="209.647" width="28" height="89.847" rx="4" ry="4" fill="#D8D8D8" class="stroke-main" stroke-width="2.4" style="stroke: rgb(216, 216, 216); transform-box: fill-box; transform-origin: 69.8321% 47.5624%;"/>
+      <rect x="18.482" y="293.786" width="480.397" height="102.798" rx="14" ry="14" class="stroke-main" style="stroke: rgb(0, 60, 119); stroke-width: 3; fill: rgb(17, 47, 93);"/>
+      <rect x="249.736" y="207.274" width="36" height="8.303" rx="3" ry="3" fill="#2A92FF" class="stroke-main" stroke-width="2.4" style="transform-box: fill-box; transform-origin: 65.425% 500.798%;"/>
+      <rect x="14" y="290" width="490" height="110" rx="14" ry="14" class="stroke-main" style="fill: rgb(218, 218, 218); stroke: rgb(218, 218, 218);"/>
+      <rect x="314.175" y="102.462" width="165.202" height="185" rx="28" ry="28" fill="#D8500A" class="stroke-main" style="stroke: rgb(231, 74, 28);"/>
+      <ellipse cx="76" cy="348" rx="52" ry="20" fill="#FFFFFF" class="stroke-main" stroke-width="2.6"/>
+      <circle cx="60" cy="348" r="12" fill="#000000"/>
+      <circle cx="92" cy="348" r="12" fill="#FF3131"/>
+    </g>
+    <g transform="matrix(0.512513, 0, 0, 0.719837, -124.674549, 16.840067)" style="">
+      <title>Power</title>
+      <rect x="689.341" y="115.794" width="200" height="230" rx="16" ry="16" class="stroke-main" style="fill: rgb(235, 235, 235);"/>
+      <rect x="709.341" y="137.794" width="120" height="38" rx="4" ry="4" fill="#FFFFFF" stroke="#000000" stroke-width="1.6"/>
+      <text x="769.341" y="163.794" text-anchor="middle" class="lbl-sub" fill="#e00000" style="white-space: pre; font-size: 15px;">0.00 V</text>
+      <rect x="709.341" y="185.794" width="120" height="38" rx="4" ry="4" fill="#FFFFFF" stroke="#000000" stroke-width="1.6"/>
+      <text x="769.341" y="211.794" text-anchor="middle" class="lbl-sub" fill="#e00000" style="white-space: pre; font-size: 15px;">0.00 A</text>
+      <circle cx="724.341" cy="253.794" r="8" fill="#FFD400" stroke="#000000" stroke-width="1.4"/>
+      <circle cx="724.341" cy="275.794" r="8" fill="#FFD400" stroke="#000000" stroke-width="1.4"/>
+      <ellipse cx="779.341" cy="323.794" rx="46" ry="17" fill="#FFFFFF" class="stroke-main" stroke-width="2.4"/>
+      <circle cx="764.341" cy="323.794" r="10" fill="#000000"/>
+      <circle cx="794.341" cy="323.794" r="10" fill="#FF3131"/>
+    </g>
+    <path class="wire" stroke="#FF3131" d="M 438.344 239.791 L 439.076 297.862 L 339.192 297.862 L 284.272 296.51 L 283.535 248.181"/>
+    <path class="wire" stroke="#000000" d="M 415.792 236.862 L 417.631 285.424 L 265.615 284.14 L 264.949 248.905"/>
+  </g>
+  <g transform="matrix(1.023813, 0, 0, 1.062122, 3.354561, 36.630643)" style="">
+    <title>usb A</title>
+    <rect x="589.07" y="472.626" width="83.054" height="66.81" rx="14" ry="14" fill="#EAEAEA" class="stroke-main" style="visibility: hidden;"/>
+    <rect x="658.467" y="506.25" width="18.687" height="8.017" rx="2" ry="2" fill="#BEBEBE" class="stroke-main" stroke-width="2.2" style=""/>
+    <rect x="661.581" y="508.032" width="12.458" height="3.563" rx="1" ry="1" fill="#333333" style=""/>
+    <text x="147.291" y="686.944" text-anchor="middle" class="lbl-caption" style="white-space: pre; font-size: 14px; visibility: hidden;" transform="matrix(0.519089, 0, 0, 0.4454, 554.140458, 225.453773)">Port USB Type-A</text>
+    <rect x="685.204" y="506.228" width="18.687" height="8.017" rx="2" ry="2" fill="#BEBEBE" class="stroke-main" stroke-width="2.2" style="stroke-width: 3;"/>
+    <rect x="688.317" y="508.01" width="12.458" height="3.563" rx="1" ry="1" fill="#333333" style="stroke-width: 1;"/>
+    <rect x="509.192" y="461.18" width="135.3" height="53.642" style="stroke: rgb(0, 0, 0); fill: rgb(255, 255, 255);"/>
+  </g>
+  <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px;" x="195.951" y="85.616" transform="matrix(1.23573, 0, 0, 1.198033, -62.972582, -47.787809)">(a)</text>
+  <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px;" x="191.215" y="363.873" transform="matrix(1.23573, 0, 0, 1.198033, -62.972582, -47.787809)">(b)</text>
+</svg>

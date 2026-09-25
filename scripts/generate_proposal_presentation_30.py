@@ -1273,7 +1273,7 @@ def build_presentation():
                           border=True, caption="Gambar III.2 Skematik Sirkuit Terintegrasi TMR, AD623, Filter RC, dan ADS1115")
 
     # Right Top: Casing 3D
-    deck.add_image_fitted(s24, "Gambar/Bab3/babIII_Desainnnn.png", Inches(7.1), Inches(1.55), Inches(5.4), Inches(2.7),
+    deck.add_image_fitted(s24, "Gambar/Bab3/babIII-desainTMR.png", Inches(7.1), Inches(1.55), Inches(5.4), Inches(2.7),
                           border=True, caption="Gambar III.3 Desain 3D Housing Sensor dan Dudukan Kaca Preparat")
 
     # Right Bottom: Key Hardware Specs
