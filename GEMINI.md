@@ -5,7 +5,7 @@ Dokumen ini berisi arsitektur sistem, konvensi berkas, spesifikasi perangkat ker
 ---
 
 ## 1. Identitas Proyek
-- **Judul**: *Rancang Bangun Instrumentasi Sensor Tunneling Magnetoresistance Berbasis Nanofiber $\text{Fe}_3\text{O}_4$/PVA-Sitrat-ADH untuk Deteksi Formalin pada Bakso Menggunakan Komparasi Model SVM dan QSVC*
+- **Judul**: *Rancang Bangun Instrumentasi Sensor Tunneling Magnetoresistance Berbasis Nanofiber $\text{Fe}_3\text{O}_4$/PVA-Sitrat-ADH untuk Deteksi Formalin pada Bakso Menggunakan Komparasi Model Klasik (SVM, Random Forest) dan Kuantum (QSVC, VQC)*
 - **Peneliti**: Fahry Rizky Samsudin (NIM: 1237030018)
 - **Institusi**: Jurusan Fisika, Fakultas Sains dan Teknologi, UIN Sunan Gunung Djati Bandung
 - **Tahun**: 2026
@@ -112,4 +112,21 @@ Saat repositori ini di-*clone* ke komputer atau laptop lain:
 2. Lingkungan Antigravity pada komputer baru akan langsung mendeteksi kustomisasi ruang kerja (*workspace customizations*) dari folder `.agents/`.
 3. Aturan anti-slop otomatis ditegakkan dari `.agents/rules/antislop.md` guna mencegah output AI yang generik (*slop*).
 4. Seluruh instruksi, gaya penulisan, dan batas arsitektur pada berkas ini (`AGENTS.md` & `GEMINI.md`) otomatis terbaca sebagai pedoman baku.
+
+---
+
+## 6. Pedoman Baku Presentasi Seminar Proposal (Anti-Slop Slide & Deck PPTX)
+
+Berdasarkan format baku Gilang Pratama (1227030017) dan arahan peneliti, slide presentasi proposal wajib mematuhi standar berikut:
+1. **Ukuran Font Wajib Besar**: Judul slide minimal 18–24 pt (Bold), heading kartu 13–15 pt (Bold), body teks materi 11.5–13 pt. Dilarang keras teks kerdil / micro-text bergumam di bawah slide latar belakang atau dasar teori.
+2. **Cover Tradisi Gilang**: Logo UIN (kiri atas) & Logo Fisika UIN (kanan atas), Judul Proposal di tengah berukuran besar dan tebal, Identitas Peneliti (Nama & NIM) di tengah, Dosen Pembimbing I di kiri bawah, dan Dosen Pembimbing II di kanan bawah.
+3. **Latar Belakang Berwujud Flowchart Berarah**: Wajib berwujud bagan alir diagramatis dengan panah alur penalaran (Urgensi Pangan → Limitasi Sensor → Reseptor Nanofiber → Transduser TMR → Rantai Sinyal → Komparasi ML → Target Solusi). Dilarang berupa paragraf teks atau bullet point biasa.
+4. **Landasan Teori Terkonsolidasi (2 Hingga 4 Teori per Slide)**:
+   - Dilarang memecah menjadi slide "Landasan Teori 1", "Landasan Teori 2" (AI slop).
+   - Wajib memadukan 2–4 teori per slide dengan sitasi persis proposal dan menyertakan gambar fisik riil (ALT023-10E, MTJ, ikatan kovalen ADH, AD623, ADS1115, serta 4 Model Cerdas dalam grid 2x2).
+5. **Larangan Keras Filler & Jargon Slop**:
+   - Dilarang membuat slide "Profil Mitra Riset" atau "Sistematika Paparan / Agenda".
+   - Dilarang jargon bisnis AI slop seperti "4 Dimensi Strategis", "Pilar Keberlanjutan", dll.
+6. **Proteksi Integritas Berkas**:
+   - File utama slide adalah `Proposal_TA_Fahry_Rizky_Samsudin.pptx` dan `presentation_preview.html`. Dilarang menimpa kedua berkas ini dengan generator generik AI slop.
 

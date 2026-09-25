@@ -1,6 +1,6 @@
 # PROPOSAL TUGAS AKHIR — FAHRY RIZKY SAMSUDIN
 
-> **Rancang Bangun Instrumentasi Sensor *Tunneling Magnetoresistance* Berbasis Nanofiber $\text{Fe}_3\text{O}_4$/PVA-Sitrat-ADH untuk Deteksi Formalin pada Bakso Menggunakan Komparasi Model SVM dan QSVC**
+> **Rancang Bangun Instrumentasi Sensor *Tunneling Magnetoresistance* Berbasis Nanofiber $\text{Fe}_3\text{O}_4$/PVA-Sitrat-ADH untuk Deteksi Formalin pada Bakso Menggunakan Komparasi Model Klasik (SVM, Random Forest) dan Kuantum (QSVC, VQC)**
 
 [![LaTeX Proposal](https://img.shields.io/badge/LaTeX-PDF%20Compiled-emerald?style=flat-square)](Proposal%20Fahry%20Rizky%20Samsudin.pdf)
 [![Python Version](https://img.shields.io/badge/Python-3.13.15-blue?style=flat-square)](requirements.txt)

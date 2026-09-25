@@ -11,9 +11,31 @@ For UI, copy, people, mobile layout, or code comments work, load the matching an
 Before starting, ask the user when antislop applies: during the work, or after it is done.
 </EXTREMELY_IMPORTANT>
 
-## Aturan Khusus Presentasi Akademik (Anti-Slop Slide & Academic Deck)
-1. **Dilarang Repetisi Kategori Bab di Header (R-05)**: Jangan pernah mencantumkan label generik seperti "BAB II: TINJAUAN PUSTAKA" atau "LANDASAN TEORI X" secara berulang di setiap judul slide teori. Judul slide harus langsung merujuk pada topik fisis/teknis (misal: "Karakteristik Formaldehida & Reaksi Hidrazon", "Fisika TMR & Model Julliere").
-2. **Formula Matematika Wajib Dirender Resmi**: Dilarang menulis persamaan matematika kompleks menggunakan representasi teks ASCII biasa (`R-NH-NH2 --> ...`, `(4/5)^(3/2)`). Wajib dirender melalui engine LaTeX Computer Modern 300 DPI dengan latar belakang transparan.
-3. **Format Cover Tradisi Akademik UIN**: Judul di atas, Identitas Peneliti (Nama & NIM) di tengah, dan Dosen Pembimbing I di kiri serta Dosen Pembimbing II di kanan (sesuai format rujukan Gilang Pratama).
-4. **Efisiensi Slide**: Gabungkan Rumusan Masalah dan Batasan Masalah dalam 1 slide (kiri dan kanan); gabungkan Tujuan Penelitian dan Manfaat Penelitian dalam 1 slide (kiri dan kanan). Dilarang membuat slide pengisi (filler) seperti profil mitra perusahaan atau daftar sistematika sidang.
-5. **Latar Belakang Berbasis Visual Flowchart**: Hindari paragraf teks panjang pada latar belakang; sajikan dalam bentuk diagram alir konseptual grafis yang menggambarkan alur masalah pangan, limitasi analisis, reseptor nanofiber, transduser TMR, rantai sinyal, komparasi ML, hingga target solusi.
+## Aturan Khusus Presentasi Akademik (Anti-Slop Slide & Academic Deck PPTX)
+1. **Ukuran Font Wajib Besar & Kontras Tinggi (R-SLOP-01)**:
+   - Judul Slide: Minimal 18–24 pt (Bold).
+   - Subjudul / Heading Kartu: Minimal 13–15 pt (Bold).
+   - Body Teks / Konten: Minimal 11.5–13 pt (Dilarang keras menggunakan font kerdil < 10 pt untuk isi materi).
+   - Dilarang keras menaruh teks kecil / micro-text bergumam di bawah slide latar belakang atau dasar teori. Semua teks harus terbaca jelas oleh penguji dan audiens dari kejauhan.
+2. **Tata Letak Cover Tradisi Akademik UIN — Rujukan Gilang Pratama (R-SLOP-02)**:
+   - Logo UIN di pojok kiri atas dan Logo Fisika UIN di pojok kanan atas.
+   - Judul Skripsi / Tugas Akhir berukuran besar, tebal, dan terpusat di area atas/tengah.
+   - Identitas Peneliti (Nama & NIM) berukuran besar, tegas, dan terpusat di tengah.
+   - Dosen Pembimbing I di kiri bawah dan Dosen Pembimbing II / Penguji di kanan bawah (lengkap dengan gelar dan NIP).
+3. **Latar Belakang Wajib Berbentuk Flowchart Berarah (R-SLOP-03)**:
+   - Dilarang keras menggunakan paragraf teks panjang atau bullet-point generik pada slide latar belakang.
+   - Wajib berwujud flowchart grafis dengan arah panah penalaran yang jelas (Urgensi Masalah Pangan → Limitasi Sensor Eksisting → Inovasi Reseptor Nanofiber → Transduser TMR Spintronik → Rantai Sinyal AD623/ADS1115 → Komparasi 4 Model Cerdas → Target Solusi).
+   - Buang teks kecil atau footer micro-text di bawah bagan alir latar belakang.
+4. **Landasan Teori Terkonsolidasi (2 Hingga 4 Teori per Slide) (R-SLOP-04)**:
+   - Dilarang keras memecah dasar teori menjadi slide-slide terpisah seperti "Landasan Teori 1", "Landasan Teori 2", dst. (Ciri utama AI slop membosankan).
+   - Dalam 1 slide wajib mengonsolidasikan 2 hingga 4 teori yang saling berkaitan secara fisis dan teknis:
+     * Teori I: Transduser TMR ALT023-10E + Reseptor Nanofiber Kovalen Fe3O4/PVA-Sitrat-ADH (dilengkapi gambar riil MTJ & ikatan kovalen formalin).
+     * Teori II: In-Amp AD623 + Filter LPF + ADC 16-Bit ADS1115 + Metrologi IUPAC LOD/LOQ (dilengkapi gambar riil pinout AD623 & modul ADS1115).
+     * Teori III: Komparasi 4 Model ML (SVM RBF, Random Forest, QSVC ZZFeatureMap, VQC Ansatz RealAmplitudes dalam grid 2x2).
+   - Wajib mencantumkan sitasi ilmiah resmi persis seperti di proposal skripsi (misal: Julliere 1975, Cortes & Vapnik 1995, Havlicek et al. 2019, TI 2018).
+5. **Larangan Keras Elemen AI Slop & Filler (R-SLOP-05)**:
+   - Dilarang membuat slide "Profil Mitra Riset" / "Profil Industri" dalam seminar proposal tugas akhir akademik.
+   - Dilarang membuat slide "Sistematika Paparan / Agenda" yang klise dan membuang waktu sidang.
+   - Dilarang menggunakan jargon bisnis/konsultan seperti "4 Dimensi Strategis", "Pilar Transformasi", "Sinergi Ekosistem", dll.
+6. **Proteksi Berkas Presentasi (R-SLOP-06)**:
+   - Dilarang meregenerasi atau menimpa berkas `Proposal_TA_Fahry_Rizky_Samsudin.pptx` dan `presentation_preview.html` yang sudah bersih dengan template generik AI slop. Setiap pemutakhiran wajib mempertahankan standar font besar, layout Gilang, dan integrasi gambar riil.

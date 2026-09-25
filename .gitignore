@@ -30,6 +30,10 @@ scratch/
 *.zip
 *.tar.gz
 *.rar
+temp_*
+*.tmp
+*.bak
+.system_generated/
 
 # OS Generated Files
 Thumbs.db
